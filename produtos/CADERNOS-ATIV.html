@@ -1,59 +1,87 @@
 ﻿<!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadernos de Ativação / Micro-Agentes — Ecossistema Live</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cadernos de Ativação / Micro-Agentes | Ecossistema Live</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    :root { --bg: #0b0f19; --card: #111827; --green: #10b981; --border: rgba(255,255,255,0.1); --text: #f8fafc; --muted: #94a3b8; }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-    body { background: #0b0f19; color: #f8fafc; padding: 2rem 1rem; line-height: 1.6; }
-    .container { max-width: 900px; margin: 0 auto; background: #111827; border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 2.5rem; }
-    .badge { display: inline-block; background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3); font-size: 0.75rem; font-weight: 800; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; margin-bottom: 1rem; }
-    h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.4rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem; }
-    .sku { font-family: monospace; color: #64748b; margin-bottom: 1.5rem; }
-    .price-box { background: rgba(15,23,42,0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
-    .price { font-size: 2rem; font-weight: 900; color: #10b981; }
-    .section-title { font-size: 1.25rem; font-weight: 800; color: #fff; margin: 1.8rem 0 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; }
-    ul { padding-left: 1.2rem; color: #94a3b8; margin-bottom: 1rem; }
-    li { margin-bottom: 0.4rem; }
-    .btn-wa { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: #25d366; color: #fff; text-decoration: none; font-weight: 800; font-size: 1.05rem; padding: 1rem 2rem; border-radius: 30px; margin-top: 2rem; width: 100%; transition: transform 0.2s; }
-    .btn-wa:hover { transform: translateY(-2px); background: #20ba5a; }
-    .btn-back { display: inline-block; color: #94a3b8; text-decoration: none; font-size: 0.9rem; margin-bottom: 1.5rem; }
+    :root {
+      --surface: #0B1120;
+      --surface-subtle: #0F1729;
+      --surface-raised: #111C33;
+      --surface-inset: #0A1020;
+      --text: #F1F5F9;
+      --text-secondary: #94A3B8;
+      --text-muted: #94A3B8;
+      --border: #1E2A44;
+      --action: #10B981;
+      --action-hover: #059669;
+      --action-subtle: rgba(16, 185, 129, 0.14);
+      --on-action: #0B1120;
+      --r-lg: 14px; --r-xl: 20px; --r-full: 999px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; }
+    body { background: var(--surface); color: var(--text); font-family: 'Inter', sans-serif; padding: 2rem 1rem; line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; background: var(--surface-raised); border: 1px solid var(--border); border-radius: var(--r-xl); padding: 2.5rem; }
+    .btn-back { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 600; margin-bottom: 1.5rem; }
     .btn-back:hover { color: #fff; }
+    .badge { display: inline-block; background: var(--action-subtle); color: var(--action); border: 1px solid var(--action); font-size: 0.75rem; font-weight: 800; padding: 4px 12px; border-radius: var(--r-full); text-transform: uppercase; margin-bottom: 1rem; }
+    h1 { font-size: 2.2rem; font-weight: 900; color: #fff; margin-bottom: 0.3rem; }
+    .sku { font-family: monospace; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem; }
+    .price-box { background: var(--surface-inset); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .price { font-size: 2rem; font-weight: 900; color: var(--action); }
+    .section-title { font-size: 1.2rem; font-weight: 800; color: #fff; margin: 1.8rem 0 0.8rem 0; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1rem; }
+    .btn-wa { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: #25D366; color: #FFF; text-decoration: none; font-weight: 800; font-size: 1.05rem; padding: 1rem 2rem; border-radius: var(--r-full); margin-top: 2rem; width: 100%; transition: background 0.2s; }
+    .btn-wa:hover { background: #20BA5A; text-decoration: none; }
   </style>
 </head>
 <body>
   <div class="container">
     <a href="../index.html" class="btn-back">← Voltar ao Catálogo Completo</a>
     
-    <div class="badge">SaaS & IA</div>
+    <div class="badge">SaaS & IA Corporativa</div>
     <h1>Cadernos de Ativação / Micro-Agentes</h1>
     <div class="sku">SKU: CADERNOS-ATIV</div>
     
     <div class="price-box">
       <div>
-        <div style="font-size:0.8rem; color:#94a3b8;">Investimento</div>
+        <div style="font-size:0.8rem; color:var(--text-muted);">Investimento Comercial</div>
         <div class="price">R$ 50,00</div>
       </div>
-      <div style="text-align:right; font-size:0.85rem; color:#cbd5e1;">Condição Comercial Oficial</div>
+      <div style="text-align:right; font-size:0.85rem; color:var(--text-secondary);">Por Caderno</div>
     </div>
     
     <div class="section-title">📌 Descrição & Valor Entregue</div>
-    <p style="color:#cbd5e1; font-size:1rem; line-height:1.6;">
-      Manuais operacionais em PDF/Markdown para delegação rápida de tarefas.
+    <p style="color:var(--text-secondary); font-size:1rem; line-height:1.6;">
+      Manuais operacionais em PDF/Markdown parametrizados para delegação rápida de tarefas a estagiários e assistentes.
     </p>
 
-    <div class="section-title">⚙️ Requisitos & Escopo</div>
-    <ul>
-      <li>Definição das metas e expectativas com a equipe do Ecossistema Live.</li>
-      <li>Disponibilidade do responsável interno da empresa cliente para acompanhamento.</li>
-      <li>Contrato e faturamento diretos com garantia de escopo fechado.</li>
-    </ul>
+    <div class="section-title">⚙️ Requisitos & Pré-Requisitos Mínimos</div>
+    <p style="color:var(--text-secondary); font-size:0.95rem;">
+      Leitor de PDF ou editor Markdown; Conexão para download.
+    </p>
 
-    <a href="https://wa.me/5561996993134?text=Ol%C3%A1!%20Quero%20informa%C3%A7%C3%B5es%20sobre%20o%20produto%20Cadernos%20de%20Ativa%C3%A7%C3%A3o%20%2F%20Micro-Agentes%20(SKU%3A%20CADERNOS-ATIV)." target="_blank" class="btn-wa">
-      💬 Contatar via WhatsApp (61 996993134)
+    <div class="section-title">⚡ Etapas da Implantação e Execução</div>
+    <div class="steps-grid">
+            <div style="background:var(--surface-inset); border:1px solid var(--border); border-radius:var(--r-lg); padding:1.2rem;">
+        <div style="font-size:0.75rem; font-weight:800; color:var(--action); margin-bottom:0.3rem;">ETAPA 1</div>
+        <div style="font-size:0.95rem; font-weight:700; color:#fff;">Escolha: Seleção do caderno no catálogo</div>
+      </div>      <div style="background:var(--surface-inset); border:1px solid var(--border); border-radius:var(--r-lg); padding:1.2rem;">
+        <div style="font-size:0.75rem; font-weight:800; color:var(--action); margin-bottom:0.3rem;">ETAPA 2</div>
+        <div style="font-size:0.95rem; font-weight:700; color:#fff;">Download: Envio imediato do arquivo em PDF/Markdown</div>
+      </div>      <div style="background:var(--surface-inset); border:1px solid var(--border); border-radius:var(--r-lg); padding:1.2rem;">
+        <div style="font-size:0.75rem; font-weight:800; color:var(--action); margin-bottom:0.3rem;">ETAPA 3</div>
+        <div style="font-size:0.95rem; font-weight:700; color:#fff;">Execução: Delegação direta para a equipe com checklists</div>
+      </div>
+    </div>
+
+    <!-- BOTÃO COM TEXTO LIMPO SEM NÚMERO EXPOSTO -->
+    <a href="https://wa.me/5561996993134?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20produto%3A%20Cadernos%20de%20Ativa%C3%A7%C3%A3o%20%2F%20Micro-Agentes%20(SKU%3A%20CADERNOS-ATIV)." target="_blank" class="btn-wa">
+      💬 Falar no WhatsApp
     </a>
   </div>
 </body>
