@@ -12,358 +12,303 @@
 
   <style>
     /* ============================================================
-       TOKENS & FUNDAÇÕES — design.md System
+       DESIGN SYSTEM - ECOSSISTEMA LIVE V3.0 (PROFISSIONAL & VISUAL)
        ============================================================ */
     :root {
-      /* Primitivos */
-      --n-0:   #FFFFFF;
-      --n-50:  #F8FAFC;
-      --n-100: #F1F5F9;
-      --n-200: #E2E8F0;
-      --n-300: #CBD5E1;
-      --n-400: #94A3B8;
-      --n-500: #64748B;
-      --n-600: #475569;
-      --n-700: #334155;
-      --n-800: #1E293B;
-      --n-900: #0F172A;
       --n-950: #0B1120;
+      --n-900: #0F172A;
+      --n-800: #1E293B;
+      --n-700: #334155;
+      --n-400: #94A3B8;
+      --n-100: #F1F5F9;
+      --n-0:   #FFFFFF;
 
-      /* Marca: Emerald & Cyan Accent (design.md) */
-      --b-50:  #ECFDF5;
-      --b-100: #D1FAE5;
-      --b-200: #A7F3D0;
-      --b-300: #6EE7B7;
-      --b-400: #34D399;
-      --b-500: #10B981;
-      --b-600: #059669;
-      --b-700: #047857;
-      --b-800: #065F46;
-      --b-900: #064E3B;
+      --emerald-500: #10B981;
+      --emerald-400: #34D399;
+      --emerald-600: #059669;
+      --emerald-glow: rgba(16, 185, 129, 0.25);
 
-      /* Semáforo */
-      --ok-600:  #047857;  --ok-400:  #34D399;
-      --warn-600:#B45309;  --warn-400:#FBBF24;
-      --err-600: #DC2626;  --err-400: #F87171;
+      --cyan-500: #06B6D4;
+      --gold-500: #F59E0B;
+      --purple-500: #8B5CF6;
 
-      /* Semânticos (Dark Mode por Padrão) */
-      --surface:        var(--n-950);
-      --surface-subtle: #0F1729;
-      --surface-raised: #111C33;
+      --surface-main:   #0B1120;
+      --surface-subtle: #0F172A;
+      --surface-card:   #111C33;
       --surface-inset:  #0A1020;
-      --surface-invert: var(--n-0);
 
-      --text:           var(--n-100);
-      --text-secondary: var(--n-400);
-      --text-muted:     var(--n-400);
-      --text-invert:    var(--n-900);
-      --text-brand:     var(--b-300);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(16, 185, 129, 0.3);
+      --border-gold:   rgba(245, 158, 11, 0.4);
 
-      --border:             #1E2A44;
-      --border-strong:      #2A3A5C;
-      --border-interactive: var(--n-500);
-      --border-focus:       var(--b-400);
+      --text-main:    #F8FAFC;
+      --text-muted:   #94A3B8;
+      --text-accent:  #34D399;
 
-      --action:        var(--b-500);
-      --action-hover:  var(--b-400);
-      --action-active: var(--b-600);
-      --action-subtle: rgba(52, 211, 153, 0.14);
-      --on-action:     var(--n-950);
+      --gradient-emerald: linear-gradient(135deg, #10B981 0%, #06B6D4 100%);
+      --gradient-head-hero: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(6, 182, 212, 0.06) 100%);
+      --gradient-head-ia: linear-gradient(135deg, rgba(6, 182, 212, 0.12) 0%, rgba(139, 92, 246, 0.06) 100%);
+      --gradient-head-cat: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
 
-      /* Tipografia */
-      --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
-      --font-text:    "Inter", ui-sans-serif, system-ui, sans-serif;
-
-      --fs-xs:   0.75rem;
-      --fs-sm:   0.875rem;
-      --fs-base: 1rem;
-      --fs-md:   1.125rem;
-      --fs-lg:   clamp(1.25rem, 0.6vw + 1.1rem, 1.375rem);
-      --fs-xl:   clamp(1.5rem,  1.0vw + 1.25rem, 1.75rem);
-      --fs-2xl:  clamp(1.875rem,1.6vw + 1.4rem,  2.25rem);
-      --fs-3xl:  clamp(2.25rem, 2.6vw + 1.6rem,  3rem);
-      --fs-4xl:  clamp(2.5rem,  3.0vw + 1.4rem,  3.5rem);
-
-      --lh-tight:  1.15;
-      --lh-snug:   1.3;
-      --lh-normal: 1.6;
-
-      --ls-tight: -0.02em;
-      --ls-wide:  0.06em;
-
-      --fw-regular: 400; --fw-medium: 500; --fw-semibold: 600; --fw-bold: 700; --fw-black: 900;
-
-      /* Espaçamento (base 4px) */
-      --sp-1: 0.25rem;  --sp-2: 0.5rem;   --sp-3: 0.75rem;  --sp-4: 1rem;
-      --sp-5: 1.25rem;  --sp-6: 1.5rem;   --sp-8: 2rem;     --sp-10: 2.5rem;
-      --sp-12: 3rem;    --sp-16: 4rem;    --sp-20: 5rem;    --sp-24: 6rem;
-
-      --section-y: clamp(4rem, 8vw, 7rem);
-      --container: 1240px;
-      --container-text: 68ch;
-      --gutter: clamp(1.25rem, 4vw, 2.5rem);
-
-      --r-sm: 6px; --r-md: 10px; --r-lg: 12px; --r-xl: 18px; --r-2xl: 24px; --r-full: 999px;
-
-      --sh-sm: 0 1px 3px rgba(0,0,0,.5);
-      --sh-md: 0 4px 12px rgba(0,0,0,.55);
-      --sh-lg: 0 12px 32px rgba(0,0,0,.6);
-
-      --dur-fast: 120ms; --dur-base: 200ms; --dur-slow: 320ms;
-      --ease-out: cubic-bezier(.16,1,.3,1);
-
-      --z-header: 200;
+      --font-family: 'Inter', sans-serif;
+      --r-md: 10px; --r-lg: 14px; --r-xl: 20px; --r-full: 999px;
     }
 
-    /* Reset + Base */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; }
     body {
-      background: var(--surface);
-      color: var(--text);
-      font-family: var(--font-text);
-      font-size: var(--fs-md);
-      line-height: var(--lh-normal);
-      -webkit-font-smoothing: antialiased;
+      background-color: var(--surface-main);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      line-height: 1.6;
       overflow-x: hidden;
     }
 
-    img, svg { display: block; max-width: 100%; height: auto; }
-    button, input, select, textarea { font: inherit; color: inherit; }
-
-    h1,h2,h3,h4 {
-      font-family: var(--font-display);
-      font-weight: var(--fw-semibold);
-      letter-spacing: var(--ls-tight);
-      line-height: var(--lh-tight);
-      text-wrap: balance;
-    }
-    h1 { font-size: var(--fs-4xl); font-weight: var(--fw-black); }
-    h2 { font-size: var(--fs-2xl); font-weight: var(--fw-bold); }
-    h3 { font-size: var(--fs-xl); line-height: var(--lh-snug); }
-    h4 { font-size: var(--fs-lg); line-height: var(--lh-snug); }
-
-    a { color: var(--text-brand); text-underline-offset: 3px; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    /* Layout Classes */
     .container {
       width: 100%;
-      max-width: var(--container);
+      max-width: 1260px;
       margin-inline: auto;
-      padding-inline: var(--gutter);
+      padding-inline: 1.5rem;
     }
-    .section { padding-block: var(--section-y); }
-    .section--subtle { background: var(--surface-subtle); border-y: 1px solid var(--border); }
-    
-    .autogrid {
-      display: grid; gap: var(--sp-6);
-      grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
-    }
-    
-    .split {
-      display: grid; gap: clamp(var(--sp-8), 5vw, var(--sp-16));
-      align-items: center;
-      grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
-    }
-
-    .section-head { max-width: 68ch; margin-bottom: var(--sp-12); }
-    .section-head--center { margin-inline: auto; text-align: center; }
-    .eyebrow {
-      font-size: var(--fs-xs); font-weight: var(--fw-bold);
-      letter-spacing: var(--ls-wide); text-transform: uppercase;
-      color: var(--action); margin-bottom: var(--sp-3);
-      display: inline-block;
-    }
-    .section-head p { color: var(--text-secondary); font-size: var(--fs-lg); margin-top: var(--sp-4); }
-
-    /* Componentes — Botões */
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: var(--sp-2);
-      min-height: 48px; padding: 0 var(--sp-6);
-      border: 1px solid transparent; border-radius: var(--r-lg);
-      font-size: var(--fs-base); font-weight: var(--fw-semibold); line-height: 1;
-      text-decoration: none; cursor: pointer; white-space: nowrap;
-      transition: background var(--dur-fast) var(--ease-out),
-                  border-color var(--dur-fast) var(--ease-out),
-                  transform var(--dur-fast) var(--ease-out),
-                  box-shadow var(--dur-fast) var(--ease-out);
-    }
-    .btn:hover { text-decoration: none; }
-    .btn:active { transform: translateY(1px); }
-
-    .btn--primary {
-      background: var(--action); color: var(--on-action); font-weight: var(--fw-bold);
-      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
-    }
-    .btn--primary:hover { background: var(--action-hover); box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5); }
-
-    .btn--whatsapp {
-      background: #25D366; color: #FFFFFF; font-weight: var(--fw-bold);
-      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
-    }
-    .btn--whatsapp:hover { background: #20BA5A; box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5); }
-
-    .btn--secondary { background: var(--surface-inset); color: var(--text); border-color: var(--border-strong); }
-    .btn--secondary:hover { border-color: var(--text); background: #1a2642; }
-
-    .btn--seller {
-      background: rgba(245, 158, 11, 0.15); border-color: var(--warn); color: var(--warn); font-weight: var(--fw-bold);
-    }
-    .btn--seller:hover, .btn--seller.active {
-      background: var(--warn); color: #000; box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
-    }
-
-    .btn--lg { min-height: 54px; padding-inline: var(--sp-8); font-size: var(--fs-md); }
-    .btn--sm { min-height: 40px; padding-inline: var(--sp-4); font-size: var(--fs-sm); }
-
-    /* Cards */
-    .card {
-      background: var(--surface-raised);
-      border: 1px solid var(--border);
-      border-radius: var(--r-xl);
-      padding: var(--sp-8);
-      display: flex; flex-direction: column; justify-content: space-between;
-      transition: border-color var(--dur-base) var(--ease-out),
-                  box-shadow var(--dur-base) var(--ease-out),
-                  transform var(--dur-base) var(--ease-out);
-    }
-    .card--interactive:hover {
-      border-color: var(--border-strong);
-      box-shadow: var(--sh-lg);
-      transform: translateY(-4px);
-    }
-
-    .badge {
-      display: inline-flex; align-items: center; gap: var(--sp-2);
-      padding: var(--sp-1) var(--sp-3); border-radius: var(--r-full);
-      font-size: var(--fs-xs); font-weight: var(--fw-bold);
-      letter-spacing: var(--ls-wide); text-transform: uppercase;
-      background: var(--action-subtle); color: var(--action);
-      border: 1px solid var(--action);
-      width: fit-content; margin-bottom: var(--sp-3);
-    }
-    .badge--gold { background: rgba(245, 158, 11, 0.15); color: var(--warn); border-color: var(--warn); }
-    .badge--blue { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border-color: #60a5fa; }
+    .section { padding-block: 4.5rem; position: relative; }
 
     /* Header Navbar */
     .site-header {
-      position: sticky; top: 0; z-index: var(--z-header);
-      background: rgba(11, 17, 32, 0.92);
-      backdrop-filter: saturate(160%) blur(12px);
-      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(11, 17, 32, 0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
     }
-    .site-header__inner { display: flex; align-items: center; justify-content: space-between; min-height: 76px; }
-    
-    .brand { display: flex; align-items: center; gap: var(--sp-3); text-decoration: none; }
+    .site-header__inner {
+      display: flex; align-items: center; justify-content: space-between;
+      min-height: 76px; gap: 1rem; flex-wrap: wrap;
+    }
+    .brand { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
     .brand img { height: 42px; width: auto; }
-    .brand__name { font-size: 1.15rem; font-weight: var(--fw-bold); color: #fff; line-height: 1.2; }
-    .brand__sub { font-size: 0.72rem; color: var(--action); font-weight: var(--fw-semibold); text-transform: uppercase; letter-spacing: 0.08em; }
+    .brand__name { font-size: 1.2rem; font-weight: 800; color: #fff; line-height: 1.1; }
+    .brand__sub { font-size: 0.72rem; color: var(--emerald-400); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
 
-    .site-header__actions { display: flex; align-items: center; gap: var(--sp-3); }
+    .header-actions { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
+
+    /* Botões Gerais */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.75rem 1.4rem; border-radius: var(--r-lg);
+      font-size: 0.92rem; font-weight: 700; text-decoration: none; cursor: pointer;
+      border: 1px solid transparent; transition: all 0.25s ease;
+      white-space: nowrap; text-align: center;
+    }
+    .btn:hover { text-decoration: none; }
+
+    .btn--primary {
+      background: var(--gradient-emerald); color: #000; font-weight: 800;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35);
+    }
+    .btn--primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5); }
+
+    .btn--whatsapp {
+      background: #25D366; color: #FFFFFF; font-weight: 800;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+    }
+    .btn--whatsapp:hover { transform: translateY(-2px); background: #20BA5A; box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5); }
+
+    .btn--secondary {
+      background: var(--surface-inset); color: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+    }
+    .btn--secondary:hover { border-color: var(--emerald-400); color: var(--emerald-400); background: rgba(16, 185, 129, 0.1); }
+
+    .btn--seller {
+      background: rgba(245, 158, 11, 0.15); border-color: var(--gold-500); color: var(--gold-500);
+    }
+    .btn--seller:hover, .btn--seller.active { background: var(--gold-500); color: #000; box-shadow: 0 0 15px rgba(245, 158, 11, 0.4); }
+
+    .btn--block { width: 100%; }
+
+    /* Cabecalhos de Seção com Cores de Fundo (SECTION HEAD CARDS) */
+    .section-head-card {
+      background: var(--gradient-head-hero);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--r-xl);
+      padding: 2.5rem 2rem;
+      margin-bottom: 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    .section-head-card.ia { background: var(--gradient-head-ia); border-color: rgba(6, 182, 212, 0.3); }
+    .section-head-card.cat { background: var(--gradient-head-cat); border-color: rgba(245, 158, 11, 0.3); }
+
+    .eyebrow-pill {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(16, 185, 129, 0.15); border: 1px solid var(--border-accent);
+      color: var(--emerald-400); font-size: 0.8rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 0.35rem 1rem; border-radius: var(--r-full); margin-bottom: 0.8rem;
+    }
+    .section-title { font-size: 2.2rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    .section-desc { font-size: 1.05rem; color: var(--text-muted); max-width: 680px; margin: 0 auto; }
 
     /* Hero Section */
-    .hero { padding-top: clamp(3rem, 6vw, 5rem); }
-    .hero__copy h1 { max-width: 22ch; margin-bottom: var(--sp-5); }
-    .hero__sub { font-size: var(--fs-lg); color: var(--text-secondary); max-width: 54ch; margin-bottom: var(--sp-8); }
-    .hero__actions { display: flex; flex-wrap: wrap; gap: var(--sp-4); margin-bottom: var(--sp-8); }
-    
-    .manifesto-box {
-      background: var(--surface-subtle);
-      border: 1px solid var(--border);
-      border-left: 4px solid var(--action);
-      border-radius: var(--r-xl);
-      padding: var(--sp-6);
-      margin-bottom: var(--sp-8);
-    }
-    .manifesto-tag { font-size: var(--fs-xs); font-weight: var(--fw-bold); color: var(--action); text-transform: uppercase; letter-spacing: var(--ls-wide); margin-bottom: var(--sp-2); }
-    .manifesto-quote { font-size: var(--fs-md); font-weight: var(--fw-medium); color: #fff; line-height: 1.5; }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2.5rem; align-items: center; }
+    @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
 
-    /* Pitch Deck Section (Modo Reunião / Vendedor) */
+    .hero-title { font-size: clamp(2.4rem, 4vw, 3.4rem); font-weight: 900; line-height: 1.15; color: #fff; margin-bottom: 1.2rem; }
+    .hero-p { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 1.8rem; }
+
+    .manifesto-banner {
+      background: var(--surface-subtle); border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--emerald-500); border-radius: var(--r-lg);
+      padding: 1.4rem; margin-bottom: 2rem;
+    }
+    .manifesto-label { font-size: 0.75rem; font-weight: 800; color: var(--emerald-400); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem; }
+    .manifesto-quote { font-size: 1rem; font-weight: 600; color: #fff; line-height: 1.5; }
+
+    /* Stats Grid */
+    .stats-box { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .stat-card {
+      background: var(--surface-card); border: 1px solid var(--border-subtle);
+      border-radius: var(--r-lg); padding: 1.6rem; text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .stat-card:hover { transform: translateY(-4px); border-color: var(--border-accent); }
+    .stat-val { font-size: 2.5rem; font-weight: 900; color: var(--emerald-400); margin-bottom: 0.2rem; }
+    .stat-lbl { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
+
+    /* Pitch Deck Seller Mode */
     .pitch-deck {
-      display: none;
-      background: #18153d;
-      border: 2px solid var(--warn);
-      border-radius: var(--r-2xl);
-      padding: var(--sp-8);
-      margin-bottom: var(--sp-12);
+      display: none; background: #1a1638; border: 2px solid var(--gold-500);
+      border-radius: var(--r-xl); padding: 2rem; margin-bottom: 3rem;
     }
     body.seller-mode-active .pitch-deck { display: block; }
-    .pitch-title { font-size: var(--fs-xl); font-weight: var(--fw-bold); color: var(--warn); margin-bottom: var(--sp-2); }
-    .pitch-grid { display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: var(--sp-6); }
-    .pitch-card { background: rgba(11, 17, 32, 0.8); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: var(--r-lg); padding: var(--sp-5); }
-    .pitch-card h4 { color: var(--action); margin-bottom: var(--sp-2); }
-    .pitch-card p { font-size: var(--fs-sm); color: var(--text-secondary); }
+    .pitch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; margin-top: 1.2rem; }
+    .pitch-card { background: rgba(11,17,32,0.8); border: 1px solid rgba(245,158,11,0.3); border-radius: var(--r-md); padding: 1.2rem; }
 
-    /* Seller Info Overlay inside Card */
+    /* Catalog Filters */
+    .catalog-bar { display: flex; flex-direction: column; gap: 1.2rem; align-items: center; margin-bottom: 2.5rem; }
+    .search-input {
+      width: 100%; max-width: 500px; padding: 0.85rem 1.4rem;
+      background: var(--surface-inset); border: 1px solid var(--border-subtle);
+      border-radius: var(--r-full); color: #fff; font-size: 0.95rem; outline: none;
+      transition: border-color 0.25s ease;
+    }
+    .search-input:focus { border-color: var(--emerald-400); }
+
+    .cat-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+    .cat-tab {
+      background: var(--surface-card); border: 1px solid var(--border-subtle);
+      color: var(--text-muted); padding: 0.55rem 1.2rem; border-radius: var(--r-full);
+      font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: all 0.25s ease;
+    }
+    .cat-tab:hover, .cat-tab.active { background: var(--emerald-500); color: #000; border-color: var(--emerald-500); }
+
+    /* GRID DE PRODUTOS & CARDS CORRIGIDOS */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 1.8rem;
+      margin-bottom: 4rem;
+    }
+
+    .product-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r-xl);
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-accent);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.6), 0 0 20px var(--emerald-glow);
+    }
+
+    .badge-pill {
+      font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em;
+      padding: 4px 12px; border-radius: 20px; display: inline-block; margin-bottom: 0.8rem;
+      background: rgba(16, 185, 129, 0.15); color: var(--emerald-400); border: 1px solid var(--border-accent);
+    }
+    .badge-pill.gold { background: rgba(245, 158, 11, 0.15); color: var(--gold-500); border-color: rgba(245, 158, 11, 0.4); }
+    .badge-pill.blue { background: rgba(6, 182, 212, 0.15); color: var(--cyan-500); border-color: rgba(6, 182, 212, 0.4); }
+
+    .product-title { font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 0.3rem; line-height: 1.3; }
+    .product-sku { font-family: monospace; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.8rem; }
+    .product-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 1.2rem; }
+
     .seller-box {
-      display: none;
-      background: rgba(11, 17, 32, 0.95);
-      border: 1px solid var(--warn);
-      border-radius: var(--r-md);
-      padding: var(--sp-4);
-      margin-top: var(--sp-4);
-      font-size: var(--fs-sm);
+      display: none; background: rgba(11, 17, 32, 0.95); border: 1px solid var(--gold-500);
+      border-radius: var(--r-md); padding: 1rem; margin-bottom: 1.2rem; font-size: 0.83rem;
     }
     body.seller-mode-active .seller-box { display: block; }
-    .seller-label { color: var(--warn); font-weight: var(--fw-bold); font-size: var(--fs-xs); text-transform: uppercase; margin-top: var(--sp-2); }
+    .seller-lbl { color: var(--gold-500); font-weight: 800; font-size: 0.72rem; text-transform: uppercase; margin-top: 0.4rem; }
 
-    /* Filters & Search */
-    .filter-controls { display: flex; flex-direction: column; gap: var(--sp-4); margin-bottom: var(--sp-8); align-items: center; }
-    .search-input {
-      width: 100%; max-width: 480px; min-height: 48px; padding: 0 var(--sp-6);
-      background: var(--surface-inset); border: 1px solid var(--border-interactive);
-      border-radius: var(--r-full); color: #fff; font-size: var(--fs-base); outline: none;
+    /* CARD FOOTER COM ESTRUTURA VERTICAL LIMPA (SEM OVERFLOW DE BOTÕES) */
+    .card-footer-box {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 1.2rem;
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
     }
-    .search-input:focus { border-color: var(--action); }
 
-    .cat-tabs { display: flex; gap: var(--sp-2); flex-wrap: wrap; justify-content: center; }
-    .cat-tab {
-      background: var(--surface-raised); border: 1px solid var(--border);
-      color: var(--text-secondary); padding: var(--sp-2) var(--sp-4);
-      border-radius: var(--r-full); font-size: var(--fs-sm); font-weight: var(--fw-semibold); cursor: pointer;
+    .price-block { display: flex; flex-direction: column; }
+    .price-val { font-size: 1.45rem; font-weight: 900; color: var(--emerald-400); line-height: 1.2; }
+    .price-model { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem; }
+
+    /* BOTÕES EM LINHA INTEIRA DENTRO DO CARD */
+    .card-btn-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+      width: 100%;
     }
-    .cat-tab:hover, .cat-tab.active { background: var(--action); color: var(--on-action); border-color: var(--action); }
 
-    /* Card Footer & Price */
-    .card-footer { border-top: 1px solid var(--border); padding-top: var(--sp-4); margin-top: var(--sp-4); display: flex; justify-content: space-between; align-items: center; }
-    .price-tag { font-size: var(--fs-xl); font-weight: var(--fw-black); color: var(--action); }
-    .price-sub { font-size: var(--fs-xs); color: var(--text-muted); }
-    .card-actions { display: flex; gap: var(--sp-2); }
+    /* Simulador Box */
+    .sim-box {
+      background: var(--surface-card); border: 1px solid var(--border-accent);
+      border-radius: var(--r-xl); padding: 2.5rem 2rem; margin-bottom: 4rem;
+    }
+    .sim-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2rem; }
+    @media (max-width: 800px) { .sim-grid { grid-template-columns: 1fr; } }
 
-    /* Simulator */
-    .sim-box { background: var(--surface-raised); border: 1px solid var(--border-strong); border-radius: var(--r-2xl); padding: var(--sp-8); margin-bottom: var(--sp-16); }
-    .sim-layout { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--sp-8); }
-    @media (max-width: 768px) { .sim-layout { grid-template-columns: 1fr; } }
-    .sim-list { display: flex; flex-direction: column; gap: var(--sp-3); max-height: 400px; overflow-y: auto; padding-right: var(--sp-2); }
+    .sim-list { display: flex; flex-direction: column; gap: 0.6rem; max-height: 380px; overflow-y: auto; padding-right: 0.5rem; }
     .sim-item {
-      background: var(--surface-inset); border: 1px solid var(--border); border-radius: var(--r-md);
-      padding: var(--sp-3) var(--sp-4); display: flex; justify-content: space-between; align-items: center; cursor: pointer;
+      background: var(--surface-inset); border: 1px solid var(--border-subtle);
+      border-radius: var(--r-md); padding: 0.8rem 1rem; display: flex;
+      justify-content: space-between; align-items: center; cursor: pointer; transition: all 0.2s ease;
     }
-    .sim-item:hover, .sim-item.active { border-color: var(--action); background: var(--action-subtle); }
+    .sim-item:hover, .sim-item.active { border-color: var(--emerald-400); background: rgba(16, 185, 129, 0.12); }
 
-    .sim-summary { background: var(--surface-inset); border: 1px solid var(--border); border-radius: var(--r-xl); padding: var(--sp-6); display: flex; flex-direction: column; justify-content: space-between; }
-    .sim-total { font-size: var(--fs-3xl); font-weight: var(--fw-black); color: var(--action); margin-block: var(--sp-2); }
+    .sim-summary {
+      background: var(--surface-inset); border: 1px solid var(--border-subtle);
+      border-radius: var(--r-lg); padding: 1.8rem; display: flex;
+      flex-direction: column; justify-content: space-between; min-height: 320px;
+    }
+    .sim-total-val { font-size: 2.5rem; font-weight: 900; color: var(--emerald-400); margin: 0.4rem 0; }
 
-    /* FAQ Details */
-    .faq { border-bottom: 1px solid var(--border); padding: var(--sp-5) 0; }
-    .faq summary { cursor: pointer; font-weight: var(--fw-semibold); font-size: var(--fs-lg); list-style: none; display: flex; justify-content: space-between; }
-    .faq summary::after { content: "+"; color: var(--text-muted); }
-    .faq[open] summary::after { content: "−"; }
-    .faq p { color: var(--text-secondary); margin-top: var(--sp-3); }
+    /* FAQ */
+    .faq-item { border-bottom: 1px solid var(--border-subtle); padding: 1.2rem 0; }
+    .faq-item summary { font-size: 1.05rem; font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; }
+    .faq-item summary::after { content: "+"; color: var(--emerald-400); font-size: 1.2rem; }
+    .faq-item[open] summary::after { content: "−"; }
+    .faq-item p { color: var(--text-muted); margin-top: 0.6rem; font-size: 0.95rem; }
 
     /* Footer */
-    .site-footer { background: var(--surface-subtle); border-top: 1px solid var(--border); padding-block: var(--sp-16) var(--sp-8); }
-    .site-footer__cols { display: grid; gap: var(--sp-8); grid-template-columns: repeat(auto-fit, minmax(min(220px,100%),1fr)); }
-    .site-footer h3 { font-size: var(--fs-sm); text-transform: uppercase; letter-spacing: var(--ls-wide); color: var(--text-muted); margin-bottom: var(--sp-4); }
-    .site-footer a { color: var(--text-secondary); text-decoration: none; }
-    .site-footer a:hover { color: var(--text); }
-    .site-footer__legal { margin-top: var(--sp-12); padding-top: var(--sp-6); border-top: 1px solid var(--border); font-size: var(--fs-sm); color: var(--text-muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--sp-4); }
+    .site-footer { background: var(--surface-subtle); border-top: 1px solid var(--border-subtle); padding: 3.5rem 1.5rem 2rem 1.5rem; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2.5rem; margin-bottom: 2.5rem; }
+    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; } }
+    .footer-legal { border-top: 1px solid var(--border-subtle); padding-top: 1.5rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; font-size: 0.85rem; color: var(--text-muted); }
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
+  <!-- Sticky Navbar -->
   <header class="site-header">
     <div class="container site-header__inner">
       <a href="#" class="brand">
@@ -374,12 +319,12 @@
         </div>
       </a>
 
-      <div class="site-header__actions">
-        <button class="btn btn--seller btn--sm" id="btnToggleSeller">
+      <div class="header-actions">
+        <button class="btn btn--seller" id="btnToggleSeller">
           💼 Modo Reunião / Vendedor
         </button>
         <!-- WHATSAPP OFICIAL: 61 996993134 -->
-        <a href="https://wa.me/5561996993134?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20produtos%20do%20Ecossistema%20Live." target="_blank" class="btn btn--whatsapp btn--sm">
+        <a href="https://wa.me/5561996993134?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20produtos%20do%20Ecossistema%20Live." target="_blank" class="btn btn--whatsapp">
           💬 WhatsApp: 61 996993134
         </a>
       </div>
@@ -387,46 +332,44 @@
   </header>
 
   <main>
-    <!-- Hero Section -->
+    <!-- HERO SECTION -->
     <section class="section hero">
-      <div class="container split">
-        <div class="hero__copy">
-          <span class="eyebrow">Governança, Soluções Modulares & IA Empresarial</span>
-          <h1>Transformamos a Gestão da sua Empresa com Produtos Modulares e IA</h1>
-          <p class="hero__sub">
-            Eliminamos o modelo ultrapassado de consultoria perpétua. Entregamos governança estruturada, diagnóstico por inteligência artificial e processos com início, meio e fim.
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow-pill">✨ Governança & Soluções Modulares por IA</div>
+          <h1 class="hero-title">Transformamos a Gestão da sua Empresa com Produtos Modulares e IA</h1>
+          <p class="hero-p">
+            Eliminamos o modelo ultrapassado de consultoria perpétua. Entregamos governança estruturada, diagnóstico rápido por inteligência artificial e processos com início, meio e fim.
           </p>
 
-          <div class="manifesto-box">
-            <div class="manifesto-tag">Posicionamento Oficial Mandatório</div>
+          <div class="manifesto-banner">
+            <div class="manifesto-label">Posicionamento Oficial Mandatório</div>
             <div class="manifesto-quote">
               "Não fazemos consultoria tradicional. Estruturamos governança, diagnosticamos gargalos através de IA, desenvolvemos lideranças e entregamos produtos de gestão modulares com início, meio e fim."
             </div>
           </div>
 
-          <div class="hero__actions">
-            <a href="#catalogo" class="btn btn--primary btn--lg">Explore os 21 SKUs Modulares</a>
-            <a href="https://wa.me/5561996993134?text=Ol%C3%A1!%20Quero%20agendar%20um%20Diagn%C3%B3stico%20Express%20para%20minha%20empresa." target="_blank" class="btn btn--whatsapp btn--lg">
+          <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+            <a href="#catalogo" class="btn btn--primary">Explore os 21 SKUs Modulares</a>
+            <a href="https://wa.me/5561996993134?text=Ol%C3%A1!%20Quero%20agendar%20um%20Diagn%C3%B3stico%20Express." target="_blank" class="btn btn--whatsapp">
               📲 Agendar Diagnóstico Express (R$ 250)
             </a>
           </div>
-          <p style="font-size:var(--fs-sm); color:var(--text-muted);">+100 diagnósticos realizados · Garantia de escopo fechado · Resposta em 24h</p>
         </div>
 
         <div>
-          <!-- Stats Grid -->
-          <div style="display:grid; gap:1.2rem; grid-template-columns:1fr 1fr;">
-            <div style="background:var(--surface-raised); border:1px solid var(--border); padding:1.8rem; border-radius:var(--r-xl); text-align:center;">
-              <div style="font-size:2.4rem; font-weight:900; color:var(--action);">21</div>
-              <div style="font-size:0.85rem; color:var(--text-muted);">Produtos Modulares</div>
+          <div class="stats-box">
+            <div class="stat-card">
+              <div class="stat-val">21</div>
+              <div class="stat-lbl">Produtos Modulares Mapeados</div>
             </div>
-            <div style="background:var(--surface-raised); border:1px solid var(--border); padding:1.8rem; border-radius:var(--r-xl); text-align:center;">
-              <div style="font-size:2.4rem; font-weight:900; color:var(--action);">6</div>
-              <div style="font-size:0.85rem; color:var(--text-muted);">Departamentos Ativos</div>
+            <div class="stat-card">
+              <div class="stat-val">6</div>
+              <div class="stat-lbl">Departamentos Ativos</div>
             </div>
-            <div style="background:var(--surface-raised); border:1px solid var(--border); padding:1.8rem; border-radius:var(--r-xl); text-align:center; grid-column: 1 / -1;">
-              <div style="font-size:2.4rem; font-weight:900; color:var(--action);">100%</div>
-              <div style="font-size:0.85rem; color:var(--text-muted);">Foco na Defesa do CNPJ</div>
+            <div class="stat-card" style="grid-column: 1 / -1; border-color:var(--border-accent);">
+              <div class="stat-val">100%</div>
+              <div class="stat-lbl">Foco na Defesa do CNPJ</div>
             </div>
           </div>
         </div>
@@ -434,68 +377,98 @@
     </section>
 
     <div class="container">
-      <!-- Pitch Deck (Ativado em Modo Reunião) -->
+
+      <!-- PITCH DECK VENDEDOR (MODO REUNIÃO) -->
       <section class="pitch-deck" id="pitchDeck">
-        <div class="pitch-title">💼 Modo Reunião — Guia Rápido do Vendedor (Pitch Deck Executivo)</div>
+        <h3 style="color:var(--gold-500); margin-bottom:0.4rem;">💼 Modo Reunião — Guia Rápido do Vendedor (Pitch Deck Executivo)</h3>
         <p style="color:#cbd5e1; font-size:0.9rem;">Utilize estes 4 passos estratégicos durante a apresentação com o cliente.</p>
         <div class="pitch-grid">
           <div class="pitch-card">
-            <h4>1. O Que É o Ecossistema Live?</h4>
+            <h4 style="color:var(--emerald-400);">1. O Que É o Ecossistema Live?</h4>
             <p>Um hub de inteligência que substitui consultorias perétuas por produtos de gestão modulares com escopo fechado e suporte de IA.</p>
           </div>
           <div class="pitch-card">
-            <h4>2. Por Que Escolher Nossos Produtos?</h4>
+            <h4 style="color:var(--emerald-400);">2. Por Que Escolher Nossos Produtos?</h4>
             <p>Zero dependência de consultores em horas avulsas, 100% de previsibilidade de custos e desintermediação de parceiros.</p>
           </div>
           <div class="pitch-card">
-            <h4>3. Régua de Atendimento B+</h4>
-            <p>Atendemos diretamente empresas de R$ 500k a R$ 5M/ano. Contas acima de R$ 5M/ano são direcionadas para Marcelo Nogueira (Ecossistema B+).</p>
+            <h4 style="color:var(--emerald-400);">3. Régua de Atendimento B+</h4>
+            <p>Atendemos diretamente empresas de R$ 500k a R$ 5M/ano. Contas acima de R$ 5M/ano são direcionadas para Marcelo Nogueira (B+).</p>
           </div>
           <div class="pitch-card">
-            <h4>4. Como Começar Hoje?</h4>
+            <h4 style="color:var(--emerald-400);">4. Como Começar Hoje?</h4>
             <p>Inicie pelo <strong>Diagnóstico Express (R$ 250 em 12x)</strong> ou pelo <strong>Almoço com o CEO no Voya</strong> para mapear as dores reais.</p>
           </div>
         </div>
       </section>
 
-      <!-- Roadmap de Implantação de IA -->
+      <!-- SEÇÃO REQUISITOS & ETAPAS DE IA (COM HEADER DESTACADO COM COR DE FUNDO) -->
       <section class="section" id="etapas-ia">
-        <div class="section-head section-head--center">
-          <span class="eyebrow">Engenharia de Implantação</span>
-          <h2>Requisitos & Etapas da Implantação de IA Corporativa</h2>
-          <p>Como funcionam os agentes Júlio Bot, Jarvis Operacional, RH Tech e Themis na sua empresa.</p>
+        <div class="section-head-card ia">
+          <div class="eyebrow-pill">⚡ Engenharia de Implantação</div>
+          <h2 class="section-title">Requisitos & Etapas da Implantação de IA Corporativa</h2>
+          <p class="section-desc">Como funcionam o Júlio Bot, Jarvis Operacional, RH Tech e Agente Jurídico Themis na sua empresa.</p>
         </div>
 
-        <div style="background:var(--surface-raised); border:1px solid var(--border); padding:2rem; border-radius:var(--r-xl); margin-bottom:2rem;">
-          <h4 style="color:var(--action); margin-bottom:0.8rem;">📌 Requisitos Técnicos Mínimos:</h4>
-          <ul style="color:var(--text-secondary); font-size:0.95rem; padding-left:1.2rem; display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:0.5rem;">
-            <li>Conexão de internet constante.</li>
+        <div style="background:var(--surface-card); border:1px solid var(--border-subtle); padding:1.8rem; border-radius:var(--r-lg); margin-bottom:2rem;">
+          <h4 style="color:var(--cyan-500); margin-bottom:0.8rem;">📌 Requisitos Técnicos Mínimos para Implantação:</h4>
+          <ul style="color:var(--text-muted); font-size:0.95rem; padding-left:1.2rem; display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:0.6rem;">
+            <li>Conexão de internet banda larga constante.</li>
             <li>Navegador Web moderno (Google Chrome / Edge).</li>
             <li>Arquivos de POPs, manuais e tabelas em PDF ou Docx.</li>
-            <li>Conta WhatsApp Comercial (se aplicável).</li>
-            <li>1 responsável interno como sponsor do projeto.</li>
+            <li>Conta de WhatsApp Comercial logada (se aplicável).</li>
+            <li>1 responsável interno nomeado como sponsor do projeto.</li>
           </ul>
         </div>
 
-        <div class="autogrid">
-          <div class="card"><span class="badge">Etapa 1</span><h3>Levantamento</h3><p>Diagnóstico de infraestrutura, computadores e rede interna.</p></div>
-          <div class="card"><span class="badge">Etapa 2</span><h3>Skills & POPs</h3><p>Mapeamento dos manuais, regras e perguntas frequentes.</p></div>
-          <div class="card"><span class="badge">Etapa 3</span><h3>RAG & Tenant</h3><p>Estruturação do banco vetorial isolado em `/tenants/{tenantId}`.</p></div>
-          <div class="card"><span class="badge">Etapa 4</span><h3>Parametrização</h3><p>Ajuste de tom de voz e testes de precisão (mín. 85% acerto).</p></div>
-          <div class="card"><span class="badge">Etapa 5</span><h3>Treinamento</h3><p>Capacitação prática da equipe em sessão de até 2 horas.</p></div>
-          <div class="card" style="border-color:var(--action);"><span class="badge" style="background:var(--action); color:#000;">Etapa 6</span><h3>Go-Live</h3><p>Liberação total dos acessos com suporte P0 a P3.</p></div>
+        <div class="products-grid" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.2rem;">
+          <div style="background:var(--surface-card); border:1px solid var(--border-subtle); padding:1.2rem; border-radius:var(--r-lg);">
+            <div style="font-size:0.75rem; font-weight:800; color:var(--emerald-400); margin-bottom:0.3rem;">ETAPA 1</div>
+            <h4 style="font-size:1rem; color:#fff; margin-bottom:0.3rem;">Levantamento</h4>
+            <p style="font-size:0.8rem; color:var(--text-muted);">Diagnóstico de infraestrutura e rede.</p>
+          </div>
+
+          <div style="background:var(--surface-card); border:1px solid var(--border-subtle); padding:1.2rem; border-radius:var(--r-lg);">
+            <div style="font-size:0.75rem; font-weight:800; color:var(--emerald-400); margin-bottom:0.3rem;">ETAPA 2</div>
+            <h4 style="font-size:1rem; color:#fff; margin-bottom:0.3rem;">Skills & POPs</h4>
+            <p style="font-size:0.8rem; color:var(--text-muted);">Mapeamento dos manuais e regras.</p>
+          </div>
+
+          <div style="background:var(--surface-card); border:1px solid var(--border-subtle); padding:1.2rem; border-radius:var(--r-lg);">
+            <div style="font-size:0.75rem; font-weight:800; color:var(--emerald-400); margin-bottom:0.3rem;">ETAPA 3</div>
+            <h4 style="font-size:1rem; color:#fff; margin-bottom:0.3rem;">RAG & Tenant</h4>
+            <p style="font-size:0.8rem; color:var(--text-muted);">Base vetorial em `/tenants/{tenantId}`.</p>
+          </div>
+
+          <div style="background:var(--surface-card); border:1px solid var(--border-subtle); padding:1.2rem; border-radius:var(--r-lg);">
+            <div style="font-size:0.75rem; font-weight:800; color:var(--emerald-400); margin-bottom:0.3rem;">ETAPA 4</div>
+            <h4 style="font-size:1rem; color:#fff; margin-bottom:0.3rem;">Parametrização</h4>
+            <p style="font-size:0.8rem; color:var(--text-muted);">Ajuste de tom e acerto (mín. 85%).</p>
+          </div>
+
+          <div style="background:var(--surface-card); border:1px solid var(--border-subtle); padding:1.2rem; border-radius:var(--r-lg);">
+            <div style="font-size:0.75rem; font-weight:800; color:var(--emerald-400); margin-bottom:0.3rem;">ETAPA 5</div>
+            <h4 style="font-size:1rem; color:#fff; margin-bottom:0.3rem;">Treinamento</h4>
+            <p style="font-size:0.8rem; color:var(--text-muted);">Sessão prática da equipe (máx 2h).</p>
+          </div>
+
+          <div style="background:var(--surface-card); border:1px solid var(--emerald-400); padding:1.2rem; border-radius:var(--r-lg);">
+            <div style="font-size:0.75rem; font-weight:800; color:#000; background:var(--emerald-400); padding:2px 6px; border-radius:4px; display:inline-block; margin-bottom:0.3rem;">ETAPA 6</div>
+            <h4 style="font-size:1rem; color:#fff; margin-bottom:0.3rem;">Go-Live</h4>
+            <p style="font-size:0.8rem; color:var(--text-muted);">Liberação total e suporte P0 a P3.</p>
+          </div>
         </div>
       </section>
 
-      <!-- Catálogo Completo dos 21 SKUs -->
+      <!-- CATÁLOGO DOS 21 SKUS (COM HEADER DESTACADO COM COR DE FUNDO) -->
       <section class="section" id="catalogo">
-        <div class="section-head section-head--center">
-          <span class="eyebrow">Portfólio de Soluções</span>
-          <h2>Catálogo Oficial de Soluções Modulares (21 SKUs)</h2>
-          <p>Clique em "📄 Ver Página" para abrir a apresentação dedicada de cada produto.</p>
+        <div class="section-head-card cat">
+          <div class="eyebrow-pill">📦 Portfólio de Soluções</div>
+          <h2 class="section-title">Catálogo Oficial de Soluções Modulares (21 SKUs)</h2>
+          <p class="section-desc">Clique no botão "📄 Ver Página" para abrir a apresentação dedicada de cada SKU.</p>
         </div>
 
-        <div class="filter-controls">
+        <div class="catalog-bar">
           <input type="text" id="searchInput" class="search-input" placeholder="Buscar por produto, palavra-chave ou SKU...">
           
           <div class="cat-tabs" id="categoryTabs">
@@ -508,20 +481,21 @@
           </div>
         </div>
 
-        <div class="autogrid" id="productsGrid">
+        <!-- PRODUCTS GRID (POSICIONAMENTO DOS BOTÕES E PREÇO CORRIGIDOS) -->
+        <div class="products-grid" id="productsGrid">
           <!-- Renderizado via JS -->
         </div>
       </section>
 
-      <!-- Simulador de ROI -->
+      <!-- SIMULADOR DE ROI -->
       <section class="section sim-box" id="simulador">
-        <div class="section-head">
-          <span class="eyebrow">Calculadora de Investimento</span>
-          <h2>Simulador de ROI & Pacotes Modulares</h2>
-          <p>Selecione os produtos e veja o orçamento consolidado em tempo real.</p>
+        <div class="section-head-card" style="margin-bottom: 2rem; background: var(--gradient-head-hero);">
+          <div class="eyebrow-pill">🧮 Calculadora de Investimento</div>
+          <h2 class="section-title">Simulador de ROI & Montagem de Pacotes</h2>
+          <p class="section-desc">Selecione os produtos e veja o orçamento consolidado em tempo real.</p>
         </div>
 
-        <div class="sim-layout">
+        <div class="sim-grid">
           <div>
             <h4 style="color:#fff; margin-bottom:1rem;">Selecione os Produtos:</h4>
             <div class="sim-list" id="simList">
@@ -531,9 +505,9 @@
 
           <div class="sim-summary">
             <div>
-              <div style="font-size:0.9rem; color:var(--text-muted);">Investimento Total Estimado</div>
-              <div class="sim-total" id="simTotalPrice">R$ 0,00</div>
-              <div id="simSelectedItems" style="font-size:0.88rem; color:var(--text-muted); margin-bottom:1.5rem;">Nenhum produto selecionado.</div>
+              <div style="font-size:0.85rem; color:var(--text-muted);">Investimento Total Estimado</div>
+              <div class="sim-total-val" id="simTotalPrice">R$ 0,00</div>
+              <div id="simSelectedItems" style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.5rem;">Nenhum produto selecionado.</div>
             </div>
 
             <a href="#" id="btnSimWhatsApp" target="_blank" class="btn btn--whatsapp btn--block">
@@ -543,109 +517,127 @@
         </div>
       </section>
 
-      <!-- Departamentos -->
+      <!-- DEPARTAMENTOS -->
       <section class="section" id="departamentos">
-        <div class="section-head section-head--center">
-          <span class="eyebrow">Estrutura Operacional</span>
-          <h2>6 Departamentos Especializados</h2>
+        <div class="section-head-card" style="background: var(--gradient-head-ia);">
+          <div class="eyebrow-pill">🏛️ Estrutura Operacional</div>
+          <h2 class="section-title">6 Departamentos Especializados</h2>
+          <p class="section-desc">Organograma modular executável por especialistas e agentes autônomos.</p>
         </div>
 
-        <div class="autogrid">
-          <div class="card">
-            <span class="badge">DEP-01</span>
-            <h3>Comercial & Crescimento</h3>
-            <p style="font-size:0.85rem; color:var(--text-muted);">Líder: Luiz Portal | Agente: el-agente-prospeccao</p>
-            <p>Prospecção B2B autônoma P1→P4, qualificação de leads e régua B+.</p>
+        <div class="products-grid">
+          <div class="product-card">
+            <div>
+              <span class="badge-pill">DEP-01</span>
+              <h3 class="product-title">Comercial & Crescimento</h3>
+              <div class="product-sku">Líder: Luiz Portal | Agente: el-agente-prospeccao</div>
+              <p class="product-desc">Prospecção B2B autônoma P1→P4 no WhatsApp, qualificação de leads e régua B+ (< R$ 5M/ano).</p>
+            </div>
           </div>
-          <div class="card">
-            <span class="badge">DEP-02</span>
-            <h3>Tecnologia & Produtos de IA</h3>
-            <p style="font-size:0.85rem; color:var(--text-muted);">Líder: Cléber Donato (CTO) | Agente: el-julio-suporte-onboarding</p>
-            <p>Infraestrutura Netlify/Firebase multi-tenant, Júlio Bot v8.0, Jarvis Operacional e RH Tech.</p>
-          </div>
-          <div class="card">
-            <span class="badge">DEP-03</span>
-            <h3>Educação Executiva & Eventos</h3>
-            <p style="font-size:0.85rem; color:var(--text-muted);">Líder: Luiz Portal | Parceiro: Restaurante Voya</p>
-            <p>O Código da Nova Liderança, workshops, mentorias e Almoço com o CEO no Restaurante Voya.</p>
-          </div>
-          <div class="card">
-            <span class="badge">DEP-04</span>
-            <h3>Governança & Estratégia</h3>
-            <p style="font-size:0.85rem; color:var(--text-muted);">Líder: Luiz Portal | Mentor: Ibrahim Boufleur</p>
-            <p>Conselho Familiar (3 Círculos de Gersick), Planejamento Estratégico OKRs 12M e Mediação M&A.</p>
-          </div>
-          <div class="card">
-            <span class="badge">DEP-05</span>
-            <h3>CX & Inteligência de Mercado</h3>
-            <p style="font-size:0.85rem; color:var(--text-muted);">Líder: Cléber Donato | Parceira: Juliana Canuto</p>
-            <p>Service Blueprint para PMEs e indústrias, formulários proprietários e NPS.</p>
-          </div>
-          <div class="card" style="border-color:var(--warn);">
-            <span class="badge badge--gold">DEP-06 — TRANSVERSAL</span>
-            <h3>Qualidade, Compliance & Defesa do CNPJ</h3>
-            <p style="font-size:0.85rem; color:var(--text-muted);">Guardião: el-antagonista-defesa-cnpj</p>
-            <p>Gate antagônico obrigatório com poder de VETO. Garante a perenidade do CNPJ.</p>
-          </div>
-        </div>
-      </section>
 
-      <!-- Parceiros (NOME CORRIGIDO: KHELVEN) -->
-      <section class="section section--subtle" style="border-radius:var(--r-2xl); padding:var(--sp-8); margin-bottom:var(--sp-16);" id="parceiros">
-        <div class="section-head section-head--center">
-          <span class="eyebrow">Rede Homologada</span>
-          <h2>Parceiros & Alianças Estratégicas</h2>
-          <p>Desintermediação total: faturamento e contratos diretos entre cliente e parceiro.</p>
-        </div>
+          <div class="product-card">
+            <div>
+              <span class="badge-pill">DEP-02</span>
+              <h3 class="product-title">Tecnologia & Produtos de IA</h3>
+              <div class="product-sku">Líder: Cléber Donato (CTO) | Agente: el-julio-suporte-onboarding</div>
+              <p class="product-desc">Infraestrutura Netlify/Firebase multi-tenant, Júlio Bot v8.0, Jarvis Operacional e RH Tech.</p>
+            </div>
+          </div>
 
-        <div class="autogrid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
-          <div style="background:var(--surface-raised); border:1px solid var(--border); padding:1.2rem; border-radius:var(--r-lg); text-align:center;">
-            <div style="font-weight:700; color:#fff;">Agregar (Khelven)</div>
-            <div style="font-size:0.8rem; color:var(--action);">BPO Financeiro & DRE</div>
+          <div class="product-card">
+            <div>
+              <span class="badge-pill">DEP-03</span>
+              <h3 class="product-title">Educação Executiva & Eventos</h3>
+              <div class="product-sku">Líder: Luiz Portal | Parceiro: Restaurante Voya</div>
+              <p class="product-desc">O Código da Nova Liderança, workshops, mentorias executivas e Almoço com o CEO no Voya.</p>
+            </div>
           </div>
-          <div style="background:var(--surface-raised); border:1px solid var(--border); padding:1.2rem; border-radius:var(--r-lg); text-align:center;">
-            <div style="font-weight:700; color:#fff;">Juliana Canuto</div>
-            <div style="font-size:0.8rem; color:var(--action);">CX & NPS Indústrias</div>
+
+          <div class="product-card">
+            <div>
+              <span class="badge-pill">DEP-04</span>
+              <h3 class="product-title">Governança & Estratégia</h3>
+              <div class="product-sku">Líder: Luiz Portal | Mentor: Ibrahim Boufleur</div>
+              <p class="product-desc">Conselho Familiar (3 Círculos de Gersick), Planejamento Estratégico OKRs 12M e Mediação M&A.</p>
+            </div>
           </div>
-          <div style="background:var(--surface-raised); border:1px solid var(--border); padding:1.2rem; border-radius:var(--r-lg); text-align:center;">
-            <div style="font-weight:700; color:#fff;">Restaurante Voya</div>
-            <div style="font-size:0.8rem; color:var(--action);">Almoço com o CEO</div>
+
+          <div class="product-card">
+            <div>
+              <span class="badge-pill">DEP-05</span>
+              <h3 class="product-title">CX & Inteligência de Mercado</h3>
+              <div class="product-sku">Líder: Cléber Donato | Parceira: Juliana Canuto</div>
+              <p class="product-desc">Service Blueprint para PMEs e indústrias, formulários proprietários e medição de NPS.</p>
+            </div>
           </div>
-          <div style="background:var(--surface-raised); border:1px solid var(--border); padding:1.2rem; border-radius:var(--r-lg); text-align:center;">
-            <div style="font-weight:700; color:#fff;">Visual Work</div>
-            <div style="font-size:0.8rem; color:var(--action);">Design & Identidade Visual</div>
-          </div>
-          <div style="background:var(--surface-raised); border:1px solid var(--border); padding:1.2rem; border-radius:var(--r-lg); text-align:center;">
-            <div style="font-weight:700; color:#fff;">Marcelo Nogueira (B+)</div>
-            <div style="font-size:0.8rem; color:var(--action);">Contas > R$ 5M/ano</div>
+
+          <div class="product-card" style="border-color:var(--gold-500);">
+            <div>
+              <span class="badge-pill gold">DEP-06 — TRANSVERSAL</span>
+              <h3 class="product-title">Qualidade, Compliance & Defesa do CNPJ</h3>
+              <div class="product-sku">Guardião: el-antagonista-defesa-cnpj</div>
+              <p class="product-desc">Gate antagônico obrigatório com poder de VETO. Preserva a solvência e a perenidade do CNPJ.</p>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- FAQ Section (Nativo sem JS) -->
+      <!-- PARCEIROS (NOME CORRIGIDO: KHELVEN) -->
+      <section class="section" id="parceiros">
+        <div class="section-head-card cat">
+          <div class="eyebrow-pill">🤝 Rede Homologada</div>
+          <h2 class="section-title">Parceiros & Alianças Estratégicas</h2>
+          <p class="section-desc">Desintermediação total: faturamento e contratos diretos entre cliente e parceiro.</p>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:1.2rem;">
+          <div style="background:var(--surface-card); border:1px solid var(--border-subtle); padding:1.4rem; border-radius:var(--r-lg); text-align:center;">
+            <div style="font-weight:800; color:#fff; font-size:1.1rem;">Agregar (Khelven)</div>
+            <div style="font-size:0.8rem; color:var(--emerald-400); font-weight:700;">BPO Financeiro & DRE</div>
+          </div>
+          <div style="background:var(--surface-card); border:1px solid var(--border-subtle); padding:1.4rem; border-radius:var(--r-lg); text-align:center;">
+            <div style="font-weight:800; color:#fff; font-size:1.1rem;">Juliana Canuto</div>
+            <div style="font-size:0.8rem; color:var(--emerald-400); font-weight:700;">CX & NPS Indústrias</div>
+          </div>
+          <div style="background:var(--surface-card); border:1px solid var(--border-subtle); padding:1.4rem; border-radius:var(--r-lg); text-align:center;">
+            <div style="font-weight:800; color:#fff; font-size:1.1rem;">Restaurante Voya</div>
+            <div style="font-size:0.8rem; color:var(--emerald-400); font-weight:700;">Almoço com o CEO</div>
+          </div>
+          <div style="background:var(--surface-card); border:1px solid var(--border-subtle); padding:1.4rem; border-radius:var(--r-lg); text-align:center;">
+            <div style="font-weight:800; color:#fff; font-size:1.1rem;">Visual Work</div>
+            <div style="font-size:0.8rem; color:var(--emerald-400); font-weight:700;">Design & Mkt</div>
+          </div>
+          <div style="background:var(--surface-card); border:1px solid var(--border-subtle); padding:1.4rem; border-radius:var(--r-lg); text-align:center;">
+            <div style="font-weight:800; color:#fff; font-size:1.1rem;">Marcelo Nogueira (B+)</div>
+            <div style="font-size:0.8rem; color:var(--emerald-400); font-weight:700;">Contas > R$ 5M/ano</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ NATIVO -->
       <section class="section" id="faq">
-        <div class="section-head section-head--center">
-          <span class="eyebrow">Tire suas dúvidas</span>
-          <h2>Perguntas Frequentes</h2>
+        <div class="section-head-card ia">
+          <div class="eyebrow-pill">❓ Objeções & Dúvidas</div>
+          <h2 class="section-title">Perguntas Frequentes</h2>
         </div>
 
-        <div style="max-width: 68ch; margin-inline: auto;">
-          <details class="faq">
+        <div style="max-width: 720px; margin-inline: auto;">
+          <details class="faq-item">
             <summary>Qual a diferença entre o Ecossistema Live e uma consultoria tradicional?</summary>
             <p>Nós não vendemos horas avulsas nem mantemos contratos abertos sem fim. Entregamos produtos de gestão modulares com escopo fechado, início, meio e fim, apoiados por inteligência artificial.</p>
           </details>
 
-          <details class="faq">
+          <details class="faq-item">
             <summary>Por onde minha empresa deve começar?</summary>
             <p>Recomendamos iniciar pelo Diagnóstico Empresarial Express (R$ 250 em até 12x) ou agendar a participação no Almoço com o CEO no Restaurante Voya. É a forma mais rápida e barata de identificar os gargalos reais.</p>
           </details>
 
-          <details class="faq">
+          <details class="faq-item">
             <summary>Como funcionam as soluções de IA Corporativa?</summary>
             <p>Nossos agentes de IA (Júlio Bot, Jarvis Operacional, RH Tech) são implantados em ambiente multi-tenant isolado no Firestore. Eles aprendem os POPs da sua empresa e auxiliam a equipe sem risco de vazamento de dados.</p>
           </details>
 
-          <details class="faq">
+          <details class="faq-item">
             <summary>Como funciona a desintermediação de parceiros?</summary>
             <p>Serviços complementares (BPO financeiro com Khelven/Agregar, design com Visual Work, pesquisas com Juliana Canuto) são faturados diretamente pelo parceiro ao cliente. O Ecossistema Live não cobra taxas de intermediação.</p>
           </details>
@@ -654,41 +646,41 @@
     </div>
   </main>
 
-  <!-- Footer -->
+  <!-- FOOTER -->
   <footer class="site-footer">
-    <div class="container site-footer__cols">
+    <div class="container footer-grid">
       <div>
-        <div style="font-size:1.15rem; font-weight:800; color:#fff; margin-bottom:0.5rem;">LUIZ E A PORTAL (Ecossistema Live)</div>
-        <p style="font-size:0.88rem; color:var(--text-muted); max-width:400px;">
+        <div style="font-size:1.2rem; font-weight:800; color:#fff; margin-bottom:0.6rem;">LUIZ E A PORTAL (Ecossistema Live)</div>
+        <p style="font-size:0.9rem; color:var(--text-muted); max-width:400px;">
           Hub de Inteligência Empresarial, Governança por IA, Diagnóstico de Gestão e Soluções Modulares com início, meio e fim.
         </p>
       </div>
 
       <div>
-        <h3>Navegação</h3>
-        <p><a href="#catalogo">Catálogo de Produtos</a></p>
-        <p><a href="#etapas-ia">Etapas de IA</a></p>
-        <p><a href="#simulador">Simulador de ROI</a></p>
-        <p><a href="#departamentos">Departamentos</a></p>
+        <h4 style="font-size:0.85rem; text-transform:uppercase; color:var(--emerald-400); margin-bottom:0.8rem;">Navegação</h4>
+        <p><a href="#catalogo" style="color:var(--text-muted); font-size:0.9rem;">Catálogo de Produtos</a></p>
+        <p><a href="#etapas-ia" style="color:var(--text-muted); font-size:0.9rem;">Etapas de IA</a></p>
+        <p><a href="#simulador" style="color:var(--text-muted); font-size:0.9rem;">Simulador de ROI</a></p>
+        <p><a href="#departamentos" style="color:var(--text-muted); font-size:0.9rem;">Departamentos</a></p>
       </div>
 
       <div>
-        <h3>Contato Direto</h3>
-        <p><a href="https://wa.me/5561996993134" target="_blank">WhatsApp: 61 996993134</a></p>
-        <p><a href="mailto:contato@ecossistemalive.com.br">contato@ecossistemalive.com.br</a></p>
-        <p><a href="mailto:cleberdonato@ecossistemalive.com.br">cleberdonato@ecossistemalive.com.br</a></p>
+        <h4 style="font-size:0.85rem; text-transform:uppercase; color:var(--emerald-400); margin-bottom:0.8rem;">Contato Direto</h4>
+        <p><a href="https://wa.me/5561996993134" target="_blank" style="color:var(--text-muted); font-size:0.9rem;">WhatsApp: 61 996993134</a></p>
+        <p><a href="mailto:contato@ecossistemalive.com.br" style="color:var(--text-muted); font-size:0.9rem;">contato@ecossistemalive.com.br</a></p>
+        <p><a href="mailto:cleberdonato@ecossistemalive.com.br" style="color:var(--text-muted); font-size:0.9rem;">cleberdonato@ecossistemalive.com.br</a></p>
       </div>
     </div>
 
-    <div class="container site-footer__legal">
+    <div class="container footer-legal">
       <div>CNPJ: 52.887.139/0001-00 | Goiânia - GO</div>
       <div>
-        &copy; Powered by <a href="mailto:cleberdonato@ecossistemalive.com.br" style="color:var(--action); font-weight:700;">Cléber Donato</a>. Todos os direitos reservados.
+        &copy; Powered by <a href="mailto:cleberdonato@ecossistemalive.com.br" style="color:var(--emerald-400); font-weight:700;">Cléber Donato</a>. Todos os direitos reservados.
       </div>
     </div>
   </footer>
 
-  <!-- Script -->
+  <!-- JAVASCRIPT DO CATÁLOGO & SIMULADOR COM ESTRUTURA DE CARD CORRIGIDA -->
   <script>
     const products = [
       { id: "SAAS-DIAG-01", cat: "saas", badge: "saas", badgeText: "SaaS Entrada", name: "Diagnóstico Empresarial Express (SaaS)", desc: "IA + Formulário de 4 Eixos (Financeiro, Operacional, Pessoal, Comercial) gerando PDF de vulnerabilidade em tempo real.", priceStr: "R$ 250,00", priceVal: 250, model: "Pagamento Único / 12x", pitch: "Entrada sem fricção. Mostre ao cliente que por R$ 250 ele descobre onde está perdendo margem em menos de 10 minutos.", obj: "'Preciso mesmo de diagnóstico?' -> Resposta: Sim, o relatório indica se a empresa está no quadrante Verde, Amarelo ou Vermelho." },
@@ -732,34 +724,37 @@
 
       filtered.forEach(p => {
         const card = document.createElement('div');
-        card.className = 'card card--interactive';
+        card.className = 'product-card';
         
         const waUrl = "https://wa.me/5561996993134?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%3A%20" + encodeURIComponent(p.name);
         const pageUrl = "./produtos/" + p.id + ".html";
 
+        const badgeClass = p.badge === 'high-ticket' ? 'gold' : p.badge === 'educacao' ? 'blue' : '';
+
         card.innerHTML = `
           <div>
-            <span class="badge ${p.badge === 'high-ticket' ? 'badge--gold' : p.badge === 'educacao' ? 'badge--blue' : ''}">${p.badgeText}</span>
-            <h3>${p.name}</h3>
-            <div style="font-size:0.75rem; font-family:monospace; color:var(--text-muted); margin-bottom:0.8rem;">SKU: ${p.id}</div>
-            <p style="color:var(--text-secondary); font-size:0.92rem;">${p.desc}</p>
+            <span class="badge-pill ${badgeClass}">${p.badgeText}</span>
+            <h3 class="product-title">${p.name}</h3>
+            <div class="product-sku">SKU: ${p.id}</div>
+            <p class="product-desc">${p.desc}</p>
 
             <div class="seller-box">
-              <div class="seller-label">🎯 Pitch de Venda</div>
+              <div class="seller-lbl">🎯 Pitch de Venda</div>
               <div>${p.pitch}</div>
-              <div class="seller-label">🛡️ Objeção & Resposta</div>
+              <div class="seller-lbl">🛡️ Objeção & Resposta</div>
               <div>${p.obj}</div>
             </div>
           </div>
 
-          <div class="card-footer">
-            <div>
-              <div class="price-tag">${p.priceStr}</div>
-              <div class="price-sub">${p.model}</div>
+          <div class="card-footer-box">
+            <div class="price-block">
+              <div class="price-val">${p.priceStr}</div>
+              <div class="price-model">${p.model}</div>
             </div>
-            <div class="card-actions">
-              <a href="${pageUrl}" class="btn btn--secondary btn--sm">📄 Ver Página</a>
-              <a href="${waUrl}" target="_blank" class="btn btn--whatsapp btn--sm">💬 WhatsApp</a>
+            
+            <div class="card-btn-group">
+              <a href="${pageUrl}" class="btn btn--secondary" style="padding:0.6rem 0.8rem; font-size:0.82rem;">📄 Ver Página</a>
+              <a href="${waUrl}" target="_blank" class="btn btn--whatsapp" style="padding:0.6rem 0.8rem; font-size:0.82rem;">💬 WhatsApp</a>
             </div>
           </div>
         `;
@@ -776,7 +771,7 @@
         item.dataset.id = p.id;
         item.dataset.price = p.priceVal;
         item.dataset.name = p.name;
-        item.innerHTML = `<div><strong>${p.name}</strong></div><div style="color:var(--action); font-weight:700;">${p.priceStr}</div>`;
+        item.innerHTML = `<div><strong>${p.name}</strong></div><div style="color:var(--emerald-400); font-weight:700;">${p.priceStr}</div>`;
         item.addEventListener('click', () => {
           item.classList.toggle('active');
           updateSimulatorSummary();
