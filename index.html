@@ -33,6 +33,7 @@
       --n-950: #0B1120;
 
       /* Marca Indigo */
+      --b-300: #A5B4FC;
       --b-400: #818CF8;
       --b-500: #6366F1;
       --b-600: #4F46E5;
@@ -177,8 +178,11 @@
     }
     .text-grad {
       background: var(--grad-text);
-      -webkit-background-clip: text; background-clip: text;
-      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: var(--accent-text);
+      display: inline-block;
     }
     .chip {
       display: inline-flex; align-items: center; gap: var(--sp-2);
