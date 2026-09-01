@@ -21,7 +21,7 @@
       --text-dim: #64748b;
       
       --brand-green: #10b981;
-      --brand-green-glow: rgba(16, 185, 129, 0.3);
+      --brand-green-glow: rgba(16, 185, 129, 0.35);
       --brand-cyan: #06b6d4;
       --brand-blue: #3b82f6;
       --brand-gold: #f59e0b;
@@ -55,30 +55,42 @@
     h1, h2, h3, h4, h5, h6 {
       font-family: var(--font-heading);
     }
+
+    /* Animated background elements */
+    .bg-grid-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 30px 30px;
+      pointer-events: none;
+      z-index: 0;
+    }
     
-    /* Background Particle Shapes */
     .bg-shape-1 {
       position: absolute;
       top: -100px;
       right: -100px;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(6, 182, 212, 0.05) 50%, transparent 70%);
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.18) 0%, rgba(6, 182, 212, 0.05) 50%, transparent 70%);
       border-radius: 50%;
-      filter: blur(60px);
+      filter: blur(70px);
       z-index: 0;
       animation: floatSlow 12s infinite alternate ease-in-out;
     }
     
     .bg-shape-2 {
       position: absolute;
-      top: 600px;
+      top: 700px;
       left: -150px;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, rgba(139, 92, 246, 0.05) 50%, transparent 70%);
+      width: 650px;
+      height: 650px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(139, 92, 246, 0.05) 50%, transparent 70%);
       border-radius: 50%;
-      filter: blur(80px);
+      filter: blur(90px);
       z-index: 0;
       animation: floatSlow 15s infinite alternate-reverse ease-in-out;
     }
@@ -88,12 +100,12 @@
       100% { transform: translate(40px, 60px) rotate(15deg); }
     }
     
-    /* Navbar */
+    /* Header Navbar */
     header {
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(11, 15, 25, 0.9);
+      background: rgba(11, 15, 25, 0.92);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border-color);
       padding: 1rem 2rem;
@@ -159,8 +171,8 @@
       box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
     }
     
-    .btn-contact-header {
-      background: var(--gradient-brand);
+    .btn-contact-whatsapp {
+      background: #25d366;
       color: #ffffff;
       padding: 0.55rem 1.3rem;
       border-radius: 30px;
@@ -171,11 +183,12 @@
       align-items: center;
       gap: 0.5rem;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
     }
-    .btn-contact-header:hover {
+    .btn-contact-whatsapp:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+      background: #20ba5a;
     }
     
     /* Layout Container */
@@ -190,17 +203,17 @@
     /* Hero Section */
     .hero {
       text-align: center;
-      padding: 4rem 1rem 5rem 1rem;
+      padding: 4rem 1rem 4rem 1rem;
     }
     
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: rgba(16, 185, 129, 0.1);
+      background: rgba(16, 185, 129, 0.12);
       border: 1px solid var(--border-accent);
       color: var(--brand-green);
-      padding: 0.4rem 1.2rem;
+      padding: 0.45rem 1.3rem;
       border-radius: 30px;
       font-size: 0.85rem;
       font-weight: 700;
@@ -214,7 +227,7 @@
     }
     
     .hero-h1 {
-      font-size: 3.2rem;
+      font-size: 3.3rem;
       font-weight: 900;
       line-height: 1.15;
       margin-bottom: 1.5rem;
@@ -243,7 +256,6 @@
       text-align: left;
       box-shadow: var(--shadow-card);
       position: relative;
-      overflow: hidden;
     }
     
     .manifesto-tag {
@@ -308,19 +320,19 @@
       background: #20ba5a;
     }
 
-    /* Stats Banner */
+    /* Stats Banner (REMOVIDO MÉTRO 3 MESES CONFORME SOLICITADO) */
     .stats-banner {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1.5rem;
-      margin: 3rem 0 5rem 0;
+      margin: 2rem 0 4rem 0;
     }
     
     .stat-card {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: 16px;
-      padding: 1.5rem;
+      padding: 1.6rem;
       text-align: center;
       transition: all 0.3s ease;
     }
@@ -330,15 +342,15 @@
     }
     
     .stat-number {
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       font-weight: 900;
       color: var(--brand-green);
       margin-bottom: 0.2rem;
     }
     .stat-label {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       color: var(--text-muted);
-      font-weight: 500;
+      font-weight: 600;
     }
 
     /* Pitch Deck Section (Seller Mode Only) */
@@ -397,6 +409,51 @@
       font-size: 0.88rem;
       color: #cbd5e1;
       line-height: 1.5;
+    }
+
+    /* AI Roadmap Section (NOVA SEÇÃO VISUAL ILUSTRATIVA) */
+    .ai-roadmap-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-accent);
+      border-radius: 24px;
+      padding: 3rem 2rem;
+      margin-bottom: 5rem;
+    }
+    
+    .roadmap-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+    
+    .step-card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.2rem;
+      position: relative;
+    }
+    .step-num {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--brand-green);
+      background: rgba(16, 185, 129, 0.15);
+      padding: 2px 8px;
+      border-radius: 10px;
+      display: inline-block;
+      margin-bottom: 0.6rem;
+    }
+    .step-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+    .step-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.4;
     }
 
     /* Section Styling */
@@ -591,6 +648,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 0.5rem;
     }
     
     .price-group {
@@ -598,7 +656,7 @@
       flex-direction: column;
     }
     .price-tag {
-      font-size: 1.35rem;
+      font-size: 1.3rem;
       font-weight: 900;
       color: var(--brand-green);
     }
@@ -607,26 +665,39 @@
       color: var(--text-dim);
     }
     
-    .btn-card-action {
-      background: rgba(255, 255, 255, 0.08);
-      color: #fff;
-      border: 1px solid var(--border-color);
-      padding: 0.6rem 1.1rem;
-      border-radius: 20px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
+    .card-actions {
+      display: flex;
       gap: 0.4rem;
     }
-    .btn-card-action:hover {
+
+    .btn-view-page {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--brand-green);
+      border: 1px solid var(--border-accent);
+      padding: 0.55rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .btn-view-page:hover {
       background: var(--brand-green);
       color: #000;
-      border-color: var(--brand-green);
-      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+    }
+
+    .btn-card-action {
+      background: #25d366;
+      color: #fff;
+      padding: 0.55rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .btn-card-action:hover {
+      background: #20ba5a;
     }
 
     /* ROI Simulator Section */
@@ -787,7 +858,7 @@
       line-height: 1.55;
     }
 
-    /* Partners Network */
+    /* Partners Section (NOME CORRIGIDO: KHELVEN) */
     .partners-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -901,57 +972,11 @@
     .footer-powered a:hover {
       text-decoration: underline;
     }
-
-    /* Modal Styling */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(8px);
-      z-index: 2000;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      padding: 1.5rem;
-    }
-    .modal-overlay.active {
-      display: flex;
-    }
-    
-    .modal-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-accent);
-      border-radius: 24px;
-      padding: 2.5rem;
-      max-width: 550px;
-      width: 100%;
-      position: relative;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
-      animation: modalIn 0.3s ease;
-    }
-    @keyframes modalIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    
-    .modal-close {
-      position: absolute;
-      top: 1.2rem;
-      right: 1.5rem;
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-    .modal-close:hover { color: #fff; }
   </style>
 </head>
 <body>
 
+  <div class="bg-grid-overlay"></div>
   <div class="bg-shape-1"></div>
   <div class="bg-shape-2"></div>
 
@@ -970,8 +995,9 @@
         💼 Modo Reunião / Vendedor
       </button>
       
-      <a href="https://wa.me/5562999999999?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20produtos%20do%20Ecossistema%20Live." target="_blank" class="btn-contact-header">
-        💬 Falar no WhatsApp
+      <!-- WHATSAPP CORRIGIDO: 61 996993134 -->
+      <a href="https://wa.me/5561996993134?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20produtos%20do%20Ecossistema%20Live." target="_blank" class="btn-contact-whatsapp">
+        💬 WhatsApp: 61 996993134
       </a>
     </div>
   </header>
@@ -1001,27 +1027,23 @@
       
       <div class="hero-ctas">
         <a href="#catalogo" class="btn-hero-primary">
-          Explore o Catálogo dos 21 SKUs
+          Explore os 21 Produtos Modulares
         </a>
-        <a href="https://wa.me/5562999999999?text=Ol%C3%A1!%20Quero%20agendar%20um%20Diagn%C3%B3stico%20Express%20para%20minha%20empresa." target="_blank" class="btn-hero-whatsapp">
+        <a href="https://wa.me/5561996993134?text=Ol%C3%A1!%20Quero%20agendar%20um%20Diagn%C3%B3stico%20Express%20para%20minha%20empresa." target="_blank" class="btn-hero-whatsapp">
           📲 Agendar Diagnóstico Express (R$ 250)
         </a>
       </div>
     </section>
 
-    <!-- Stats Banner -->
+    <!-- Stats Banner (RETIRADO O MÉTRICO 3 MESES DE CONFORME SOLICITADO) -->
     <section class="stats-banner">
       <div class="stat-card">
         <div class="stat-number">21</div>
-        <div class="stat-label">Produtos Modulares</div>
+        <div class="stat-label">Produtos Modulares Mapeados</div>
       </div>
       <div class="stat-card">
         <div class="stat-number">6</div>
         <div class="stat-label">Departamentos Especializados</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">3 Meses</div>
-        <div class="stat-label">Prazo Máximo de Entrega</div>
       </div>
       <div class="stat-card">
         <div class="stat-number">100%</div>
@@ -1041,7 +1063,7 @@
       <div class="pitch-grid">
         <div class="pitch-card">
           <h4>1. O Que É o Ecossistema Live?</h4>
-          <p>Um hub de inteligência que substitui consultorias perétuas por produtos de gestão modulares com escopo fechado, suporte de IA e entrega em até 3 meses.</p>
+          <p>Um hub de inteligência que substitui consultorias perétuas por produtos de gestão modulares com escopo fechado e suporte de IA.</p>
         </div>
         
         <div class="pitch-card">
@@ -1061,12 +1083,72 @@
       </div>
     </section>
 
+    <!-- AI Implementation Roadmap Section (ELEMENTO VISUAL PARA PRODUTOS DE IA) -->
+    <section class="ai-roadmap-box" id="etapas-ia">
+      <div class="section-header" style="margin-bottom: 1.5rem;">
+        <div class="section-tag">Engenharia de Implantação</div>
+        <h2 class="section-title">Requisitos & Etapas de Implantação das IAs Corporativas</h2>
+        <p class="section-desc">Como funcionam o Júlio Bot, Jarvis Operacional, RH Tech e Agentes Jurídicos na sua empresa.</p>
+      </div>
+
+      <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-color); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem;">
+        <h4 style="color: var(--brand-green); font-size: 1.1rem; margin-bottom: 0.8rem;">📌 Requisitos Técnicos Mínimos para Implantação de IA:</h4>
+        <ul style="color: #cbd5e1; font-size: 0.92rem; padding-left: 1.2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0.6rem;">
+          <li>Acesso à internet banda larga constante.</li>
+          <li>Navegador moderno (Google Chrome / Edge).</li>
+          <li>Arquivos de POPs, manuais e tabelas em PDF ou Docx.</li>
+          <li>Conta de WhatsApp Comercial logada (se aplicável).</li>
+          <li>Definição de 1 responsável interno como sponsor.</li>
+        </ul>
+      </div>
+
+      <h4 style="color: #fff; font-size: 1.1rem; margin-bottom: 1rem; text-align: center;">⚡ As 6 Etapas da Jornada de Implantação da IA:</h4>
+
+      <div class="roadmap-steps">
+        <div class="step-card">
+          <span class="step-num">Etapa 1</span>
+          <div class="step-title">Levantamento</div>
+          <div class="step-desc">Diagnóstico de infraestrutura, computadores e rede interna.</div>
+        </div>
+
+        <div class="step-card">
+          <span class="step-num">Etapa 2</span>
+          <div class="step-title">Skills & POPs</div>
+          <div class="step-desc">Mapeamento dos manuais, regras e perguntas frequentes.</div>
+        </div>
+
+        <div class="step-card">
+          <span class="step-num">Etapa 3</span>
+          <div class="step-title">RAG & Tenant</div>
+          <div class="step-desc">Estruturação do banco vetorial isolado em `/tenants/{tenantId}`.</div>
+        </div>
+
+        <div class="step-card">
+          <span class="step-num">Etapa 4</span>
+          <div class="step-title">Parametrização</div>
+          <div class="step-desc">Ajuste de tom de voz e testes de precisão (mín. 85% de acerto).</div>
+        </div>
+
+        <div class="step-card">
+          <span class="step-num">Etapa 5</span>
+          <div class="step-title">Treinamento</div>
+          <div class="step-desc">Capacitação prática da equipe em sessão de até 2 horas.</div>
+        </div>
+
+        <div class="step-card" style="border-color: var(--brand-green);">
+          <span class="step-num" style="background:var(--brand-green); color:#000;">Etapa 6</span>
+          <div class="step-title">Go-Live</div>
+          <div class="step-desc">Liberação total do acesso com suporte contínuo P0 a P3.</div>
+        </div>
+      </div>
+    </section>
+
     <!-- Catalog Section -->
     <section id="catalogo">
       <div class="section-header">
         <div class="section-tag">Portfólio Completo</div>
         <h2 class="section-title">Catálogo Oficial de Soluções Modulares (21 SKUs)</h2>
-        <p class="section-desc">Filtre por categoria ou pesquise o produto ideal para a sua empresa.</p>
+        <p class="section-desc">Clique no botão "📄 Ver Página do Produto" para abrir a apresentação dedicada de cada SKU.</p>
       </div>
 
       <div class="catalog-controls">
@@ -1116,7 +1198,7 @@
 
           <div>
             <a href="#" id="btnSimWhatsApp" target="_blank" class="btn-sim-whatsapp">
-              📲 Enviar Proposta Selecionada via WhatsApp
+              📲 Enviar Proposta via WhatsApp (61 996993134)
             </a>
           </div>
         </div>
@@ -1157,7 +1239,7 @@
           <div class="dept-badge">DEP-04</div>
           <div class="dept-name">Governança & Estratégia</div>
           <div class="dept-lead">Líder: Luiz Portal | Mentor: Ibrahim Boufleur</div>
-          <p class="dept-desc">Conselho Familiar 3M (Modelo 3 Círculos), Planejamento Estratégico OKRs 12M e Mediação de M&A.</p>
+          <p class="dept-desc">Conselho Familiar (Modelo 3 Círculos), Planejamento Estratégico OKRs 12M e Mediação de M&A.</p>
         </div>
 
         <div class="dept-card">
@@ -1176,7 +1258,7 @@
       </div>
     </section>
 
-    <!-- Partners Section -->
+    <!-- Partners Section (NOME CORRIGIDO: KHELVEN) -->
     <section id="parceiros">
       <div class="section-header">
         <div class="section-tag">Hub de Alianças</div>
@@ -1186,7 +1268,7 @@
 
       <div class="partners-grid">
         <div class="partner-card">
-          <div class="partner-name">Agregar (Kelvin)</div>
+          <div class="partner-name">Agregar (Khelven)</div>
           <div class="partner-role">BPO Financeiro & DRE</div>
         </div>
         <div class="partner-card">
@@ -1224,6 +1306,7 @@
         <div class="footer-col-title">Navegação</div>
         <ul class="footer-links">
           <li><a href="#catalogo">Catálogo de Produtos</a></li>
+          <li><a href="#etapas-ia">Etapas de IA</a></li>
           <li><a href="#simulador">Simulador de ROI</a></li>
           <li><a href="#departamentos">Departamentos</a></li>
           <li><a href="#parceiros">Rede de Parceiros</a></li>
@@ -1233,9 +1316,9 @@
       <div>
         <div class="footer-col-title">Contato Direto</div>
         <ul class="footer-links">
+          <li><a href="https://wa.me/5561996993134" target="_blank">WhatsApp: 61 996993134</a></li>
           <li><a href="mailto:contato@ecossistemalive.com.br">contato@ecossistemalive.com.br</a></li>
           <li><a href="mailto:cleberdonato@ecossistemalive.com.br">cleberdonato@ecossistemalive.com.br</a></li>
-          <li><a href="https://wa.me/5562999999999" target="_blank">WhatsApp Comercial</a></li>
         </ul>
       </div>
     </div>
@@ -1250,7 +1333,7 @@
 
   <!-- JavaScript -->
   <script>
-    // 21 SKUs Full Dataset
+    // Full dataset for 21 SKUs
     const products = [
       {
         id: "SAAS-DIAG-01",
@@ -1393,7 +1476,7 @@
         priceVal: 10000,
         model: "3 Parcelas Mensais",
         pitch: "Alinhe toda a diretoria em torno das mesmas 3 metas globais com métricas claras de execução semanal.",
-        obj: "'Já fizemos planejamento e ficou na gaveta' -> Resposta: Nosso formato inclui 90 dias de acompanhamento prático."
+        obj: "'Já fizemos planejamento e ficou na gaveta' -> Resposta: Nosso formato inclui acompanhamento prático."
       },
       {
         id: "ACOMP-CONSELHO",
@@ -1556,7 +1639,9 @@
         const card = document.createElement('div');
         card.className = 'product-card';
         
-        const waUrl = `https://wa.me/5562999999999?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20produto%3A%20${encodeURIComponent(p.name)}%20(SKU%3A%20${p.id}).`;
+        // WHATSAPP LINK CORRIGIDO: 61 996993134 (5561996993134)
+        const waUrl = `https://wa.me/5561996993134?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20produto%3A%20${encodeURIComponent(p.name)}%20(SKU%3A%20${p.id}).`;
+        const pageUrl = `./produtos/${p.id}.html`;
         
         card.innerHTML = `
           <div class="card-top">
@@ -1579,9 +1664,14 @@
               <div class="price-sub">${p.model}</div>
             </div>
             
-            <a href="${waUrl}" target="_blank" class="btn-card-action">
-              💬 Contatar
-            </a>
+            <div class="card-actions">
+              <a href="${pageUrl}" class="btn-view-page">
+                📄 Ver Página
+              </a>
+              <a href="${waUrl}" target="_blank" class="btn-card-action">
+                💬 WhatsApp
+              </a>
+            </div>
           </div>
         `;
         
@@ -1634,7 +1724,7 @@
 
       if (names.length === 0) {
         summaryText.innerText = "Nenhum produto selecionado. Clique nos itens ao lado para adicionar.";
-        waBtn.href = "https://wa.me/5562999999999?text=Ol%C3%A1!%20Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20os%20produtos%20do%20Ecossistema%20Live.";
+        waBtn.href = "https://wa.me/5561996993134?text=Ol%C3%A1!%20Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20os%20produtos%20do%20Ecossistema%20Live.";
       } else {
         summaryText.innerHTML = `<strong>${names.length} produto(s) selecionado(s):</strong><br>` + names.join('<br>');
         
@@ -1642,7 +1732,7 @@
           encodeURIComponent(names.join('\n- ')) + 
           `%0A%0A*Total%20Estimado%3A%20${encodeURIComponent(formattedPrice)}*%0A%0AGostaria%20de%20agendar%20uma%20reuni%C3%A3o%20para%20formalizar%20o%20projeto.`;
         
-        waBtn.href = `https://wa.me/5562999999999?text=${message}`;
+        waBtn.href = `https://wa.me/5561996993134?text=${message}`;
       }
     }
 

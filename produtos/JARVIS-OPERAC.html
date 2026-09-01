@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jarvis Operacional (IA Corporativa) — Ecossistema Live</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: #0b0f19; --card: #111827; --green: #10b981; --border: rgba(255,255,255,0.1); --text: #f8fafc; --muted: #94a3b8; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    body { background: #0b0f19; color: #f8fafc; padding: 2rem 1rem; line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; background: #111827; border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 2.5rem; }
+    .badge { display: inline-block; background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3); font-size: 0.75rem; font-weight: 800; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; margin-bottom: 1rem; }
+    h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.4rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem; }
+    .sku { font-family: monospace; color: #64748b; margin-bottom: 1.5rem; }
+    .price-box { background: rgba(15,23,42,0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .price { font-size: 2rem; font-weight: 900; color: #10b981; }
+    .section-title { font-size: 1.25rem; font-weight: 800; color: #fff; margin: 1.8rem 0 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; }
+    ul { padding-left: 1.2rem; color: #94a3b8; margin-bottom: 1rem; }
+    li { margin-bottom: 0.4rem; }
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1rem; }
+    .step-item { background: rgba(15,23,42,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1rem; }
+    .step-num { font-size: 0.75rem; font-weight: 800; color: #10b981; margin-bottom: 0.3rem; }
+    .btn-wa { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: #25d366; color: #fff; text-decoration: none; font-weight: 800; font-size: 1.05rem; padding: 1rem 2rem; border-radius: 30px; margin-top: 2rem; width: 100%; transition: transform 0.2s; }
+    .btn-wa:hover { transform: translateY(-2px); background: #20ba5a; }
+    .btn-back { display: inline-block; color: #94a3b8; text-decoration: none; font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .btn-back:hover { color: #fff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="../index.html" class="btn-back">← Voltar ao Catálogo Completo</a>
+    
+    <div class="badge">Implantação + MRR</div>
+    <h1>Jarvis Operacional (IA Corporativa em POPs)</h1>
+    <div class="sku">SKU: JARVIS-OPERAC</div>
+    
+    <div class="price-box">
+      <div>
+        <div style="font-size:0.8rem; color:#94a3b8;">Investimento</div>
+        <div class="price">R$ 1.500 setup + R$ 350/mês</div>
+      </div>
+      <div style="text-align:right; font-size:0.85rem; color:#cbd5e1;">Setup de Implantação + Recorrência</div>
+    </div>
+    
+    <div class="section-title">📌 Descrição & Valor Entregue</div>
+    <p style="color:#cbd5e1; font-size:1rem; line-height:1.6;">
+      O Jarvis Operacional é a IA corporativa treinada estritamente nos POPs (Procedimentos Operacionais Padrão), manuais internos e políticas da sua empresa. Elimina o tempo perdido pelos sócios respondendo dúvidas banais da equipe e garante respostas 100% fiéis às regras internas.
+    </p>
+
+    <div class="section-title">⚙️ Requisitos Técnicos Mínimos</div>
+    <ul>
+      <li>Mínimo de 3 POPs, manuais ou FAQs organizados em formato digital (PDF, Word ou TXT).</li>
+      <li>Definição de 1 responsável técnico interno da empresa cliente.</li>
+      <li>Conexão à internet para acesso à plataforma do Jarvis.</li>
+    </ul>
+
+    <div class="section-title">⚡ As 4 Etapas da Implantação</div>
+    <div class="steps-grid">
+      <div class="step-item">
+        <div class="step-num">Etapa 1 (D+1 a D+5)</div>
+        <div style="font-weight:700; color:#fff; margin-bottom:0.2rem;">Coleta de Documentos</div>
+        <div style="font-size:0.8rem; color:#94a3b8;">Recebimento de POPs, manuais, tabelas e regras operacionais.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">Etapa 2 (D+5 a D+12)</div>
+        <div style="font-weight:700; color:#fff; margin-bottom:0.2rem;">Ingestão & RAG</div>
+        <div style="font-size:0.8rem; color:#94a3b8;">Estruturação do banco vetorial isolado em `/tenants/{tenantId}` no Firestore.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">Etapa 3 (D+12 a D+15)</div>
+        <div style="font-weight:700; color:#fff; margin-bottom:0.2rem;">Homologação & Gate</div>
+        <div style="font-size:0.8rem; color:#94a3b8;">Bateria de testes de acerto (meta mínima de 85% de precisão) + Gate Antagonista.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">Etapa 4 (D+15 a D+20)</div>
+        <div style="font-weight:700; color:#fff; margin-bottom:0.2rem;">Treinamento & Go-Live</div>
+        <div style="font-size:0.8rem; color:#94a3b8;">Treinamento da equipe (máx 2h), manual de uso e ativação da mensalidade.</div>
+      </div>
+    </div>
+
+    <a href="https://wa.me/5561996993134?text=Ol%C3%A1!%20Quero%20implantar%20o%20Jarvis%20Operacional%20(SKU%3A%20JARVIS-OPERAC)%20na%20minha%20empresa." target="_blank" class="btn-wa">
+      💬 Contatar via WhatsApp (61 996993134)
+    </a>
+  </div>
+</body>
+</html>
