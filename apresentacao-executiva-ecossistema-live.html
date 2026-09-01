@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apresentação Executiva — Ecossistema Live & Nirvana-OS</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              200: '#c7d2fe',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81',
+              950: '#1e1b4b'
+            },
+            accent: {
+              500: '#06b6d4',
+              600: '#0891b2',
+              emerald: '#10b981',
+              amber: '#f59e0b',
+              rose: '#f43f5e'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+    }
+    .dark .glass-panel {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(51, 65, 85, 0.6);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #334155;
+    }
+    .tab-active {
+      border-color: #4f46e5 !important;
+      color: #4f46e5 !important;
+      background-color: #eef2ff !important;
+    }
+    .dark .tab-active {
+      border-color: #818cf8 !important;
+      color: #c7d2fe !important;
+      background-color: rgba(79, 70, 229, 0.2) !important;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans antialiased min-h-screen">
+
+  <!-- Header / Navigation Bar -->
+  <header class="sticky top-0 z-50 glass-panel shadow-sm border-b border-slate-200 dark:border-slate-800 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Brand Logo & Title -->
+        <div class="flex items-center space-x-3">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-brand-700 to-indigo-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30">
+            <i class="fa-solid fa-cube text-xl"></i>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="text-xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-brand-900 via-brand-700 to-indigo-600 dark:from-white dark:to-indigo-300">
+                ECOSSISTEMA LIVE
+              </span>
+              <span class="text-xs px-2 py-0.5 rounded-full font-bold bg-indigo-100 text-indigo-800 dark:bg-indigo-900/50 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-700">
+                Nirvana-OS v1.1
+              </span>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Hub de Governança, Inteligência Empresarial & Produtos de IA</p>
+          </div>
+        </div>
+
+        <!-- Quick Info & Theme Toggle -->
+        <div class="hidden md:flex items-center space-x-4">
+          <div class="text-right">
+            <span class="text-xs text-slate-400 block font-mono">CNPJ: 52.887.139/0001-00</span>
+            <span class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 flex items-center justify-end gap-1">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Modelo Modular Ativo
+            </span>
+          </div>
+          <button onclick="toggleDarkMode()" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+            <i id="theme-icon" class="fa-solid fa-moon"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="flex space-x-2 overflow-x-auto py-2 custom-scrollbar text-sm font-semibold border-t border-slate-100 dark:border-slate-800/80">
+        <button onclick="switchTab('tab-visao')" id="btn-tab-visao" class="tab-btn tab-active px-4 py-2 rounded-lg whitespace-nowrap transition flex items-center gap-2">
+          <i class="fa-solid fa-compass"></i> Visão & Posicionamento
+        </button>
+        <button onclick="switchTab('tab-jornada')" id="btn-tab-jornada" class="tab-btn px-4 py-2 rounded-lg whitespace-nowrap transition flex items-center gap-2 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <i class="fa-solid fa-timeline"></i> A Jornada dos Sócios
+        </button>
+        <button onclick="switchTab('tab-mindclones')" id="btn-tab-mindclones" class="tab-btn px-4 py-2 rounded-lg whitespace-nowrap transition flex items-center gap-2 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <i class="fa-solid fa-brain"></i> Parecer dos Mind-Clones
+        </button>
+        <button onclick="switchTab('tab-organograma')" id="btn-tab-organograma" class="tab-btn px-4 py-2 rounded-lg whitespace-nowrap transition flex items-center gap-2 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <i class="fa-solid fa-sitemap"></i> Organograma & Antagonista
+        </button>
+        <button onclick="switchTab('tab-produtos')" id="btn-tab-produtos" class="tab-btn px-4 py-2 rounded-lg whitespace-nowrap transition flex items-center gap-2 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <i class="fa-solid fa-boxes-stacked"></i> Esteira de 16 Soluções
+        </button>
+        <button onclick="switchTab('tab-blueprints')" id="btn-tab-blueprints" class="tab-btn px-4 py-2 rounded-lg whitespace-nowrap transition flex items-center gap-2 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <i class="fa-solid fa-microchip"></i> Blueprints Técnicos de IA
+        </button>
+        <button onclick="switchTab('tab-simulador')" id="btn-tab-simulador" class="tab-btn px-4 py-2 rounded-lg whitespace-nowrap transition flex items-center gap-2 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <i class="fa-solid fa-calculator"></i> Simulador & Metas
+        </button>
+        <button onclick="switchTab('tab-documentos')" id="btn-tab-documentos" class="tab-btn px-4 py-2 rounded-lg whitespace-nowrap transition flex items-center gap-2 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <i class="fa-solid fa-book"></i> Biblioteca de Documentos
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- ========================================== -->
+    <!-- TAB 1: VISÃO & POSICIONAMENTO OFICIAL -->
+    <!-- ========================================== -->
+    <div id="tab-visao" class="tab-content block space-y-8 animate-fadeIn">
+      
+      <!-- Hero Banner -->
+      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-950 via-brand-900 to-indigo-900 text-white p-8 md:p-12 shadow-2xl border border-indigo-500/20">
+        <div class="absolute -right-16 -top-16 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="relative z-10 max-w-4xl space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-200 text-xs font-semibold uppercase tracking-wider">
+            <i class="fa-solid fa-shield-halved"></i> Posicionamento Oficial Mandatório
+          </div>
+          <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+            "Não fazemos consultoria tradicional."
+          </h1>
+          <p class="text-lg md:text-xl text-indigo-100/90 font-light leading-relaxed">
+            Estruturamos governança, diagnosticamos gargalos através de Inteligência Artificial, desenvolvemos lideranças executivas e entregamos <span class="text-amber-300 font-semibold">produtos modulares de gestão com início, meio e fim</span>.
+          </p>
+          <div class="pt-4 flex flex-wrap gap-4 text-sm font-medium">
+            <div class="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-xl backdrop-blur-md">
+              <i class="fa-solid fa-location-dot text-indigo-400"></i> Goiânia - GO
+            </div>
+            <div class="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-xl backdrop-blur-md">
+              <i class="fa-solid fa-building text-indigo-400"></i> LUIZ E A PORTAL
+            </div>
+            <div class="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-xl backdrop-blur-md">
+              <i class="fa-solid fa-network-wired text-indigo-400"></i> Modelo Hub Desacoplado
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid: Sócios & Rede Homologada -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Card Sócios Lideranças -->
+        <div class="glass-panel rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-800 space-y-6">
+          <div class="flex items-center justify-between border-b pb-4 border-slate-100 dark:border-slate-800">
+            <h3 class="text-lg font-bold flex items-center gap-2.5">
+              <i class="fa-solid fa-user-tie text-brand-600"></i> Lideranças Executivas
+            </h3>
+            <span class="text-xs font-semibold px-2.5 py-1 bg-brand-50 text-brand-700 dark:bg-brand-900/40 dark:text-brand-300 rounded-lg">Sócios Fundadores</span>
+          </div>
+
+          <div class="space-y-4">
+            <!-- Luiz Portal -->
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800">
+              <div class="flex items-start justify-between">
+                <div>
+                  <h4 class="font-bold text-slate-900 dark:text-white">Luiz Portal</h4>
+                  <p class="text-xs font-semibold text-brand-600 dark:text-brand-400">Estratégia de Negócios, Governança & Relações Institucionais</p>
+                </div>
+                <span class="w-8 h-8 rounded-full bg-brand-100 dark:bg-brand-900/50 flex items-center justify-center text-brand-700 dark:text-brand-300 text-sm">
+                  <i class="fa-solid fa-scale-balanced"></i>
+                </span>
+              </div>
+              <p class="text-xs text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
+                Condução de Conselhos Familiares fechados (3 meses), Negociações/M&A, Planejamento Estratégico, Palestras e articulação institucional (BNI, VP e Vox).
+              </p>
+            </div>
+
+            <!-- Cléber Donato -->
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800">
+              <div class="flex items-start justify-between">
+                <div>
+                  <h4 class="font-bold text-slate-900 dark:text-white">Cléber Donato</h4>
+                  <p class="text-xs font-semibold text-indigo-600 dark:text-indigo-400">Liderança Técnica, IA, Processos & CX</p>
+                </div>
+                <span class="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center text-indigo-700 dark:text-indigo-300 text-sm">
+                  <i class="fa-solid fa-code"></i>
+                </span>
+              </div>
+              <p class="text-xs text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
+                Arquitetura dos motores de IA (Júlio Bot v8.0 Netlify SPA - Suporte & Onboarding, Diagnóstico Express, Agente de R&S, Jarvis Operacional), pesquisas de CX e guardião metodológico.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Rede Homologada -->
+        <div class="glass-panel rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-800 space-y-6">
+          <div class="flex items-center justify-between border-b pb-4 border-slate-100 dark:border-slate-800">
+            <h3 class="text-lg font-bold flex items-center gap-2.5">
+              <i class="fa-solid fa-handshake text-indigo-600"></i> Rede de Parceiros Homologados
+            </h3>
+            <span class="text-xs font-semibold px-2.5 py-1 bg-emerald-50 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 rounded-lg">Desintermediação Direta</span>
+          </div>
+
+          <div class="space-y-3">
+            <div class="flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 flex items-center justify-center text-sm font-bold">
+                  <i class="fa-solid fa-calculator"></i>
+                </div>
+                <div>
+                  <h5 class="text-sm font-bold text-slate-900 dark:text-white">Agregar (Kelvin)</h5>
+                  <p class="text-xs text-slate-500">BPO Financeiro, DRE profunda e Reestruturação Contábil</p>
+                </div>
+              </div>
+              <span class="text-[11px] px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono">Faturamento Direto</span>
+            </div>
+
+            <div class="flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-pink-100 dark:bg-pink-900/40 text-pink-600 flex items-center justify-center text-sm font-bold">
+                  <i class="fa-solid fa-palette"></i>
+                </div>
+                <div>
+                  <h5 class="text-sm font-bold text-slate-900 dark:text-white">Visual Work</h5>
+                  <p class="text-xs text-slate-500">Design Gráfico, Identidade Visual e Marketing</p>
+                </div>
+              </div>
+              <span class="text-[11px] px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono">Faturamento Direto</span>
+            </div>
+
+            <div class="flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-cyan-100 dark:bg-cyan-900/40 text-cyan-600 flex items-center justify-center text-sm font-bold">
+                  <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <div>
+                  <h5 class="text-sm font-bold text-slate-900 dark:text-white">Juliana Canuto</h5>
+                  <p class="text-xs text-slate-500">Pesquisas de CX, NPS e entrevistas industriais</p>
+                </div>
+              </div>
+              <span class="text-[11px] px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono">Parceria Técnica</span>
+            </div>
+
+            <div class="flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 dark:bg-amber-900/40 text-amber-600 flex items-center justify-center text-sm font-bold">
+                  <i class="fa-solid fa-utensils"></i>
+                </div>
+                <div>
+                  <h5 class="text-sm font-bold text-slate-900 dark:text-white">Restaurante Voya</h5>
+                  <p class="text-xs text-slate-500">Espaço gastronômico do Almoço com o CEO</p>
+                </div>
+              </div>
+              <span class="text-[11px] px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono">Parceria VIP</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Princípios de Blindagem do Modelo -->
+      <div class="glass-panel rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 dark:border-slate-800 space-y-6">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-lock text-brand-600"></i> Os 4 Pilares de Blindagem Operacional
+        </h3>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 space-y-2">
+            <div class="text-brand-600 font-extrabold text-2xl font-mono">01</div>
+            <h4 class="font-bold text-slate-900 dark:text-white text-sm">Fim do Over-Delivery</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              Toda entrega tem escopo fechado, início, meio e fim. Proibição de honorários abertos generalistas.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 space-y-2">
+            <div class="text-emerald-600 font-extrabold text-2xl font-mono">02</div>
+            <h4 class="font-bold text-slate-900 dark:text-white text-sm">Defesa do CNPJ</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              A sobrevivência e a solvência da empresa prevalecem sobre caprichos e disputas familiares.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 space-y-2">
+            <div class="text-indigo-600 font-extrabold text-2xl font-mono">03</div>
+            <h4 class="font-bold text-slate-900 dark:text-white text-sm">Desintermediação</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              O cliente contrata e paga parceiros homologados diretamente, eliminando passivos e atritos operacionais.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 space-y-2">
+            <div class="text-cyan-600 font-extrabold text-2xl font-mono">04</div>
+            <h4 class="font-bold text-slate-900 dark:text-white text-sm">Escala por Software</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              Metodologia convertida em ferramentas de IA e Cadernos de Ativação executados por estagiários do cliente.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: A JORNADA DOS SÓCIOS -->
+    <!-- ========================================== -->
+    <div id="tab-jornada" class="tab-content hidden space-y-8 animate-fadeIn">
+      
+      <div class="glass-panel rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 dark:border-slate-800 space-y-6">
+        <div>
+          <span class="text-xs font-bold px-3 py-1 bg-brand-100 text-brand-700 dark:bg-brand-900/50 dark:text-brand-300 rounded-full uppercase tracking-wider">
+            Documento Narrativo Vivo
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-2">
+            A Ruptura Estratégica: Do Modelo Artesanal para a Empresa Escalável
+          </h2>
+          <p class="text-sm text-slate-500 dark:text-slate-400">Histórico, dores superadas e cronologia das decisões que transformaram a empresa.</p>
+        </div>
+
+        <!-- Before / After Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+          
+          <!-- As-Is -->
+          <div class="p-6 rounded-2xl bg-rose-50/50 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-900/50 space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="text-base font-bold text-rose-800 dark:text-rose-300 flex items-center gap-2">
+                <i class="fa-solid fa-triangle-exclamation"></i> O Modelo Antigo (As-Is)
+              </h3>
+              <span class="text-xs font-mono px-2 py-0.5 rounded bg-rose-200 dark:bg-rose-900 text-rose-800 dark:text-rose-200 font-bold">ESGOTADO</span>
+            </div>
+            <ul class="space-y-3 text-xs sm:text-sm text-rose-900 dark:text-rose-200/90 leading-relaxed">
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-xmark text-rose-600 mt-1"></i>
+                <span><strong>Over-Delivery Crônico:</strong> Contratos abertos de R$ 3.000 a R$ 3.500/mês sem limite de escopo, transformando sócios em funcionários de luxo.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-xmark text-rose-600 mt-1"></i>
+                <span><strong>Aprisionamento da Agenda:</strong> Reuniões infinitas e apagar de incêndios diários, impedindo novas vendas e criação de produtos.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-xmark text-rose-600 mt-1"></i>
+                <span><strong>Responsabilidade por Terceiros:</strong> Assumir a bronca financeira e prazos de agências e fornecedores gráficos.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-xmark text-rose-600 mt-1"></i>
+                <span><strong>Conflitos Familiares:</strong> Ficar no meio de brigas entre irmãos e herdeiros sem uma blindagem institucional.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- To-Be -->
+          <div class="p-6 rounded-2xl bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900/50 space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="text-base font-bold text-emerald-800 dark:text-emerald-300 flex items-center gap-2">
+                <i class="fa-solid fa-circle-check"></i> O Novo Paradigma (To-Be)
+              </h3>
+              <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-200 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-200 font-bold">HOMOLOGADO</span>
+            </div>
+            <ul class="space-y-3 text-xs sm:text-sm text-emerald-900 dark:text-emerald-200/90 leading-relaxed">
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-emerald-600 mt-1"></i>
+                <span><strong>Produtos com Início, Meio e Fim:</strong> Prazos rígidos (máximo 3 meses) com entregáveis contratados e orçados previamente.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-emerald-600 mt-1"></i>
+                <span><strong>Cláusula de Defesa do CNPJ:</strong> Princípio mandatória que subordina qualquer disputa de sócios à saúde da pessoa jurídica.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-emerald-600 mt-1"></i>
+                <span><strong>Desintermediação Completa:</strong> Agregar (Kelvin) e Visual Work faturam diretamente com o cliente final.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-emerald-600 mt-1"></i>
+                <span><strong>Escala por Inteligência Artificial:</strong> Júlio Bot v8.0 SPA, Diagnóstico Express a R$ 250 e Jarvis para suporte a POPs.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Cronologia Reversa da Transição -->
+        <div class="pt-6 border-t border-slate-100 dark:border-slate-800 space-y-6">
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-clock-rotate-left text-brand-600"></i> Cronologia Reversa das Decisões Estratégicas
+          </h3>
+
+          <div class="relative border-l-2 border-brand-200 dark:border-brand-900 ml-4 space-y-8 pl-6">
+            
+            <!-- Marco 1 -->
+            <div class="relative">
+              <span class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-brand-600 ring-4 ring-white dark:ring-slate-950"></span>
+              <span class="text-xs font-mono font-bold px-2 py-0.5 bg-brand-100 dark:bg-brand-900/60 text-brand-700 dark:text-brand-300 rounded">
+                2026-08-31
+              </span>
+              <h4 class="text-base font-bold text-slate-900 dark:text-white mt-1">Reestruturação Multi-Squad no Nirvana-OS</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+                Formalização da empresa como organização autônoma (`businesses/ecossistema-live`), definição dos 8 colaboradores/agentes de IA, implementação do Antagonista bloqueante e blueprints de software.
+              </p>
+            </div>
+
+            <!-- Marco 2 -->
+            <div class="relative">
+              <span class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-emerald-500 ring-4 ring-white dark:ring-slate-950"></span>
+              <span class="text-xs font-mono font-bold px-2 py-0.5 bg-emerald-100 dark:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300 rounded">
+                2026-08-14
+              </span>
+              <h4 class="text-base font-bold text-slate-900 dark:text-white mt-1">Homologação da Esteira de 16 Soluções & Precificação</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+                Reunião de Luiz Portal e Cléber Donato acordando a precificação de CX com Juliana Canuto, M&A (Retainer + 1% a 8%), Almoço com o CEO no Restaurante Voya e especificação do Júlio Bot v8.0 no Netlify com Firebase Auth.
+              </p>
+            </div>
+
+            <!-- Marco 3 -->
+            <div class="relative">
+              <span class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-amber-500 ring-4 ring-white dark:ring-slate-950"></span>
+              <span class="text-xs font-mono font-bold px-2 py-0.5 bg-amber-100 dark:bg-amber-900/60 text-amber-700 dark:text-amber-300 rounded">
+                2026-08-13
+              </span>
+              <h4 class="text-base font-bold text-slate-900 dark:text-white mt-1">Reunião Histórica de Transição: Banimento da "Consultoria"</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+                Decisão unânime de banir o termo consultoria, criação do Diagnóstico Express a R$ 250 parcelado em 12x, aprovação do RH Tech DIY e estruturação do Piloto de 60 Dias com meta de 100 diagnósticos/mês.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: PARECER DOS MIND-CLONES -->
+    <!-- ========================================== -->
+    <div id="tab-mindclones" class="tab-content hidden space-y-8 animate-fadeIn">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Daniel Kahneman -->
+        <div class="glass-panel rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-800 space-y-4">
+          <div class="flex items-center gap-3 border-b pb-4 border-slate-100 dark:border-slate-800">
+            <div class="w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-900/50 text-purple-600 flex items-center justify-center text-xl font-bold">
+              <i class="fa-solid fa-brain"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-900 dark:text-white">Daniel Kahneman</h3>
+              <p class="text-xs text-purple-600 dark:text-purple-400 font-semibold">Economia Comportamental & Decisão</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+            <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800">
+              <strong class="text-slate-900 dark:text-white block mb-1">Preço de Ancoragem (R$ 250):</strong>
+              O empresário de PME sofre de aversão à perda de controle. O Diagnóstico a R$ 250 em 12x ativa o Sistema 1 (decisão intuitiva de baixíssimo risco) e gera o efeito de propriedade psicológica imediato.
+            </div>
+
+            <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800">
+              <strong class="text-slate-900 dark:text-white block mb-1">Defesa do CNPJ como Ponto Focal:</strong>
+              Conflitos familiares são emocionais. Ter uma regra neutra impessoal ("Defesa do CNPJ") remove a carga de atrito pessoal nas reuniões de conselho.
+            </div>
+          </div>
+        </div>
+
+        <!-- DHH -->
+        <div class="glass-panel rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-800 space-y-4">
+          <div class="flex items-center gap-3 border-b pb-4 border-slate-100 dark:border-slate-800">
+            <div class="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-900/50 text-amber-600 flex items-center justify-center text-xl font-bold">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-900 dark:text-white">DHH</h3>
+              <p class="text-xs text-amber-600 dark:text-amber-400 font-semibold">Pragmatismo & Lucratividade Real</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+            <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800">
+              <strong class="text-slate-900 dark:text-white block mb-1">Rejeição ao Modelo Artesanal:</strong>
+              Vender horas abertas de consultoria é a forma mais dolorosa de morrer de estresse. O valor real está em empacotar o método em produtos simples e software escalável.
+            </div>
+
+            <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800">
+              <strong class="text-slate-900 dark:text-white block mb-1">Desintermediação É Liberdade:</strong>
+              Fazer o cliente pagar diretamente a Agregar e a Visual Work elimina a culpa por atrasos alheios e mantém a margem líquida da Live 100% protegida.
+            </div>
+          </div>
+        </div>
+
+        <!-- Martin Fowler -->
+        <div class="glass-panel rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-800 space-y-4">
+          <div class="flex items-center gap-3 border-b pb-4 border-slate-100 dark:border-slate-800">
+            <div class="w-12 h-12 rounded-xl bg-cyan-100 dark:bg-cyan-900/50 text-cyan-600 flex items-center justify-center text-xl font-bold">
+              <i class="fa-solid fa-diagram-project"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-900 dark:text-white">Martin Fowler</h3>
+              <p class="text-xs text-cyan-600 dark:text-cyan-400 font-semibold">Arquitetura Modular & Interfaces</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+            <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800">
+              <strong class="text-slate-900 dark:text-white block mb-1">Hub de Roteamento Desacoplado:</strong>
+              A Live atua como o Gateway de Inteligência. Parceiros e ferramentas de IA são microsserviços especializados com contratos de entrada e saída rigorosos.
+            </div>
+
+            <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800">
+              <strong class="text-slate-900 dark:text-white block mb-1">O Antagonista como Quality Gate:</strong>
+              Nenhum relatório ou proposta deve ser enviado sem passar pelo crivo do Antagonista, garantindo que o escopo delimitado não sofra desvios.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 4: ORGANOGRAMA & ANTAGONISTA -->
+    <!-- ========================================== -->
+    <div id="tab-organograma" class="tab-content hidden space-y-8 animate-fadeIn">
+      
+      <div class="glass-panel rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 dark:border-slate-800 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <span class="text-xs font-bold px-3 py-1 bg-indigo-100 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300 rounded-full uppercase tracking-wider">
+              Arquitetura Nirvana-OS
+            </span>
+            <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white mt-1">Organograma Operacional & O Papel do Antagonista</h2>
+          </div>
+          <div class="flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-lg bg-rose-50 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300 border border-rose-200 dark:border-rose-800">
+            <i class="fa-solid fa-shield-halved text-rose-500"></i> Antagonista com Poder de Veto Bloqueante
+          </div>
+        </div>
+
+        <!-- Visual Org Chart Tree -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+          
+          <!-- Sócios -->
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border-2 border-brand-500/40 space-y-2">
+            <span class="text-[11px] font-bold text-brand-600 uppercase">Estratégia & Governança</span>
+            <h4 class="font-bold text-sm text-slate-900 dark:text-white">Luiz Portal</h4>
+            <p class="text-xs text-slate-500">Conselhos Familiares, M&A, Planejamento e Relações BNI/VP/Vox.</p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border-2 border-indigo-500/40 space-y-2">
+            <span class="text-[11px] font-bold text-indigo-600 uppercase">Liderança Técnica & IA</span>
+            <h4 class="font-bold text-sm text-slate-900 dark:text-white">Cléber Donato</h4>
+            <p class="text-xs text-slate-500">CTO, Arquitetura de Motores de IA, Processos, CX e Plataformas SaaS.</p>
+          </div>
+
+          <!-- Antagonista -->
+          <div class="p-4 rounded-xl bg-rose-50 dark:bg-rose-950/30 border-2 border-rose-500 space-y-2 relative shadow-lg shadow-rose-500/10">
+            <span class="text-[11px] font-bold text-rose-600 uppercase flex items-center gap-1">
+              <i class="fa-solid fa-gavel"></i> Antagonista Oficial
+            </span>
+            <h4 class="font-bold text-sm text-slate-900 dark:text-white">Guardião da Defesa do CNPJ</h4>
+            <p class="text-xs text-rose-800 dark:text-rose-300">Auditoria prévia obrigatória: barra over-delivery e prazos abertos.</p>
+          </div>
+
+          <!-- Parceiro Agregar -->
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border-2 border-emerald-500/40 space-y-2">
+            <span class="text-[11px] font-bold text-emerald-600 uppercase">Parceiro Homologado</span>
+            <h4 class="font-bold text-sm text-slate-900 dark:text-white">Agregar (Kelvin)</h4>
+            <p class="text-xs text-slate-500">BPO Financeiro, DRE profunda e Reestruturação Contábil direta.</p>
+          </div>
+        </div>
+
+        <!-- Agentes de IA Integrados -->
+        <div class="pt-6 border-t border-slate-100 dark:border-slate-800">
+          <h4 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4">Agentes de IA e Automação do Ecossistema</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+              <div class="flex items-center gap-2 text-indigo-600 text-base mb-1">
+                <i class="fa-solid fa-robot"></i>
+                <h5 class="font-bold text-sm text-slate-900 dark:text-white">Júlio Bot v8.0</h5>
+              </div>
+              <p class="text-xs text-slate-500 leading-relaxed">Suporte e onboarding diário para novos colaboradores, estagiários e assistentes.</p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+              <div class="flex items-center gap-2 text-purple-600 text-base mb-1">
+                <i class="fa-solid fa-users-viewfinder"></i>
+                <h5 class="font-bold text-sm text-slate-900 dark:text-white">Agente de R&S</h5>
+              </div>
+              <p class="text-xs text-slate-500 leading-relaxed">Produto autônomo (RH Tech) para descritivos de cargo, triagem e roteiros de entrevista.</p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+              <div class="flex items-center gap-2 text-cyan-600 text-base mb-1">
+                <i class="fa-solid fa-magnifying-glass-chart"></i>
+                <h5 class="font-bold text-sm text-slate-900 dark:text-white">Agente Prospecção</h5>
+              </div>
+              <p class="text-xs text-slate-500 leading-relaxed">Pipeline P1 a P4 para mineração, auditoria e abordagem personalizada de PMEs.</p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+              <div class="flex items-center gap-2 text-amber-600 text-base mb-1">
+                <i class="fa-solid fa-book-bookmark"></i>
+                <h5 class="font-bold text-sm text-slate-900 dark:text-white">Jarvis Operacional</h5>
+              </div>
+              <p class="text-xs text-slate-500 leading-relaxed">RAG corporativo treinado diretamente nos POPs e manuais internos da empresa cliente.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 5: ESTEIRA DE 16 SOLUÇÕES -->
+    <!-- ========================================== -->
+    <div id="tab-produtos" class="tab-content hidden space-y-8 animate-fadeIn">
+      
+      <div class="glass-panel rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 dark:border-slate-800 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <span class="text-xs font-bold px-3 py-1 bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300 rounded-full uppercase tracking-wider">
+              Catálogo Oficial & Precificação
+            </span>
+            <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white mt-1">Esteira Completa de 16 Soluções Modulares</h2>
+          </div>
+          <div class="text-xs font-mono text-slate-500">
+            Valores homologados em 14/08/2026
+          </div>
+        </div>
+
+        <!-- Products Table -->
+        <div class="overflow-x-auto custom-scrollbar">
+          <table class="w-full text-left text-sm border-collapse">
+            <thead>
+              <tr class="border-b border-slate-200 dark:border-slate-800 text-xs uppercase font-bold text-slate-500">
+                <th class="py-3 px-4">#</th>
+                <th class="py-3 px-4">Solução / Produto</th>
+                <th class="py-3 px-4">Formato / Duração</th>
+                <th class="py-3 px-4">Preço Oficial (R$)</th>
+                <th class="py-3 px-4">Modelo de Cobrança</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 dark:divide-slate-800/60 font-normal">
+              
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/50">
+                <td class="py-3 px-4 font-mono font-bold text-brand-600">01</td>
+                <td class="py-3 px-4 font-semibold text-slate-900 dark:text-white">Diagnóstico Empresarial Express</td>
+                <td class="py-3 px-4 text-xs text-slate-500">SaaS / IA (Raio-X de Gestão)</td>
+                <td class="py-3 px-4 font-mono font-bold text-emerald-600">R$ 250,00</td>
+                <td class="py-3 px-4 text-xs">Até 12x no Cartão (Front-End)</td>
+              </tr>
+
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/50">
+                <td class="py-3 px-4 font-mono font-bold text-brand-600">02</td>
+                <td class="py-3 px-4 font-semibold text-slate-900 dark:text-white">Júlio Bot v8.0 (Suporte & Onboarding)</td>
+                <td class="py-3 px-4 text-xs text-slate-500">Netlify SPA + Firebase Auth</td>
+                <td class="py-3 px-4 font-mono font-bold text-indigo-600">R$ 120,00 / mês</td>
+                <td class="py-3 px-4 text-xs">Assinatura Recorrente (MRR)</td>
+              </tr>
+
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/50">
+                <td class="py-3 px-4 font-mono font-bold text-brand-600">03</td>
+                <td class="py-3 px-4 font-semibold text-slate-900 dark:text-white">Agente de Recrutamento & Seleção (RH Tech DIY)</td>
+                <td class="py-3 px-4 text-xs text-slate-500">Autoatendimento com IA</td>
+                <td class="py-3 px-4 font-mono font-bold text-purple-600">R$ 250,00 / vaga</td>
+                <td class="py-3 px-4 text-xs">Por Processo Seletivo</td>
+              </tr>
+
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/50">
+                <td class="py-3 px-4 font-mono font-bold text-brand-600">04</td>
+                <td class="py-3 px-4 font-semibold text-slate-900 dark:text-white">RH Tech Full-Service</td>
+                <td class="py-3 px-4 text-xs text-slate-500">Condução Completa c/ IA</td>
+                <td class="py-3 px-4 font-mono font-bold text-purple-600">1 Salário Integral</td>
+                <td class="py-3 px-4 text-xs">Garantia 30 dias de reposição</td>
+              </tr>
+
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/50">
+                <td class="py-3 px-4 font-mono font-bold text-brand-600">05</td>
+                <td class="py-3 px-4 font-semibold text-slate-900 dark:text-white">Jarvis Operacional (IA para POPs)</td>
+                <td class="py-3 px-4 text-xs text-slate-500">Setup + Recorrência</td>
+                <td class="py-3 px-4 font-mono font-bold">R$ 1.500 setup + R$ 350/mês</td>
+                <td class="py-3 px-4 text-xs">Setup + Recorrente</td>
+              </tr>
+
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/50">
+                <td class="py-3 px-4 font-mono font-bold text-brand-600">06</td>
+                <td class="py-3 px-4 font-semibold text-slate-900 dark:text-white">Cadernos de Ativação & Micro-Agentes</td>
+                <td class="py-3 px-4 text-xs text-slate-500">Manuais Práticos PDF/MD</td>
+                <td class="py-3 px-4 font-mono font-bold">R$ 40 a R$ 50</td>
+                <td class="py-3 px-4 text-xs">Por Caderno Temático</td>
+              </tr>
+
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/50">
+                <td class="py-3 px-4 font-mono font-bold text-brand-600">07</td>
+                <td class="py-3 px-4 font-semibold text-slate-900 dark:text-white">CX & Service Blueprint (PMEs)</td>
+                <td class="py-3 px-4 text-xs text-slate-500">NPS, CSAT e Blueprint</td>
+                <td class="py-3 px-4 font-mono font-bold">R$ 3.500 a R$ 6.000</td>
+                <td class="py-3 px-4 text-xs">50% Entrada + 50% Entrega</td>
+              </tr>
+
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/50">
+                <td class="py-3 px-4 font-mono font-bold text-brand-600">08</td>
+                <td class="py-3 px-4 font-semibold text-slate-900 dark:text-white">CX Corporativo & Indústrias (Juliana Canuto)</td>
+                <td class="py-3 px-4 text-xs text-slate-500">Entrevistas em Profundidade</td>
+                <td class="py-3 px-4 font-mono font-bold">A partir de R$ 12.000</td>
+                <td class="py-3 px-4 text-xs">Parceria Técnica Homologada</td>
+              </tr>
+
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/50">
+                <td class="py-3 px-4 font-mono font-bold text-brand-600">09</td>
+                <td class="py-3 px-4 font-semibold text-slate-900 dark:text-white">Pesquisa de Mercado & Inteligência</td>
+                <td class="py-3 px-4 text-xs text-slate-500">Benchmarking e Concorrentes</td>
+                <td class="py-3 px-4 font-mono font-bold">R$ 4.000 a R$ 12.000</td>
+                <td class="py-3 px-4 text-xs">Projeto Fechado</td>
+              </tr>
+
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/50">
+                <td class="py-3 px-4 font-mono font-bold text-brand-600">10</td>
+                <td class="py-3 px-4 font-semibold text-slate-900 dark:text-white">Negociação, Mediação & M&A</td>
+                <td class="py-3 px-4 text-xs text-slate-500">Valuation & Acordos</td>
+                <td class="py-3 px-4 font-mono font-bold">Retainer + 1% a 8% Success</td>
+                <td class="py-3 px-4 text-xs">Mensal + Comissão no Fechamento</td>
+              </tr>
+
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/50">
+                <td class="py-3 px-4 font-mono font-bold text-brand-600">11</td>
+                <td class="py-3 px-4 font-semibold text-slate-900 dark:text-white">Estruturação de Conselho Familiar</td>
+                <td class="py-3 px-4 text-xs text-slate-500">3 meses fechados + Defesa CNPJ</td>
+                <td class="py-3 px-4 font-mono font-bold text-brand-600">R$ 8.000 a R$ 15.000</td>
+                <td class="py-3 px-4 text-xs">3 Parcelas Mensais</td>
+              </tr>
+
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/50">
+                <td class="py-3 px-4 font-mono font-bold text-brand-600">12</td>
+                <td class="py-3 px-4 font-semibold text-slate-900 dark:text-white">Planejamento Estratégico Modular</td>
+                <td class="py-3 px-4 text-xs text-slate-500">3 meses fechados + OKRs 12M</td>
+                <td class="py-3 px-4 font-mono font-bold text-brand-600">R$ 8.000 a R$ 12.000</td>
+                <td class="py-3 px-4 text-xs">3 Parcelas Mensais</td>
+              </tr>
+
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/50">
+                <td class="py-3 px-4 font-mono font-bold text-brand-600">13</td>
+                <td class="py-3 px-4 font-semibold text-slate-900 dark:text-white">O Código da Nova Liderança (Turmas)</td>
+                <td class="py-3 px-4 text-xs text-slate-500">Formação Executiva Aberta</td>
+                <td class="py-3 px-4 font-mono font-bold">R$ 1.900 a R$ 4.299 / aluno</td>
+                <td class="py-3 px-4 text-xs">Por Inscrição</td>
+              </tr>
+
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/50">
+                <td class="py-3 px-4 font-mono font-bold text-brand-600">14</td>
+                <td class="py-3 px-4 font-semibold text-slate-900 dark:text-white">O Código da Nova Liderança (In-Company)</td>
+                <td class="py-3 px-4 text-xs text-slate-500">16 horas de capacitação</td>
+                <td class="py-3 px-4 font-mono font-bold">R$ 12.000 a R$ 25.000</td>
+                <td class="py-3 px-4 text-xs">+10%/aula a partir da 3ª</td>
+              </tr>
+
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/50">
+                <td class="py-3 px-4 font-mono font-bold text-brand-600">15</td>
+                <td class="py-3 px-4 font-semibold text-slate-900 dark:text-white">Palestras & Workshops Corporativos</td>
+                <td class="py-3 px-4 text-xs text-slate-500">1h a 4h de evento</td>
+                <td class="py-3 px-4 font-mono font-bold">R$ 890 a R$ 2.000/h</td>
+                <td class="py-3 px-4 text-xs">Por Evento</td>
+              </tr>
+
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/50">
+                <td class="py-3 px-4 font-mono font-bold text-brand-600">16</td>
+                <td class="py-3 px-4 font-semibold text-slate-900 dark:text-white">Almoço com o CEO (Restaurante Voya)</td>
+                <td class="py-3 px-4 text-xs text-slate-500">Sessão VIP C-Level</td>
+                <td class="py-3 px-4 font-mono font-bold text-amber-600">R$ 180 a R$ 220 / assento</td>
+                <td class="py-3 px-4 text-xs">Buffet + Brinde VIP R$ 18</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 6: BLUEPRINTS TÉCNICOS DE IA -->
+    <!-- ========================================== -->
+    <div id="tab-blueprints" class="tab-content hidden space-y-8 animate-fadeIn">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Júlio Bot v8 -->
+        <div class="glass-panel rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-800 space-y-4">
+          <div class="flex items-center justify-between border-b pb-4 border-slate-100 dark:border-slate-800">
+            <h3 class="text-base font-bold text-indigo-600 flex items-center gap-2">
+              <i class="fa-solid fa-robot"></i> Júlio Bot v8.0 Netlify SPA
+            </h3>
+            <span class="text-xs font-mono px-2 py-0.5 rounded bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-300 font-bold">Hospedagem Netlify</span>
+          </div>
+
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            Desenvolvido como uma Single Page Application (SPA) ultraleve com autenticação via <strong>Firebase Auth</strong> e controle multi-tenant no Firestore.
+          </p>
+
+          <div class="space-y-2 text-xs">
+            <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-900 font-mono">
+              <span class="text-indigo-600 font-bold">Módulo 1:</span> Onboarding estruturado para novos funcionários.
+            </div>
+            <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-900 font-mono">
+              <span class="text-indigo-600 font-bold">Módulo 2:</span> Canal diário de dúvidas sobre procedimentos internos.
+            </div>
+            <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-900 font-mono">
+              <span class="text-indigo-600 font-bold">Módulo 3:</span> Tutoria na aplicação dos Cadernos de Ativação.
+            </div>
+          </div>
+        </div>
+
+        <!-- Agente de Recrutamento & Seleção -->
+        <div class="glass-panel rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-800 space-y-4">
+          <div class="flex items-center justify-between border-b pb-4 border-slate-100 dark:border-slate-800">
+            <h3 class="text-base font-bold text-purple-600 flex items-center gap-2">
+              <i class="fa-solid fa-users-viewfinder"></i> Agente de R&S (RH Tech)
+            </h3>
+            <span class="text-xs font-mono px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-300 font-bold">Produto Separado</span>
+          </div>
+
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            Motor de atração e seleção autônomo, eliminando o atrito das PMEs na contratação de equipe.
+          </p>
+
+          <div class="space-y-2 text-xs">
+            <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-900 font-mono">
+              <span class="text-purple-600 font-bold">Etapa 1:</span> Engenharia de descritivo de cargo e perfil técnico/comportamental.
+            </div>
+            <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-900 font-mono">
+              <span class="text-purple-600 font-bold">Etapa 2:</span> Roteiro de entrevista comportamental com perguntas situacionais.
+            </div>
+            <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-900 font-mono">
+              <span class="text-purple-600 font-bold">Etapa 3:</span> Triagem e ranking automatizado de CVs por fit com a vaga.
+            </div>
+          </div>
+        </div>
+
+        <!-- Diagnóstico Express SaaS -->
+        <div class="glass-panel rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-800 space-y-4">
+          <div class="flex items-center justify-between border-b pb-4 border-slate-100 dark:border-slate-800">
+            <h3 class="text-base font-bold text-emerald-600 flex items-center gap-2">
+              <i class="fa-solid fa-bolt"></i> Diagnóstico Empresarial Express
+            </h3>
+            <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-300 font-bold">Front-End R$ 250</span>
+          </div>
+
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            Tripwire comercial com checkout em 12x que gera em 15 minutos o <strong>Índice de Vulnerabilidade Operacional</strong> da PME em 4 pilares essenciais.
+          </p>
+
+          <div class="grid grid-cols-2 gap-2 text-[11px] font-mono">
+            <div class="p-2 rounded bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-300">1. Financeiro & Margem</div>
+            <div class="p-2 rounded bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-300">2. Processos & Operação</div>
+            <div class="p-2 rounded bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-300">3. Pessoas & Liderança</div>
+            <div class="p-2 rounded bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-300">4. Vendas & CX</div>
+          </div>
+        </div>
+
+        <!-- Esteira de Prospecção B2B (P1 a P4) -->
+        <div class="glass-panel rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-800 space-y-4">
+          <div class="flex items-center justify-between border-b pb-4 border-slate-100 dark:border-slate-800">
+            <h3 class="text-base font-bold text-cyan-600 flex items-center gap-2">
+              <i class="fa-solid fa-paper-plane"></i> Pipeline Autônomo de Prospecção
+            </h3>
+            <span class="text-xs font-mono px-2 py-0.5 rounded bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-300 font-bold">Scripts Python</span>
+          </div>
+
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            Automação em 4 scripts modulares para alimentação contínua do funil de vendas em Goiânia e região metropolitana.
+          </p>
+
+          <div class="space-y-1.5 text-xs font-mono">
+            <div class="p-2 rounded bg-slate-50 dark:bg-slate-900 flex justify-between">
+              <span><strong>P1:</strong> p1_buscar.py</span> <span class="text-slate-400">Mineração CNAE / Região</span>
+            </div>
+            <div class="p-2 rounded bg-slate-50 dark:bg-slate-900 flex justify-between">
+              <span><strong>P2:</strong> p2_auditar.py</span> <span class="text-slate-400">Auditoria Digital & Sócios</span>
+            </div>
+            <div class="p-2 rounded bg-slate-50 dark:bg-slate-900 flex justify-between">
+              <span><strong>P3:</strong> p3_mensagens.py</span> <span class="text-slate-400">Copywriting com IA</span>
+            </div>
+            <div class="p-2 rounded bg-slate-50 dark:bg-slate-900 flex justify-between">
+              <span><strong>P4:</strong> p4_disparar.py</span> <span class="text-slate-400">Disparo Cadenciado</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 7: SIMULADOR & METAS DO PILOTO -->
+    <!-- ========================================== -->
+    <div id="tab-simulador" class="tab-content hidden space-y-8 animate-fadeIn">
+      
+      <div class="glass-panel rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 dark:border-slate-800 space-y-8">
+        <div>
+          <span class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300 rounded-full uppercase tracking-wider">
+            Planejamento de Receita
+          </span>
+          <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white mt-1">Simulador de Receita do Piloto de 60 Dias</h2>
+          <p class="text-xs text-slate-500">Ajuste as metas de volume e veja a projeção de faturamento mensal em tempo real.</p>
+        </div>
+
+        <!-- Interactive Simulator Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          <!-- Controls Column -->
+          <div class="lg:col-span-2 space-y-6">
+            
+            <!-- Diagnósticos Express -->
+            <div class="space-y-2">
+              <div class="flex justify-between text-sm">
+                <span class="font-bold text-slate-700 dark:text-slate-300">Diagnóstico Express (R$ 250)</span>
+                <span id="val-diag" class="font-mono font-bold text-brand-600">100 vendas</span>
+              </div>
+              <input type="range" id="range-diag" min="0" max="300" step="5" value="100" oninput="calculateSimulator()" class="w-full accent-brand-600 cursor-pointer">
+            </div>
+
+            <!-- Assinaturas Júlio Onboarding -->
+            <div class="space-y-2">
+              <div class="flex justify-between text-sm">
+                <span class="font-bold text-slate-700 dark:text-slate-300">Júlio Bot v8.0 MRR (R$ 120/mês)</span>
+                <span id="val-julio" class="font-mono font-bold text-indigo-600">10 assinaturas</span>
+              </div>
+              <input type="range" id="range-julio" min="0" max="100" step="1" value="10" oninput="calculateSimulator()" class="w-full accent-indigo-600 cursor-pointer">
+            </div>
+
+            <!-- Agente R&S -->
+            <div class="space-y-2">
+              <div class="flex justify-between text-sm">
+                <span class="font-bold text-slate-700 dark:text-slate-300">Agente de R&S - Vagas (R$ 1.000 Médio)</span>
+                <span id="val-rs" class="font-mono font-bold text-purple-600">6 vagas</span>
+              </div>
+              <input type="range" id="range-rs" min="0" max="30" step="1" value="6" oninput="calculateSimulator()" class="w-full accent-purple-600 cursor-pointer">
+            </div>
+
+            <!-- Conselhos Familiares / Planejamento -->
+            <div class="space-y-2">
+              <div class="flex justify-between text-sm">
+                <span class="font-bold text-slate-700 dark:text-slate-300">Conselho Familiar / Planejamento (R$ 10.000 Médio)</span>
+                <span id="val-conselho" class="font-mono font-bold text-emerald-600">2 contratos</span>
+              </div>
+              <input type="range" id="range-conselho" min="0" max="10" step="1" value="2" oninput="calculateSimulator()" class="w-full accent-emerald-600 cursor-pointer">
+            </div>
+
+            <!-- Almoço com o CEO -->
+            <div class="space-y-2">
+              <div class="flex justify-between text-sm">
+                <span class="font-bold text-slate-700 dark:text-slate-300">Almoço com o CEO no Voya (R$ 200/assento)</span>
+                <span id="val-almoco" class="font-mono font-bold text-amber-600">40 assentos (2 edições)</span>
+              </div>
+              <input type="range" id="range-almoco" min="0" max="100" step="5" value="40" oninput="calculateSimulator()" class="w-full accent-amber-600 cursor-pointer">
+            </div>
+          </div>
+
+          <!-- Total Result Card -->
+          <div class="p-6 rounded-2xl bg-gradient-to-br from-brand-950 via-brand-900 to-indigo-950 text-white flex flex-col justify-between space-y-6 shadow-xl border border-indigo-500/30">
+            <div>
+              <span class="text-xs uppercase font-mono tracking-wider text-indigo-300">Receita Mensal Projetada</span>
+              <div id="total-revenue" class="text-4xl font-extrabold text-white mt-2 font-mono">
+                R$ 80.200,00
+              </div>
+              <p class="text-xs text-indigo-200/80 mt-2 leading-relaxed">
+                Com base no mix de produtos e 0% de sobrecarga operacional dos sócios em tarefas braçais.
+              </p>
+            </div>
+
+            <div class="space-y-2 border-t border-indigo-800/80 pt-4 text-xs">
+              <div class="flex justify-between">
+                <span class="text-indigo-300">Front-End (Diagnósticos):</span>
+                <span id="sub-diag" class="font-mono font-bold">R$ 25.000,00</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-indigo-300">Produtos SaaS & IA:</span>
+                <span id="sub-ia" class="font-mono font-bold">R$ 7.200,00</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-indigo-300">High-Ticket & Governança:</span>
+                <span id="sub-gov" class="font-mono font-bold">R$ 20.000,00</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-indigo-300">Eventos C-Level:</span>
+                <span id="sub-events" class="font-mono font-bold">R$ 8.000,00</span>
+              </div>
+            </div>
+
+            <button onclick="resetSimulator()" class="w-full py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold transition">
+              <i class="fa-solid fa-arrows-rotate mr-1"></i> Restaurar Metas Oficiais
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 8: BIBLIOTECA DE DOCUMENTOS -->
+    <!-- ========================================== -->
+    <div id="tab-documentos" class="tab-content hidden space-y-8 animate-fadeIn">
+      
+      <div class="glass-panel rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 dark:border-slate-800 space-y-6">
+        <div>
+          <span class="text-xs font-bold px-3 py-1 bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 rounded-full uppercase tracking-wider">
+            Arquivos do Projeto
+          </span>
+          <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white mt-1">Biblioteca Completa de Documentos & Manifestos</h2>
+          <p class="text-xs text-slate-500">Acesse na íntegra a documentação gerada e homologada para o Ecossistema Live.</p>
+        </div>
+
+        <!-- Document Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2">
+            <div class="flex items-center gap-2 text-brand-600 font-bold text-sm">
+              <i class="fa-solid fa-file-lines"></i> Relatório de Reestruturação
+            </div>
+            <p class="text-xs text-slate-500">Documento executivo mestre com todas as decisões homologadas.</p>
+            <div class="text-[11px] font-mono text-slate-400">RELATORIO_EXECUTIVO_REESTRUTURACAO_NIRVANA.md</div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2">
+            <div class="flex items-center gap-2 text-purple-600 font-bold text-sm">
+              <i class="fa-solid fa-brain"></i> Parecer dos Mind-Clones
+            </div>
+            <p class="text-xs text-slate-500">Análise comportamental e técnica de Kahneman, DHH e Fowler.</p>
+            <div class="text-[11px] font-mono text-slate-400">07-reunioes/PARECER_MIND_CLONES_NIRVANA.md</div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2">
+            <div class="flex items-center gap-2 text-indigo-600 font-bold text-sm">
+              <i class="fa-solid fa-code"></i> Blueprint de Produtos de IA
+            </div>
+            <p class="text-xs text-slate-500">Especificações do Júlio Bot v8, R&S, Diagnóstico e Jarvis.</p>
+            <div class="text-[11px] font-mono text-slate-400">produtos/BLUEPRINT_ARQUITETURA_PRODUTOS_IA.md</div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2">
+            <div class="flex items-center gap-2 text-emerald-600 font-bold text-sm">
+              <i class="fa-solid fa-book"></i> Caderno de Ativação Template
+            </div>
+            <p class="text-xs text-slate-500">Manual prático para delegação a estagiários e assistentes.</p>
+            <div class="text-[11px] font-mono text-slate-400">produtos/CADERNO_ATIVACAO_TEMPLATE.md</div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2">
+            <div class="flex items-center gap-2 text-amber-600 font-bold text-sm">
+              <i class="fa-solid fa-sitemap"></i> Manifesto Nirvana-OS
+            </div>
+            <p class="text-xs text-slate-500">business.yaml, org-chart.yaml e regras de roteamento.</p>
+            <div class="text-[11px] font-mono text-slate-400">agentes/nirvana-os/.../businesses/ecossistema-live/</div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2">
+            <div class="flex items-center gap-2 text-cyan-600 font-bold text-sm">
+              <i class="fa-solid fa-chart-pie"></i> Painel de Metas 60 Dias
+            </div>
+            <p class="text-xs text-slate-500">Matriz de faturamento e rituais semanais de governança.</p>
+            <div class="text-[11px] font-mono text-slate-400">06-dashboard/PAINEL_METAS_PILOTO_60_DIAS.md</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 dark:border-slate-800 mt-16 py-8 text-center text-xs text-slate-400 font-mono">
+    <div class="max-w-7xl mx-auto px-4 space-y-2">
+      <p>ECOSSISTEMA LIVE — LUIZ E A PORTAL (CNPJ: 52.887.139/0001-00) • Goiânia - GO</p>
+      <p>Arquitetado e Orquestrado com Nirvana-OS v1.1 • Live Consultoria 2026</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript Logic -->
+  <script>
+    // Tab switching logic
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.add('hidden');
+        tab.classList.remove('block');
+      });
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('tab-active');
+      });
+
+      const targetTab = document.getElementById(tabId);
+      const targetBtn = document.getElementById('btn-' + tabId);
+
+      if (targetTab && targetBtn) {
+        targetTab.classList.remove('hidden');
+        targetTab.classList.add('block');
+        targetBtn.classList.add('tab-active');
+      }
+    }
+
+    // Dark mode toggle
+    function toggleDarkMode() {
+      const html = document.documentElement;
+      const themeIcon = document.getElementById('theme-icon');
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+      } else {
+        html.classList.add('dark');
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+      }
+    }
+
+    // Simulator calculation logic
+    function calculateSimulator() {
+      const diagCount = parseInt(document.getElementById('range-diag').value);
+      const julioCount = parseInt(document.getElementById('range-julio').value);
+      const rsCount = parseInt(document.getElementById('range-rs').value);
+      const conselhoCount = parseInt(document.getElementById('range-conselho').value);
+      const almocoCount = parseInt(document.getElementById('range-almoco').value);
+
+      document.getElementById('val-diag').innerText = diagCount + ' vendas';
+      document.getElementById('val-julio').innerText = julioCount + ' assinaturas';
+      document.getElementById('val-rs').innerText = rsCount + ' vagas';
+      document.getElementById('val-conselho').innerText = conselhoCount + ' contratos';
+      document.getElementById('val-almoco').innerText = almocoCount + ' assentos';
+
+      const totalDiag = diagCount * 250;
+      const totalJulio = julioCount * 120;
+      const totalRs = rsCount * 1000;
+      const totalConselho = conselhoCount * 10000;
+      const totalAlmoco = almocoCount * 200;
+
+      const totalIA = totalJulio + totalRs;
+      const totalGov = totalConselho;
+      const totalEvents = totalAlmoco;
+      const grandTotal = totalDiag + totalIA + totalGov + totalEvents;
+
+      document.getElementById('sub-diag').innerText = totalDiag.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      document.getElementById('sub-ia').innerText = totalIA.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      document.getElementById('sub-gov').innerText = totalGov.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      document.getElementById('sub-events').innerText = totalEvents.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      document.getElementById('total-revenue').innerText = grandTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    function resetSimulator() {
+      document.getElementById('range-diag').value = 100;
+      document.getElementById('range-julio').value = 10;
+      document.getElementById('range-rs').value = 6;
+      document.getElementById('range-conselho').value = 2;
+      document.getElementById('range-almoco').value = 40;
+      calculateSimulator();
+    }
+
+    // Initialize
+    calculateSimulator();
+  </script>
+</body>
+</html>
