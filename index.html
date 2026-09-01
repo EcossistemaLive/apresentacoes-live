@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ecossistema Live — Hub de Inteligência Empresarial & Governança por IA</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hub de Inteligência Empresarial & Governança por IA | Ecossistema Live</title>
+  <meta name="description" content="Não fazemos consultoria tradicional. Estruturamos governança, diagnosticamos gargalos através de IA, desenvolvemos lideranças e entregamos produtos modulares.">
+  <link rel="canonical" href="https://ecossistemalive.github.io/apresentacoes-live/">
+  <meta name="theme-color" content="#0B1120">
 
   <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,9 +15,10 @@
 
   <style>
     /* ============================================================
-       TOKENS & DESIGN SYSTEM — design.md v1.1
+       TOKENS — design.md v1.1 (Camada 1: Primitivos & Camada 2: Semânticos)
        ============================================================ */
     :root {
+      /* Neutros */
       --n-0:   #FFFFFF;
       --n-50:  #F8FAFC;
       --n-100: #F1F5F9;
@@ -28,39 +32,84 @@
       --n-900: #0F172A;
       --n-950: #0B1120;
 
-      /* Paleta Semântica */
+      /* Marca Indigo */
+      --b-50:  #EEF2FF;
+      --b-100: #E0E7FF;
+      --b-200: #C7D2FE;
+      --b-300: #A5B4FC;
+      --b-400: #818CF8;
+      --b-500: #6366F1;
+      --b-600: #4F46E5;
+      --b-700: #4338CA;
+
+      /* Acento Frio — Ciano */
+      --c-50:  #ECFEFF;
+      --c-100: #CFFAFE;
+      --c-200: #A5F3FC;
+      --c-300: #67E8F9;
+      --c-400: #22D3EE;
+      --c-500: #06B6D4;
+      --c-700: #0E7490;
+
+      /* Destaque Quente — Âmbar */
+      --a-100: #FEF3C7;
+      --a-200: #FDE68A;
+      --a-300: #FCD34D;
+      --a-400: #FBBF24;
+      --a-500: #F59E0B;
+      --a-700: #B45309;
+
+      /* Semáforo */
+      --ok-400: #34D399; --ok-600: #047857;
+      --warn-400: #FBBF24; --err-400: #F87171;
+
+      /* Semânticos (Dark Mode por Padrão) */
       --surface:        var(--n-950);
       --surface-subtle: #0F1729;
       --surface-raised: #111C33;
       --surface-inset:  #0A1020;
+      --surface-invert: var(--n-0);
 
       --text:           var(--n-100);
       --text-secondary: var(--n-400);
       --text-muted:     var(--n-400);
-      --text-brand:     #34D399;
+      --text-invert:    var(--n-900);
+      --text-brand:     var(--b-300);
 
       --border:            #1E2A44;
       --border-strong:     #2A3A5C;
       --border-interactive:var(--n-500);
+      --border-focus:      var(--b-400);
 
-      /* Marca: Emerald / Cyan / Amber (design.md v1.1) */
-      --action:        #10B981;
-      --action-hover:  #059669;
-      --action-subtle: rgba(16, 185, 129, 0.14);
-      --on-action:     #0B1120;
+      --action:        var(--b-400);
+      --action-hover:  var(--b-300);
+      --action-active: var(--b-200);
+      --action-subtle: rgba(129, 140, 248, 0.14);
+      --on-action:     var(--n-950);
 
-      --accent:        #06B6D4;
-      --accent-text:   #67E8F9;
-      --accent-surface:rgba(6, 182, 212, 0.12);
-      --accent-border: rgba(6, 182, 212, 0.3);
+      --accent:          var(--c-400);
+      --accent-text:     var(--c-300);
+      --accent-surface:  rgba(34, 211, 238, 0.12);
+      --accent-border:   rgba(34, 211, 238, 0.28);
 
-      --highlight:        #FBBF24;
-      --highlight-text:   #FCD34D;
+      --highlight:        var(--a-400);
+      --highlight-text:   var(--a-300);
       --highlight-surface:rgba(251, 191, 36, 0.14);
-      --highlight-border: rgba(251, 191, 36, 0.3);
+      --highlight-border: rgba(251, 191, 36, 0.30);
+      --highlight-mark:   rgba(251, 191, 36, 0.26);
 
-      --font-display: "Inter", sans-serif;
-      --font-text:    "Inter", sans-serif;
+      --grad-brand: linear-gradient(135deg, var(--b-400) 0%, var(--c-400) 100%);
+      --grad-warm:  linear-gradient(135deg, var(--b-400) 0%, var(--a-400) 100%);
+      --grad-text:  linear-gradient(100deg, var(--b-300) 0%, var(--c-300) 100%);
+      --grad-soft:  linear-gradient(160deg, #131C33 0%, #0E1B2B 55%, #17182B 100%);
+      --grad-line:  linear-gradient(90deg, transparent, var(--b-400), var(--c-400), transparent);
+
+      --aura-brand:  radial-gradient(60% 60% at 50% 0%, rgba(99,102,241,.30) 0%, transparent 70%);
+      --aura-accent: radial-gradient(52% 52% at 88% 18%, rgba(34,211,238,.22) 0%, transparent 70%);
+      --aura-warm:   radial-gradient(45% 45% at 10% 88%, rgba(251,191,36,.13) 0%, transparent 70%);
+
+      --font-display: "Inter", system-ui, sans-serif;
+      --font-text:    "Inter", system-ui, sans-serif;
 
       --fs-xs:   0.75rem;
       --fs-sm:   0.875rem;
@@ -72,21 +121,37 @@
       --fs-3xl:  clamp(2.25rem, 2.6vw + 1.6rem,  3rem);
       --fs-4xl:  clamp(2.5rem,  3.0vw + 1.4rem,  3.5rem);
 
-      --lh-tight: 1.15; --lh-snug: 1.3; --lh-normal: 1.6;
-      --ls-tight: -0.02em; --ls-wide: 0.06em;
-      --fw-medium: 500; --fw-semibold: 600; --fw-bold: 700; --fw-black: 900;
+      --lh-tight: 1.1; --lh-snug: 1.25; --lh-normal: 1.6;
+      --ls-tight: -0.02em; --ls-flat: 0; --ls-wide: 0.06em;
+      --fw-regular: 400; --fw-medium: 500; --fw-semibold: 600; --fw-bold: 700; --fw-black: 900;
 
-      --sp-2: 0.5rem; --sp-3: 0.75rem; --sp-4: 1rem; --sp-6: 1.5rem; --sp-8: 2rem; --sp-12: 3rem;
-      --section-y: clamp(4rem, 8vw, 7.5rem);
-      --container: 1240px;
+      --sp-1: 0.25rem; --sp-2: 0.5rem; --sp-3: 0.75rem; --sp-4: 1rem;
+      --sp-5: 1.25rem; --sp-6: 1.5rem; --sp-8: 2rem; --sp-10: 2.5rem;
+      --sp-12: 3rem; --sp-16: 4rem; --sp-20: 5rem;
+
+      --section-y:       clamp(4rem, 8vw, 7.5rem);
+      --section-y-tight: clamp(3rem, 5vw, 4.5rem);
+      --container: 1200px;
       --gutter: clamp(1.25rem, 4vw, 2.5rem);
 
-      --r-md: 10px; --r-lg: 14px; --r-xl: 20px; --r-full: 999px;
+      --r-sm: 6px; --r-md: 10px; --r-lg: 12px; --r-xl: 18px; --r-2xl: 24px; --r-full: 999px;
+
+      --sh-sm: 0 1px 3px rgba(0,0,0,.5);
+      --sh-md: 0 4px 12px rgba(0,0,0,.55);
       --sh-lg: 0 12px 32px rgba(0,0,0,.6);
+      --sh-stack: 0 8px 16px rgba(0,0,0,.4), 0 24px 48px rgba(0,0,0,.5), 0 48px 96px rgba(0,0,0,.4);
+      --sh-glow: 0 8px 32px rgba(99,102,241,.35);
+
+      --dur-fast: 120ms; --dur-base: 200ms; --dur-slow: 320ms;
+      --ease-out: cubic-bezier(.16,1,.3,1);
+      --ease-in-out: cubic-bezier(.4,0,.2,1);
+
+      --z-header: 200;
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    /* Reset & Base */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; }
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
     body {
       background: var(--surface);
       color: var(--text);
@@ -97,173 +162,300 @@
       overflow-x: hidden;
     }
 
-    img, svg { display: block; max-width: 100%; height: auto; }
+    img, svg, video { display: block; max-width: 100%; height: auto; }
     button, input, select, textarea { font: inherit; color: inherit; }
 
-    h1,h2,h3,h4 { font-family: var(--font-display); font-weight: var(--fw-bold); letter-spacing: var(--ls-tight); line-height: var(--lh-tight); }
+    h1,h2,h3,h4 {
+      font-family: var(--font-display);
+      font-weight: var(--fw-semibold);
+      letter-spacing: var(--ls-tight);
+      line-height: var(--lh-tight);
+      text-wrap: balance;
+    }
     h1 { font-size: var(--fs-4xl); font-weight: var(--fw-black); }
     h2 { font-size: var(--fs-2xl); }
-    h3 { font-size: var(--fs-xl); }
-    h4 { font-size: var(--fs-lg); }
+    h3 { font-size: var(--fs-xl); line-height: var(--lh-snug); }
+    h4 { font-size: var(--fs-lg); line-height: var(--lh-snug); }
+    p  { text-wrap: pretty; }
 
-    a { color: var(--text-brand); text-decoration: none; }
+    a { color: var(--text-brand); text-underline-offset: 3px; text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    .container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
+    /* Layout Classes */
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
     .section { padding-block: var(--section-y); position: relative; }
+    .section--tight { padding-block: var(--section-y-tight); }
+    .section--subtle { background: var(--surface-subtle); border-y: 1px solid var(--border); }
+
+    .split {
+      display: grid; gap: clamp(var(--sp-8), 5vw, var(--sp-16));
+      align-items: center;
+      grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
+    }
+
+    /* SEÇÃO 5 — TEXTURAS DE FUNDO (.bg) */
+    .bg { position: relative; isolation: isolate; overflow: hidden; }
+    .bg > * { position: relative; z-index: 1; }
+    .bg::before, .bg::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; }
     
-    .autogrid { display: grid; gap: var(--sp-6); grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); }
-    .split { display: grid; gap: clamp(var(--sp-8), 5vw, var(--sp-12)); align-items: center; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); }
-
-    /* Header Navbar */
-    .site-header {
-      position: sticky; top: 0; z-index: 200;
-      background: rgba(11, 17, 32, 0.94);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-    }
-    .site-header__inner { display: flex; align-items: center; justify-content: space-between; min-height: 76px; }
-    .brand { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
-    .brand img { height: 42px; width: auto; }
-    .brand__name { font-size: 1.15rem; font-weight: var(--fw-bold); color: #fff; }
-    .brand__sub { font-size: 0.72rem; color: var(--action); font-weight: var(--fw-bold); text-transform: uppercase; letter-spacing: var(--ls-wide); }
-
-    /* Botões */
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-      min-height: 48px; padding: 0 var(--sp-6); border-radius: var(--r-lg);
-      font-size: var(--fs-base); font-weight: var(--fw-bold); text-decoration: none; cursor: pointer;
-      border: 1px solid transparent; transition: all 0.2s ease; white-space: nowrap;
-    }
-    .btn:hover { text-decoration: none; }
+    .bg--aura::before { background: var(--aura-brand), var(--aura-accent), var(--aura-warm); }
     
-    .btn--primary { background: var(--action); color: var(--on-action); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35); }
-    .btn--primary:hover { background: var(--action-hover); transform: translateY(-2px); }
-
-    .btn--whatsapp { background: #25D366; color: #FFFFFF; box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3); }
-    .btn--whatsapp:hover { background: #20BA5A; transform: translateY(-2px); }
-
-    .btn--secondary { background: var(--surface-inset); color: #FFF; border: 1px solid var(--border-strong); }
-    .btn--secondary:hover { border-color: var(--action); color: var(--action); }
-
-    .btn--block { width: 100%; }
-
-    /* Cabecalhos com Cores de Fundo Estilizadas */
-    .section-head-card {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(6, 182, 212, 0.06) 100%);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      border-radius: var(--r-xl);
-      padding: 2.5rem 2rem;
-      margin-bottom: 3rem;
-      text-align: center;
-    }
-    .section-head-card.ia { background: linear-gradient(135deg, rgba(6, 182, 212, 0.12) 0%, rgba(251, 191, 36, 0.06) 100%); border-color: rgba(6, 182, 212, 0.3); }
-    .section-head-card.cat { background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(251, 191, 36, 0.06) 100%); border-color: rgba(251, 191, 36, 0.3); }
-
-    .eyebrow {
-      display: inline-block; font-size: var(--fs-xs); font-weight: var(--fw-bold);
-      letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--action);
-      background: var(--action-subtle); border: 1px solid var(--action);
-      padding: 0.35rem 1rem; border-radius: var(--r-full); margin-bottom: 0.8rem;
-    }
-    .section-title { font-size: var(--fs-2xl); color: #fff; margin-bottom: 0.5rem; }
-    .section-desc { font-size: var(--fs-lg); color: var(--text-secondary); max-width: 680px; margin: 0 auto; }
-
-    /* Hero */
-    .hero__sub { font-size: var(--fs-lg); color: var(--text-secondary); margin-bottom: var(--sp-6); }
-    .manifesto-box {
-      background: var(--surface-subtle); border-left: 4px solid var(--action);
-      border: 1px solid var(--border); border-left-width: 4px;
-      border-radius: var(--r-lg); padding: 1.4rem; margin-bottom: var(--sp-6);
+    .bg--dots::before {
+      background-image: radial-gradient(color-mix(in srgb, var(--text) 16%, transparent) 1px, transparent 1px);
+      background-size: 24px 24px;
+      -webkit-mask-image: radial-gradient(75% 65% at 50% 0%, #000 0%, transparent 78%);
+              mask-image: radial-gradient(75% 65% at 50% 0%, #000 0%, transparent 78%);
     }
 
-    /* Cards e Grid de Produtos */
+    .bg--grid::before {
+      background-image:
+        linear-gradient(to right,  color-mix(in srgb, var(--text) 9%, transparent) 1px, transparent 1px),
+        linear-gradient(to bottom, color-mix(in srgb, var(--text) 9%, transparent) 1px, transparent 1px);
+      background-size: 64px 64px;
+      -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 85%);
+              mask-image: linear-gradient(to bottom, #000 0%, transparent 85%);
+    }
+
+    .divider { height: 1px; border: 0; margin: 0; background: var(--grad-line); opacity: .6; }
+
+    /* SEÇÃO 5.4 — DESTAQUES DE TEXTO */
+    .mark {
+      background-image: linear-gradient(180deg, transparent 55%, var(--highlight-mark) 55%);
+      padding-inline: .14em; border-radius: 2px;
+      box-decoration-break: clone; -webkit-box-decoration-break: clone;
+    }
+
+    .text-grad {
+      background: var(--grad-text);
+      -webkit-background-clip: text; background-clip: text;
+      color: transparent;
+    }
+
+    .chip {
+      display: inline-flex; align-items: center; gap: var(--sp-2);
+      padding: var(--sp-2) var(--sp-4); border-radius: var(--r-full);
+      background: var(--accent-surface); color: var(--accent-text);
+      border: 1px solid var(--accent-border);
+      font-size: var(--fs-sm); font-weight: var(--fw-semibold);
+      width: fit-content;
+    }
+    .chip__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+
+    .callout {
+      border-left: 3px solid var(--accent);
+      background: var(--accent-surface);
+      padding: var(--sp-5) var(--sp-6);
+      border-radius: 0 var(--r-md) var(--r-md) 0;
+    }
+
+    /* SEÇÃO 6 — CARDS E BENTO GRID */
+    .bento { display: grid; gap: var(--sp-4); grid-template-columns: 1fr; }
+    @media (min-width: 720px) {
+      .bento { grid-template-columns: repeat(6, 1fr); grid-auto-rows: minmax(190px, auto); gap: var(--sp-5); }
+      .bento__item { grid-column: span 2; }
+      .bento__item--wide { grid-column: span 4; }
+      .bento__item--full { grid-column: span 6; }
+    }
+
     .card {
       background: var(--surface-raised);
       border: 1px solid var(--border);
       border-radius: var(--r-xl);
       padding: var(--sp-8);
       display: flex; flex-direction: column; justify-content: space-between;
-      transition: all 0.25s ease;
+      transition: border-color var(--dur-base) var(--ease-out),
+                  box-shadow var(--dur-base) var(--ease-out),
+                  transform var(--dur-base) var(--ease-out);
     }
-    .card:hover { transform: translateY(-4px); border-color: var(--action); box-shadow: var(--sh-lg); }
+    .card--interactive:hover {
+      border-color: var(--border-strong);
+      box-shadow: var(--sh-md);
+      transform: translateY(-2px);
+    }
 
-    .badge-pill {
-      font-size: var(--fs-xs); font-weight: var(--fw-bold); text-transform: uppercase; letter-spacing: var(--ls-wide);
-      padding: 4px 12px; border-radius: var(--r-full); display: inline-block; margin-bottom: 0.8rem;
-      background: var(--action-subtle); color: var(--action); border: 1px solid var(--action);
+    /* Card Borda Gradiente (Máscara CSS design.md 6.2) */
+    .card--gradient { position: relative; border-color: transparent; }
+    .card--gradient::before {
+      content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
+      background: var(--grad-brand); pointer-events: none;
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+              mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
     }
-    .badge-pill.gold { background: var(--highlight-surface); color: var(--highlight); border-color: var(--highlight-border); }
-    .badge-pill.blue { background: var(--accent-surface); color: var(--accent); border-color: var(--accent-border); }
+
+    /* Card Spotlight (design.md 6.3) */
+    .card--spotlight { position: relative; overflow: hidden; }
+    .card--spotlight::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+      background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%),
+                  color-mix(in srgb, var(--accent) 20%, transparent), transparent 70%);
+      transition: opacity var(--dur-base) var(--ease-out);
+    }
+    .card--spotlight:hover::after { opacity: 1; }
+
+    /* Tile de Ícone (design.md 6.4) */
+    .tile {
+      width: 48px; height: 48px; display: grid; place-items: center;
+      border-radius: var(--r-md); flex: none;
+      background: var(--grad-brand); color: #fff; box-shadow: var(--sh-glow);
+      margin-bottom: var(--sp-3);
+    }
+    .tile--accent { background: var(--accent-surface); color: var(--accent-text); border: 1px solid var(--accent-border); box-shadow: none; }
+    .tile--warm   { background: var(--highlight-surface); color: var(--highlight-text); border: 1px solid var(--highlight-border); box-shadow: none; }
+
+    /* Card Vidro (design.md 6.5) */
+    .card--glass {
+      background: color-mix(in srgb, var(--surface-raised) 70%, transparent);
+      backdrop-filter: blur(16px) saturate(150%);
+      -webkit-backdrop-filter: blur(16px) saturate(150%);
+      border-color: color-mix(in srgb, var(--text) 10%, transparent);
+      box-shadow: var(--sh-md);
+    }
+
+    /* KPI com Barra Vertical (design.md 6.6) */
+    .kpi { display: flex; gap: var(--sp-4); align-items: stretch; }
+    .kpi__bar { width: 4px; border-radius: var(--r-full); background: var(--grad-brand); flex: none; }
+    .kpi__value { font-family: var(--font-display); font-size: var(--fs-3xl); font-weight: var(--fw-bold); letter-spacing: var(--ls-tight); line-height: 1; }
+    .kpi__label { font-size: var(--fs-sm); color: var(--text-secondary); margin-top: var(--sp-2); }
+
+    /* SEÇÃO 7 — MOLDURA DE NAVEGADOR & MARQUEE LOGOS */
+    .frame {
+      margin: 0; border-radius: var(--r-xl); overflow: hidden;
+      border: 1px solid var(--border); background: var(--surface-raised);
+      box-shadow: var(--sh-stack);
+    }
+    .frame__bar {
+      display: flex; align-items: center; gap: 6px;
+      padding: 10px 14px; background: var(--surface-subtle);
+      border-bottom: 1px solid var(--border);
+    }
+    .frame__bar > span { width: 10px; height: 10px; border-radius: 50%; background: var(--border-strong); }
+    .frame__bar em {
+      margin-left: var(--sp-4); font-style: normal; font-size: var(--fs-xs); color: var(--text-muted);
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-full); padding: 3px 12px;
+    }
+
+    .media-aura { position: relative; isolation: isolate; }
+    .media-aura > * { position: relative; z-index: 1; }
+    .media-aura::before {
+      content: ""; position: absolute; inset: -14% -6% -20%; z-index: 0; border-radius: 50%;
+      background: var(--grad-brand); filter: blur(72px); opacity: .28;
+    }
+
+    /* Marquee de Logos (design.md 7.5) */
+    .marquee {
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+              mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    }
+    .marquee__track {
+      display: flex; align-items: center; gap: clamp(2.5rem, 5vw, 4.5rem);
+      width: max-content; list-style: none; padding: 0; margin: 0;
+      animation: marquee 34s linear infinite;
+    }
+    .marquee:hover .marquee__track { animation-play-state: paused; }
+    .marquee img { filter: grayscale(1); opacity: .62; }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+
+    /* Header Navbar */
+    .site-header {
+      position: sticky; top: 0; z-index: var(--z-header);
+      background: color-mix(in srgb, var(--surface) 85%, transparent);
+      backdrop-filter: saturate(160%) blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .site-header__inner { display: flex; align-items: center; justify-content: space-between; min-height: 72px; }
+
+    .brand { display: flex; align-items: center; gap: var(--sp-3); text-decoration: none; }
+    .brand img { height: 40px; width: auto; }
+    .brand__name { font-size: 1.15rem; font-weight: var(--fw-bold); color: #fff; }
+    .brand__sub { font-size: 0.72rem; color: var(--action); font-weight: var(--fw-semibold); text-transform: uppercase; letter-spacing: var(--ls-wide); }
+
+    /* Botões de Componente (design.md 4.1) */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: var(--sp-2);
+      min-height: 48px; padding: 0 var(--sp-6);
+      border: 1px solid transparent; border-radius: var(--r-lg);
+      font-size: var(--fs-base); font-weight: var(--fw-semibold); line-height: 1;
+      text-decoration: none; cursor: pointer; white-space: nowrap;
+      transition: background var(--dur-fast) var(--ease-out),
+                  border-color var(--dur-fast) var(--ease-out),
+                  transform var(--dur-fast) var(--ease-out);
+    }
+    .btn:hover { text-decoration: none; }
+    .btn:active { transform: translateY(1px); }
+
+    .btn--primary { background: var(--action); color: var(--on-action); font-weight: var(--fw-bold); }
+    .btn--primary:hover { background: var(--action-hover); }
+
+    .btn--whatsapp { background: #25D366; color: #FFFFFF; font-weight: var(--fw-bold); }
+    .btn--whatsapp:hover { background: #20BA5A; }
+
+    .btn--secondary { background: transparent; color: var(--text); border-color: var(--border-strong); }
+    .btn--secondary:hover { border-color: var(--text); background: var(--surface-subtle); }
+
+    .btn--lg { min-height: 56px; padding-inline: var(--sp-8); font-size: var(--fs-md); }
+    .btn--sm { min-height: 38px; padding-inline: var(--sp-4); font-size: var(--fs-sm); }
+    .btn--block { width: 100%; }
+
+    /* Elementos do Catálogo */
+    .badge {
+      display: inline-flex; align-items: center; gap: var(--sp-2);
+      padding: var(--sp-1) var(--sp-3); border-radius: var(--r-full);
+      font-size: var(--fs-xs); font-weight: var(--fw-semibold);
+      letter-spacing: var(--ls-wide); text-transform: uppercase;
+      background: var(--action-subtle); color: var(--text-brand);
+      width: fit-content; margin-bottom: var(--sp-3);
+    }
+    .badge--gold { background: var(--highlight-surface); color: var(--highlight-text); border: 1px solid var(--highlight-border); }
+    .badge--blue { background: var(--accent-surface); color: var(--accent-text); border: 1px solid var(--accent-border); }
 
     .card-footer-box {
       border-top: 1px solid var(--border);
-      padding-top: 1.2rem;
+      padding-top: var(--sp-4);
       margin-top: auto;
       display: flex;
       flex-direction: column;
-      gap: 1.2rem;
+      gap: var(--sp-4);
     }
-    .price-val { font-size: 1.4rem; font-weight: var(--fw-black); color: var(--action); }
-    .price-model { font-size: var(--fs-xs); color: var(--text-muted); margin-top: 0.2rem; }
+    .price-val { font-size: var(--fs-xl); font-weight: var(--fw-bold); color: var(--action); }
+    .price-model { font-size: var(--fs-xs); color: var(--text-muted); margin-top: var(--sp-1); }
+    .card-btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-2); width: 100%; }
 
-    .card-btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; width: 100%; }
-
-    /* Organograma 45 Dias */
-    .roadmap-45 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; margin-top: 2rem; }
-    .phase-card {
-      background: var(--surface-raised); border: 1px solid var(--border);
-      border-radius: var(--r-lg); padding: 1.5rem; position: relative;
-    }
-    .phase-tag {
-      font-size: 0.75rem; font-weight: var(--fw-bold); color: var(--action);
-      background: var(--action-subtle); padding: 4px 10px; border-radius: var(--r-full);
-      display: inline-block; margin-bottom: 0.8rem;
-    }
-
-    /* Mapeamento Box */
-    .mapeamento-box {
-      background: var(--surface-subtle); border: 1px solid var(--accent-border);
-      border-radius: var(--r-xl); padding: 2rem; margin-bottom: 3rem;
-    }
-    .mapeamento-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.2rem; }
-    .map-item { background: var(--surface-inset); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 1.2rem; }
-    .map-title { font-size: 1rem; font-weight: var(--fw-bold); color: var(--accent); margin-bottom: 0.4rem; }
-
-    /* Filters & Search */
-    .catalog-bar { display: flex; flex-direction: column; gap: 1.2rem; align-items: center; margin-bottom: 2.5rem; }
+    .catalog-bar { display: flex; flex-direction: column; gap: var(--sp-4); align-items: center; margin-bottom: var(--sp-8); }
     .search-input {
-      width: 100%; max-width: 500px; padding: 0.85rem 1.4rem;
+      width: 100%; max-width: 480px; min-height: 48px; padding: 0 var(--sp-6);
       background: var(--surface-inset); border: 1px solid var(--border-interactive);
       border-radius: var(--r-full); color: #fff; font-size: var(--fs-base); outline: none;
     }
-    .search-input:focus { border-color: var(--action); }
+    .search-input:focus { border-color: var(--border-focus); }
 
-    .cat-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+    .cat-tabs { display: flex; gap: var(--sp-2); flex-wrap: wrap; justify-content: center; }
     .cat-tab {
       background: var(--surface-raised); border: 1px solid var(--border);
-      color: var(--text-secondary); padding: 0.55rem 1.2rem; border-radius: var(--r-full);
-      font-size: var(--fs-sm); font-weight: var(--fw-semibold); cursor: pointer;
+      color: var(--text-secondary); padding: var(--sp-2) var(--sp-4);
+      border-radius: var(--r-full); font-size: var(--fs-sm); font-weight: var(--fw-semibold); cursor: pointer;
     }
     .cat-tab:hover, .cat-tab.active { background: var(--action); color: var(--on-action); border-color: var(--action); }
 
-    /* FAQ */
-    .faq-item { border-bottom: 1px solid var(--border); padding: 1.2rem 0; }
-    .faq-item summary { font-size: var(--fs-lg); font-weight: var(--fw-semibold); cursor: pointer; list-style: none; display: flex; justify-content: space-between; }
-    .faq-item summary::after { content: "+"; color: var(--action); }
-    .faq-item[open] summary::after { content: "−"; }
-    .faq-item p { color: var(--text-secondary); margin-top: 0.6rem; }
-
     /* Footer */
-    .site-footer { background: var(--surface-subtle); border-top: 1px solid var(--border); padding: 3.5rem 1.5rem 2rem 1.5rem; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2.5rem; margin-bottom: 2.5rem; }
-    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; } }
-    .footer-legal { border-top: 1px solid var(--border); padding-top: 1.5rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; font-size: var(--fs-sm); color: var(--text-muted); }
+    .site-footer { background: var(--surface-subtle); border-top: 1px solid var(--border); padding-block: var(--sp-16) var(--sp-8); }
+    .site-footer__cols { display: grid; gap: var(--sp-8); grid-template-columns: repeat(auto-fit, minmax(min(220px,100%),1fr)); }
+    .site-footer h3 { font-size: var(--fs-sm); text-transform: uppercase; letter-spacing: var(--ls-wide); color: var(--text-muted); margin-bottom: var(--sp-4); }
+    .site-footer a { color: var(--text-secondary); text-decoration: none; }
+    .site-footer a:hover { color: var(--text); }
+    .site-footer__legal { margin-top: var(--sp-12); padding-top: var(--sp-6); border-top: 1px solid var(--border); font-size: var(--fs-sm); color: var(--text-muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--sp-4); }
   </style>
 </head>
 <body>
 
-  <!-- Header / Navigation (SEM BOTÃO MODO VENDEDOR, SEM NÚMERO NO BOTÃO WHATSAPP) -->
+  <!-- Sticky Navbar (SEM BOTÃO MODO VENDEDOR, WHATSAPP COM TEXTO LIMPO) -->
   <header class="site-header">
     <div class="container site-header__inner">
       <a href="#" class="brand">
@@ -274,158 +466,195 @@
         </div>
       </a>
 
-      <!-- RÓTULO LIMPO SEM NÚMERO EXPOSTO -->
-      <a href="https://wa.me/5561996993134?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20produtos%20do%20Ecossistema%20Live." target="_blank" class="btn btn--whatsapp">
+      <!-- RÓTULO LIMPO CONFORME SOLICITADO -->
+      <a href="https://wa.me/5561996993134?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20produtos%20do%20Ecossistema%20Live." target="_blank" class="btn btn--whatsapp btn--sm">
         💬 Falar no WhatsApp
       </a>
     </div>
   </header>
 
   <main>
-    <!-- HERO SECTION -->
-    <section class="section hero">
+    <!-- HERO SECTION COM AURA RADIAL, DOTS & MOLDURA DE NAVEGADOR -->
+    <section class="section hero bg bg--aura bg--dots">
       <div class="container split">
-        <div>
-          <span class="eyebrow">Governança & Soluções Modulares por IA</span>
-          <h1>Transformamos a Gestão da sua Empresa com Produtos Modulares e IA</h1>
+        <div class="hero__copy">
+          <p class="chip"><span class="chip__dot"></span>Governança & Soluções Modulares por IA</p>
+          <h1>Transformamos a Gestão da sua Empresa com <span class="text-grad">Produtos Modulares e IA</span></h1>
           <p class="hero__sub">
-            Eliminamos o modelo ultrapassado de consultoria perpétua. Entregamos governança estruturada, diagnóstico por inteligência artificial e processos com início, meio e fim.
+            Eliminamos o modelo ultrapassado de consultoria perpétua. Entregamos governança estruturada, diagnóstico por inteligência artificial e processos com <span class="mark">início, meio e fim</span>.
           </p>
 
-          <div class="manifesto-box">
-            <div style="font-size:0.75rem; font-weight:800; color:var(--action); text-transform:uppercase; margin-bottom:0.4rem;">Posicionamento Oficial Mandatório</div>
-            <div style="font-size:1rem; font-weight:600; color:#fff;">
+          <div class="callout" style="margin-bottom: var(--sp-6);">
+            <div style="font-size:var(--fs-xs); font-weight:var(--fw-bold); color:var(--accent-text); text-transform:uppercase; margin-bottom:0.2rem;">Posicionamento Oficial Mandatório</div>
+            <div style="font-size:var(--fs-base); font-weight:var(--fw-medium); color:#fff;">
               "Não fazemos consultoria tradicional. Estruturamos governança, diagnosticamos gargalos através de IA, desenvolvemos lideranças e entregamos produtos de gestão modulares com início, meio e fim."
             </div>
           </div>
 
-          <div style="display:flex; gap:1rem; flex-wrap:wrap;">
-            <a href="#catalogo" class="btn btn--primary">Explore os 21 SKUs Modulares</a>
-            <a href="https://wa.me/5561996993134?text=Ol%C3%A1!%20Quero%20agendar%20um%20Diagn%C3%B3stico%20Express." target="_blank" class="btn btn--whatsapp">
+          <div style="display:flex; gap:var(--sp-3); flex-wrap:wrap;">
+            <a href="#catalogo" class="btn btn--primary btn--lg">Explore os 21 SKUs Modulares</a>
+            <a href="https://wa.me/5561996993134?text=Ol%C3%A1!%20Quero%20agendar%20um%20Diagn%C3%B3stico%20Express." target="_blank" class="btn btn--whatsapp btn--lg">
               📲 Agendar Diagnóstico Express
             </a>
           </div>
         </div>
 
-        <div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
-            <div style="background:var(--surface-raised); border:1px solid var(--border); padding:1.6rem; border-radius:var(--r-lg); text-align:center;">
-              <div style="font-size:2.5rem; font-weight:900; color:var(--action);">21</div>
-              <div style="font-size:0.85rem; color:var(--text-muted);">Produtos Modulares</div>
+        <div class="media-aura">
+          <!-- MOLDURA DE NAVEGADOR (design.md 7.1) -->
+          <figure class="frame frame--browser">
+            <div class="frame__bar" aria-hidden="true">
+              <span></span><span></span><span></span>
+              <em>app.ecossistemalive.com.br</em>
             </div>
-            <div style="background:var(--surface-raised); border:1px solid var(--border); padding:1.6rem; border-radius:var(--r-lg); text-align:center;">
-              <div style="font-size:2.5rem; font-weight:900; color:var(--action);">6</div>
-              <div style="font-size:0.85rem; color:var(--text-muted);">Departamentos Ativos</div>
+            <!-- BENTO KPIS DENTRO DA MOLDURA DO NAVEGADOR -->
+            <div style="padding:var(--sp-6); display:grid; gap:var(--sp-4);">
+              <div class="kpi">
+                <span class="kpi__bar"></span>
+                <div>
+                  <p class="kpi__value">21 SKUs</p>
+                  <p class="kpi__label">produtos modulares com escopo fechado</p>
+                </div>
+              </div>
+
+              <div class="kpi kpi--warm">
+                <span class="kpi__bar"></span>
+                <div>
+                  <p class="kpi__value">6 Departamentos</p>
+                  <p class="kpi__label">estrutura operacional com gate antagônico</p>
+                </div>
+              </div>
+
+              <div class="kpi">
+                <span class="kpi__bar"></span>
+                <div>
+                  <p class="kpi__value">100% CNPJ</p>
+                  <p class="kpi__label">foco em solvência e governança perétua</p>
+                </div>
+              </div>
             </div>
-            <div style="background:var(--surface-raised); border:1px solid var(--border); padding:1.6rem; border-radius:var(--r-lg); text-align:center; grid-column: 1 / -1;">
-              <div style="font-size:2.5rem; font-weight:900; color:var(--action);">100%</div>
-              <div style="font-size:0.85rem; color:var(--text-muted);">Foco na Defesa do CNPJ</div>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- PROVA SOCIAL — MARQUEE SLIDER DE LOGOS (design.md 7.5) -->
+    <section class="section section--tight marquee">
+      <div class="container">
+        <p style="text-align:center; font-size:var(--fs-sm); color:var(--text-muted); margin-bottom:var(--sp-6);">Empresas e Alianças que confiam no Ecossistema Live</p>
+        <ul class="marquee__track">
+          <li><strong style="color:#fff; font-size:1.1rem;">Agregar (Khelven) BPO</strong></li>
+          <li><strong style="color:#fff; font-size:1.1rem;">Juliana Canuto CX</strong></li>
+          <li><strong style="color:#fff; font-size:1.1rem;">Restaurante Voya</strong></li>
+          <li><strong style="color:#fff; font-size:1.1rem;">Marcelo Nogueira (B+)</strong></li>
+          <li aria-hidden="true"><strong style="color:#fff; font-size:1.1rem;">Agregar (Khelven) BPO</strong></li>
+          <li aria-hidden="true"><strong style="color:#fff; font-size:1.1rem;">Juliana Canuto CX</strong></li>
+          <li aria-hidden="true"><strong style="color:#fff; font-size:1.1rem;">Restaurante Voya</strong></li>
+          <li aria-hidden="true"><strong style="color:#fff; font-size:1.1rem;">Marcelo Nogueira (B+)</strong></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SEÇÃO REQUISITOS TÉCNICOS & MAPEAMENTO DE IA -->
+    <section class="section bg bg--dots" id="etapas-ia">
+      <div class="container">
+        <div style="text-align:center; max-width:68ch; margin-inline:auto; margin-bottom:var(--sp-12);">
+          <p class="chip" style="margin-inline:auto;"><span class="chip__dot"></span>Engenharia de Inteligência Artificial</p>
+          <h2 style="font-size:var(--fs-2xl); color:#fff; margin-top:var(--sp-3);">Requisitos Técnicos & Mapeamento de IA Corporativa</h2>
+          <p style="color:var(--text-secondary); margin-top:var(--sp-3);">Como estruturamos os agentes Júlio Bot, Jarvis Operacional, RH Tech e Agente Jurídico Themis na sua empresa.</p>
+        </div>
+
+        <!-- REQUISITOS TÉCNICOS (BENTO GRID 6.1) -->
+        <div class="bento" style="margin-bottom:var(--sp-12);">
+          <article class="card card--spotlight card--gradient bento__item bento__item--wide">
+            <div class="tile tile--accent">🖥️</div>
+            <h3>Hardware Mínimo Exigido</h3>
+            <p style="color:var(--text-secondary); margin-top:var(--sp-2);">Computador com pelo menos <span class="mark">16GB de RAM</span>, processador Intel Core i5 ou superior (ou processadores M1/M2/M3 para Mac).</p>
+          </article>
+
+          <article class="card card--spotlight bento__item">
+            <div class="tile">☁️</div>
+            <h3>Armazenamento Cloud</h3>
+            <p style="color:var(--text-secondary); margin-top:var(--sp-2);">Serviços de armazenamento corporativo em nuvem para ingestão de documentos.</p>
+          </article>
+
+          <article class="card card--spotlight bento__item">
+            <div class="tile tile--warm">📋</div>
+            <h3>Gestão de Demandas</h3>
+            <p style="color:var(--text-secondary); margin-top:var(--sp-2);">Plataforma de demandas/tarefas (pode ser conta gratuita conforme o volume).</p>
+          </article>
+
+          <article class="card card--spotlight bento__item bento__item--wide">
+            <div class="tile tile--accent">🔑</div>
+            <h3>APIs de IA Corporativa</h3>
+            <p style="color:var(--text-secondary); margin-top:var(--sp-2);">Assinatura de serviços de IA com funcionalidade de API externa ativa (OpenAI, Gemini etc.).</p>
+          </article>
+        </div>
+
+        <!-- EXPLICAÇÃO SOBRE O MAPEAMENTO DA IA -->
+        <div class="callout" style="background:var(--surface-raised); border-left-color:var(--accent); border-radius:var(--r-xl); padding:var(--sp-8); margin-bottom:var(--sp-12);">
+          <h3 style="color:var(--accent-text); margin-bottom:var(--sp-3);">🔍 Mapeamento das Ferramentas, Jornada Diária & TMA</h3>
+          <p style="color:var(--text-secondary); margin-bottom:var(--sp-6);">Antes de programar os agentes, nossa equipe mapeia em profundidade 3 pilares da sua operação:</p>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:var(--sp-5);">
+            <div style="background:var(--surface-inset); padding:var(--sp-5); border-radius:var(--r-lg); border:1px solid var(--border);">
+              <h4 style="color:#fff; margin-bottom:var(--sp-2);">1. Ferramentas e Sistemas Utilizados</h4>
+              <p style="font-size:var(--fs-sm); color:var(--text-muted);">Mapeamento de CRM, Google Workspace, Blip, ERPs e assinaturas de IA corporativa utilizadas no dia a dia.</p>
             </div>
+
+            <div style="background:var(--surface-inset); padding:var(--sp-5); border-radius:var(--r-lg); border:1px solid var(--border);">
+              <h4 style="color:#fff; margin-bottom:var(--sp-2);">2. Jornada de Atendimento & TMA</h4>
+              <p style="font-size:var(--fs-sm); color:var(--text-muted);">Trâmite de atendimento, setores envolvidos, documentos gerados/acessados e o TMA (Tempo Médio de Atendimento).</p>
+            </div>
+
+            <div style="background:var(--surface-inset); padding:var(--sp-5); border-radius:var(--r-lg); border:1px solid var(--border);">
+              <h4 style="color:#fff; margin-bottom:var(--sp-2);">3. Recursos Adicionais Diários</h4>
+              <p style="font-size:var(--fs-sm); color:var(--text-muted);">Levantamento de sites especializados, ferramentas de consulta pública, bancos de pareceres e serviços externos.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ORGANOGRAMA DE IMPLANTAÇÃO DE 45 DIAS -->
+        <div style="text-align:center; margin-bottom:var(--sp-6);">
+          <h3 style="color:#fff;">📅 Organograma de Implantação Personalizada (Ciclo de 45 Dias)</h3>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:var(--sp-4);">
+          <div class="card card--spotlight">
+            <span class="badge">Fase 1 (Dias 1 a 10)</span>
+            <h4>Planejamento & Coleta</h4>
+            <p style="font-size:var(--fs-sm); color:var(--text-secondary); margin-top:var(--sp-2);">Levantamento de ferramentas, jornadas de atendimento, TMA e regras internas.</p>
+          </div>
+
+          <div class="card card--spotlight">
+            <span class="badge">Fase 2 (Dias 11 a 25)</span>
+            <h4>Desenvolvimento & RAG</h4>
+            <p style="font-size:var(--fs-sm); color:var(--text-secondary); margin-top:var(--sp-2);">Construção dos agentes de IA, engenharia de prompt e ingestão vetorial multi-tenant.</p>
+          </div>
+
+          <div class="card card--spotlight">
+            <span class="badge">Fase 3 (Dias 26 a 35)</span>
+            <h4>Testes & Treinamento</h4>
+            <p style="font-size:var(--fs-sm); color:var(--text-secondary); margin-top:var(--sp-2);">Testes de acerto (mín. 85% de precisão) e capacitação prática da equipe.</p>
+          </div>
+
+          <div class="card card--spotlight card--gradient">
+            <span class="badge badge--gold">Fase 4 (Dias 36 a 45)</span>
+            <h4>Execução em Produção</h4>
+            <p style="font-size:var(--fs-sm); color:var(--text-secondary); margin-top:var(--sp-2);">Lançamento oficial (Go-Live), transição operacional e suporte contínuo P0 a P3.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <div class="container">
-
-      <!-- SEÇÃO REQUISITOS TÉCNICOS & MAPEAMENTO DA IA -->
-      <section class="section" id="etapas-ia">
-        <div class="section-head-card ia">
-          <span class="eyebrow">⚡ Engenharia de Inteligência Artificial</span>
-          <h2 class="section-title">Requisitos Técnicos & Arquitetura de Mapeamento de IA</h2>
-          <p class="section-desc">Como estruturamos os agentes Júlio Bot, Jarvis Operacional, RH Tech e Agente Jurídico Themis.</p>
-        </div>
-
-        <!-- REQUISITOS TÉCNICOS DE HARDWARE E SOFTWARE -->
-        <div style="background:var(--surface-raised); border:1px solid var(--accent-border); padding:2rem; border-radius:var(--r-xl); margin-bottom:2.5rem;">
-          <h3 style="color:var(--accent); margin-bottom:1rem; font-size:1.2rem;">🖥️ Requisitos Técnicos Mínimos de Infraestrutura:</h3>
-          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1.2rem;">
-            <div style="background:var(--surface-inset); padding:1rem; border-radius:var(--r-md); border:1px solid var(--border);">
-              <strong style="color:#fff;">Hardware Mínimo:</strong>
-              <p style="font-size:0.88rem; color:var(--text-muted); margin-top:0.2rem;">Computador com pelo menos 16GB de RAM, processador Intel Core i5 ou superior (ou M1/M2/M3 para Mac).</p>
-            </div>
-            <div style="background:var(--surface-inset); padding:1rem; border-radius:var(--r-md); border:1px solid var(--border);">
-              <strong style="color:#fff;">Armazenamento de Dados:</strong>
-              <p style="font-size:0.88rem; color:var(--text-muted); margin-top:0.2rem;">Serviços de armazenamento de dados e arquivos corporativos em nuvem (quando necessário).</p>
-            </div>
-            <div style="background:var(--surface-inset); padding:1rem; border-radius:var(--r-md); border:1px solid var(--border);">
-              <strong style="color:#fff;">Gerenciamento de Demandas:</strong>
-              <p style="font-size:0.88rem; color:var(--text-muted); margin-top:0.2rem;">Plataforma de demandas/tarefas (pode ser conta gratuita dependendo do volume da empresa).</p>
-            </div>
-            <div style="background:var(--surface-inset); padding:1rem; border-radius:var(--r-md); border:1px solid var(--border);">
-              <strong style="color:#fff;">APIs de IA Corporativa:</strong>
-              <p style="font-size:0.88rem; color:var(--text-muted); margin-top:0.2rem;">Assinatura de serviços de IA com funcionalidade de API externa ativa (OpenAI, Gemini etc.).</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- EXPLICAÇÃO SOBRE O MAPEAMENTO OPERACIONAL DA IA -->
-        <div class="mapeamento-box">
-          <h3 style="color:var(--accent-text); margin-bottom:0.6rem;">🔍 Como é Realizado o Mapeamento da IA na sua Empresa</h3>
-          <p style="color:var(--text-secondary); font-size:0.95rem;">
-            Antes de programar qualquer agente, nossa equipe realiza um levantamento minucioso dos 3 pilares operacionais do negócio:
-          </p>
-
-          <div class="mapeamento-grid">
-            <div class="map-item">
-              <div class="map-title">1. Ferramentas e Sistemas Utilizados</div>
-              <p style="font-size:0.88rem; color:var(--text-muted);">
-                Mapeamos todos os softwares utilizados diariamente pela equipe: CRM, Google Workspace, Blip, ERPs e assinaturas de IA corporativa.
-              </p>
-            </div>
-
-            <div class="map-item">
-              <div class="map-title">2. Jornada de Atendimento Diário & TMA</div>
-              <p style="font-size:0.88rem; color:var(--text-muted);">
-                Mapeamos como o cliente entra em contato, por quais setores passa conforme a solicitação, quais documentos são gerados/acessados e o TMA (Tempo Médio de Atendimento).
-              </p>
-            </div>
-
-            <div class="map-item">
-              <div class="map-title">3. Recursos Adicionais Diários</div>
-              <p style="font-size:0.88rem; color:var(--text-muted);">
-                Levantamos os sites especializados, ferramentas de consulta pública, bancos de pareceres e serviços externos utilizados diariamente na operação.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- ORGANOGRAMA DE IMPLANTAÇÃO PERSONALIZADA (45 DIAS) -->
-        <h3 style="color:#fff; text-align:center; font-size:1.3rem; margin-bottom:1rem;">📅 Organograma de Implantação Personalizada (Ciclo de 45 Dias)</h3>
-
-        <div class="roadmap-45">
-          <div class="phase-card">
-            <span class="phase-tag">Fase 1 (Dias 1 a 10)</span>
-            <h4 style="color:#fff; margin-bottom:0.4rem;">Planejamento & Levantamento</h4>
-            <p style="font-size:0.85rem; color:var(--text-muted);">Coleta de ferramentas, mapeamento das jornadas de atendimento, medição do TMA e entrevistas operacionais.</p>
-          </div>
-
-          <div class="phase-card">
-            <span class="phase-tag">Fase 2 (Dias 11 a 25)</span>
-            <h4 style="color:#fff; margin-bottom:0.4rem;">Desenvolvimento & Adequação</h4>
-            <p style="font-size:0.85rem; color:var(--text-muted);">Construção dos agentes de IA, engenharia de prompt, ingestão de POPs e estrutura RAG multi-tenant.</p>
-          </div>
-
-          <div class="phase-card">
-            <span class="phase-tag">Fase 3 (Dias 26 a 35)</span>
-            <h4 style="color:#fff; margin-bottom:0.4rem;">Testes & Treinamento</h4>
-            <p style="font-size:0.85rem; color:var(--text-muted);">Testes de acerto (mín. 85% de precisão), validação com dados reais e capacitação prática da equipe.</p>
-          </div>
-
-          <div class="phase-card" style="border-color:var(--action);">
-            <span class="phase-tag" style="background:var(--action); color:#000;">Fase 4 (Dias 36 a 45)</span>
-            <h4 style="color:#fff; margin-bottom:0.4rem;">Execução em Produção</h4>
-            <p style="font-size:0.85rem; color:var(--text-muted);">Lançamento oficial (Go-Live), virada para ambiente real de atendimento e acompanhamento de suporte P0 a P3.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- CATÁLOGO DOS 21 SKUS -->
-      <section class="section" id="catalogo">
-        <div class="section-head-card cat">
-          <span class="eyebrow">📦 Portfólio de Soluções Modulares</span>
-          <h2 class="section-title">Catálogo Oficial de Soluções Modulares (21 SKUs)</h2>
-          <p class="section-desc">Clique no botão "📄 Ver Página" para abrir a apresentação dedicada de cada produto.</p>
+    <!-- CATÁLOGO DOS 21 SKUS -->
+    <section class="section bg bg--grid" id="catalogo">
+      <div class="container">
+        <div style="text-align:center; max-width:68ch; margin-inline:auto; margin-bottom:var(--sp-8);">
+          <p class="chip" style="margin-inline:auto;"><span class="chip__dot"></span>Portfólio de Soluções Modulares</p>
+          <h2 style="font-size:var(--fs-2xl); color:#fff; margin-top:var(--sp-3);">Catálogo Oficial de Soluções Modulares (21 SKUs)</h2>
+          <p style="color:var(--text-secondary); margin-top:var(--sp-3);">Clique no botão "📄 Ver Página" para abrir a apresentação dedicada de cada produto.</p>
         </div>
 
         <div class="catalog-bar">
@@ -441,194 +670,170 @@
           </div>
         </div>
 
-        <!-- PRODUCTS GRID (POSICIONAMENTO DOS BOTÕES CORRIGIDO) -->
-        <div class="autogrid" id="productsGrid">
+        <!-- PRODUCTS GRID (POSICIONAMENTO DOS BOTÕES E PREÇO CORRIGIDOS) -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(340px, 1fr)); gap:var(--sp-6);" id="productsGrid">
           <!-- Renderizado via JS -->
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- SIMULADOR DE ROI -->
-      <section class="section" style="background:var(--surface-raised); border:1px solid var(--border-strong); border-radius:var(--r-xl); padding:2.5rem 2rem; margin-bottom:4rem;" id="simulador">
-        <div class="section-head-card" style="margin-bottom:2rem;">
-          <span class="eyebrow">🧮 Calculadora de Investimento</span>
-          <h2 class="section-title">Simulador de ROI & Pacotes Modulares</h2>
-          <p class="section-desc">Selecione os produtos e veja o orçamento consolidado em tempo real.</p>
-        </div>
-
-        <div style="display:grid; grid-template-columns: 1.2fr 0.8fr; gap:2rem;">
-          <div>
-            <h4 style="color:#fff; margin-bottom:1rem;">Selecione os Produtos:</h4>
-            <div style="display:flex; flex-direction:column; gap:0.6rem; max-height:380px; overflow-y:auto; padding-right:0.5rem;" id="simList">
-              <!-- Renderizado via JS -->
-            </div>
+    <!-- SIMULADOR DE ROI -->
+    <section class="section" id="simulador">
+      <div class="container">
+        <div class="card card--glass" style="padding:var(--sp-8);">
+          <div style="text-align:center; margin-bottom:var(--sp-6);">
+            <p class="chip" style="margin-inline:auto;"><span class="chip__dot"></span>Calculadora de Investimento</p>
+            <h2 style="font-size:var(--fs-2xl); color:#fff; margin-top:var(--sp-2);">Simulador de ROI & Montagem de Pacotes</h2>
           </div>
 
-          <div style="background:var(--surface-inset); border:1px solid var(--border); border-radius:var(--r-lg); padding:1.8rem; display:flex; flex-direction:column; justify-content:space-between; min-height:320px;">
+          <div style="display:grid; grid-template-columns: 1.2fr 0.8fr; gap:var(--sp-8);">
             <div>
-              <div style="font-size:0.85rem; color:var(--text-muted);">Investimento Total Estimado</div>
-              <div style="font-size:2.5rem; font-weight:900; color:var(--action); margin:0.4rem 0;" id="simTotalPrice">R$ 0,00</div>
-              <div id="simSelectedItems" style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.5rem;">Nenhum produto selecionado.</div>
+              <h4 style="color:#fff; margin-bottom:var(--sp-3);">Selecione os Produtos Desejados:</h4>
+              <div style="display:flex; flex-direction:column; gap:var(--sp-2); max-height:380px; overflow-y:auto; padding-right:var(--sp-2);" id="simList">
+                <!-- Renderizado via JS -->
+              </div>
             </div>
 
-            <a href="#" id="btnSimWhatsApp" target="_blank" class="btn btn--whatsapp btn--block">
-              📲 Enviar Proposta no WhatsApp
-            </a>
-          </div>
-        </div>
-      </section>
+            <div style="background:var(--surface-inset); border:1px solid var(--border); border-radius:var(--r-xl); padding:var(--sp-6); display:flex; flex-direction:column; justify-content:space-between; min-height:320px;">
+              <div>
+                <div style="font-size:var(--fs-sm); color:var(--text-muted);">Investimento Total Estimado</div>
+                <div style="font-size:var(--fs-3xl); font-weight:var(--fw-black); color:var(--action); margin-block:var(--sp-2);" id="simTotalPrice">R$ 0,00</div>
+                <div id="simSelectedItems" style="font-size:var(--fs-sm); color:var(--text-muted); margin-bottom:var(--sp-6);">Nenhum produto selecionado.</div>
+              </div>
 
-      <!-- DEPARTAMENTOS -->
-      <section class="section" id="departamentos">
-        <div class="section-head-card ia">
-          <span class="eyebrow">🏛️ Estrutura Operacional</span>
-          <h2 class="section-title">6 Departamentos Especializados</h2>
-          <p class="section-desc">Organograma modular executável por especialistas e agentes autônomos.</p>
-        </div>
-
-        <div class="autogrid">
-          <div class="card">
-            <div>
-              <span class="badge-pill">DEP-01</span>
-              <h3>Comercial & Crescimento</h3>
-              <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.6rem;">Líder: Luiz Portal | Agente: el-agente-prospeccao</div>
-              <p style="font-size:0.92rem; color:var(--text-secondary);">Prospecção B2B autônoma P1→P4 no WhatsApp, qualificação de leads e régua B+ (< R$ 5M/ano).</p>
-            </div>
-          </div>
-
-          <div class="card">
-            <div>
-              <span class="badge-pill">DEP-02</span>
-              <h3>Tecnologia & Produtos de IA</h3>
-              <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.6rem;">Líder: Cléber Donato (CTO) | Agente: el-julio-suporte-onboarding</div>
-              <p style="font-size:0.92rem; color:var(--text-secondary);">Infraestrutura Netlify/Firebase multi-tenant, Júlio Bot v8.0, Jarvis Operacional e RH Tech.</p>
-            </div>
-          </div>
-
-          <div class="card">
-            <div>
-              <span class="badge-pill">DEP-03</span>
-              <h3>Educação Executiva & Eventos</h3>
-              <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.6rem;">Líder: Luiz Portal | Parceiro: Restaurante Voya</div>
-              <p style="font-size:0.92rem; color:var(--text-secondary);">O Código da Nova Liderança, workshops, mentorias executivas e Almoço com o CEO no Voya.</p>
-            </div>
-          </div>
-
-          <div class="card">
-            <div>
-              <span class="badge-pill">DEP-04</span>
-              <h3>Governança & Estratégia</h3>
-              <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.6rem;">Líder: Luiz Portal | Mentor: Ibrahim Boufleur</div>
-              <p style="font-size:0.92rem; color:var(--text-secondary);">Conselho Familiar (3 Círculos de Gersick), Planejamento Estratégico OKRs 12M e Mediação M&A.</p>
-            </div>
-          </div>
-
-          <div class="card">
-            <div>
-              <span class="badge-pill">DEP-05</span>
-              <h3>CX & Inteligência de Mercado</h3>
-              <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.6rem;">Líder: Cléber Donato | Parceira: Juliana Canuto</div>
-              <p style="font-size:0.92rem; color:var(--text-secondary);">Service Blueprint para PMEs e indústrias, formulários proprietários e medição de NPS.</p>
-            </div>
-          </div>
-
-          <div class="card" style="border-color:var(--highlight);">
-            <div>
-              <span class="badge-pill gold">DEP-06 — TRANSVERSAL</span>
-              <h3>Qualidade, Compliance & Defesa do CNPJ</h3>
-              <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.6rem;">Guardião: el-antagonista-defesa-cnpj</div>
-              <p style="font-size:0.92rem; color:var(--text-secondary);">Gate antagônico obrigatório com poder de VETO. Preserva a solvência e a perenidade do CNPJ.</p>
+              <a href="#" id="btnSimWhatsApp" target="_blank" class="btn btn--whatsapp btn--block btn--lg">
+                📲 Enviar Proposta no WhatsApp
+              </a>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- PARCEIROS (VISUAL WORK REMOVIDO CONFORME SOLICITADO) -->
-      <section class="section" id="parceiros">
-        <div class="section-head-card cat">
-          <span class="eyebrow">🤝 Rede Homologada</span>
-          <h2 class="section-title">Parceiros & Alianças Estratégicas</h2>
-          <p class="section-desc">Desintermediação total: faturamento e contratos diretos entre cliente e parceiro.</p>
+    <!-- DEPARTAMENTOS (BENTO GRID 6.1) -->
+    <section class="section section--subtle" id="departamentos">
+      <div class="container">
+        <div style="text-align:center; max-width:68ch; margin-inline:auto; margin-bottom:var(--sp-12);">
+          <p class="chip" style="margin-inline:auto;"><span class="chip__dot"></span>Estrutura Operacional</p>
+          <h2 style="font-size:var(--fs-2xl); color:#fff; margin-top:var(--sp-3);">6 Departamentos Especializados</h2>
         </div>
 
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1.2rem;">
-          <div style="background:var(--surface-card); border:1px solid var(--border); padding:1.4rem; border-radius:var(--r-lg); text-align:center;">
-            <div style="font-weight:800; color:#fff; font-size:1.1rem;">Agregar (Khelven)</div>
-            <div style="font-size:0.8rem; color:var(--action); font-weight:700;">BPO Financeiro & DRE</div>
-          </div>
-          <div style="background:var(--surface-card); border:1px solid var(--border); padding:1.4rem; border-radius:var(--r-lg); text-align:center;">
-            <div style="font-weight:800; color:#fff; font-size:1.1rem;">Juliana Canuto</div>
-            <div style="font-size:0.8rem; color:var(--action); font-weight:700;">CX & NPS Indústrias</div>
-          </div>
-          <div style="background:var(--surface-card); border:1px solid var(--border); padding:1.4rem; border-radius:var(--r-lg); text-align:center;">
-            <div style="font-weight:800; color:#fff; font-size:1.1rem;">Restaurante Voya</div>
-            <div style="font-size:0.8rem; color:var(--action); font-weight:700;">Almoço com o CEO</div>
-          </div>
-          <div style="background:var(--surface-card); border:1px solid var(--border); padding:1.4rem; border-radius:var(--r-lg); text-align:center;">
-            <div style="font-weight:800; color:#fff; font-size:1.1rem;">Marcelo Nogueira (B+)</div>
-            <div style="font-size:0.8rem; color:var(--action); font-weight:700;">Contas > R$ 5M/ano</div>
-          </div>
+        <div class="bento">
+          <article class="card card--spotlight bento__item">
+            <span class="badge">DEP-01</span>
+            <h3>Comercial & Crescimento</h3>
+            <p style="font-size:var(--fs-xs); color:var(--text-muted); margin-top:var(--sp-1);">Líder: Luiz Portal | Agente: el-agente-prospeccao</p>
+            <p style="font-size:var(--fs-base); color:var(--text-secondary); margin-top:var(--sp-3);">Prospecção B2B autônoma P1→P4 no WhatsApp e régua B+ (< R$ 5M/ano).</p>
+          </article>
+
+          <article class="card card--spotlight bento__item">
+            <span class="badge">DEP-02</span>
+            <h3>Tecnologia & Produtos de IA</h3>
+            <p style="font-size:var(--fs-xs); color:var(--text-muted); margin-top:var(--sp-1);">Líder: Cléber Donato (CTO) | Agente: el-julio-suporte-onboarding</p>
+            <p style="font-size:var(--fs-base); color:var(--text-secondary); margin-top:var(--sp-3);">Infraestrutura Netlify/Firebase multi-tenant, Júlio Bot v8.0 e Jarvis Operacional.</p>
+          </article>
+
+          <article class="card card--spotlight bento__item">
+            <span class="badge">DEP-03</span>
+            <h3>Educação Executiva & Eventos</h3>
+            <p style="font-size:var(--fs-xs); color:var(--text-muted); margin-top:var(--sp-1);">Líder: Luiz Portal | Parceiro: Restaurante Voya</p>
+            <p style="font-size:var(--fs-base); color:var(--text-secondary); margin-top:var(--sp-3);">O Código da Nova Liderança e Almoço com o CEO no Restaurante Voya.</p>
+          </article>
+
+          <article class="card card--spotlight bento__item">
+            <span class="badge">DEP-04</span>
+            <h3>Governança & Estratégia</h3>
+            <p style="font-size:var(--fs-xs); color:var(--text-muted); margin-top:var(--sp-1);">Líder: Luiz Portal | Mentor: Ibrahim Boufleur</p>
+            <p style="font-size:var(--fs-base); color:var(--text-secondary); margin-top:var(--sp-3);">Conselho Familiar (3 Círculos de Gersick) e Planejamento OKRs 12M.</p>
+          </article>
+
+          <article class="card card--spotlight bento__item">
+            <span class="badge">DEP-05</span>
+            <h3>CX & Inteligência de Mercado</h3>
+            <p style="font-size:var(--fs-xs); color:var(--text-muted); margin-top:var(--sp-1);">Líder: Cléber Donato | Parceira: Juliana Canuto</p>
+            <p style="font-size:var(--fs-base); color:var(--text-secondary); margin-top:var(--sp-3);">Service Blueprint para PMEs e indústrias, formulários proprietários e NPS.</p>
+          </article>
+
+          <article class="card card--spotlight card--gradient bento__item" style="border-color:var(--highlight-border);">
+            <span class="badge badge--gold">DEP-06 — TRANSVERSAL</span>
+            <h3>Qualidade, Compliance & Defesa do CNPJ</h3>
+            <p style="font-size:var(--fs-xs); color:var(--text-muted); margin-top:var(--sp-1);">Guardião: el-antagonista-defesa-cnpj</p>
+            <p style="font-size:var(--fs-base); color:var(--text-secondary); margin-top:var(--sp-3);">Gate antagônico com poder de VETO. Preserva a solvência e perenidade do CNPJ.</p>
+          </article>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- FAQ NATIVO -->
-      <section class="section" id="faq">
-        <div class="section-head-card ia">
-          <span class="eyebrow">❓ Objeções & Dúvidas</span>
-          <h2 class="section-title">Perguntas Frequentes</h2>
+    <!-- FAQ (NATIVO SEM JS design.md 8.7) -->
+    <section class="section" id="faq">
+      <div class="container container--text">
+        <div style="text-align:center; margin-bottom:var(--sp-8);">
+          <p class="chip" style="margin-inline:auto;"><span class="chip__dot"></span>Tire suas dúvidas</p>
+          <h2 style="font-size:var(--fs-2xl); color:#fff; margin-top:var(--sp-2);">Perguntas Frequentes</h2>
         </div>
 
-        <div style="max-width: 720px; margin-inline: auto;">
-          <details class="faq-item">
-            <summary>Qual a diferença entre o Ecossistema Live e uma consultoria tradicional?</summary>
-            <p>Nós não vendemos horas avulsas nem mantemos contratos abertos sem fim. Entregamos produtos de gestão modulares com escopo fechado, início, meio e fim, apoiados por inteligência artificial.</p>
-          </details>
+        <details class="faq-item">
+          <summary>Qual a diferença entre o Ecossistema Live e uma consultoria tradicional?</summary>
+          <p>Nós não vendemos horas avulsas nem mantemos contratos abertos sem fim. Entregamos produtos de gestão modulares com escopo fechado, início, meio e fim, apoiados por inteligência artificial.</p>
+        </details>
 
-          <details class="faq-item">
-            <summary>Quais são os requisitos mínimos para usar as IAs corporativas?</summary>
-            <p>Computador com no mínimo 16GB de RAM, processador Intel Core i5 ou M1 Mac, conexão à internet e assinaturas dos serviços de armazenamento e API de IA quando aplicável.</p>
-          </details>
+        <details class="faq-item">
+          <summary>Quais são os requisitos mínimos para usar as IAs corporativas?</summary>
+          <p>Computador com no mínimo 16GB de RAM, processador Intel Core i5 ou M1 Mac, conexão à internet e assinaturas dos serviços de armazenamento e API de IA quando aplicável.</p>
+        </details>
 
-          <details class="faq-item">
-            <summary>Quanto tempo leva a implantação de uma IA personalizada?</summary>
-            <p>Nossa jornada padrão leva 45 dias divididos em 4 fases: Planejamento (1-10d), Desenvolvimento (11-25d), Testes/Treinamento (26-35d) e Execução em Produção (36-45d).</p>
-          </details>
+        <details class="faq-item">
+          <summary>Quanto tempo leva a implantação de uma IA personalizada?</summary>
+          <p>Nossa jornada padrão leva 45 dias divididos em 4 fases: Planejamento (1-10d), Desenvolvimento (11-25d), Testes/Treinamento (26-35d) e Execução em Produção (36-45d).</p>
+        </details>
 
-          <details class="faq-item">
-            <summary>Como funciona a desintermediação de parceiros?</summary>
-            <p>Serviços complementares (BPO financeiro com Khelven/Agregar, pesquisas com Juliana Canuto) são faturados diretamente pelo parceiro ao cliente. O Ecossistema Live não cobra taxas de intermediação.</p>
-          </details>
+        <details class="faq-item">
+          <summary>Como funciona a desintermediação de parceiros?</summary>
+          <p>Serviços complementares (BPO financeiro com Khelven/Agregar, pesquisas com Juliana Canuto) são faturados diretamente pelo parceiro ao cliente. O Ecossistema Live não cobra taxas de intermediação.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- CTA FINAL (design.md 8.8) -->
+    <section class="section" id="contato">
+      <div class="container">
+        <div style="background:var(--surface-raised); border:1px solid var(--border-strong); border-radius:var(--r-2xl); padding:clamp(var(--sp-10), 6vw, var(--sp-16)); text-align:center; display:grid; justify-items:center; gap:var(--sp-5);">
+          <h2 style="font-size:var(--fs-3xl); color:#fff;">Pronto para transformar a gestão da sua empresa?</h2>
+          <p style="color:var(--text-secondary); max-width:54ch;">Agende um Diagnóstico Empresarial Express por R$ 250 ou fale diretamente com a equipe técnica no WhatsApp.</p>
+          <a class="btn btn--whatsapp btn--lg" href="https://wa.me/5561996993134?text=Ol%C3%A1!%20Quero%20agendar%20um%20Diagn%C3%B3stico%20Express." target="_blank">📲 Falar no WhatsApp Agora</a>
+          <p style="font-size:var(--fs-sm); color:var(--text-muted);">Sem compromisso · Resposta em até 24h úteis</p>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   </main>
 
-  <!-- FOOTER -->
+  <!-- FOOTER (design.md 8.9) -->
   <footer class="site-footer">
-    <div class="container footer-grid">
+    <div class="container site-footer__cols">
       <div>
         <div style="font-size:1.2rem; font-weight:800; color:#fff; margin-bottom:0.6rem;">LUIZ E A PORTAL (Ecossistema Live)</div>
-        <p style="font-size:0.9rem; color:var(--text-muted); max-width:400px;">
+        <p style="font-size:var(--fs-sm); color:var(--text-muted); max-width:400px;">
           Hub de Inteligência Empresarial, Governança por IA, Diagnóstico de Gestão e Soluções Modulares com início, meio e fim.
         </p>
       </div>
 
       <div>
-        <h4 style="font-size:0.85rem; text-transform:uppercase; color:var(--action); margin-bottom:0.8rem;">Navegação</h4>
-        <p><a href="#catalogo" style="color:var(--text-muted); font-size:0.9rem;">Catálogo de Produtos</a></p>
-        <p><a href="#etapas-ia" style="color:var(--text-muted); font-size:0.9rem;">Etapas de IA</a></p>
-        <p><a href="#simulador" style="color:var(--text-muted); font-size:0.9rem;">Simulador de ROI</a></p>
-        <p><a href="#departamentos" style="color:var(--text-muted); font-size:0.9rem;">Departamentos</a></p>
+        <h3>Navegação</h3>
+        <p><a href="#catalogo">Catálogo de Produtos</a></p>
+        <p><a href="#etapas-ia">Etapas de IA</a></p>
+        <p><a href="#simulador">Simulador de ROI</a></p>
+        <p><a href="#departamentos">Departamentos</a></p>
       </div>
 
       <div>
-        <h4 style="font-size:0.85rem; text-transform:uppercase; color:var(--action); margin-bottom:0.8rem;">Contato Direto</h4>
-        <p><a href="https://wa.me/5561996993134" target="_blank" style="color:var(--text-muted); font-size:0.9rem;">Falar no WhatsApp</a></p>
-        <p><a href="mailto:contato@ecossistemalive.com.br" style="color:var(--text-muted); font-size:0.9rem;">contato@ecossistemalive.com.br</a></p>
-        <p><a href="mailto:cleberdonato@ecossistemalive.com.br" style="color:var(--text-muted); font-size:0.9rem;">cleberdonato@ecossistemalive.com.br</a></p>
+        <h3>Contato Direto</h3>
+        <p><a href="https://wa.me/5561996993134" target="_blank">Falar no WhatsApp</a></p>
+        <p><a href="mailto:contato@ecossistemalive.com.br">contato@ecossistemalive.com.br</a></p>
+        <p><a href="mailto:cleberdonato@ecossistemalive.com.br">cleberdonato@ecossistemalive.com.br</a></p>
       </div>
     </div>
 
-    <div class="container footer-legal">
+    <div class="container site-footer__legal">
       <div>CNPJ: 52.887.139/0001-00 | Goiânia - GO</div>
       <div>
         &copy; Powered by <a href="mailto:cleberdonato@ecossistemalive.com.br" style="color:var(--action); font-weight:700;">Cléber Donato</a>. Todos os direitos reservados.
@@ -636,8 +841,17 @@
     </div>
   </footer>
 
-  <!-- SCRIPT DO CATÁLOGO & SIMULADOR -->
+  <!-- SCRIPT SPOTLIGHT E RENDERIZAÇÃO DO CATÁLOGO (design.md 6.3) -->
   <script>
+    // Spotlight Effect (design.md 6.3)
+    document.querySelectorAll('.card--spotlight').forEach(c => {
+      c.addEventListener('pointermove', e => {
+        const r = c.getBoundingClientRect();
+        c.style.setProperty('--mx', `${e.clientX - r.left}px`);
+        c.style.setProperty('--my', `${e.clientY - r.top}px`);
+      });
+    });
+
     const products = [
       { id: "SAAS-DIAG-01", cat: "saas", badge: "saas", badgeText: "SaaS Entrada", name: "Diagnóstico Empresarial Express (SaaS)", desc: "IA + Formulário de 4 Eixos (Financeiro, Operacional, Pessoal, Comercial) gerando PDF de vulnerabilidade em tempo real.", priceStr: "R$ 250,00", priceVal: 250, model: "Pagamento Único / 12x" },
       { id: "JULIO-NETLIFY", cat: "saas", badge: "saas", badgeText: "Assinatura MRR", name: "Júlio Bot v8.0 (Copiloto de Gestão)", desc: "Web App SPA no Netlify com Firebase Auth e Firestore multi-tenant. Copiloto de gestão com rotinas, alertas e cadernos.", priceStr: "R$ 120,00", priceVal: 120, model: "Mensal / Assinatura" },
@@ -680,15 +894,15 @@
 
       filtered.forEach(p => {
         const card = document.createElement('div');
-        card.className = 'card';
+        card.className = 'card card--spotlight card--interactive';
         
         const waUrl = "https://wa.me/5561996993134?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%3A%20" + encodeURIComponent(p.name);
         const pageUrl = "./produtos/" + p.id + ".html";
-        const badgeClass = p.badge === 'high-ticket' ? 'gold' : p.badge === 'educacao' ? 'blue' : '';
+        const badgeClass = p.badge === 'high-ticket' ? 'badge--gold' : p.badge === 'educacao' ? 'badge--blue' : '';
 
         card.innerHTML = `
           <div>
-            <span class="badge-pill ${badgeClass}">${p.badgeText}</span>
+            <span class="badge ${badgeClass}">${p.badgeText}</span>
             <h3 style="font-size:1.25rem; font-weight:800; color:#fff; margin-bottom:0.3rem; line-height:1.3;">${p.name}</h3>
             <div style="font-family:monospace; font-size:0.75rem; color:var(--text-muted); margin-bottom:0.8rem;">SKU: ${p.id}</div>
             <p style="font-size:0.92rem; color:var(--text-secondary); line-height:1.55; margin-bottom:1.2rem;">${p.desc}</p>
@@ -701,12 +915,18 @@
             </div>
             
             <div class="card-btn-group">
-              <a href="${pageUrl}" class="btn btn--secondary" style="min-height:42px; font-size:0.82rem;">📄 Ver Página</a>
-              <!-- TEXTO LIMPO NO BOTÃO SEM NÚMERO EXPOSTO -->
-              <a href="${waUrl}" target="_blank" class="btn btn--whatsapp" style="min-height:42px; font-size:0.82rem;">💬 WhatsApp</a>
+              <a href="${pageUrl}" class="btn btn--secondary btn--sm">📄 Ver Página</a>
+              <a href="${waUrl}" target="_blank" class="btn btn--whatsapp btn--sm">💬 WhatsApp</a>
             </div>
           </div>
         `;
+
+        card.addEventListener('pointermove', e => {
+          const r = card.getBoundingClientRect();
+          card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+          card.style.setProperty('--my', `${e.clientY - r.top}px`);
+        });
+
         grid.appendChild(card);
       });
     }
