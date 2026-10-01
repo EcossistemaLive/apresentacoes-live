@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Estratégia OS — Planejamento Estratégico Modular com IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #040d1a;
+      --bg-surface: #071526;
+      --bg-card: #0c1e36;
+      --bg-card-hover: #102747;
+      --border-color: #173254;
+      --border-bright: #234c7a;
+      --live-green: #00e800;
+      --live-green-hover: #00c700;
+      --live-green-glow: rgba(0, 232, 0, 0.22);
+      --cyan: #00d2ff;
+      --amber: #ffaa00;
+      --red: #ff4d4d;
+      --purple: #a855f7;
+      --text-main: #f0f5fa;
+      --text-muted: #95acc6;
+      --text-dim: #5c7490;
+      --font-title: 'Poppins', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top Navigation Bar */
+    header.top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(4, 13, 26, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-badge {
+      width: 34px;
+      height: 34px;
+      background: var(--live-green);
+      color: #000;
+      font-family: var(--font-title);
+      font-weight: 900;
+      font-size: 1.15rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px var(--live-green-glow);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-family: var(--font-title);
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-subtitle {
+      font-size: 0.7rem;
+      color: var(--live-green);
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .mode-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .mode-btn:hover, .mode-btn.active {
+      border-color: var(--live-green);
+      color: var(--live-green);
+      background: rgba(0, 232, 0, 0.06);
+    }
+
+    /* Progress Indicator Bar */
+    .progress-bar-container {
+      position: fixed;
+      top: 55px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: transparent;
+      z-index: 999;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--live-green);
+      box-shadow: 0 0 8px var(--live-green);
+      transition: width 0.2s ease;
+    }
+
+    /* Slide Mode Styles */
+    body.mode-slides {
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    body.mode-slides .slide-section {
+      display: none;
+      height: calc(100vh - 58px);
+      padding: 2.5rem 3rem;
+      overflow-y: auto;
+      animation: fadeInSlide 0.35s ease forwards;
+    }
+
+    body.mode-slides .slide-section.active {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    @keyframes fadeInSlide {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Continuous Reading Mode */
+    body.mode-reading .slide-section {
+      display: block;
+      padding: 5rem 2rem;
+      max-width: 1240px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border-color);
+      scroll-margin-top: 60px;
+    }
+
+    /* Floating Slides Controls */
+    .slides-nav {
+      position: fixed;
+      bottom: 24px;
+      right: 28px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(7, 21, 38, 0.95);
+      border: 1px solid var(--border-color);
+      padding: 8px 16px;
+      border-radius: 30px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    }
+
+    .slide-counter {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--live-green);
+      margin: 0 6px;
+    }
+
+    .nav-arrow {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 0.9rem;
+    }
+
+    .nav-arrow:hover {
+      border-color: var(--live-green);
+      color: var(--live-green);
+      background: var(--bg-card-hover);
+    }
+
+    /* Slide Elements */
+    .slide-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--live-green);
+      background: rgba(0, 232, 0, 0.08);
+      border: 1px solid rgba(0, 232, 0, 0.3);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+
+    .slide-title {
+      font-family: var(--font-title);
+      font-size: 2.6rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      max-width: 950px;
+    }
+
+    .slide-title span {
+      color: var(--live-green);
+      text-shadow: 0 0 20px var(--live-green-glow);
+    }
+
+    .slide-desc {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 820px;
+      margin-bottom: 2.2rem;
+    }
+
+    /* Grid & Cards */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+    }
+
+    @media (max-width: 960px) {
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .slide-title { font-size: 1.9rem; }
+      body.mode-slides .slide-section { padding: 1.5rem; }
+    }
+
+    .glass-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.6rem;
+      position: relative;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-bright);
+    }
+
+    .card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .card-title {
+      font-family: var(--font-title);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      color: #fff;
+    }
+
+    .card-body {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .highlight-border-green { border-top: 3px solid var(--live-green); }
+    .highlight-border-cyan { border-top: 3px solid var(--cyan); }
+    .highlight-border-amber { border-top: 3px solid var(--amber); }
+    .highlight-border-purple { border-top: 3px solid var(--purple); }
+
+    /* Interactive Matrix Tabs */
+    .tab-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
+
+    .tab-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active, .tab-btn:hover {
+      background: var(--bg-card);
+      border-color: var(--live-green);
+      color: var(--live-green);
+    }
+
+    .matrix-content-panel {
+      display: none;
+    }
+
+    .matrix-content-panel.active {
+      display: block;
+      animation: fadeInSlide 0.25s ease forwards;
+    }
+
+    /* BSC Strategy Map Diagram */
+    .bsc-map {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 1.2rem;
+    }
+
+    .bsc-row {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1.2rem 1.6rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .bsc-label {
+      width: 200px;
+      flex-shrink: 0;
+      font-family: var(--font-title);
+      font-weight: 700;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .bsc-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      flex-grow: 1;
+    }
+
+    .bsc-pill {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-bright);
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .dot-green { background: #00e800; box-shadow: 0 0 6px #00e800; }
+    .dot-amber { background: #ffaa00; box-shadow: 0 0 6px #ffaa00; }
+    .dot-cyan { background: #00d2ff; box-shadow: 0 0 6px #00d2ff; }
+
+    /* Pricing Escada de Valor */
+    .pricing-tier {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .pricing-tier.featured {
+      border-color: var(--live-green);
+      box-shadow: 0 0 25px rgba(0, 232, 0, 0.12);
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: -12px;
+      right: 24px;
+      background: var(--live-green);
+      color: #000;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 12px;
+      text-transform: uppercase;
+    }
+
+    .tier-price {
+      font-family: var(--font-title);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 1rem 0;
+    }
+
+    .tier-price span {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .tier-features {
+      list-style-type: none;
+      margin-bottom: 2rem;
+      flex-grow: 1;
+    }
+
+    .tier-features li {
+      margin-bottom: 0.7rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .tier-features li::before {
+      content: "✓";
+      color: var(--live-green);
+      font-weight: 700;
+    }
+
+    /* Footer */
+    footer.page-footer {
+      border-top: 1px solid var(--border-color);
+      padding: 3rem 2rem;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      background: var(--bg-dark);
+    }
+
+    footer a {
+      color: var(--live-green);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body class="mode-slides">
+
+  <!-- Top Navigation -->
+  <header class="top-nav">
+    <a href="#" class="brand-box">
+      <div class="brand-badge">L</div>
+      <div class="brand-text">
+        <span class="brand-title">Live Estratégia OS</span>
+        <span class="brand-subtitle">Planejamento Estratégico com IA</span>
+      </div>
+    </a>
+    <div class="nav-actions">
+      <button class="mode-btn active" id="btnModeSlides" onclick="switchMode('slides')">Modo Apresentação</button>
+      <button class="mode-btn" id="btnModeReading" onclick="switchMode('reading')">Modo Documento</button>
+      <button class="mode-btn" onclick="toggleFullScreen()">Tela Cheia</button>
+    </div>
+  </header>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- Slides Floating Navigator -->
+  <div class="slides-nav" id="slidesNav">
+    <button class="nav-arrow" onclick="prevSlide()" title="Slide Anterior (←)">←</button>
+    <span class="slide-counter" id="slideCounter">01 / 10</span>
+    <button class="nav-arrow" onclick="nextSlide()" title="Próximo Slide (→)">→</button>
+  </div>
+
+  <!-- ==================== SLIDE 1: CAPA ==================== -->
+  <section class="slide-section active" id="slide-1">
+    <div class="slide-tag">Arquitetura de Negócios & IA · Ecossistema Live</div>
+    <h1 class="slide-title">Live Estratégia OS: O Fim do Planejamento <span>Engavetado</span></h1>
+    <p class="slide-desc">A metodologia clássica de Planejamento Estratégico (PACE / ISOTECH / Kaplan & Norton) transformada em um <strong>Produto Modular de IA</strong> com entrega em 7 dias, dashboard operacional interativo e rituais bimestrais de governança.</p>
+    <div class="grid-3">
+      <div class="glass-card highlight-border-green">
+        <div class="card-icon">⚡</div>
+        <div class="card-title">Entrega em 7 Dias</div>
+        <div class="card-body">Adeus aos 6 meses de consultoria tradicional lenta. Diagnóstico 360°, formulação de matrizes e Balanced Scorecard prontos em 1 semana.</div>
+      </div>
+      <div class="glass-card highlight-border-cyan">
+        <div class="card-icon">📊</div>
+        <div class="card-title">Dashboard Vivo (BSC)</div>
+        <div class="card-body">Em vez de um PDF de 80 páginas empoeirado, o cliente recebe um painel interativo com semáforo de metas e Kanban 5W2H.</div>
+      </div>
+      <div class="glass-card highlight-border-amber">
+        <div class="card-icon">🛡️</div>
+        <div class="card-title">Defesa do CNPJ</div>
+        <div class="card-body">Governança soberana que blindará o caixa contra o over-delivery, desintermediação de parceiros e foco absoluto em metas de lucro real.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 2: O PROBLEMA ==================== -->
+  <section class="slide-section" id="slide-2">
+    <div class="slide-tag">O Cenário das Médias Empresas</div>
+    <h1 class="slide-title">Por Que os Planejamentos Tradicionais <span>Falham</span>?</h1>
+    <p class="slide-desc">PMEs que faturam de R$ 2M a R$ 50M/ano costumam cair na mesma armadilha ao tentar se planejar.</p>
+    <div class="grid-3">
+      <div class="glass-card">
+        <div class="card-icon">⏳</div>
+        <div class="card-title">A Armadilha das Horas</div>
+        <div class="card-body">Consultorias tradicionais vendem "horas de reunião". Quanto mais o processo se arrasta e mais reuniões acontecem, mais o consultor ganha — e mais a empresa perde tempo.</div>
+      </div>
+      <div class="glass-card">
+        <div class="card-icon">📁</div>
+        <div class="card-title">O Relatório da Gaveta</div>
+        <div class="card-body">O entregável final é um documento de 60 a 90 páginas em Word/PDF denso e estático. Uma semana após a apresentação executiva, ninguém mais abre o arquivo.</div>
+      </div>
+      <div class="glass-card">
+        <div class="card-icon">🌪️</div>
+        <div class="card-title">O Tsunami Operacional</div>
+        <div class="card-body">Sem rituais bimestrais de controle e sem semáforo de metas, a rotina diária e os "incêndios" engolem as metas de longo prazo em menos de 45 dias.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 3: FUNDAMENTOS ==================== -->
+  <section class="slide-section" id="slide-3">
+    <div class="slide-tag">Fundamentos Clássicos & Robustez Teórica</div>
+    <h1 class="slide-title">A Base Metodológica <span>Master</span></h1>
+    <p class="slide-desc">O Live Estratégia OS não usa fórmulas genéricas de internet; apoia-se nos pilares consagrados da ciência da administração moderna.</p>
+    <div class="grid-4">
+      <div class="glass-card highlight-border-green">
+        <div class="card-title">Henry Mintzberg</div>
+        <div class="card-body"><strong>Os 5Ps da Estratégia:</strong> Plano (guia), Padrão (consistência), Posição (onde competir), Perspectiva (cultura) e Estratagema (manobras competitivas).</div>
+      </div>
+      <div class="glass-card highlight-border-cyan">
+        <div class="card-title">Michael Porter</div>
+        <div class="card-body"><strong>Vantagem Competitiva:</strong> As 5 Forças da Indústria, Estratégias Genéricas (Custo vs. Diferenciação) e Posicionamento Estratégico.</div>
+      </div>
+      <div class="glass-card highlight-border-purple">
+        <div class="card-title">Kaplan & Norton</div>
+        <div class="card-body"><strong>Balanced Scorecard (BSC):</strong> O mapa de causa e efeito conectando aprendizado, processos internos, satisfação de clientes e retorno financeiro.</div>
+      </div>
+      <div class="glass-card highlight-border-amber">
+        <div class="card-title">Abraham Maslow</div>
+        <div class="card-body"><strong>O Olhar Orgânico:</strong> Diagnóstico das necessidades humanas na organização (salário, segurança, acolhimento, reconhecimento e realização).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 4: DIAGNÓSTICO EM 7 DIMENSÕES ==================== -->
+  <section class="slide-section" id="slide-4">
+    <div class="slide-tag">Auditoria Interna 360°</div>
+    <h1 class="slide-title">Raio-X Organizacional em <span>7 Dimensões</span></h1>
+    <p class="slide-desc">Antes de propor metas, o agente mapeia a saúde estrutural e os focos de resistência cultural da empresa.</p>
+    <div class="grid-2">
+      <div class="glass-card">
+        <div class="card-title">1. Estrutural & 2. Processual</div>
+        <div class="card-body">Mapeamento dos níveis hierárquicos, amplitude de comando, centralização decisória e fluidez da comunicação horizontal entre comercial e operações.</div>
+      </div>
+      <div class="glass-card">
+        <div class="card-title">3. Estrutura de Poder & 4. Planejamento</div>
+        <div class="card-body">Análise de como a autoridade é exercida (por conhecimento, propriedade ou carisma) e histórico de cumprimento de planos anteriores.</div>
+      </div>
+      <div class="glass-card">
+        <div class="card-title">5. Desempenho & 6. Operacional</div>
+        <div class="card-body">Verificação da clareza das metas individuais, auditoria de gargalos, retrabalho, perda de insumos e nível de padronização de POPs.</div>
+      </div>
+      <div class="glass-card highlight-border-green">
+        <div class="card-title">7. Clima & Maslow Orgânico</div>
+        <div class="card-body">Auditoria do ambiente de trabalho: se a equipe tem segurança básica, reconhecimento pelo trabalho e motivação real para sustentar o crescimento.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 5: 8 MATRIZES ==================== -->
+  <section class="slide-section" id="slide-5">
+    <div class="slide-tag">Formulação Estratégica Avançada</div>
+    <h1 class="slide-title">O Arsenal das <span>8 Matrizes</span> Estratégicas</h1>
+    <p class="slide-desc">Clique nas abas abaixo para explorar os modelos matemáticos e conceituais aplicados pelo agente.</p>
+
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="openMatrix('swot')">1. SWOT Cruzada</button>
+      <button class="tab-btn" onclick="openMatrix('mckinsey')">2. McKinsey / GE</button>
+      <button class="tab-btn" onclick="openMatrix('porter')">3. Porter Genéricas</button>
+      <button class="tab-btn" onclick="openMatrix('ansoff')">4. Matriz Ansoff</button>
+      <button class="tab-btn" onclick="openMatrix('bcg')">5. Matriz BCG</button>
+      <button class="tab-btn" onclick="openMatrix('ciclo')">6. Ciclo de Vida</button>
+      <button class="tab-btn" onclick="openMatrix('cliente')">7. Cliente-Lucro</button>
+    </div>
+
+    <div class="matrix-content-panel active" id="mat-swot">
+      <div class="grid-2">
+        <div class="glass-card highlight-border-green">
+          <div class="card-title">Ações Ofensivas (Forças + Oportunidades)</div>
+          <div class="card-body">Investimento acelerado e expansão de capacidade onde a empresa tem competência superior e o mercado está favorável.</div>
+        </div>
+        <div class="glass-card highlight-border-amber">
+          <div class="card-title">Ações Defensivas (Forças + Ameaças)</div>
+          <div class="card-body">Blindagem de margem e retenção de contas-chave contra guerras de preços e concorrentes agressivos.</div>
+        </div>
+        <div class="glass-card highlight-border-cyan">
+          <div class="card-title">Ações de Reforço (Fraquezas + Oportunidades)</div>
+          <div class="card-body">Parcerias e adoção de tecnologia para suprir carências internas e capturar novas fatias de mercado.</div>
+        </div>
+        <div class="glass-card" style="border-top: 3px solid var(--red);">
+          <div class="card-title">Ações de Vulnerabilidade (Fraquezas + Ameaças)</div>
+          <div class="card-body">Desinvestimento planejado, corte de linhas deficitárias e reorganização imediata para evitar sangria de caixa.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-content-panel" id="mat-mckinsey">
+      <div class="glass-card">
+        <div class="card-title">Matriz McKinsey / GE — Atratividade vs. Força Competitiva</div>
+        <div class="card-body">Avalia se o nicho de mercado tem tamanho, crescimento e margem suficientes, confrontando com a participação e competitividade da empresa. Define com precisão matemática se a ordem é <strong>Investir Pesado</strong>, <strong>Manter com Cautela</strong> ou <strong>Abandonar</strong>.</div>
+      </div>
+    </div>
+
+    <div class="matrix-content-panel" id="mat-porter">
+      <div class="glass-card">
+        <div class="card-title">Estratégias Genéricas & Posicionamento de Porter</div>
+        <div class="card-body">Elimina a armadilha de tentar "agradar todo mundo". A empresa escolhe conscientemente entre <strong>Liderança em Custo</strong>, <strong>Diferenciação Premium</strong> ou <strong>Enfoque Especializado</strong>, blindando-se contra a comoditização.</div>
+      </div>
+    </div>
+
+    <div class="matrix-content-panel" id="mat-ansoff">
+      <div class="glass-card">
+        <div class="card-title">Matriz de Ansoff — Vetores de Crescimento</div>
+        <div class="card-body">Mapeia com rigor os 4 caminhos de receita: Penetração de Mercado (produtos atuais / clientes atuais), Desenvolvimento de Produtos, Expansão Geográfica (novos mercados) ou Diversificação de Negócios.</div>
+      </div>
+    </div>
+
+    <div class="matrix-content-panel" id="mat-bcg">
+      <div class="glass-card">
+        <div class="card-title">Matriz BCG — Gestão de Portfólio</div>
+        <div class="card-body">Classifica os produtos da empresa em <strong>Vacas Leiteiras</strong> (geradoras de caixa líquido), <strong>Estrelas</strong> (alto crescimento que exige reinvestimento), <strong>Gatos / Dúvidas</strong> (apostas) e <strong>Cães / Abacaxis</strong> (produtos que drenam energia e devem ser descontinuados).</div>
+      </div>
+    </div>
+
+    <div class="matrix-content-panel" id="mat-ciclo">
+      <div class="glass-card">
+        <div class="card-title">Ciclo de Vida de Produtos</div>
+        <div class="card-body">Define as ações comerciais e financeiras específicas para cada estágio de maturidade: Introdução, Crescimento, Maturidade e Declínio de cada linha de serviço.</div>
+      </div>
+    </div>
+
+    <div class="matrix-content-panel" id="mat-cliente">
+      <div class="glass-card">
+        <div class="card-title">Modelo Cliente-Lucro de Robert Kaplan</div>
+        <div class="card-body">Cruza a aderência do cliente com o seu lucro real. Ensina quais clientes devem ser retidos com atendimento VIP, quais devem ser renegociados e quais devem ser gentilmente demitidos da carteira.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 6: BALANCED SCORECARD ==================== -->
+  <section class="slide-section" id="slide-6">
+    <div class="slide-tag">O Ápice da Execução</div>
+    <h1 class="slide-title">Mapa Estratégico <span>Balanced Scorecard</span> (5 Anos)</h1>
+    <p class="slide-desc">A engrenagem de causa e efeito: pessoas capacitadas melhoram processos; processos ágeis encantam clientes; clientes satisfeitos geram lucro recorde.</p>
+
+    <div class="bsc-map">
+      <div class="bsc-row highlight-border-green">
+        <div class="bsc-label"><span class="status-dot dot-green"></span> 1. Financeira</div>
+        <div class="bsc-items">
+          <div class="bsc-pill">Crescimento de Receita +35%/ano</div>
+          <div class="bsc-pill">Margem Líquida >= 18%</div>
+          <div class="bsc-pill">Geração de Caixa Operacional</div>
+        </div>
+      </div>
+      <div class="bsc-row highlight-border-cyan">
+        <div class="bsc-label"><span class="status-dot dot-cyan"></span> 2. Clientes</div>
+        <div class="bsc-items">
+          <div class="bsc-pill">Taxa de Retenção >= 75%</div>
+          <div class="bsc-pill">NPS >= 80 Pontos</div>
+          <div class="bsc-pill">Autoridade de Marca Regional</div>
+        </div>
+      </div>
+      <div class="bsc-row highlight-border-amber">
+        <div class="bsc-label"><span class="status-dot dot-amber"></span> 3. Processos</div>
+        <div class="bsc-items">
+          <div class="bsc-pill">100% dos POPs Documentados</div>
+          <div class="bsc-pill">Quebra de Insumos &lt; 2%</div>
+          <div class="bsc-pill">SLA Comercial em 24h</div>
+        </div>
+      </div>
+      <div class="bsc-row highlight-border-purple">
+        <div class="bsc-label"><span class="status-dot dot-green"></span> 4. Aprendizado</div>
+        <div class="bsc-items">
+          <div class="bsc-pill">24h de Treinamento/Colaborador</div>
+          <div class="bsc-pill">Adoção de Ferramentas de IA</div>
+          <div class="bsc-pill">Cultura Forte de Dono</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 7: PLANO 5W2H ==================== -->
+  <section class="slide-section" id="slide-7">
+    <div class="slide-tag">Desdobramento Tático</div>
+    <h1 class="slide-title">Plano de Ação <span>5W2H</span> Sem Ambiguidade</h1>
+    <p class="slide-desc">Nenhuma estratégia sobrevive sem donos nominais e prazos inegociáveis. O Live Estratégia OS desdobra cada objetivo em cards acionáveis.</p>
+    <div class="grid-3">
+      <div class="glass-card">
+        <div class="card-title">Responsável Único (Who)</div>
+        <div class="card-body">Fim dos "comitês sem dono". Cada iniciativa tem o nome de um gestor ou líder responsável pela entrega no prazo.</div>
+      </div>
+      <div class="glass-card">
+        <div class="card-title">Prazo Improrrogável (When)</div>
+        <div class="card-body">Datas fixadas no calendário executivo com alerta preventivo de desvios através de inteligência operacional.</div>
+      </div>
+      <div class="glass-card">
+        <div class="card-title">Orçamento & ROI (How Much)</div>
+        <div class="card-body">Previsão financeira de investimento necessário e mensuração direta do retorno financeiro esperado para o negócio.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 8: OS 3 ENTREGÁVEIS ==================== -->
+  <section class="slide-section" id="slide-8">
+    <div class="slide-tag">Tangibilidade do Produto</div>
+    <h1 class="slide-title">O Que o Cliente <span>Recebe</span> em 7 Dias</h1>
+    <p class="slide-desc">Produtos empacotados, com início, meio e fim, prontos para uso pela diretoria e gestores da empresa.</p>
+    <div class="grid-3">
+      <div class="glass-card highlight-border-green">
+        <div class="card-icon">🌐</div>
+        <div class="card-title">1. Executive Deck Online</div>
+        <div class="card-body">Página HTML interativa publicada no GitHub Pages do cliente, protegida e formatada com a identidade visual Live V6.0 para apresentações a sócios e investidores.</div>
+      </div>
+      <div class="glass-card highlight-border-cyan">
+        <div class="card-icon">📱</div>
+        <div class="card-title">2. Dashboard BSC & Kanban</div>
+        <div class="card-body">Painel operacional interativo com semáforo de metas e quadro Kanban 5W2H para o dia a dia da equipe, com persistência e importação/exportação JSON.</div>
+      </div>
+      <div class="glass-card highlight-border-amber">
+        <div class="card-icon">📖</div>
+        <div class="card-title">3. Caderno de Rituais (60 Dias)</div>
+        <div class="card-body">Guia prático de condução das reuniões bimestrais de governança para auditar metas e manter a empresa nos trilhos sem depender de consultores presentes.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 9: GOVERNANÇA E RITUAIS ==================== -->
+  <section class="slide-section" id="slide-9">
+    <div class="slide-tag">Governança Viva</div>
+    <h1 class="slide-title">Rituais Bimestrais de <span>Prestação de Contas</span></h1>
+    <p class="slide-desc">Como o Ecossistema Live assegura que o plano será executado ao longo do ano.</p>
+    <div class="grid-2">
+      <div class="glass-card">
+        <div class="card-title">Reuniões Bimestrais de 90 Minutos</div>
+        <div class="card-body">A cada 60 dias, os sócios realizam a reunião de auditoria do semáforo. Problemas são atacados na raiz antes de virarem prejuízos.</div>
+      </div>
+      <div class="glass-card">
+        <div class="card-title">Atas e Atualizações Automáticas com IA</div>
+        <div class="card-body">A gravação do encontro é processada pelo agente Secretária, que gera a ata formal e atualiza os cartões do Kanban automaticamente.</div>
+      </div>
+      <div class="glass-card">
+        <div class="card-title">Veto do Antagonista (DEP-06)</div>
+        <div class="card-body">Qualquer projeto ou despesa improvisada que não esteja alinhada ao Balanced Scorecard é barrada pelo filtro de Defesa do CNPJ.</div>
+      </div>
+      <div class="glass-card highlight-border-green">
+        <div class="card-title">Evolução Contínua de Metas</div>
+        <div class="card-body">O planejamento não fica obsoleto: ele é revisado dinamicamente com base em dados reais de vendas, margem e mercado.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 10: OFERTA COMERCIAL ==================== -->
+  <section class="slide-section" id="slide-10">
+    <div class="slide-tag">Escada de Valor & Investimento</div>
+    <h1 class="slide-title">Modelos de Contratação <span>Modulares</span></h1>
+    <p class="slide-desc">Escolha o nível de profundidade ideal para a maturidade atual da sua empresa.</p>
+
+    <div class="grid-3">
+      <!-- Tier 1 -->
+      <div class="pricing-tier">
+        <div class="card-title">Express Setup</div>
+        <p style="color: var(--text-muted); font-size: 0.85rem;">Diagnóstico e Matriz Estratégica Inicial</p>
+        <div class="tier-price">R$ 2.490 <span>/ único</span></div>
+        <ul class="tier-features">
+          <li>Diagnóstico 360° em 7 Dimensões</li>
+          <li>Identidade Organizacional Completa</li>
+          <li>Matriz SWOT Cruzada + Porter</li>
+          <li>Executive Deck Online (HTML)</li>
+          <li>Entrega expressa em até 72 horas</li>
+        </ul>
+        <button class="mode-btn" style="width: 100%; justify-content: center; border-color: var(--border-bright);">Contratar Express</button>
+      </div>
+
+      <!-- Tier 2 -->
+      <div class="pricing-tier featured">
+        <div class="pricing-badge">Mais Recomendado</div>
+        <div class="card-title">Master Full Scorecard</div>
+        <p style="color: var(--text-muted); font-size: 0.85rem;">Planejamento Completo 5 Anos</p>
+        <div class="tier-price" style="color: var(--live-green);">R$ 7.900 <span>/ único</span></div>
+        <ul class="tier-features">
+          <li>Tudo do Pacote Express</li>
+          <li>Arsenal Completo das 8 Matrizes</li>
+          <li>Mapa Estratégico BSC (5 Anos)</li>
+          <li>Plano de Ação Tático 5W2H</li>
+          <li>Dashboard Operacional Kanban</li>
+          <li>1 Reunião C-Level de Homologação</li>
+          <li>Entrega em 7 dias úteis</li>
+        </ul>
+        <button class="mode-btn active" style="width: 100%; justify-content: center;">Contratar Master</button>
+      </div>
+
+      <!-- Tier 3 -->
+      <div class="pricing-tier">
+        <div class="card-title">Governança Bimestral</div>
+        <p style="color: var(--text-muted); font-size: 0.85rem;">Acompanhamento Contínuo de Metas</p>
+        <div class="tier-price">R$ 1.500 <span>/ mês</span></div>
+        <ul class="tier-features">
+          <li>6 Reuniões Bimestrais de Auditoria</li>
+          <li>Geração de Atas de Alta Fidelidade</li>
+          <li>Sincronização Contínua do Kanban</li>
+          <li>Auditoria do Antagonista DEP-06</li>
+          <li>Ajustes periódicos nas metas do BSC</li>
+        </ul>
+        <button class="mode-btn" style="width: 100%; justify-content: center; border-color: var(--border-bright);">Assinar Governança</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="page-footer">
+    <p>© Powered by Cléber Donato & Luiz Portal · <a href="mailto:cleberdonato@ecossistemalive.com.br">Ecossistema Live</a></p>
+    <p style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-dim);">Live Consultoria · CNPJ: 52.887.139/0001-00 · Goiânia - GO</p>
+  </footer>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 10;
+
+    function updateProgress() {
+      const pct = (currentSlide / totalSlides) * 100;
+      document.getElementById('progressBar').style.width = pct + '%';
+      document.getElementById('slideCounter').innerText = String(currentSlide).padStart(2, '0') + ' / ' + String(totalSlides).padStart(2, '0');
+    }
+
+    function showSlide(index) {
+      if (document.body.classList.contains('mode-reading')) return;
+      if (index < 1) index = 1;
+      if (index > totalSlides) index = totalSlides;
+      currentSlide = index;
+
+      document.querySelectorAll('.slide-section').forEach((el, i) => {
+        el.classList.toggle('active', (i + 1) === currentSlide);
+      });
+      updateProgress();
+    }
+
+    function nextSlide() { showSlide(currentSlide + 1); }
+    function prevSlide() { showSlide(currentSlide - 1); }
+
+    function switchMode(mode) {
+      if (mode === 'slides') {
+        document.body.className = 'mode-slides';
+        document.getElementById('btnModeSlides').classList.add('active');
+        document.getElementById('btnModeReading').classList.remove('active');
+        document.getElementById('slidesNav').style.display = 'flex';
+        showSlide(currentSlide);
+      } else {
+        document.body.className = 'mode-reading';
+        document.getElementById('btnModeReading').classList.add('active');
+        document.getElementById('btnModeSlides').classList.remove('active');
+        document.getElementById('slidesNav').style.display = 'none';
+        document.querySelectorAll('.slide-section').forEach(el => el.classList.remove('active'));
+      }
+    }
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+
+    function openMatrix(key) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.matrix-content-panel').forEach(p => p.classList.remove('active'));
+      event.target.classList.add('active');
+      const panel = document.getElementById('mat-' + key);
+      if (panel) panel.classList.add('active');
+    }
+
+    // Keyboard navigation in slides mode
+    window.addEventListener('keydown', (e) => {
+      if (document.body.classList.contains('mode-slides')) {
+        if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+          e.preventDefault();
+          nextSlide();
+        } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+          e.preventDefault();
+          prevSlide();
+        } else if (e.key === 'f' || e.key === 'F') {
+          toggleFullScreen();
+        }
+      }
+    });
+
+    updateProgress();
+  </script>
+</body>
+</html>

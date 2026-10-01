@@ -1,0 +1,2282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecossistema Live — Arquitetura de Agentes de IA, Imersão MLP & Cooperação Multi-Agente</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --live-bg: #040d1a;
+            --live-card: rgba(10, 25, 47, 0.78);
+            --live-card-hover: rgba(16, 38, 70, 0.92);
+            --live-border: rgba(255, 255, 255, 0.08);
+            --live-border-active: rgba(0, 232, 0, 0.4);
+            --live-accent: #00e800;
+            --live-accent-glow: rgba(0, 232, 0, 0.25);
+            --live-cyan: #00d4ff;
+            --live-purple: #a855f7;
+            --live-warning: #ffb703;
+            --live-danger: #ff3b3b;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --text-subtle: #64748b;
+            --glass-blur: blur(16px);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--live-bg);
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(0, 232, 0, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(0, 212, 255, 0.05) 0%, transparent 40%),
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .brand-font {
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        code, pre, .mono-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* TOP NAVIGATION */
+        header.top-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: var(--glass-blur);
+            background: rgba(4, 13, 26, 0.88);
+            border-bottom: 1px solid var(--live-border);
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .brand-badge {
+            background: linear-gradient(135deg, var(--live-accent) 0%, #00a800 100%);
+            color: #040d1a;
+            font-weight: 800;
+            font-size: 0.85rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            box-shadow: 0 0 15px var(--live-accent-glow);
+        }
+
+        .brand-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .brand-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .mode-toggle {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--live-border);
+            border-radius: 8px;
+            padding: 3px;
+            display: flex;
+            gap: 2px;
+        }
+
+        .mode-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.2s ease;
+        }
+
+        .mode-btn.active {
+            background: rgba(0, 232, 0, 0.15);
+            color: var(--live-accent);
+            border: 1px solid var(--live-border-active);
+        }
+
+        .slide-nav-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .nav-icon-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--live-border);
+            color: var(--text-main);
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-icon-btn:hover:not(:disabled) {
+            background: rgba(0, 232, 0, 0.15);
+            color: var(--live-accent);
+            border-color: var(--live-accent);
+        }
+
+        .nav-icon-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            min-width: 50px;
+            text-align: center;
+        }
+
+        /* PROGRESS BAR */
+        .progress-container {
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.05);
+            position: sticky;
+            top: 61px;
+            z-index: 99;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--live-accent) 0%, var(--live-cyan) 100%);
+            width: 16.66%;
+            transition: width 0.3s ease;
+        }
+
+        /* TABS HEADER */
+        nav.tabs-header {
+            background: rgba(6, 17, 34, 0.95);
+            backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid var(--live-border);
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.5rem 2rem;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            position: sticky;
+            top: 64px;
+            z-index: 98;
+        }
+
+        .tab-item {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-muted);
+            padding: 0.5rem 1rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            border-radius: 8px;
+            white-space: nowrap;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .tab-item:hover {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .tab-item.active {
+            background: rgba(0, 232, 0, 0.1);
+            color: var(--live-accent);
+            border-color: rgba(0, 232, 0, 0.3);
+            box-shadow: 0 0 15px rgba(0, 232, 0, 0.1);
+        }
+
+        /* PRESENTATION WRAPPER */
+        main.presentation-wrapper {
+            flex: 1;
+            max-width: 1320px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2.5rem 2rem;
+        }
+
+        /* SLIDE CONTAINER & SECTIONS */
+        .slide-content {
+            display: none;
+            animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            scroll-margin-top: 140px;
+        }
+
+        .slide-content.active {
+            display: block;
+        }
+
+        /* Scroll mode overrides */
+        body.scroll-mode .slide-content {
+            display: block !important;
+            margin-bottom: 4rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* HERO HEADER IN SLIDES */
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--live-accent);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.5rem;
+            background: rgba(0, 232, 0, 0.08);
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 232, 0, 0.2);
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 900px;
+            line-height: 1.6;
+        }
+
+        /* LIVE CARDS & GRIDS */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        @media (max-width: 1024px) {
+            .grid-3 { grid-template-columns: repeat(2, 1fr); }
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+            .section-title { font-size: 1.7rem; }
+            header.top-nav { padding: 0.8rem 1rem; }
+            nav.tabs-header { padding: 0.5rem 1rem; }
+            main.presentation-wrapper { padding: 1.5rem 1rem; }
+        }
+
+        .live-card {
+            background: var(--live-card);
+            border: 1px solid var(--live-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .live-card:hover {
+            background: var(--live-card-hover);
+            border-color: rgba(255, 255, 255, 0.16);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .live-card.highlight {
+            border-color: var(--live-border-active);
+            box-shadow: 0 0 20px rgba(0, 232, 0, 0.05);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: rgba(0, 232, 0, 0.1);
+            color: var(--live-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(0, 232, 0, 0.2);
+        }
+
+        .card-icon-box.cyan {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--live-cyan);
+            border-color: rgba(0, 212, 255, 0.2);
+        }
+
+        .card-icon-box.purple {
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--live-purple);
+            border-color: rgba(168, 85, 247, 0.2);
+        }
+
+        .card-icon-box.amber {
+            background: rgba(255, 183, 3, 0.1);
+            color: var(--live-warning);
+            border-color: rgba(255, 183, 3, 0.2);
+        }
+
+        .card-icon-box.danger {
+            background: rgba(255, 59, 59, 0.1);
+            color: var(--live-danger);
+            border-color: rgba(255, 59, 59, 0.2);
+        }
+
+        .card-badge {
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-accent { background: rgba(0, 232, 0, 0.15); color: var(--live-accent); }
+        .badge-cyan { background: rgba(0, 212, 255, 0.15); color: var(--live-cyan); }
+        .badge-purple { background: rgba(168, 85, 247, 0.15); color: var(--live-purple); }
+        .badge-amber { background: rgba(255, 183, 3, 0.15); color: var(--live-warning); }
+        .badge-danger { background: rgba(255, 59, 59, 0.15); color: var(--live-danger); }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+
+        /* CUSTOM TABLES */
+        .custom-table-wrapper {
+            background: var(--live-card);
+            border: 1px solid var(--live-border);
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        table.custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            text-align: left;
+        }
+
+        table.custom-table th {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 0.9rem 1.2rem;
+            color: #ffffff;
+            font-weight: 600;
+            border-bottom: 1px solid var(--live-border);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.06em;
+        }
+
+        table.custom-table td {
+            padding: 0.9rem 1.2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: var(--text-main);
+            vertical-align: top;
+        }
+
+        table.custom-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        table.custom-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* FLOW DIAGRAMS & SEQUENCES */
+        .flow-diagram {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .flow-step-card {
+            background: rgba(10, 25, 47, 0.8);
+            border: 1px solid var(--live-border);
+            border-radius: 10px;
+            padding: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .flow-step-card.active-step {
+            border-color: var(--live-accent);
+            background: rgba(0, 232, 0, 0.04);
+        }
+
+        .flow-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 232, 0, 0.1);
+            border: 1px solid var(--live-accent);
+            color: var(--live-accent);
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .flow-content {
+            flex: 1;
+        }
+
+        .flow-content h4 {
+            font-size: 1.1rem;
+            color: #ffffff;
+            margin-bottom: 0.4rem;
+        }
+
+        /* INTERACTIVE SIMULATOR */
+        .simulator-box {
+            background: #020710;
+            border: 1px solid rgba(0, 232, 0, 0.3);
+            border-radius: 14px;
+            padding: 1.5rem;
+            box-shadow: 0 0 40px rgba(0, 232, 0, 0.08);
+            margin: 2rem 0;
+        }
+
+        .sim-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--live-border);
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .scenario-selector {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .sim-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--live-border);
+            color: var(--text-main);
+            padding: 0.6rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .sim-btn:hover {
+            background: rgba(0, 232, 0, 0.1);
+            border-color: var(--live-accent);
+            color: var(--live-accent);
+        }
+
+        .sim-btn.active {
+            background: var(--live-accent);
+            color: #040d1a;
+            border-color: var(--live-accent);
+            font-weight: 700;
+        }
+
+        .sim-screen {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            min-height: 400px;
+        }
+
+        @media (max-width: 900px) {
+            .sim-screen { grid-template-columns: 1fr; }
+        }
+
+        .sim-chat-panel, .sim-system-panel {
+            background: rgba(10, 22, 40, 0.7);
+            border: 1px solid var(--live-border);
+            border-radius: 10px;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            max-height: 460px;
+        }
+
+        .panel-heading {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-message-stream {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+
+        .chat-msg {
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            max-width: 85%;
+            line-height: 1.4;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .chat-msg.inbound {
+            background: #1e293b;
+            color: #f1f5f9;
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+        }
+
+        .chat-msg.outbound-agent {
+            background: rgba(0, 232, 0, 0.15);
+            color: #a7f3d0;
+            border: 1px solid rgba(0, 232, 0, 0.3);
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+        }
+
+        .sim-system-logs {
+            flex: 1;
+            background: #020710;
+            border-radius: 6px;
+            padding: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            color: #a5f3fc;
+            overflow-y: auto;
+            line-height: 1.7;
+        }
+
+        .log-entry {
+            margin-bottom: 0.5rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .log-tag {
+            color: var(--live-accent);
+            font-weight: 700;
+        }
+
+        .log-warn { color: var(--live-warning); }
+        .log-danger { color: var(--live-danger); }
+        .log-info { color: var(--live-cyan); }
+        .log-purple { color: var(--live-purple); }
+
+        /* AGENT FILTER BAR */
+        .filter-bar {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--live-border);
+            color: var(--text-muted);
+            padding: 0.4rem 0.9rem;
+            font-size: 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: rgba(0, 232, 0, 0.15);
+            border-color: var(--live-accent);
+            color: var(--live-accent);
+        }
+
+        /* ACCORDION / CODE DRAWER */
+        .code-block {
+            background: #020710;
+            border: 1px solid var(--live-border);
+            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            font-size: 0.8rem;
+            color: #e2e8f0;
+            overflow-x: auto;
+            margin: 1rem 0;
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+        footer.live-footer {
+            backdrop-filter: var(--glass-blur);
+            background: rgba(4, 13, 26, 0.9);
+            border-top: 1px solid var(--live-border);
+            padding: 1.5rem 2rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        footer a {
+            color: var(--live-accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP HEADER -->
+    <header class="top-nav">
+        <a href="#" class="brand">
+            <span class="brand-badge">LIVE V6.0</span>
+            <div>
+                <div class="brand-title">
+                    ECOSSISTEMA LIVE
+                    <i data-lucide="cpu" style="width: 18px; height: 18px; color: var(--live-accent);"></i>
+                </div>
+                <div class="brand-subtitle">Arquitetura de Agentes & Engenharia de IA</div>
+            </div>
+        </a>
+
+        <div class="nav-controls">
+            <!-- Mode Switcher -->
+            <div class="mode-toggle">
+                <button class="mode-btn active" id="btnModeDeck" onclick="setViewMode('deck')">
+                    <i data-lucide="presentation" style="width: 14px; height: 14px;"></i> Slides
+                </button>
+                <button class="mode-btn" id="btnModeScroll" onclick="setViewMode('scroll')">
+                    <i data-lucide="file-text" style="width: 14px; height: 14px;"></i> Documento
+                </button>
+            </div>
+
+            <!-- Slide Nav Buttons -->
+            <div class="slide-nav-bar" id="slideNavControls">
+                <button class="nav-icon-btn" id="btnPrev" onclick="navigateSlide(-1)" title="Slide Anterior (Seta Esquerda)">
+                    <i data-lucide="chevron-left" style="width: 18px; height: 18px;"></i>
+                </button>
+                <span class="slide-counter" id="slideCounter">1 / 6</span>
+                <button class="nav-icon-btn" id="btnNext" onclick="navigateSlide(1)" title="Próximo Slide (Seta Direita / Espaço)">
+                    <i data-lucide="chevron-right" style="width: 18px; height: 18px;"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- PROGRESS BAR -->
+    <div class="progress-container">
+        <div class="progress-fill" id="progressBar"></div>
+    </div>
+
+    <!-- TABS BAR -->
+    <nav class="tabs-header" id="tabsHeader">
+        <button class="tab-item active" onclick="goToSlide(0)">
+            <i data-lucide="building-2" style="width: 16px; height: 16px;"></i> 1. Estrutura da Consultoria
+        </button>
+        <button class="tab-item" onclick="goToSlide(1)">
+            <i data-lucide="scale" style="width: 16px; height: 16px;"></i> 2. Imersão MLP & Themis
+        </button>
+        <button class="tab-item" onclick="goToSlide(2)">
+            <i data-lucide="bot" style="width: 16px; height: 16px;"></i> 3. Catálogo dos Agentes
+        </button>
+        <button class="tab-item" onclick="goToSlide(3)">
+            <i data-lucide="network" style="width: 16px; height: 16px;"></i> 4. Cooperação Multi-Agente
+        </button>
+        <button class="tab-item" onclick="goToSlide(4)">
+            <i data-lucide="play-circle" style="width: 16px; height: 16px;"></i> 5. Simulador em Tempo Real
+        </button>
+        <button class="tab-item" onclick="goToSlide(5)">
+            <i data-lucide="shield-alert" style="width: 16px; height: 16px;"></i> 6. Governança, Risco & Meta
+        </button>
+    </nav>
+
+    <!-- MAIN PRESENTATION BODY -->
+    <main class="presentation-wrapper">
+
+        <!-- ===================================================================
+             SLIDE 1: ESTRUTURA DA CONSULTORIA & TRANSIÇÃO ESTRATÉGICA
+             =================================================================== -->
+        <section class="slide-content active" id="slide-0">
+            <div class="section-header">
+                <span class="section-tag">
+                    <i data-lucide="compass" style="width: 14px; height: 14px;"></i> Identidade Institucional & Portfólio
+                </span>
+                <h1 class="section-title">A Nova Arquitetura do Ecossistema Live</h1>
+                <p class="section-subtitle">
+                    A evolução da consultoria tradicional para um Hub de Inteligência Empresarial, Produtos Modulares com Início, Meio e Fim, e Motores Autônomos de IA.
+                </p>
+            </div>
+
+            <!-- Diretriz Soberana Banner -->
+            <div class="live-card highlight" style="margin-bottom: 2rem; border-left: 4px solid var(--live-accent);">
+                <div style="display: flex; gap: 1.2rem; align-items: flex-start;">
+                    <div class="card-icon-box" style="background: rgba(0,232,0,0.15); flex-shrink: 0;">
+                        <i data-lucide="alert-octagon" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--live-accent); margin-bottom: 0.3rem;">Diretriz Soberana & Defesa do CNPJ (Mandatória desde 13/08/2026)</h3>
+                        <p style="font-size: 1.05rem; font-weight: 500; color: #ffffff; margin-bottom: 0.6rem;">
+                            <strong>Banimento do termo "Consultoria":</strong> Não vendemos horas abertas de consultoria genérica. Diagnosticamos gargalos reais e entregamos produtos modulares de gestão com início, meio e fim (máximo 3 meses), apoiados em esteiras autônomas de Inteligência Artificial.
+                        </p>
+                        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; font-size: 0.85rem; color: var(--text-muted);">
+                            <span><strong style="color: var(--live-cyan);">Razão Social:</strong> LUIZ E A PORTAL (CNPJ: 52.887.139/0001-00)</span>
+                            <span><strong style="color: var(--live-cyan);">Sede:</strong> Goiânia - GO</span>
+                            <span><strong style="color: var(--live-accent);">Cláusula Pétrea:</strong> A Defesa do CNPJ prevalece sobre caprichos individuais de sócios, cônjuges ou herdeiros.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Liderança e Hub de Parceiros -->
+            <div class="grid-2" style="margin-bottom: 2rem;">
+                <div class="live-card">
+                    <div class="card-header">
+                        <div class="card-icon-box cyan">
+                            <i data-lucide="users" style="width: 22px; height: 22px;"></i>
+                        </div>
+                        <span class="card-badge badge-cyan">Comando Executivo</span>
+                    </div>
+                    <h3 class="card-title">Liderança Estratégica & Técnica</h3>
+                    <p class="card-desc">Uma união simbiótica entre validação executiva de alto nível e engenharia de software de fronteira.</p>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem;">
+                        <div style="background: rgba(255,255,255,0.03); padding: 0.8rem; border-radius: 8px;">
+                            <strong style="color: #ffffff; display: block; font-size: 0.95rem;">Luiz Portal — Estrategista Sênior & CEO</strong>
+                            <span style="font-size: 0.85rem; color: var(--text-muted);">Conselhos Familiares, Negociações Complexas, M&A, Mentorias Executivas e Alianças Institucionais (BNI, VP & Vox).</span>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.03); padding: 0.8rem; border-radius: 8px;">
+                            <strong style="color: var(--live-accent); display: block; font-size: 0.95rem;">Cléber Donato — Engenheiro Chefe de IA & CTO</strong>
+                            <span style="font-size: 0.85rem; color: var(--text-muted);">Arquitetura de Multi-Agentes, Modelagem de Processos, Pesquisas de CX e Criador dos Motores de IA (Júlio Bot v8, Themis, Orquestrador Live).</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="live-card">
+                    <div class="card-header">
+                        <div class="card-icon-box purple">
+                            <i data-lucide="share-2" style="width: 22px; height: 22px;"></i>
+                        </div>
+                        <span class="card-badge badge-purple">Hub Desintermediado</span>
+                    </div>
+                    <h3 class="card-title">Rede Homologada de Alianças</h3>
+                    <p class="card-desc">A Live diagnostica e conecta. Parceiros operacionais são contratados e faturados diretamente pelo cliente (zero intermediação financeira).</p>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-top: 1rem;">
+                        <div style="padding: 0.7rem; background: rgba(255,255,255,0.03); border-radius: 6px;">
+                            <strong style="color: #ffffff; font-size: 0.85rem;">Agregar (Kelvin)</strong>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">BPO Financeiro, DRE e Reestruturação Contábil</div>
+                        </div>
+                        <div style="padding: 0.7rem; background: rgba(255,255,255,0.03); border-radius: 6px;">
+                            <strong style="color: #ffffff; font-size: 0.85rem;">Design System Live V6.0</strong>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">Identidade Visual, UI/UX & Padrão Técnico Interno</div>
+                        </div>
+                        <div style="padding: 0.7rem; background: rgba(255,255,255,0.03); border-radius: 6px;">
+                            <strong style="color: #ffffff; font-size: 0.85rem;">Juliana Canuto</strong>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">Pesquisa de CX, NPS & Entrevistas em Profundidade</div>
+                        </div>
+                        <div style="padding: 0.7rem; background: rgba(255,255,255,0.03); border-radius: 6px;">
+                            <strong style="color: #ffffff; font-size: 0.85rem;">Felipe Zanoni & Wagner</strong>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">Gestão de Tráfego de Performance e Automações</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Os 6 Departamentos Operacionais e Transversal DEP-06 -->
+            <h3 style="margin: 2rem 0 1rem 0; color: #ffffff; display: flex; align-items: center; gap: 0.5rem;">
+                <i data-lucide="layers" style="color: var(--live-accent);"></i>
+                Estrutura Departamental da Empresa (10-Departamentos & DEP-06 Transversal)
+            </h3>
+
+            <!-- DEPARTAMENTO TRANSVERSAL DE DESTAQUE -->
+            <div class="live-card highlight" style="margin-bottom: 1.5rem; border: 2px solid var(--live-danger); background: rgba(255, 59, 59, 0.05);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem;">
+                    <div style="display: flex; align-items: center; gap: 0.6rem;">
+                        <span class="card-badge badge-danger">DEP-06 — TRANSVERSAL SOBERANO</span>
+                        <strong style="color: #ffffff; font-size: 1.1rem;">Qualidade, Compliance & Defesa do CNPJ (el-antagonista-defesa-cnpj)</strong>
+                    </div>
+                    <span style="color: var(--live-danger); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 700;">PODER DE VETO TOTAL</span>
+                </div>
+                <p style="color: var(--text-main); font-size: 0.88rem; margin-bottom: 0.8rem;">
+                    O departamento transversal que atua como <strong>guardião incondicional de integridade</strong> sobre todos os outros 5 departamentos. Nenhum contrato é assinado, nenhuma proposta é enviada e nenhuma parceria é firmada sem o gate de aprovação do Antagonista.
+                </p>
+                <div class="grid-3" style="font-size: 0.8rem; color: var(--text-muted);">
+                    <div><strong style="color: #ffffff;">Veto Contratual:</strong> Proíbe contratos com escopo aberto ou sem data fatal de término (teto 90 dias).</div>
+                    <div><strong style="color: #ffffff;">Sem Intermediação:</strong> Bloqueia faturamento casado com parceiros externos (Agregar, Juliana Canuto, Voya).</div>
+                    <div><strong style="color: #ffffff;">Auditoria de Prazos:</strong> Cruza semanalmente compromissos de atas e bloqueia desvios operacionais.</div>
+                </div>
+            </div>
+
+            <div class="grid-3" style="margin-bottom: 2rem;">
+                <div class="live-card">
+                    <span class="card-badge badge-accent" style="margin-bottom: 0.5rem; display: inline-block;">DEP-01</span>
+                    <h4 style="color: #ffffff; font-size: 1rem; margin-bottom: 0.4rem;">Comercial & Crescimento</h4>
+                    <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                        Líder: Luiz Portal. Prospecção B2B (Google Maps), qualificação outbound via WhatsApp e esteira de fechamento.
+                    </p>
+                    <div style="font-size: 0.75rem; color: var(--live-accent); font-family: 'JetBrains Mono', monospace;">Agentes: el-agente-prospeccao, el-secretaria-atendimento</div>
+                </div>
+                <div class="live-card">
+                    <span class="card-badge badge-cyan" style="margin-bottom: 0.5rem; display: inline-block;">DEP-02</span>
+                    <h4 style="color: #ffffff; font-size: 1rem; margin-bottom: 0.4rem;">Tecnologia & Produtos de IA</h4>
+                    <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                        Líder: Cléber Donato. Engenharia de agentes, integrações ClickUp, RAG local e arquitetura Themis.
+                    </p>
+                    <div style="font-size: 0.75rem; color: var(--live-cyan); font-family: 'JetBrains Mono', monospace;">Agentes: el-julio-bot, el-jarvis, el-rh-tech</div>
+                </div>
+                <div class="live-card">
+                    <span class="card-badge badge-purple" style="margin-bottom: 0.5rem; display: inline-block;">DEP-03</span>
+                    <h4 style="color: #ffffff; font-size: 1rem; margin-bottom: 0.4rem;">Educação Executiva & Eventos</h4>
+                    <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                        Líder: Luiz Portal. Formação "O Código da Nova Liderança", Workshops In-Company e "Almoço com o CEO".
+                    </p>
+                    <div style="font-size: 0.75rem; color: var(--live-purple); font-family: 'JetBrains Mono', monospace;">Agente: el-secretaria-atendimento</div>
+                </div>
+                <div class="live-card">
+                    <span class="card-badge badge-amber" style="margin-bottom: 0.5rem; display: inline-block;">DEP-04</span>
+                    <h4 style="color: #ffffff; font-size: 1rem; margin-bottom: 0.4rem;">Governança & Estratégia</h4>
+                    <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                        Líder: Luiz Portal. Conselhos Familiares, Acordos de Sócios, Mediação e OKRs Estratégicos.
+                    </p>
+                    <div style="font-size: 0.75rem; color: var(--live-warning); font-family: 'JetBrains Mono', monospace;">Agente: el-antagonista-defesa-cnpj</div>
+                </div>
+                <div class="live-card">
+                    <span class="card-badge badge-cyan" style="margin-bottom: 0.5rem; display: inline-block;">DEP-05</span>
+                    <h4 style="color: #ffffff; font-size: 1rem; margin-bottom: 0.4rem;">CX & Inteligência de Mercado</h4>
+                    <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                        Líder: Cléber Donato. Service Blueprint, auditoria de percepção do cliente, cálculo de NPS/CSAT e pesquisas quantitativas.
+                    </p>
+                    <div style="font-size: 0.75rem; color: var(--live-cyan); font-family: 'JetBrains Mono', monospace;">Agente: el-secretaria-atendimento</div>
+                </div>
+                <div class="live-card" style="border: 1px dashed var(--live-accent);">
+                    <span class="card-badge badge-accent" style="margin-bottom: 0.5rem; display: inline-block;">INVARIÂNCIA</span>
+                    <h4 style="color: #ffffff; font-size: 1rem; margin-bottom: 0.4rem;">As 6 Regras Invioláveis</h4>
+                    <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.4;">
+                        1. Nenhum contrato sem gate DEP-06.<br>
+                        2. Nenhum arquivo apagado (apenas adição).<br>
+                        3. Zero intermediação de parceiros.<br>
+                        4. Contratos fechados em até 3 meses.<br>
+                        5. Termo "Consultoria" estritamente banido.<br>
+                        6. Defesa do CNPJ acima de indivíduos.
+                    </p>
+                </div>
+            </div>
+
+            <!-- PORTFÓLIO DE PRODUTOS DE IA & SAAS -->
+            <h3 style="margin: 2rem 0 1rem 0; color: #ffffff; display: flex; align-items: center; gap: 0.5rem;">
+                <i data-lucide="package-check" style="color: var(--live-accent);"></i>
+                Esteira de Produtos de Software & IA (Blueprint de Arquitetura)
+            </h3>
+
+            <div class="grid-4" style="margin-bottom: 2rem;">
+                <div class="live-card">
+                    <div class="card-header">
+                        <div class="card-icon-box cyan"><i data-lucide="bot" style="width: 20px; height: 20px;"></i></div>
+                        <span class="card-badge badge-cyan">SaaS Onboarding</span>
+                    </div>
+                    <h4 style="color: #fff; font-size: 0.95rem; margin-bottom: 0.3rem;">Júlio Bot v8.0</h4>
+                    <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                        Netlify SPA + Firebase Auth + Firestore multi-tenant. Onboarding interativo e tutoria de POPs para colaboradores PME.
+                    </p>
+                    <div style="font-size: 0.75rem; color: var(--live-accent);">Modelo: R$ 120/mês por empresa</div>
+                </div>
+
+                <div class="live-card">
+                    <div class="card-header">
+                        <div class="card-icon-box purple"><i data-lucide="user-check" style="width: 20px; height: 20px;"></i></div>
+                        <span class="card-badge badge-purple">RH Tech</span>
+                    </div>
+                    <h4 style="color: #fff; font-size: 0.95rem; margin-bottom: 0.3rem;">Agente R&S Tech</h4>
+                    <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                        Engenharia de vagas, roteiros comportamentais, triagem de currículos e pontuação de fit cultural com IA.
+                    </p>
+                    <div style="font-size: 0.75rem; color: var(--live-purple);">DIY (R$ 250/vaga) ou Full-Service (1 Salário)</div>
+                </div>
+
+                <div class="live-card">
+                    <div class="card-header">
+                        <div class="card-icon-box amber"><i data-lucide="activity" style="width: 20px; height: 20px;"></i></div>
+                        <span class="card-badge badge-amber">Tripwire SaaS</span>
+                    </div>
+                    <h4 style="color: #fff; font-size: 0.95rem; margin-bottom: 0.3rem;">Diagnóstico Express</h4>
+                    <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                        Front-end de entrada calculando o Índice de Vulnerabilidade Operacional em 4 pilares (Finanças, Processos, Pessoas e Vendas).
+                    </p>
+                    <div style="font-size: 0.75rem; color: var(--live-warning);">R$ 250 em até 12x (Gatilho de Entrada)</div>
+                </div>
+
+                <div class="live-card">
+                    <div class="card-header">
+                        <div class="card-icon-box"><i data-lucide="shield-check" style="width: 20px; height: 20px;"></i></div>
+                        <span class="card-badge badge-accent">IA Interna</span>
+                    </div>
+                    <h4 style="color: #fff; font-size: 0.95rem; margin-bottom: 0.3rem;">Jarvis Operacional</h4>
+                    <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                        IA corporativa treinada nos POPs, manuais e regras da empresa cliente para consulta instantânea da equipe.
+                    </p>
+                    <div style="font-size: 0.75rem; color: var(--live-accent);">Isolamento RAG Local + Zero Alucinação</div>
+                </div>
+            </div>
+
+            <!-- Padrão dos 9 Artefatos -->
+            <div class="live-card">
+                <div class="card-header">
+                    <div class="card-icon-box amber">
+                        <i data-lucide="folder-check" style="width: 22px; height: 22px;"></i>
+                    </div>
+                    <span class="card-badge badge-amber">Governança por Pastas</span>
+                </div>
+                <h3 class="card-title">O Padrão Rígido dos 9 Artefatos Obrigatórios</h3>
+                <p class="card-desc">
+                    Todo cliente atendido pelo Ecossistema Live recebe rigorosamente a mesma estrutura física em disco (01 a 09), garantindo rastreabilidade perene e conformidade jurídica.
+                </p>
+
+                <div class="custom-table-wrapper" style="margin: 0.5rem 0 0 0;">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 120px;">Pasta</th>
+                                <th style="width: 220px;">Artefato</th>
+                                <th>Conteúdo Crítico & Regras de Conformidade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>01-proposta/</code></td>
+                                <td>Proposta Comercial</td>
+                                <td>Objetivos, diagnóstico inicial, prazos de entrega e tabela de investimento padronizada.</td>
+                            </tr>
+                            <tr>
+                                <td><code>02-contrato/</code></td>
+                                <td>Contrato de Prestação</td>
+                                <td>Cláusulas de LGPD, responsabilidade técnica, sigilo de dados e ausência de vínculo empregatício.</td>
+                            </tr>
+                            <tr>
+                                <td><code>03-plano-de-acao/</code></td>
+                                <td>Plano de Ação (Sprints)</td>
+                                <td>Sprints semanais, responsáveis nominais, critérios de aceite (DoD) e dependências técnicas.</td>
+                            </tr>
+                            <tr>
+                                <td><code>04-calendario/</code></td>
+                                <td>Calendário de Execução</td>
+                                <td>Cronograma macro em Gantt, marcos de validação executiva e datas finais inegociáveis.</td>
+                            </tr>
+                            <tr>
+                                <td><code>05-agenda/</code></td>
+                                <td>Agenda de Reuniões</td>
+                                <td>Link das salas virtuais, pautas antecipadas e calendário formal de alinhamentos.</td>
+                            </tr>
+                            <tr>
+                                <td><code>06-dashboard/</code></td>
+                                <td>Painel de Controle</td>
+                                <td>Métricas em tempo real, status das sprints e links diretos para tarefas ClickUp.</td>
+                            </tr>
+                            <tr>
+                                <td><code>07-reunioes/</code></td>
+                                <td>Atas de Reunião</td>
+                                <td>Transcrições na íntegra, decisões colegiadas registradas e pendências atribuídas.</td>
+                            </tr>
+                            <tr>
+                                <td><code>08-apresentacoes/</code></td>
+                                <td>Apresentações & Decks</td>
+                                <td>Decks executivos em HTML/Tailwind, relatórios visuais e demonstrações interativas.</td>
+                            </tr>
+                            <tr>
+                                <td><code>09-jornada/</code></td>
+                                <td>Jornada do Cliente</td>
+                                <td>Mapeamento de touchpoints, gargalos operacionais e plano de suporte pós-entrega.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ===================================================================
+             SLIDE 2: IMERSÃO MLP ADVOGADOS & SISTEMA THEMIS
+             =================================================================== -->
+        <section class="slide-content" id="slide-1">
+            <div class="section-header">
+                <span class="section-tag">
+                    <i data-lucide="scale" style="width: 14px; height: 14px;"></i> Caso de Engenharia Real
+                </span>
+                <h1 class="section-title">Imersão Profunda MLP Advogados & Sistema Themis</h1>
+                <p class="section-subtitle">
+                    Como a análise de 1h42 de transcrição presencial com a operação de um dos maiores escritórios tributários de Goiás reescreveu a arquitetura de agentes e deu origem ao Themis.
+                </p>
+            </div>
+
+            <!-- O Choque da Realidade (Diagnóstico) -->
+            <div class="grid-2" style="margin-bottom: 2rem;">
+                <div class="live-card" style="border-left: 4px solid var(--live-warning);">
+                    <div class="card-header">
+                        <div class="card-icon-box amber">
+                            <i data-lucide="alert-triangle" style="width: 22px; height: 22px;"></i>
+                        </div>
+                        <span class="card-badge badge-amber">Diagnóstico da Operação</span>
+                    </div>
+                    <h3 class="card-title">O Paradoxo dos 280 Grupos de WhatsApp</h3>
+                    <p class="card-desc">
+                        O briefing presencial de 04/09 com Lucíola e coordenadoras (Aika/Cível, Michele/Tributário, Flávia/Trabalhista, Aldenusa/Financeiro e Mikael/CS) revelou a verdadeira dor:
+                    </p>
+                    <ul style="font-size: 0.88rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.6rem; padding-left: 1.2rem;">
+                        <li><strong>A dor NÃO É responder devagar — é NÃO SABER o que está aberto:</strong> Ninguém sabe quantos grupos existem (estimativas de 70 a 280). Cada cliente tem de 2 a 5 grupos por decisão de gestão do Dr. Rogério.</li>
+                        <li><strong>"Mensagem não lida" mente:</strong> Um sócio respondendo <em>"vou ver isso"</em> às 3h da manhã zera o contador sem resolver nada. Vinte mensagens sem retorno contam igual a uma saudação.</li>
+                        <li><strong>Comunicação interna pesa tanto quanto o cliente:</strong> O cliente interno (diretoria) gera volume maciço e concentrado, quase 100% em <strong>áudio</strong>.</li>
+                        <li><strong>Relatórios automáticos crus:</strong> O Legal One envia relatórios em juridiquês puro. O cliente não entende e liga para o escritório, multiplicando a sobrecarga.</li>
+                    </ul>
+                </div>
+
+                <div class="live-card" style="border-left: 4px solid var(--live-accent);">
+                    <div class="card-header">
+                        <div class="card-icon-box">
+                            <i data-lucide="cpu" style="width: 22px; height: 22px;"></i>
+                        </div>
+                        <span class="card-badge badge-accent">Solução de Engenharia</span>
+                    </div>
+                    <h3 class="card-title">A Resposta: O Motor Híbrido Themis</h3>
+                    <p class="card-desc">
+                        Desenvolvido por Cléber Donato para resolver os 280 grupos sem recorrer a APIs caras da Meta e sem colocar os números corporativos em risco.
+                    </p>
+                    <div style="background: rgba(0,0,0,0.3); border-radius: 8px; padding: 1rem; border: 1px solid var(--live-border); font-size: 0.85rem; line-height: 1.7;">
+                        <div style="color: var(--live-accent); font-weight: 700;">Princípio Arquitetural Básico:</div>
+                        <p style="color: var(--text-main); margin-bottom: 0.5rem;">
+                            <strong>Coletar</strong> mensagem da tela é trabalho de script (determinístico, barato, zero token). 
+                            <strong>Classificar</strong> intenção é trabalho de LLM. 
+                            <strong>Calcular SLA</strong> é pura aritmética.
+                        </p>
+                        <div style="border-top: 1px solid var(--live-border); padding-top: 0.5rem; color: var(--text-muted); font-size: 0.8rem;">
+                            Sem essa divisão, manter 280 grupos consumiria dezenas de milhares de dólares em tokens para ler piadas e figurinhas.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OS 7 PRINCÍPIOS FUNDAMENTAIS DO THEMIS -->
+            <h3 style="margin: 2rem 0 1rem 0; color: #ffffff; display: flex; align-items: center; gap: 0.5rem;">
+                <i data-lucide="bookmark" style="color: var(--live-accent);"></i>
+                Os 7 Princípios de Arquitetura do Themis (Fundação Teórica)
+            </h3>
+
+            <div class="grid-3" style="margin-bottom: 2rem;">
+                <div class="live-card">
+                    <span class="card-badge badge-accent" style="margin-bottom: 0.4rem; display: inline-block;">Princípio 1</span>
+                    <h4 style="color: #fff; font-size: 0.95rem; margin-bottom: 0.3rem;">1. Observar Antes de Agir</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">
+                        Entra em produção em modo somente-leitura. Monitora, mede e reporta antes de responder. Risco zero de bloqueio inicial e entrega dashboard em 2 semanas.
+                    </p>
+                </div>
+                <div class="live-card">
+                    <span class="card-badge badge-cyan" style="margin-bottom: 0.4rem; display: inline-block;">Princípio 2</span>
+                    <h4 style="color: #fff; font-size: 0.95rem; margin-bottom: 0.3rem;">2. Local Primeiro, Nuvem por Exceção</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">
+                        Whisper e modelos locais processam áudio e anonimizam dados na máquina da MLP. Só sai para API externa o raciocínio complexo. Sigilo total.
+                    </p>
+                </div>
+                <div class="live-card">
+                    <span class="card-badge badge-purple" style="margin-bottom: 0.4rem; display: inline-block;">Princípio 3</span>
+                    <h4 style="color: #fff; font-size: 0.95rem; margin-bottom: 0.3rem;">3. Nenhuma Afirmação Sem Fonte</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">
+                        Toda resposta cita o documento, página e trecho que a sustenta, ou é explicitamente marcada como inferência não confirmada. Elimina alucinações.
+                    </p>
+                </div>
+                <div class="live-card">
+                    <span class="card-badge badge-amber" style="margin-bottom: 0.4rem; display: inline-block;">Princípio 4</span>
+                    <h4 style="color: #fff; font-size: 0.95rem; margin-bottom: 0.3rem;">4. Motor Fixo, Config por Cliente</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">
+                        A lógica do agente é genérica e imutável; as particularidades de cada escritório vivem no <code>CONFIGURACAO.md</code>. Replicabilidade imediata.
+                    </p>
+                </div>
+                <div class="live-card">
+                    <span class="card-badge badge-danger" style="margin-bottom: 0.4rem; display: inline-block;">Princípio 5</span>
+                    <h4 style="color: #fff; font-size: 0.95rem; margin-bottom: 0.3rem;">5. Escopo Fechado & Recusa Elegante</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">
+                        Responde estritamente dentro do perímetro delimitado. Fora dele, recusa com cortesia, aciona o advogado e redireciona. Blindagem contra manipulação.
+                    </p>
+                </div>
+                <div class="live-card">
+                    <span class="card-badge badge-accent" style="margin-bottom: 0.4rem; display: inline-block;">Princípio 6 & 7</span>
+                    <h4 style="color: #fff; font-size: 0.95rem; margin-bottom: 0.3rem;">6. Autonomia Graduada & 7. Nada Destrutivo</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">
+                        Opera em 3 níveis (Observa, Sugere, Executa) e só sobe de nível por acerto medido. Jamais apaga arquivos ou sobrescreve originais. Trilha 100% auditável.
+                    </p>
+                </div>
+            </div>
+
+            <!-- As 13 Decisões Estruturais -->
+            <h3 style="margin: 2rem 0 1rem 0; color: #ffffff; display: flex; align-items: center; gap: 0.5rem;">
+                <i data-lucide="check-check" style="color: var(--live-accent);"></i>
+                As 13 Decisões Estruturais que Fundamentaram o Themis (D1 a D13)
+            </h3>
+
+            <div class="custom-table-wrapper">
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;">#</th>
+                            <th style="width: 240px;">Decisão Tomada</th>
+                            <th>Racional de Engenharia & Impacto Operacional</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong style="color: var(--live-accent);">D1</strong></td>
+                            <td><strong>A unidade é a Demanda</strong></td>
+                            <td>Mensagem é o que se coleta; <strong>demanda</strong> é o que se gerencia. Evita painéis que mostram "tudo lido" enquanto os clientes estão esperando providências há dias.</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: var(--live-accent);">D2</strong></td>
+                            <td><strong>Fechamento Qualificado (3 Testes)</strong></td>
+                            <td>Uma demanda só fecha se passar em: (1) <strong>Autoria</strong> (quem respondeu tem autoridade no assunto); (2) <strong>Endereçamento</strong> (foi para quem pediu); (3) <strong>Suficiência</strong> (resolução real, não promessa de "vou ver").</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: var(--live-accent);">D3</strong></td>
+                            <td><strong>Matriz de Legitimidade em Tabela</strong></td>
+                            <td>Decisão resolvida por tabela determinística, não por modelo generativo. Previsível, 100% auditável, custo zero e facilmente compreensível pelas coordenadoras.</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: var(--live-accent);">D4</strong></td>
+                            <td><strong>Nunca comunicar falta de legitimidade</strong></td>
+                            <td>Um assistente de IA que disser <em>"você não tem autorização para pedir isso"</em> a um gerente financeiro gera uma crise com o cliente. O agente acolhe educadamente, marca a demanda como <code>Bloqueada</code> e aciona o advogado responsável.</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: var(--live-accent);">D5</strong></td>
+                            <td><strong>Régua de Urgência N0 a N5 + NX</strong></td>
+                            <td>Escalonamento com aceleradores (recorrência, atrito) e o vital <strong>desacelerador de data combinada</strong> (NX): se o cliente concordou em receber na quinta-feira, o painel não gera falso vermelho.</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: var(--live-accent);">D6</strong></td>
+                            <td><strong>Motor Híbrido (Script + LLM)</strong></td>
+                            <td>Script Puppeteer/Playwright coleta em lote via navegador dedicado; LLM classifica apenas quando há mensagens novas; grupo parado custa ZERO tokens.</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: var(--live-accent);">D7</strong></td>
+                            <td><strong>ClickUp como Camada Visual Segregada</strong></td>
+                            <td>Criação de um workspace próprio da MLP. Sigilo profissional, separação de assentos e percepção de software corporativo próprio.</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: var(--live-accent);">D8</strong></td>
+                            <td><strong>Listas por Coordenação em Folders Privados</strong></td>
+                            <td>No ClickUp, view pública não garante isolamento. Cada coordenação (Tributário, Cível, Trabalhista, Administrativo) tem seu folder com permissões restritas.</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: var(--live-accent);">D9</strong></td>
+                            <td><strong>Notificações de Prazo via ClickUp (E-mail)</strong></td>
+                            <td>Advogados respeitam notificações formais de e-mail. Não depende do WhatsApp estar ativo e fica registrado no histórico da tarefa.</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: var(--live-accent);">D10</strong></td>
+                            <td><strong>Um Agente Só com Cascata de 6 Níveis</strong></td>
+                            <td>Em vez de criar dezenas de agentes para clientes difíceis, adota-se um único agente com parametrização em cascata (Nível 0 a 5). O mais específico vence.</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: var(--live-accent);">D11</strong></td>
+                            <td><strong>Hermes decide, o script digita</strong></td>
+                            <td>Duas automações nunca podem interagir concorrentemente na mesma sessão do WhatsApp Web. Um único portão de escrita garante estabilidade.</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: var(--live-accent);">D12</strong></td>
+                            <td><strong>Implantação por Coordenação Piloto</strong></td>
+                            <td>Entrar em 2–3 grupos/dia sobre 280 levaria meses. Inicia-se pelo Trabalhista, consolida-se o modelo, e depois expande-se para o Cível e Tributário.</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: var(--live-accent);">D13</strong></td>
+                            <td><strong>Argos entra primeiro e NÃO FALA com ninguém</strong></td>
+                            <td>O primeiro agente entra apenas em modo <code>Observa</code>. Risco de bloqueio zero, e o dashboard resultante entrega o valor visual que viabiliza o projeto.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Modelo de Grupo Canônico -->
+            <div class="live-card highlight" style="margin-top: 1.5rem;">
+                <h3 style="color: #ffffff; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <i data-lucide="git-merge" style="color: var(--live-accent);"></i>
+                    O Mecanismo dos Grupos Canônicos: Reduzir Grupos sem Conflito
+                </h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+                    A coordenação queria no máximo 2 grupos por cliente; a diretoria insistia em manter 5 grupos abertos. A engenharia resolveu sem atrito político:
+                </p>
+                <div class="grid-3" style="gap: 1rem;">
+                    <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 8px;">
+                        <strong style="color: var(--live-accent); display: block; margin-bottom: 0.3rem;">1. Ler Todos</strong>
+                        <span style="font-size: 0.82rem; color: var(--text-muted);">O Argos lê e cataloga mensagens em todos os grupos onde estiver adicionado. Nenhuma informação é perdida.</span>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 8px;">
+                        <strong style="color: var(--live-cyan); display: block; margin-bottom: 0.3rem;">2. Escrever em Dois</strong>
+                        <span style="font-size: 0.82rem; color: var(--text-muted);">O sistema só responde nos grupos configurados como <code>canonico: true</code> (um Externo e um Interno).</span>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 8px;">
+                        <strong style="color: var(--live-purple); display: block; margin-bottom: 0.3rem;">3. Migração Natural</strong>
+                        <span style="font-size: 0.82rem; color: var(--text-muted);">Ao responder apenas no canal oficial, os demais grupos satélites esfriam organicamente, sem impor regras drásticas ao cliente.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ===================================================================
+             SLIDE 3: CATÁLOGO DOS AGENTES & SKILLS MODULARES
+             =================================================================== -->
+        <section class="slide-content" id="slide-2">
+            <div class="section-header">
+                <span class="section-tag">
+                    <i data-lucide="bot" style="width: 14px; height: 14px;"></i> Catálogo Técnico Completo
+                </span>
+                <h1 class="section-title">Anatomia dos Agentes e Skills do Ecossistema</h1>
+                <p class="section-subtitle">
+                    Explore os agentes autônomos criados para a MLP Advogados, a esteira de governança, os motores do Ecossistema Live e as 11 Skills Modulares de Prática Jurídica.
+                </p>
+            </div>
+
+            <!-- Filtros de Agentes (CORRIGIDO PARA FIREFOX / MOBILE) -->
+            <div class="filter-bar">
+                <button class="filter-btn active" onclick="filterAgents('all', this)">Todos (16)</button>
+                <button class="filter-btn" onclick="filterAgents('mlp', this)">MLP / Themis</button>
+                <button class="filter-btn" onclick="filterAgents('live', this)">Ecossistema Live Operação</button>
+                <button class="filter-btn" onclick="filterAgents('governanca', this)">Governança & Defesa CNPJ</button>
+                <button class="filter-btn" onclick="filterAgents('skills', this)">11 Skills Jurídicas</button>
+                <button class="filter-btn" onclick="filterAgents('engine', this)">Engines & Infra</button>
+            </div>
+
+            <div class="grid-3" id="agentGrid">
+
+                <!-- 1. ARGOS -->
+                <div class="live-card agent-card" data-category="mlp">
+                    <div class="card-header">
+                        <div class="card-icon-box">
+                            <i data-lucide="eye" style="width: 22px; height: 22px;"></i>
+                        </div>
+                        <span class="card-badge badge-accent">Autonomia: Observa</span>
+                    </div>
+                    <h3 class="card-title">Argos — Vigília de Grupos</h3>
+                    <p class="card-desc">O sentinela silencioso do WhatsApp da MLP Advogados. Não fala, não envia saudações e não interage com humanos.</p>
+                    <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.4rem;">
+                        <div><strong>Entrada:</strong> Sessão dedicada WhatsApp Web + Whisper local para áudios.</div>
+                        <div><strong>Saída:</strong> Demandas catalogadas no ClickUp + Heartbeat incondicional.</div>
+                        <div><strong>Regra de Ouro:</strong> Nunca digita nada. Se o layout mudar, para e notifica.</div>
+                    </div>
+                </div>
+
+                <!-- 2. SECRETÁRIA & CONCIERGE (THEMIS) -->
+                <div class="live-card agent-card" data-category="mlp">
+                    <div class="card-header">
+                        <div class="card-icon-box cyan">
+                            <i data-lucide="message-square-heart" style="width: 22px; height: 22px;"></i>
+                        </div>
+                        <span class="card-badge badge-cyan">Autonomia: Sugere</span>
+                    </div>
+                    <h3 class="card-title">Secretária Concierge (MLP)</h3>
+                    <p class="card-desc">Duas faces: acolhe clientes em grupos externos e coordena pendências da equipe em grupos internos.</p>
+                    <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.4rem;">
+                        <div><strong>Entrada:</strong> Mensagens de grupos canônicos + Tags de Perfil do Cliente.</div>
+                        <div><strong>Saída:</strong> Acuse de recebimento (&lt; 30s) + Fila de aprovação de respostas.</div>
+                        <div><strong>Regra de Ouro:</strong> NUNCA envia áudio; NUNCA opina sobre mérito; ALERTA DTE MÁXIMO.</div>
+                    </div>
+                </div>
+
+                <!-- 3. MENTOR JURÍDICO INTERNO -->
+                <div class="live-card agent-card" data-category="mlp">
+                    <div class="card-header">
+                        <div class="card-icon-box purple">
+                            <i data-lucide="graduation-cap" style="width: 22px; height: 22px;"></i>
+                        </div>
+                        <span class="card-badge badge-purple">Autonomia: Sugere</span>
+                    </div>
+                    <h3 class="card-title">Mentor Jurídico de Prática</h3>
+                    <p class="card-desc">Back-end dos advogados e estagiários da MLP. Opera sobre o servidor de arquivos e o Legal One, sem tocar no WhatsApp.</p>
+                    <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.4rem;">
+                        <div><strong>Entrada:</strong> Publicações do Legal One + Pastas de Clientes no Dropbox.</div>
+                        <div><strong>Saída:</strong> Minutas padronizadas, prazos (D2/D1/Fatal) e <strong>tradução didática em 3 camadas</strong>.</div>
+                        <div><strong>Regra de Ouro:</strong> Nunca fornece data de prazo processual ao cliente final.</div>
+                    </div>
+                </div>
+
+                <!-- 4. AGENTE REGISTRO CLICKUP -->
+                <div class="live-card agent-card" data-category="mlp">
+                    <div class="card-header">
+                        <div class="card-icon-box">
+                            <i data-lucide="check-square" style="width: 22px; height: 22px;"></i>
+                        </div>
+                        <span class="card-badge badge-accent">SDK & Automação</span>
+                    </div>
+                    <h3 class="card-title">Agente Registro ClickUp</h3>
+                    <p class="card-desc">SDK Python autônomo e CLI para registrar demandas, atividades e entregáveis diretamente na API do ClickUp.</p>
+                    <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.4rem;">
+                        <div><strong>Entrada:</strong> Linha de comando, assistente interativo ou instrução em linguagem natural.</div>
+                        <div><strong>Saída:</strong> Tarefas formatadas com normalização de tags por cliente (<code>slugify</code>).</div>
+                        <div><strong>Regra de Ouro:</strong> Idempotência estrita; atribuição automática ao ID de usuário responsável.</div>
+                    </div>
+                </div>
+
+                <!-- 5. ANTAGONISTA DE DEFESA DO CNPJ -->
+                <div class="live-card agent-card" data-category="governanca">
+                    <div class="card-header">
+                        <div class="card-icon-box danger">
+                            <i data-lucide="shield-alert" style="width: 22px; height: 22px;"></i>
+                        </div>
+                        <span class="card-badge badge-danger">Veto Soberano</span>
+                    </div>
+                    <h3 class="card-title">Antagonista Defesa do CNPJ</h3>
+                    <p class="card-desc">O auditor implacável do Ecossistema Live (DEP-06). Age como advogado do diabo antes de qualquer entrega ou contrato.</p>
+                    <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.4rem;">
+                        <div><strong>Função:</strong> Auditar propostas, checar conformidade de LGPD e fiscalizar as 6 regras invioláveis.</div>
+                        <div><strong>Poder:</strong> Veto absoluto sobre contratações de risco e contratos sem prazo fatal.</div>
+                        <div><strong>Missão:</strong> Blindar o patrimônio e a reputação jurídica da LUIZ E A PORTAL.</div>
+                    </div>
+                </div>
+
+                <!-- 6. ORQUESTRADOR ATENDIMENTO & PROSPECÇÃO (LIVE) -->
+                <div class="live-card agent-card" data-category="live">
+                    <div class="card-header">
+                        <div class="card-icon-box">
+                            <i data-lucide="git-branch" style="width: 22px; height: 22px;"></i>
+                        </div>
+                        <span class="card-badge badge-accent">Maestro WhatsApp</span>
+                    </div>
+                    <h3 class="card-title">Orquestrador de Atendimento</h3>
+                    <p class="card-desc">Cérebro central das operações do Ecossistema Live. Coordena micro-scripts Python em torno do <code>controle_whatsapp.db</code>.</p>
+                    <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.4rem;">
+                        <div><strong>Entrada:</strong> Fila SQLite <code>leads_master</code> + Base de Conhecimento .md.</div>
+                        <div><strong>Saída:</strong> Despacho dos scripts (<code>sc_buscar</code>, <code>sc_disparar</code>, <code>sc_responder</code>).</div>
+                        <div><strong>Regra de Ouro:</strong> Interrompe disparos imediatamente quando lead responde (Inbound prioritário).</div>
+                    </div>
+                </div>
+
+                <!-- 7. AGENTE ATENDIMENTO RÁPIDO TMA -->
+                <div class="live-card agent-card" data-category="live">
+                    <div class="card-header">
+                        <div class="card-icon-box cyan">
+                            <i data-lucide="zap" style="width: 22px; height: 22px;"></i>
+                        </div>
+                        <span class="card-badge badge-cyan">TMA &lt; 180s</span>
+                    </div>
+                    <h3 class="card-title">Agente TMA Inbound</h3>
+                    <p class="card-desc">Garante resposta em menos de 3 minutos para leads que responderam às mensagens ou entraram em contato.</p>
+                    <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.4rem;">
+                        <div><strong>Entrada:</strong> Mensagem recebida + FAQ de produtos e preços.</div>
+                        <div><strong>Saída:</strong> Esclarecimento com CTA para agendamento no Cal.com/Calendly.</div>
+                        <div><strong>Regra de Ouro:</strong> Respeito absoluto ao Opt-Out ("não quero" ativa cancelamento imediato).</div>
+                    </div>
+                </div>
+
+                <!-- 8. AGENTE DE PROSPECÇÃO MAPS -->
+                <div class="live-card agent-card" data-category="live">
+                    <div class="card-header">
+                        <div class="card-icon-box amber">
+                            <i data-lucide="map-pin" style="width: 22px; height: 22px;"></i>
+                        </div>
+                        <span class="card-badge badge-amber">Outbound B2B</span>
+                    </div>
+                    <h3 class="card-title">Agente Prospecção Maps B2B</h3>
+                    <p class="card-desc">Minera empresas no Google Maps, audita seus websites e prepara abordagens hyper-personalizadas em Spintax.</p>
+                    <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.4rem;">
+                        <div><strong>Entrada:</strong> Segmento e cidade (via Maps API ou CSV) + Crawler de sites.</div>
+                        <div><strong>Saída:</strong> Mensagem de 4 linhas com o <code>{achado}</code> específico da empresa.</div>
+                        <div><strong>Regra de Ouro:</strong> Zero links ou anexos na 1ª mensagem; teto operacional seguro de 100/dia.</div>
+                    </div>
+                </div>
+
+                <!-- 9. JÚLIO BOT V8 -->
+                <div class="live-card agent-card" data-category="live">
+                    <div class="card-header">
+                        <div class="card-icon-box cyan">
+                            <i data-lucide="bot" style="width: 22px; height: 22px;"></i>
+                        </div>
+                        <span class="card-badge badge-cyan">SPA Onboarding</span>
+                    </div>
+                    <h3 class="card-title">Júlio Bot v8.0</h3>
+                    <p class="card-desc">Web App SPA no Netlify com Firebase Auth para suporte e onboarding interativo de colaboradores corporativos.</p>
+                    <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.4rem;">
+                        <div><strong>Entrada:</strong> POPs, Manuais de Integração e Cultura da Empresa contratante.</div>
+                        <div><strong>Saída:</strong> Esclarecimento instantâneo de dúvidas para recém-contratados.</div>
+                        <div><strong>Modelo:</strong> R$ 120,00/mês por empresa na esteira de produtos escaláveis.</div>
+                    </div>
+                </div>
+
+                <!-- 10. JARVIS OPERACIONAL -->
+                <div class="live-card agent-card" data-category="live">
+                    <div class="card-header">
+                        <div class="card-icon-box">
+                            <i data-lucide="cpu" style="width: 22px; height: 22px;"></i>
+                        </div>
+                        <span class="card-badge badge-accent">IA Corporativa</span>
+                    </div>
+                    <h3 class="card-title">Jarvis Operacional</h3>
+                    <p class="card-desc">IA interna corporativa treinada diretamente na documentação, manuais operacionais e sistemas do cliente.</p>
+                    <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.4rem;">
+                        <div><strong>Entrada:</strong> Base de POPs, planilhas e base de conhecimento da empresa.</div>
+                        <div><strong>Saída:</strong> Resolução de dúvidas operacionais internas de colaboradores.</div>
+                        <div><strong>Diferencial:</strong> 100% isolado por tenant, sem vazamento de dados concorrentes.</div>
+                    </div>
+                </div>
+
+                <!-- 11. R&S LIVE & DELECTUS -->
+                <div class="live-card agent-card" data-category="live">
+                    <div class="card-header">
+                        <div class="card-icon-box purple">
+                            <i data-lucide="user-check" style="width: 22px; height: 22px;"></i>
+                        </div>
+                        <span class="card-badge badge-purple">RH Tech</span>
+                    </div>
+                    <h3 class="card-title">R&S Live & Delectus</h3>
+                    <p class="card-desc">Motor inteligente de triagem curricular, elaboração de vagas e emissão de Pareceres Elite V6.0.</p>
+                    <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.4rem;">
+                        <div><strong>R&S Live:</strong> Operado pela equipe Live para processos seletivos consultivos.</div>
+                        <div><strong>Delectus:</strong> Versão self-service operada pelo cliente no portal autenticado.</div>
+                        <div><strong>Conformidade:</strong> Descarte de currículos em 6 meses conforme LGPD.</div>
+                    </div>
+                </div>
+
+                <!-- 12. AGE QUOD AGIS (V2) -->
+                <div class="live-card agent-card" data-category="live">
+                    <div class="card-header">
+                        <div class="card-icon-box purple">
+                            <i data-lucide="file-text" style="width: 22px; height: 22px;"></i>
+                        </div>
+                        <span class="card-badge badge-purple">Metodologia M.A.P.C.A</span>
+                    </div>
+                    <h3 class="card-title">Age Quod Agis (v2)</h3>
+                    <p class="card-desc">O arquiteto comercial do Ecossistema Live. Consolida diagnósticos e produz propostas interativas no padrão Live V6.0.</p>
+                    <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.4rem;">
+                        <div><strong>Entrada:</strong> Transcrições de briefing + Pareceres dos 5 especialistas.</div>
+                        <div><strong>Saída:</strong> Proposta comercial e minuta contratual interativa em HTML/GitHub Pages.</div>
+                        <div><strong>Regra de Ouro:</strong> Publicação condicionada a Gate L3 de aprovação humana nominal.</div>
+                    </div>
+                </div>
+
+                <!-- 13. AGENTES LATINOS (IANUS, ORDO, LEX, RATIO, CENSOR) -->
+                <div class="live-card agent-card" data-category="governanca">
+                    <div class="card-header">
+                        <div class="card-icon-box cyan">
+                            <i data-lucide="shield" style="width: 22px; height: 22px;"></i>
+                        </div>
+                        <span class="card-badge badge-cyan">Sexteto Latino</span>
+                    </div>
+                    <h3 class="card-title">Ianus, Ordo, Lex & Ratio</h3>
+                    <p class="card-desc">Os agentes especializados da arquitetura de governança: Ianus (Concierge), Ordo (Plano de Ação), Lex (Jurídico), Ratio (Contábil), Censor (Auditor).</p>
+                    <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.4rem;">
+                        <div><strong>Ianus:</strong> Porta de entrada única do cliente no portal; encaminha e protege.</div>
+                        <div><strong>Lex & Ratio:</strong> Emitem pareceres técnicos com disclaimer obrigatório de suporte.</div>
+                        <div><strong>Censor:</strong> Supervisor invisível que audita conversas e mede a qualidade.</div>
+                    </div>
+                </div>
+
+                <!-- 14. AS 11 SKILLS JURÍDICAS MODULARES -->
+                <div class="live-card agent-card" data-category="skills" style="border: 1px solid var(--live-purple);">
+                    <div class="card-header">
+                        <div class="card-icon-box purple">
+                            <i data-lucide="layers" style="width: 22px; height: 22px;"></i>
+                        </div>
+                        <span class="card-badge badge-purple">Biblioteca Modular</span>
+                    </div>
+                    <h3 class="card-title">As 11 Skills Jurídicas Replicáveis</h3>
+                    <p class="card-desc">Acervo padronizado em <code>produtos/agente-juridico/skills/</code>. O motor é fixo e o comportamento é parametrizado via <code>CONFIGURACAO.md</code>.</p>
+                    <div style="font-size: 0.78rem; color: var(--text-muted); display: grid; grid-template-columns: 1fr 1fr; gap: 0.3rem;">
+                        <div>01. Rotina WhatsApp</div>
+                        <div>02. Painel SLA</div>
+                        <div>03. Dossiê Peticionamento</div>
+                        <div>04. Prazos & Andamentos</div>
+                        <div>05. Controladoria & Horas</div>
+                        <div>06. Onboarding Cliente</div>
+                        <div>07. Mentor Interno</div>
+                        <div>08. Ata de Reunião</div>
+                        <div>09. Proposta & Contrato</div>
+                        <div>10. Régua de Cobrança</div>
+                        <div>11. Pesquisa & Cotação</div>
+                        <div>Blindagem: Protocolo ClickUp</div>
+                    </div>
+                </div>
+
+                <!-- 15. NIRVANA-OS ENGINE -->
+                <div class="live-card agent-card" data-category="engine">
+                    <div class="card-header">
+                        <div class="card-icon-box danger">
+                            <i data-lucide="terminal" style="width: 22px; height: 22px;"></i>
+                        </div>
+                        <span class="card-badge badge-danger">Orquestrador DAG</span>
+                    </div>
+                    <h3 class="card-title">Nirvana-OS Engine</h3>
+                    <p class="card-desc">Camada de orquestração multi-agente em DAGs com tríade Business-Squad-MindClone e validação por verdade em disco.</p>
+                    <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.4rem;">
+                        <div><strong>Diferencial:</strong> Auditoria append-only em JSONL (<code>audit.jsonl</code>) + SQLite.</div>
+                        <div><strong>Verificação:</strong> <code>verify-deliverable.ts</code> checa arquivos reais em disco antes de dar OK.</div>
+                        <div><strong>Portão:</strong> Loop guard (máximo 12 passos) e fail-closed em inconsistências.</div>
+                    </div>
+                </div>
+
+                <!-- 16. WHISPER LOCAL & MOTOR DE ÁUDIO -->
+                <div class="live-card agent-card" data-category="engine">
+                    <div class="card-header">
+                        <div class="card-icon-box">
+                            <i data-lucide="mic" style="width: 22px; height: 22px;"></i>
+                        </div>
+                        <span class="card-badge badge-accent">IA Local On-Premise</span>
+                    </div>
+                    <h3 class="card-title">Whisper Local & Ingestão</h3>
+                    <p class="card-desc">Motor de transcrição semântica executado na Estação Themis, garantindo zero tráfego externo de voz confidencial.</p>
+                    <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.4rem;">
+                        <div><strong>Processamento:</strong> Transcreve áudios do Dr. Rogério e coordenadoras em &lt; 5s.</div>
+                        <div><strong>Sigilo:</strong> Conformidade estrita com o sigilo profissional da OAB e LGPD.</div>
+                        <div><strong>Economia:</strong> Zero cobrança de tokens ou APIs externas de speech-to-text.</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ===================================================================
+             SLIDE 4: COMO OS AGENTES COOPERAM ENTRE SI (SINERGIA)
+             =================================================================== -->
+        <section class="slide-content" id="slide-3">
+            <div class="section-header">
+                <span class="section-tag">
+                    <i data-lucide="network" style="width: 14px; height: 14px;"></i> Orquestração e Sinergia
+                </span>
+                <h1 class="section-title">Como os Agentes Cooperam Entre Si</h1>
+                <p class="section-subtitle">
+                    Nenhum agente atua isolado. A inteligência do ecossistema reside na orquestração contínua e nas passagens de bastão seguras entre especialistas.
+                </p>
+            </div>
+
+            <!-- As 4 Esteiras de Cooperação -->
+            <div class="flow-diagram">
+
+                <!-- Fluxo 1 -->
+                <div class="flow-step-card active-step">
+                    <div class="flow-number">1</div>
+                    <div class="flow-content">
+                        <h4>Esteira de Atendimento & Triagem de Grupos (WhatsApp MLP Themis)</h4>
+                        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.6rem;">
+                            <strong>Argos</strong> captura a mensagem na tela &rarr; se for áudio, <strong>Whisper Local</strong> transcreve &rarr; <strong>Classificador LLM</strong> define se é Demanda ou Conversa &rarr; <strong>Secretária Concierge</strong> consulta a Matriz de Legitimidade determinística &rarr; envia acuse de recebimento em &lt; 30s &rarr; <strong>Agente ClickUp</strong> abre o Card com tags normalizadas e notifica a coordenação responsável por e-mail corporativo.
+                        </p>
+                        <div style="font-size: 0.78rem; color: var(--live-accent); font-family: 'JetBrains Mono', monospace;">
+                            Ponto Crítico: Demanda Bloqueada em caso de falta de legitimidade (D4) & Alerta Imediato DTE (N5).
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fluxo 2 -->
+                <div class="flow-step-card">
+                    <div class="flow-number" style="border-color: var(--live-cyan); color: var(--live-cyan); background: rgba(0,212,255,0.1);">2</div>
+                    <div class="flow-content">
+                        <h4>Esteira de Tradução Didática Processual com Fila Humana L2</h4>
+                        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.6rem;">
+                            Andamento processual chega pelo Legal One em jargão judicial &rarr; <strong>Mentor Jurídico</strong> decodifica o despacho em 3 camadas (O que aconteceu, O que significa para o cliente e Próximos passos) &rarr; gera rascunho formatado na Fila de Aprovação L2 &rarr; <strong>Advogado Humano</strong> valida ou ajusta com um clique no ClickUp &rarr; <strong>Secretária Concierge</strong> despacha a explicação humanizada no grupo canônico do cliente.
+                        </p>
+                        <div style="font-size: 0.78rem; color: var(--live-cyan); font-family: 'JetBrains Mono', monospace;">
+                            Ponto Crítico: Nenhum parecer de mérito vai direto ao WhatsApp sem chancela humana prévia (Gate L2).
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fluxo 3 -->
+                <div class="flow-step-card">
+                    <div class="flow-number" style="border-color: var(--live-purple); color: var(--live-purple); background: rgba(168,85,247,0.1);">3</div>
+                    <div class="flow-content">
+                        <h4>Esteira de Prospecção Ativa B2B & Blindagem Meta (Live Comercial)</h4>
+                        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.6rem;">
+                            <strong>Agente Maps B2B</strong> minera dados de empresas e websites &rarr; <strong>Auditor de Presença Digital</strong> identifica falhas visuais e de SEO &rarr; <strong>Redator Spintax</strong> gera copy sob medida sem links &rarr; <strong>Orquestrador de Disparos</strong> aplica fila de aquecimento e jitter humano no WhatsApp &rarr; lead responde &rarr; <strong>Agente TMA Inbound</strong> assume instantaneamente em &lt; 180s com foco em agendamento no Cal.com/Calendly.
+                        </p>
+                        <div style="font-size: 0.78rem; color: var(--live-purple); font-family: 'JetBrains Mono', monospace;">
+                            Ponto Crítico: Inbound tem prioridade máxima; qualquer resposta suspende envios para proteger o chip (Anti-Ban).
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fluxo 4 -->
+                <div class="flow-step-card">
+                    <div class="flow-number" style="border-color: var(--live-danger); color: var(--live-danger); background: rgba(255,59,59,0.1);">4</div>
+                    <div class="flow-content">
+                        <h4>Esteira de Governança, Qualidade & Defesa do CNPJ (DEP-06 Transversal)</h4>
+                        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.6rem;">
+                            Comercial fecha pré-acordo &rarr; <strong>Age Quod Agis</strong> redige a proposta V6.0 &rarr; <strong>Antagonista Defesa do CNPJ (DEP-06)</strong> realiza auditoria cega procurando brechas de escopo aberto, riscos tributários e conflitos de interesse de sócios &rarr; se houver pendência, aciona veto &rarr; aprovado, registra ata com prazos e delega a execução ao ClickUp com monitoramento de SLA contínuo.
+                        </p>
+                        <div style="font-size: 0.78rem; color: var(--live-danger); font-family: 'JetBrains Mono', monospace;">
+                            Ponto Crítico: A empresa não pode falir por promessas comerciais inconsequentes; o CNPJ prevalece sempre.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Matriz de Cascata de Configuração (6 Níveis) -->
+            <div class="live-card highlight" style="margin-top: 2rem;">
+                <h3 class="card-title" style="display: flex; align-items: center; gap: 0.5rem;">
+                    <i data-lucide="layers" style="color: var(--live-accent);"></i>
+                    A Cascata de 6 Níveis de Parametrização (Como Evitar dezenas de agentes duplicados)
+                </h3>
+                <p class="card-desc">
+                    Quando o escritório atende desde um cliente rústico que só fala por áudio até uma diretoria multinacional que exige relatórios formais, a inteligência é aplicada por sobreposição de camadas. O nível mais específico sempre sobrepõe o mais genérico:
+                </p>
+                <div class="custom-table-wrapper" style="margin-top: 0.5rem;">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 80px;">Nível</th>
+                                <th style="width: 200px;">Camada</th>
+                                <th>Onde é Definido & Exemplo de Aplicação Prática</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>L0</code></td>
+                                <td><strong>Padrão Global</strong></td>
+                                <td>Definido no prompt mestre: tom formal e acolhedor, SLA padrão de 4h, vedação absoluta de áudio.</td>
+                            </tr>
+                            <tr>
+                                <td><code>L1</code></td>
+                                <td><strong>Coordenação</strong></td>
+                                <td>Folder da Coordenação (Tributário exige certidões negativas; Trabalhista prioriza audiências).</td>
+                            </tr>
+                            <tr>
+                                <td><code>L2</code></td>
+                                <td><strong>Cliente</strong></td>
+                                <td>Ficha cadastral do cliente: Usina Caçu prefere contato com a contabilidade externa; Família Soncini exige linguagem didática.</td>
+                            </tr>
+                            <tr>
+                                <td><code>L3</code></td>
+                                <td><strong>Grupo Específico</strong></td>
+                                <td>Configuração do grupo: grupo diretoria é <code>canonico: true</code>; grupo de compras é <code>observa: true</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>L4</code></td>
+                                <td><strong>Pessoa / Remetente</strong></td>
+                                <td>Papel do remetente: Marcos Vinícius (Operacional - sem acesso a contratos); Dr. Rogério (Sócio - legitimidade total).</td>
+                            </tr>
+                            <tr>
+                                <td><code>L5</code></td>
+                                <td><strong>Assunto / Demanda</strong></td>
+                                <td>Urgência instantânea: menção a "DTE", "bloqueio judicial" ou "liminar" cancela qualquer fila e dispara SLA N5.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ===================================================================
+             SLIDE 5: SIMULADOR INTERATIVO EM TEMPO REAL
+             =================================================================== -->
+        <section class="slide-content" id="slide-4">
+            <div class="section-header">
+                <span class="section-tag">
+                    <i data-lucide="play" style="width: 14px; height: 14px;"></i> Demonstração Prática
+                </span>
+                <h1 class="section-title">Simulador Interativo de Cooperação Multi-Agente</h1>
+                <p class="section-subtitle">
+                    Selecione os cenários reais do caso MLP para observar como os agentes conversam entre si, consultam bases locais, acionam travas de segurança e alimentam o ClickUp.
+                </p>
+            </div>
+
+            <div class="simulator-box">
+                <div class="sim-header">
+                    <div style="display: flex; align-items: center; gap: 0.6rem;">
+                        <span style="width: 10px; height: 10px; border-radius: 50%; background: var(--live-accent); box-shadow: 0 0 10px var(--live-accent);"></span>
+                        <strong style="color: #ffffff; font-size: 0.95rem;">Motor de Execução Multi-Agente</strong>
+                    </div>
+
+                    <div class="scenario-selector">
+                        <button class="sim-btn active" id="btnScen1" onclick="runScenario(1)">
+                            <i data-lucide="mic" style="width: 14px; height: 14px;"></i> 1. Áudio Dr. Rogério
+                        </button>
+                        <button class="sim-btn" id="btnScen2" onclick="runScenario(2)">
+                            <i data-lucide="graduation-cap" style="width: 14px; height: 14px;"></i> 2. Cliente Leigo
+                        </button>
+                        <button class="sim-btn" id="btnScen3" onclick="runScenario(3)">
+                            <i data-lucide="user-x" style="width: 14px; height: 14px;"></i> 3. Sem Legitimidade
+                        </button>
+                        <button class="sim-btn" id="btnScen4" onclick="runScenario(4)">
+                            <i data-lucide="alert-triangle" style="width: 14px; height: 14px;"></i> 4. Alerta DTE Máximo
+                        </button>
+                    </div>
+                </div>
+
+                <div class="sim-screen">
+                    <!-- Chat View -->
+                    <div class="sim-chat-panel">
+                        <div class="panel-heading">
+                            <span><i data-lucide="message-circle" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle;"></i> Canal WhatsApp (Sessão Web)</span>
+                            <span id="chatGroupIndicator" style="color: var(--live-accent); font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;">MLP — Grupo Interno Diretoria</span>
+                        </div>
+                        <div class="chat-message-stream" id="chatStream">
+                            <!-- Messages injected via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Telemetry & System Logs -->
+                    <div class="sim-system-panel">
+                        <div class="panel-heading">
+                            <span><i data-lucide="terminal" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle;"></i> Telemetria, Back-end & ClickUp</span>
+                            <span class="card-badge badge-accent" id="systemStatusBadge">Executando</span>
+                        </div>
+                        <div class="sim-system-logs" id="systemLogs">
+                            <!-- Logs injected via JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ===================================================================
+             SLIDE 6: GOVERNANÇA, RISCO & BLINDAGEM META
+             =================================================================== -->
+        <section class="slide-content" id="slide-5">
+            <div class="section-header">
+                <span class="section-tag">
+                    <i data-lucide="shield" style="width: 14px; height: 14px;"></i> Engenharia de Segurança & Compliance
+                </span>
+                <h1 class="section-title">Governança, Escala de Risco & Blindagem Meta</h1>
+                <p class="section-subtitle">
+                    Os protocolos inegociáveis que impedem alucinações, protegem dados sensíveis (LGPD) e garantem longevidade operacional contra bloqueios do WhatsApp.
+                </p>
+            </div>
+
+            <!-- Matriz de Risco L0 a L3 -->
+            <div class="live-card highlight" style="margin-bottom: 2rem;">
+                <h3 class="card-title" style="color: #ffffff; display: flex; align-items: center; gap: 0.5rem;">
+                    <i data-lucide="sliders" style="color: var(--live-accent);"></i>
+                    Escala de Autonomia Decisória do Ecossistema Live
+                </h3>
+                <p class="card-desc">
+                    Nenhum agente nasce com autonomia irrestrita. O ecossistema adota uma régua de 4 níveis estritos, auditada pelo DEP-06:
+                </p>
+
+                <div class="custom-table-wrapper" style="margin: 0.5rem 0 0 0;">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 80px;">Nível</th>
+                                <th style="width: 180px;">Classificação</th>
+                                <th style="width: 200px;">Permissão de Ação</th>
+                                <th>Exemplo Prático na Operação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="card-badge badge-accent">L0</span></td>
+                                <td><strong>Somente-Leitura</strong></td>
+                                <td>Observa, indexa, gera logs e métricas. Jamais responde ou emite comandos externos.</td>
+                                <td><strong>Argos Vigília:</strong> Monitora 280 grupos de WhatsApp, registra no ClickUp e permanece 100% silencioso.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="card-badge badge-cyan">L1</span></td>
+                                <td><strong>Operacional Rápido</strong></td>
+                                <td>Responde com templates pré-aprovados ou acusa recebimento imediato.</td>
+                                <td><strong>Secretária Concierge:</strong> Dispara acuse de recebimento em &lt; 30s ("Recebemos seu pedido #123").</td>
+                            </tr>
+                            <tr>
+                                <td><span class="card-badge badge-amber">L2</span></td>
+                                <td><strong>Sugestão Assistida</strong></td>
+                                <td>Redige minutas ou relatórios e aguarda aprovação humana formal (Gate L2).</td>
+                                <td><strong>Mentor Jurídico:</strong> Escreve tradução didática do despacho e envia card ao ClickUp para a advogada validar.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="card-badge badge-danger">L3</span></td>
+                                <td><strong>Execução Crítica</strong></td>
+                                <td>Bloqueado por padrão. Exige autorização expressa em duas etapas (2FA) do sócio.</td>
+                                <td>Envio de propostas comerciais de alto valor, contratos e peticionamento processual nos tribunais.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Blindagem Meta & Regras Anti-Bloqueio -->
+            <div class="grid-2">
+                <div class="live-card">
+                    <div class="card-header">
+                        <div class="card-icon-box purple">
+                            <i data-lucide="lock" style="width: 22px; height: 22px;"></i>
+                        </div>
+                        <span class="card-badge badge-purple">Privacidade & LGPD</span>
+                    </div>
+                    <h3 class="card-title">Arquitetura de Sigilo & Não-Vazamento</h3>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.82rem; color: var(--text-muted); margin-top: 0.8rem;">
+                        <div><strong style="color: #ffffff;">1. Local-First Processing:</strong> Whisper e redaction de dados sensíveis ocorrem on-premise no servidor da MLP.</div>
+                        <div><strong style="color: #ffffff;">2. Zero Cloud Training:</strong> Garantia contratual com provedores de API de que nenhum dado trafegado é usado em retreino.</div>
+                        <div><strong style="color: #ffffff;">3. Segmentação de Folders:</strong> Listas do ClickUp protegidas por coordenação jurídica (sigilo profissional OAB).</div>
+                        <div><strong style="color: #ffffff;">4. Trilha Auditável:</strong> Todo evento registrado com timestamp, autor, canal e hash criptográfico imutável.</div>
+                    </div>
+                </div>
+
+                <div class="live-card">
+                    <div class="card-header">
+                        <div class="card-icon-box amber">
+                            <i data-lucide="shield-alert" style="width: 22px; height: 22px;"></i>
+                        </div>
+                        <span class="card-badge badge-amber">Proteção de Contas</span>
+                    </div>
+                    <h3 class="card-title">Política Anti-Bloqueio Meta (WhatsApp)</h3>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.82rem; color: var(--text-muted); margin-top: 0.8rem;">
+                        <div><strong style="color: #ffffff;">1. Spintax 100% Obrigatório:</strong> Proibido enviar duas frases idênticas; variações de sinônimos via IA em todo envio.</div>
+                        <div><strong style="color: #ffffff;">2. Jitter & Cadência Humana:</strong> Intervalos aleatórios entre 35s e 110s com pausas de descanso a cada bloco.</div>
+                        <div><strong style="color: #ffffff;">3. Aquecimento Gradual (14 Dias):</strong> Linhas novas começam com 2 a 3 grupos/dia nos primeiros 30 dias.</div>
+                        <div><strong style="color: #ffffff;">4. Zero Links no 1º Contato:</strong> A primeira abordagem jamais contém links ou anexos (maior gatilho de denúncia por SPAM).</div>
+                        <div><strong style="color: #ffffff;">5. Circuito de Parada (Circuit Breaker):</strong> Falha em 2 envios consecutivos interrompe o processo e notifica o consultor.</div>
+                        <div><strong style="color: #ffffff;">6. Respeito Imediato ao Opt-Out:</strong> Palavras como "não", "pare" ou "remover" cancelam novos disparos para sempre.</div>
+                        <div><strong style="color: #ffffff;">7. Grupo Canônico:</strong> Monitora-se múltiplos grupos, mas a escrita ocorre em no máximo dois canais oficiais.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="live-footer">
+        <div>
+            <strong>Ecossistema Live & Live Consultoria</strong> — LUIZ E A PORTAL (CNPJ: 52.887.139/0001-00)
+            <div style="font-size: 0.75rem; color: var(--text-subtle); margin-top: 0.2rem;">
+                Apresentação Técnica e Pedagógica de Arquitetura Multi-Agente & Imersão Themis (08/09/2026)
+            </div>
+        </div>
+        <div>
+            © Powered by <a href="mailto:cleberdonato@ecossistemalive.com.br">Cléber Donato</a> & <a href="#">Luiz Portal</a>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPTS -->
+    <script>
+        // Lucide Icons initialization
+        if (typeof lucide !== 'undefined' && lucide.createIcons) {
+            lucide.createIcons();
+        }
+
+        // Slide Navigation State
+        let currentSlide = 0;
+        const totalSlides = 6;
+        let viewMode = 'deck'; // 'deck' or 'scroll'
+
+        function updateSlideUI() {
+            if (viewMode === 'deck') {
+                const slides = document.querySelectorAll('.slide-content');
+                slides.forEach((slide, idx) => {
+                    if (idx === currentSlide) {
+                        slide.classList.add('active');
+                    } else {
+                        slide.classList.remove('active');
+                    }
+                });
+
+                // Update tabs
+                const tabs = document.querySelectorAll('.tab-item');
+                tabs.forEach((tab, idx) => {
+                    if (idx === currentSlide) {
+                        tab.classList.add('active');
+                    } else {
+                        tab.classList.remove('active');
+                    }
+                });
+
+                // Update counter and progress
+                const counter = document.getElementById('slideCounter');
+                if (counter) counter.textContent = `${currentSlide + 1} / ${totalSlides}`;
+                const progressPct = ((currentSlide + 1) / totalSlides) * 100;
+                const pBar = document.getElementById('progressBar');
+                if (pBar) pBar.style.width = `${progressPct}%`;
+
+                // Update button states
+                const btnPrev = document.getElementById('btnPrev');
+                const btnNext = document.getElementById('btnNext');
+                if (btnPrev) btnPrev.disabled = (currentSlide === 0);
+                if (btnNext) btnNext.disabled = (currentSlide === totalSlides - 1);
+
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function navigateSlide(delta) {
+            const next = currentSlide + delta;
+            if (next >= 0 && next < totalSlides) {
+                currentSlide = next;
+                updateSlideUI();
+            }
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            if (viewMode === 'scroll') {
+                const target = document.getElementById(`slide-${index}`);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            } else {
+                updateSlideUI();
+            }
+        }
+
+        function setViewMode(mode) {
+            viewMode = mode;
+            const btnDeck = document.getElementById('btnModeDeck');
+            const btnScroll = document.getElementById('btnModeScroll');
+            const slideControls = document.getElementById('slideNavControls');
+
+            if (mode === 'scroll') {
+                document.body.classList.add('scroll-mode');
+                if (btnScroll) btnScroll.classList.add('active');
+                if (btnDeck) btnDeck.classList.remove('active');
+                if (slideControls) slideControls.style.display = 'none';
+                setupScrollSpy();
+            } else {
+                document.body.classList.remove('scroll-mode');
+                if (btnDeck) btnDeck.classList.add('active');
+                if (btnScroll) btnScroll.classList.remove('active');
+                if (slideControls) slideControls.style.display = 'flex';
+                updateSlideUI();
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (viewMode === 'deck') {
+                if (e.key === 'ArrowRight' || e.key === 'Space') {
+                    navigateSlide(1);
+                } else if (e.key === 'ArrowLeft') {
+                    navigateSlide(-1);
+                }
+            }
+        });
+
+        // Filter Agents in Slide 3 (BUG-FREE CROSS-BROWSER)
+        function filterAgents(category, btnElement) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+            if (btnElement) {
+                btnElement.classList.add('active');
+            }
+
+            const cards = document.querySelectorAll('.agent-card');
+            cards.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                if (category === 'all' || cardCat === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Scroll Spy for Scroll Mode
+        let scrollObserver = null;
+        function setupScrollSpy() {
+            if (scrollObserver) scrollObserver.disconnect();
+            const slides = document.querySelectorAll('.slide-content');
+            scrollObserver = new IntersectionObserver((entries) => {
+                if (viewMode !== 'scroll') return;
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const sid = entry.target.id;
+                        const sIdx = parseInt(sid.replace('slide-', ''));
+                        if (!isNaN(sIdx)) {
+                            currentSlide = sIdx;
+                            const tabs = document.querySelectorAll('.tab-item');
+                            tabs.forEach((tab, idx) => {
+                                if (idx === currentSlide) tab.classList.add('active');
+                                else tab.classList.remove('active');
+                            });
+                            const counter = document.getElementById('slideCounter');
+                            if (counter) counter.textContent = `${currentSlide + 1} / ${totalSlides}`;
+                            const pBar = document.getElementById('progressBar');
+                            if (pBar) pBar.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+                        }
+                    }
+                });
+            }, {
+                rootMargin: '-15% 0px -60% 0px',
+                threshold: 0
+            });
+
+            slides.forEach(slide => scrollObserver.observe(slide));
+        }
+
+        // Simulator Logic with Robust Cancellation
+        const scenarios = {
+            1: {
+                title: "Áudio Dr. Rogério (Demanda Interna)",
+                group: "MLP — Grupo Interno Diretoria",
+                steps: [
+                    { delay: 400, type: "inbound", text: "🎙️ Áudio recebido (0:42) — Dr. Rogério: 'Meninas, preciso que confiram com urgência a guia da Usina Caçu ref. competência 08/2026 antes do almoço.'" },
+                    { delay: 1000, type: "log", tag: "[ARGOS COLETOR]", text: "Capturado áudio id_94821 na sessão web. Whisper local acionado para transcrição semântica.", cls: "log-info" },
+                    { delay: 1800, type: "log", tag: "[CLASSIFICADOR]", text: "Texto extraído: 'conferir guia Usina Caçu 08/2026'. Origem: equipe_mlp (Dr. Rogério). Natureza: pedido_urgente. Assunto: financeiro_tributario.", cls: "log-tag" },
+                    { delay: 2600, type: "log", tag: "[MATRIZ LEGITIMIDADE]", text: "Solicitante: Dr. Rogério (Diretoria). Legitimidade: TOTAL (Nível 0). Demanda aberta status='aberta'.", cls: "log-tag" },
+                    { delay: 3400, type: "log", tag: "[CLICKUP]", text: "Card criado na Lista 'Demandas — Tributário'. Tags: #dep:tributario #pes:rogerio #sla:n3-urgente. Notificação enviada para Michele.", cls: "log-warn" },
+                    { delay: 4200, type: "outbound", text: "🤖 Secretária MLP: 'Demanda registrada no ClickUp sob #891. Coordenação Tributária notificada com prazo N3 (4h) para conferência da guia da Usina Caçu.'" },
+                    { delay: 4800, type: "log", tag: "[FECHAMENTO]", text: "Relógio de acolhimento encerrado (12s). Relógio de resolução correndo até envio do comprovante.", cls: "log-tag" }
+                ]
+            },
+            2: {
+                title: "Cliente Leigo (Tradução Didática)",
+                group: "Grupo Canônico: Família Soncini & MLP",
+                steps: [
+                    { delay: 400, type: "inbound", text: "👤 Seu Otávio (Cliente): 'Boa tarde! Saiu uma decisão no nosso processo e eu não entendi nada daquele papel que chegou no e-mail. Alguém me explica?'" },
+                    { delay: 1100, type: "log", tag: "[ARGOS COLETOR]", text: "Mensagem capturada. Remetente identificado: Otávio Soncini (Pessoa física / Didático).", cls: "log-info" },
+                    { delay: 1900, type: "log", tag: "[SECRETÁRIA CONCIERGE]", text: "Acuse de recebimento imediato disparado. Tag do cliente: 'perfil:didatico'.", cls: "log-tag" },
+                    { delay: 2500, type: "outbound", text: "🤖 Secretária MLP: 'Olá, Seu Otávio! Já recebi sua mensagem. Nossa equipe já está abrindo o andamento para te explicar com toda clareza. Um momento!'" },
+                    { delay: 3300, type: "log", tag: "[MENTOR JURÍDICO]", text: "Andamento recuperado do Legal One: 'Despacho deferindo efeito suspensivo ao Agravo de Instrumento'. Aplicando skill de tradução em 3 camadas.", cls: "log-purple" },
+                    { delay: 4200, type: "log", tag: "[FILA DE APROVAÇÃO]", text: "Tradução gerada na Fila L2: 1. O que aconteceu (juiz pausou a cobrança); 2. O que significa (empresa não precisa pagar agora); 3. O que acontece agora (aguarda réplica da Fazenda).", cls: "log-warn" },
+                    { delay: 5000, type: "log", tag: "[GATE L2 HUMANO]", text: "Advogada Aika validou o texto no ClickUp sem edição. Autorizado envio ao WhatsApp.", cls: "log-tag" },
+                    { delay: 5800, type: "outbound", text: "🤖 Secretária MLP (Validado por Dra. Aika): 'Seu Otávio, uma ótima notícia: o juiz aceitou nosso pedido e suspendeu temporariamente a cobrança. Isso significa que a empresa não terá que desembolsar esse valor agora. Agora nós vamos aguardar a manifestação da outra parte. Qualquer novidade eu te aviso!'" }
+                ]
+            },
+            3: {
+                title: "Solicitante sem Legitimidade",
+                group: "Grupo Canônico: Goianita & MLP",
+                steps: [
+                    { delay: 400, type: "inbound", text: "👤 Marcos (Gerente Operacional): 'Favor me enviarem o contrato social consolidado com os valores de honorários da última alteração contratual.'" },
+                    { delay: 1100, type: "log", tag: "[ARGOS COLETOR]", text: "Mensagem capturada. Remetente: Marcos Vinícius (Papel: 'Operacional').", cls: "log-info" },
+                    { delay: 2000, type: "log", tag: "[MATRIZ LEGITIMIDADE]", text: "Consultando aba 'Matriz Legitimidade' do cliente Goianita. Tipo 'honorarios_contrato' restrito a: SÓCIOS e DIRETORIA FINANCEIRA.", cls: "log-warn" },
+                    { delay: 2800, type: "log", tag: "[REGRA D4 ATIVADA]", text: "REGRA DE OURO D4: O agente NUNCA comunica falta de legitimidade ao solicitante. Criada Demanda status='bloqueada'.", cls: "log-danger" },
+                    { delay: 3600, type: "outbound", text: "🤖 Secretária MLP: 'Olá, Marcos! Recebemos sua solicitação. Registrei o pedido internamente e nossa coordenação já foi acionada para verificar o envio da documentação.'" },
+                    { delay: 4400, type: "log", tag: "[NOTIFICAÇÃO INTERNA]", text: "Alerta no ClickUp para o sócio responsável: 'Marcos solicitou documento financeiro sigiloso sem legitimidade formal. Decisão humana requerida.'", cls: "log-warn" }
+                ]
+            },
+            4: {
+                title: "Menção Notificação DTE (Urgência Crítica)",
+                group: "Grupo Canônico: Usina Caçu Tributário",
+                steps: [
+                    { delay: 400, type: "inbound", text: "👤 Contabilidade Caçu: 'Pessoal, acabou de chegar uma mensagem estranha no DTE da Receita Federal sobre o processo de compensação. O que fazemos?'" },
+                    { delay: 1000, type: "log", tag: "[ARGOS COLETOR]", text: "Captura de mensagem com keyword crítica detectada: 'DTE'.", cls: "log-danger" },
+                    { delay: 1800, type: "log", tag: "[PROTOCOLO DTE MÁXIMO]", text: "DISPARO DO PROTOCOLO DTE: Risco de abertura de prazo recursal compulsório (15 dias). Régua N5 (Crítico Máximo).", cls: "log-danger" },
+                    { delay: 2600, type: "outbound", text: "🚨 Secretária MLP: 'ALERTA DE SEGURANÇA: Identificamos que se trata de uma notificação do portal DTE. Por favor, NÃO CLIQUEM na mensagem no portal antes de alinharmos, para não iniciar a contagem do prazo! Nossa coordenadora tributária já está acessando agora!'" },
+                    { delay: 3400, type: "log", tag: "[ALERTAS SIMULTÂNEOS]", text: "E-mail urgente + SMS + Card N5 Prioridade Máxima no ClickUp atribuído a Dra. Michele e Controladoria.", cls: "log-danger" },
+                    { delay: 4200, type: "log", tag: "[STATUS]", text: "TMA de resposta: 14 segundos. Acidente de prazo prevenido com sucesso.", cls: "log-tag" }
+                ]
+            }
+        };
+
+        // Race-Condition-Free Simulator Runner
+        let currentSimRunId = 0;
+        let simTimeouts = [];
+
+        function stopCurrentSimulation() {
+            currentSimRunId++;
+            simTimeouts.forEach(t => clearTimeout(t));
+            simTimeouts = [];
+        }
+
+        function runScenario(scenId) {
+            stopCurrentSimulation();
+            const runId = currentSimRunId;
+
+            // Update buttons
+            for (let i = 1; i <= 4; i++) {
+                const btn = document.getElementById(`btnScen${i}`);
+                if (btn) {
+                    if (i === scenId) btn.classList.add('active');
+                    else btn.classList.remove('active');
+                }
+            }
+
+            const chatStream = document.getElementById('chatStream');
+            const systemLogs = document.getElementById('systemLogs');
+            const indicator = document.getElementById('chatGroupIndicator');
+            const statusBadge = document.getElementById('systemStatusBadge');
+
+            if (chatStream) chatStream.innerHTML = '';
+            if (systemLogs) systemLogs.innerHTML = '';
+
+            const scen = scenarios[scenId];
+            if (!scen) return;
+
+            if (indicator) indicator.textContent = scen.group;
+            if (statusBadge) {
+                statusBadge.textContent = "Executando...";
+                statusBadge.className = "card-badge badge-amber";
+            }
+
+            let stepIndex = 0;
+
+            function executeStep() {
+                if (runId !== currentSimRunId) return; // Abort if user switched scenario
+
+                if (stepIndex >= scen.steps.length) {
+                    if (statusBadge) {
+                        statusBadge.textContent = "Concluído";
+                        statusBadge.className = "card-badge badge-accent";
+                    }
+                    return;
+                }
+
+                const step = scen.steps[stepIndex];
+                const timer = setTimeout(() => {
+                    if (runId !== currentSimRunId) return; // Abort if cancelled
+
+                    if (step.type === 'inbound') {
+                        const msg = document.createElement('div');
+                        msg.className = 'chat-msg inbound';
+                        msg.textContent = step.text;
+                        if (chatStream) {
+                            chatStream.appendChild(msg);
+                            chatStream.scrollTop = chatStream.scrollHeight;
+                        }
+                    } else if (step.type === 'outbound') {
+                        const msg = document.createElement('div');
+                        msg.className = 'chat-msg outbound-agent';
+                        msg.textContent = step.text;
+                        if (chatStream) {
+                            chatStream.appendChild(msg);
+                            chatStream.scrollTop = chatStream.scrollHeight;
+                        }
+                    } else if (step.type === 'log') {
+                        const log = document.createElement('div');
+                        log.className = 'log-entry';
+                        log.innerHTML = `<span class="${step.cls}">${step.tag}</span> <span>${step.text}</span>`;
+                        if (systemLogs) {
+                            systemLogs.appendChild(log);
+                            systemLogs.scrollTop = systemLogs.scrollHeight;
+                        }
+                    }
+
+                    stepIndex++;
+                    executeStep();
+                }, step.delay);
+
+                simTimeouts.push(timer);
+            }
+
+            executeStep();
+        }
+
+        // Initialize with scenario 1 after load
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                runScenario(1);
+            }, 400);
+        });
+
+    </script>
+</body>
+</html>

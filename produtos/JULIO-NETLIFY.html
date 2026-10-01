@@ -1,86 +1,90 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+﻿<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Júlio Bot v8.0 (Copiloto de Gestão) — Ecossistema Live</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Júlio Bot v8.0 (Copiloto de Gestão) | Ecossistema Live</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    :root { var(--bg: #0b0f19; --card: #111827; --green: #10b981; --border: rgba(255,255,255,0.1); --text: #f8fafc; --muted: #94a3b8; }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-    body { background: #0b0f19; color: #f8fafc; padding: 2rem 1rem; line-height: 1.6; }
-    .container { max-width: 900px; margin: 0 auto; background: #111827; border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 2.5rem; }
-    .badge { display: inline-block; background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3); font-size: 0.75rem; font-weight: 800; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; margin-bottom: 1rem; }
-    h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.4rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem; }
-    .sku { font-family: monospace; color: #64748b; margin-bottom: 1.5rem; }
-    .price-box { background: rgba(15,23,42,0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
-    .price { font-size: 2rem; font-weight: 900; color: #10b981; }
-    .section-title { font-size: 1.25rem; font-weight: 800; color: #fff; margin: 1.8rem 0 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; }
-    ul { padding-left: 1.2rem; color: #94a3b8; margin-bottom: 1rem; }
-    li { margin-bottom: 0.4rem; }
-    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1rem; }
-    .step-item { background: rgba(15,23,42,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1rem; }
-    .step-num { font-size: 0.75rem; font-weight: 800; color: #10b981; margin-bottom: 0.3rem; }
-    .btn-wa { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: #25d366; color: #fff; text-decoration: none; font-weight: 800; font-size: 1.05rem; padding: 1rem 2rem; border-radius: 30px; margin-top: 2rem; width: 100%; transition: transform 0.2s; }
-    .btn-wa:hover { transform: translateY(-2px); background: #20ba5a; }
-    .btn-back { display: inline-block; color: #94a3b8; text-decoration: none; font-size: 0.9rem; margin-bottom: 1.5rem; }
+    :root {
+      --surface: #0B1120;
+      --surface-subtle: #0F1729;
+      --surface-raised: #111C33;
+      --surface-inset: #0A1020;
+      --text: #F1F5F9;
+      --text-secondary: #94A3B8;
+      --text-muted: #94A3B8;
+      --border: #1E2A44;
+      --action: #10B981;
+      --action-hover: #059669;
+      --action-subtle: rgba(16, 185, 129, 0.14);
+      --on-action: #0B1120;
+      --r-lg: 14px; --r-xl: 20px; --r-full: 999px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; }
+    body { background: var(--surface); color: var(--text); font-family: 'Inter', sans-serif; padding: 2rem 1rem; line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; background: var(--surface-raised); border: 1px solid var(--border); border-radius: var(--r-xl); padding: 2.5rem; }
+    .btn-back { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 600; margin-bottom: 1.5rem; }
     .btn-back:hover { color: #fff; }
+    .badge { display: inline-block; background: var(--action-subtle); color: var(--action); border: 1px solid var(--action); font-size: 0.75rem; font-weight: 800; padding: 4px 12px; border-radius: var(--r-full); text-transform: uppercase; margin-bottom: 1rem; }
+    h1 { font-size: 2.2rem; font-weight: 900; color: #fff; margin-bottom: 0.3rem; }
+    .sku { font-family: monospace; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem; }
+    .price-box { background: var(--surface-inset); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .price { font-size: 2rem; font-weight: 900; color: var(--action); }
+    .section-title { font-size: 1.2rem; font-weight: 800; color: #fff; margin: 1.8rem 0 0.8rem 0; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1rem; }
+    .btn-wa { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: #25D366; color: #FFF; text-decoration: none; font-weight: 800; font-size: 1.05rem; padding: 1rem 2rem; border-radius: var(--r-full); margin-top: 2rem; width: 100%; transition: background 0.2s; }
+    .btn-wa:hover { background: #20BA5A; text-decoration: none; }
   </style>
 </head>
 <body>
   <div class="container">
     <a href="../index.html" class="btn-back">← Voltar ao Catálogo Completo</a>
     
-    <div class="badge">Assinatura MRR</div>
+    <div class="badge">SaaS & IA Corporativa</div>
     <h1>Júlio Bot v8.0 (Copiloto de Gestão)</h1>
     <div class="sku">SKU: JULIO-NETLIFY</div>
     
     <div class="price-box">
       <div>
-        <div style="font-size:0.8rem; color:#94a3b8;">Investimento Recorrente</div>
+        <div style="font-size:0.8rem; color:var(--text-muted);">Investimento Comercial</div>
         <div class="price">R$ 120,00 / mês</div>
       </div>
-      <div style="text-align:right; font-size:0.85rem; color:#cbd5e1;">Assinatura Mensal sem fidelidade perétua</div>
+      <div style="text-align:right; font-size:0.85rem; color:var(--text-secondary);">Assinatura Mensal sem fidelidade</div>
     </div>
     
     <div class="section-title">📌 Descrição & Valor Entregue</div>
-    <p style="color:#cbd5e1; font-size:1rem; line-height:1.6;">
-      O Júlio Bot v8.0 é um Web App SPA hospedado no Netlify com Firebase Auth e Cloud Firestore multi-tenant. Atua como o copiloto diário do gestor e colaboradores, cobrando rotinas, orientando tarefas, organizando cadernos de ativação e tirando dúvidas de processos da empresa.
+    <p style="color:var(--text-secondary); font-size:1rem; line-height:1.6;">
+      Web App SPA no Netlify com Firebase Auth e Cloud Firestore multi-tenant. Copiloto de gestão com rotinas, alertas e cadernos.
     </p>
 
-    <div class="section-title">⚙️ Requisitos Técnicos Mínimos</div>
-    <ul>
-      <li>Navegador Web (Chrome, Edge ou Safari) em qualquer computador ou dispositivo móvel.</li>
-      <li>E-mail corporativo ou pessoal para cadastro de usuário.</li>
-      <li>Conexão de internet ativa.</li>
-    </ul>
+    <div class="section-title">⚙️ Requisitos & Pré-Requisitos Mínimos</div>
+    <p style="color:var(--text-secondary); font-size:0.95rem;">
+      Navegador Web; E-mail corporativo para cadastro; Conexão de internet ativa.
+    </p>
 
-    <div class="section-title">⚡ Etapas da Implantação</div>
+    <div class="section-title">⚡ Etapas da Implantação e Execução</div>
     <div class="steps-grid">
-      <div class="step-item">
-        <div class="step-num">Etapa 1 — Criar Tenant (D+1)</div>
-        <div style="font-weight:700; color:#fff; margin-bottom:0.2rem;">Provisionamento Firebase</div>
-        <div style="font-size:0.8rem; color:#94a3b8;">Criação da partição `/tenants/{tenantId}` no Firestore e liberação de Auth.</div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">Etapa 2 — Credenciais (D+1)</div>
-        <div style="font-weight:700; color:#fff; margin-bottom:0.2rem;">Envio de Acesso</div>
-        <div style="font-size:0.8rem; color:#94a3b8;">Envio do link oficial e senha temporária por WhatsApp ou e-mail.</div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">Etapa 3 — Onboarding (D+2)</div>
-        <div style="font-weight:700; color:#fff; margin-bottom:0.2rem;">Sessão Virtual 30 min</div>
-        <div style="font-size:0.8rem; color:#94a3b8;">Apresentação do Júlio e configuração dos 3 objetivos iniciais da empresa.</div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">Etapa 4 — Uso diário</div>
-        <div style="font-weight:700; color:#fff; margin-bottom:0.2rem;">Suporte & Alertas</div>
-        <div style="font-size:0.8rem; color:#94a3b8;">Acompanhamento contínuo de tarefas e suporte técnico.</div>
+            <div style="background:var(--surface-inset); border:1px solid var(--border); border-radius:var(--r-lg); padding:1.2rem;">
+        <div style="font-size:0.75rem; font-weight:800; color:var(--action); margin-bottom:0.3rem;">ETAPA 1</div>
+        <div style="font-size:0.95rem; font-weight:700; color:#fff;">Tenant: Provisionamento da partição /tenants/{tenantId} no Firestore</div>
+      </div>      <div style="background:var(--surface-inset); border:1px solid var(--border); border-radius:var(--r-lg); padding:1.2rem;">
+        <div style="font-size:0.75rem; font-weight:800; color:var(--action); margin-bottom:0.3rem;">ETAPA 2</div>
+        <div style="font-size:0.95rem; font-weight:700; color:#fff;">Credenciais: Envio do link oficial e acesso inicial</div>
+      </div>      <div style="background:var(--surface-inset); border:1px solid var(--border); border-radius:var(--r-lg); padding:1.2rem;">
+        <div style="font-size:0.75rem; font-weight:800; color:var(--action); margin-bottom:0.3rem;">ETAPA 3</div>
+        <div style="font-size:0.95rem; font-weight:700; color:#fff;">Onboarding: Sessão de 30 min para configurar objetivos</div>
+      </div>      <div style="background:var(--surface-inset); border:1px solid var(--border); border-radius:var(--r-lg); padding:1.2rem;">
+        <div style="font-size:0.75rem; font-weight:800; color:var(--action); margin-bottom:0.3rem;">ETAPA 4</div>
+        <div style="font-size:0.95rem; font-weight:700; color:#fff;">Uso Diário: Suporte contínuo e cobrança de rotinas</div>
       </div>
     </div>
 
-    <a href="https://wa.me/5561996993134?text=Ol%C3%A1!%20Quero%20assinar%20o%20J%C3%BAlio%20Bot%20v8.0%20(SKU%3A%20JULIO-NETLIFY)%20por%20R%24%20120%2Fm%C3%AAs." target="_blank" class="btn-wa">
-      💬 Contatar via WhatsApp (61 996993134)
+    <!-- BOTÃO COM TEXTO LIMPO SEM NÚMERO EXPOSTO -->
+    <a href="https://wa.me/5561996993134?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20produto%3A%20J%C3%BAlio%20Bot%20v8.0%20(Copiloto%20de%20Gest%C3%A3o)%20(SKU%3A%20JULIO-NETLIFY)." target="_blank" class="btn-wa">
+      💬 Falar no WhatsApp
     </a>
   </div>
 </body>

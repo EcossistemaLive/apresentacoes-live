@@ -1,1773 +1,1081 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ecossistema Live — Hub de Inteligência Empresarial & Governança por IA</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hub de Inteligência Empresarial & Governança por IA | Ecossistema Live</title>
+  <meta name="description" content="Não fazemos consultoria tradicional. Estruturamos governança, diagnosticamos gargalos através de IA, desenvolvemos lideranças e entregamos produtos modulares.">
+  <link rel="canonical" href="https://ecossistemalive.github.io/apresentacoes-live/">
+  <meta name="theme-color" content="#0B1120">
+
+  <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
   <style>
+    /* ============================================================
+       TOKENS — design.md v1.1
+       ============================================================ */
     :root {
-      --bg-main: #0b0f19;
-      --bg-card: #111827;
-      --bg-card-hover: #1f2937;
-      --border-color: rgba(255, 255, 255, 0.1);
-      --border-accent: rgba(16, 185, 129, 0.4);
-      
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --text-dim: #64748b;
-      
-      --brand-green: #10b981;
-      --brand-green-glow: rgba(16, 185, 129, 0.35);
-      --brand-cyan: #06b6d4;
-      --brand-blue: #3b82f6;
-      --brand-gold: #f59e0b;
-      --brand-purple: #8b5cf6;
-      
-      --gradient-brand: linear-gradient(135deg, #10b981 0%, #06b6d4 50%, #3b82f6 100%);
-      --gradient-text: linear-gradient(90deg, #ffffff 0%, #e2e8f0 50%, #34d399 100%);
-      --gradient-gold: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-      
-      --font-body: 'Inter', sans-serif;
-      --font-heading: 'Plus Jakarta Sans', sans-serif;
-      --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-      --shadow-glow: 0 0 25px rgba(16, 185, 129, 0.25);
+      /* Neutros */
+      --n-0:   #FFFFFF;
+      --n-50:  #F8FAFC;
+      --n-100: #F1F5F9;
+      --n-200: #E2E8F0;
+      --n-300: #CBD5E1;
+      --n-400: #94A3B8;
+      --n-500: #64748B;
+      --n-600: #475569;
+      --n-700: #334155;
+      --n-800: #1E293B;
+      --n-900: #0F172A;
+      --n-950: #0B1120;
+
+      /* Marca Indigo */
+      --b-300: #A5B4FC;
+      --b-400: #818CF8;
+      --b-500: #6366F1;
+      --b-600: #4F46E5;
+
+      /* Acento Ciano */
+      --c-300: #67E8F9;
+      --c-400: #22D3EE;
+      --c-500: #06B6D4;
+
+      /* Destaque Âmbar */
+      --a-300: #FCD34D;
+      --a-400: #FBBF24;
+
+      /* Semânticos (Dark Mode) */
+      --surface:        var(--n-950);
+      --surface-subtle: #0F1729;
+      --surface-raised: #111C33;
+      --surface-inset:  #0A1020;
+
+      --text:           var(--n-100);
+      --text-secondary: var(--n-400);
+      --text-muted:     var(--n-400);
+      --text-brand:     var(--b-300);
+
+      --border:            #1E2A44;
+      --border-strong:     #2A3A5C;
+      --border-interactive:var(--n-500);
+
+      --action:        var(--b-400);
+      --action-hover:  var(--b-300);
+      --action-subtle: rgba(129, 140, 248, 0.14);
+      --on-action:     var(--n-950);
+
+      --accent:          var(--c-400);
+      --accent-text:     var(--c-300);
+      --accent-surface:  rgba(34, 211, 238, 0.12);
+      --accent-border:   rgba(34, 211, 238, 0.28);
+
+      --highlight:        var(--a-400);
+      --highlight-text:   var(--a-300);
+      --highlight-surface:rgba(251, 191, 36, 0.14);
+      --highlight-border: rgba(251, 191, 36, 0.30);
+      --highlight-mark:   rgba(251, 191, 36, 0.26);
+
+      --grad-brand: linear-gradient(135deg, var(--b-400) 0%, var(--c-400) 100%);
+      --grad-text:  linear-gradient(100deg, var(--b-300) 0%, var(--c-300) 100%);
+      --grad-line:  linear-gradient(90deg, transparent, var(--b-400), var(--c-400), transparent);
+
+      --aura-brand:  radial-gradient(60% 60% at 50% 0%, rgba(99,102,241,.30) 0%, transparent 70%);
+      --aura-accent: radial-gradient(52% 52% at 88% 18%, rgba(34,211,238,.22) 0%, transparent 70%);
+      --aura-warm:   radial-gradient(45% 45% at 10% 88%, rgba(251,191,36,.13) 0%, transparent 70%);
+
+      --font-display: "Inter", system-ui, sans-serif;
+      --font-text:    "Inter", system-ui, sans-serif;
+
+      --fs-xs:   0.75rem;
+      --fs-sm:   0.875rem;
+      --fs-base: 1rem;
+      --fs-md:   1.125rem;
+      --fs-lg:   clamp(1.25rem, 0.6vw + 1.1rem, 1.375rem);
+      --fs-xl:   clamp(1.5rem,  1.0vw + 1.25rem, 1.75rem);
+      --fs-2xl:  clamp(1.875rem,1.6vw + 1.4rem,  2.25rem);
+      --fs-3xl:  clamp(2.25rem, 2.6vw + 1.6rem,  3rem);
+      --fs-4xl:  clamp(2.5rem,  3.0vw + 1.4rem,  3.5rem);
+
+      --lh-tight: 1.1; --lh-snug: 1.25; --lh-normal: 1.6;
+      --ls-tight: -0.02em; --ls-wide: 0.06em;
+      --fw-semibold: 600; --fw-bold: 700; --fw-black: 900;
+
+      --sp-2: 0.5rem; --sp-3: 0.75rem; --sp-4: 1rem; --sp-6: 1.5rem; --sp-8: 2rem; --sp-12: 3rem;
+      --section-y: clamp(4rem, 8vw, 7.5rem);
+      --container: 1200px;
+      --gutter: clamp(1.25rem, 4vw, 2.5rem);
+
+      --r-md: 10px; --r-lg: 14px; --r-xl: 20px; --r-full: 999px;
+      --sh-md: 0 4px 12px rgba(0,0,0,.55);
+      --sh-lg: 0 12px 32px rgba(0,0,0,.6);
+      --sh-stack: 0 8px 16px rgba(0,0,0,.4), 0 24px 48px rgba(0,0,0,.5);
+
+      --dur-fast: 120ms; --dur-base: 200ms;
+      --ease-out: cubic-bezier(.16,1,.3,1);
+
+      --z-header: 200;
     }
-    
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: var(--font-body);
-      scroll-behavior: smooth;
-    }
-    
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; }
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
     body {
-      background-color: var(--bg-main);
-      color: var(--text-main);
-      line-height: 1.6;
+      background: var(--surface);
+      color: var(--text);
+      font-family: var(--font-text);
+      font-size: var(--fs-md);
+      line-height: var(--lh-normal);
+      -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
-    
-    h1, h2, h3, h4, h5, h6 {
-      font-family: var(--font-heading);
+
+    img, svg { display: block; max-width: 100%; height: auto; }
+    button, input, select, textarea { font: inherit; color: inherit; }
+
+    h1,h2,h3,h4 { font-family: var(--font-display); font-weight: var(--fw-semibold); letter-spacing: var(--ls-tight); line-height: var(--lh-tight); }
+    h1 { font-size: var(--fs-4xl); font-weight: var(--fw-black); }
+    h2 { font-size: var(--fs-2xl); }
+    h3 { font-size: var(--fs-xl); }
+    h4 { font-size: var(--fs-lg); }
+
+    a { color: var(--text-brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
+    .section { padding-block: var(--section-y); position: relative; }
+    .section--subtle { background: var(--surface-subtle); border-y: 1px solid var(--border); }
+
+    .split { display: grid; gap: clamp(var(--sp-8), 5vw, var(--sp-16)); align-items: center; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); }
+
+    /* SEÇÃO 5 — TEXTURAS DE FUNDO (.bg) */
+    .bg { position: relative; isolation: isolate; overflow: hidden; }
+    .bg > * { position: relative; z-index: 1; }
+    .bg::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+    .bg--aura::before { background: var(--aura-brand), var(--aura-accent), var(--aura-warm); }
+    .bg--dots::before {
+      background-image: radial-gradient(color-mix(in srgb, var(--text) 16%, transparent) 1px, transparent 1px);
+      background-size: 24px 24px;
+      -webkit-mask-image: radial-gradient(75% 65% at 50% 0%, #000 0%, transparent 78%);
+              mask-image: radial-gradient(75% 65% at 50% 0%, #000 0%, transparent 78%);
+    }
+    .bg--grid::before {
+      background-image:
+        linear-gradient(to right,  color-mix(in srgb, var(--text) 9%, transparent) 1px, transparent 1px),
+        linear-gradient(to bottom, color-mix(in srgb, var(--text) 9%, transparent) 1px, transparent 1px);
+      background-size: 64px 64px;
+      -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 85%);
+              mask-image: linear-gradient(to bottom, #000 0%, transparent 85%);
     }
 
-    /* Animated background elements */
-    .bg-grid-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-      background-size: 30px 30px;
-      pointer-events: none;
-      z-index: 0;
+    .divider { height: 1px; border: 0; margin: 0; background: var(--grad-line); opacity: .6; }
+
+    .mark {
+      background-image: linear-gradient(180deg, transparent 55%, var(--highlight-mark) 55%);
+      padding-inline: .14em; border-radius: 2px;
+      box-decoration-break: clone; -webkit-box-decoration-break: clone;
     }
-    
-    .bg-shape-1 {
-      position: absolute;
-      top: -100px;
-      right: -100px;
-      width: 550px;
-      height: 550px;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.18) 0%, rgba(6, 182, 212, 0.05) 50%, transparent 70%);
-      border-radius: 50%;
-      filter: blur(70px);
-      z-index: 0;
-      animation: floatSlow 12s infinite alternate ease-in-out;
-    }
-    
-    .bg-shape-2 {
-      position: absolute;
-      top: 700px;
-      left: -150px;
-      width: 650px;
-      height: 650px;
-      background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(139, 92, 246, 0.05) 50%, transparent 70%);
-      border-radius: 50%;
-      filter: blur(90px);
-      z-index: 0;
-      animation: floatSlow 15s infinite alternate-reverse ease-in-out;
-    }
-    
-    @keyframes floatSlow {
-      0% { transform: translate(0, 0) rotate(0deg); }
-      100% { transform: translate(40px, 60px) rotate(15deg); }
-    }
-    
-    /* Header Navbar */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(11, 15, 25, 0.92);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border-color);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: all 0.3s ease;
-    }
-    
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      text-decoration: none;
-    }
-    
-    .logo-img {
-      height: 44px;
-      width: auto;
-      transition: transform 0.3s ease;
-    }
-    .logo-container:hover .logo-img {
-      transform: scale(1.05) rotate(-2deg);
-    }
-    
-    .brand-title {
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.02em;
-    }
-    .brand-tagline {
-      font-size: 0.75rem;
-      color: var(--brand-green);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-    
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    
-    .btn-seller-mode {
-      background: rgba(245, 158, 11, 0.15);
-      border: 1px solid var(--brand-gold);
-      color: var(--brand-gold);
-      padding: 0.55rem 1.2rem;
-      border-radius: 30px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: all 0.3s ease;
-    }
-    .btn-seller-mode:hover, .btn-seller-mode.active {
-      background: var(--gradient-gold);
-      color: #000;
-      box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
-    }
-    
-    .btn-contact-whatsapp {
-      background: #25d366;
-      color: #ffffff;
-      padding: 0.55rem 1.3rem;
-      border-radius: 30px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-    }
-    .btn-contact-whatsapp:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
-      background: #20ba5a;
-    }
-    
-    /* Layout Container */
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 2rem 1.5rem;
-      position: relative;
-      z-index: 10;
-    }
-    
-    /* Hero Section */
-    .hero {
-      text-align: center;
-      padding: 4rem 1rem 4rem 1rem;
-    }
-    
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(16, 185, 129, 0.12);
-      border: 1px solid var(--border-accent);
-      color: var(--brand-green);
-      padding: 0.45rem 1.3rem;
-      border-radius: 30px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      animation: pulseGlow 2.5s infinite ease-in-out;
-    }
-    
-    @keyframes pulseGlow {
-      0%, 100% { box-shadow: 0 0 10px rgba(16, 185, 129, 0.2); }
-      50% { box-shadow: 0 0 25px rgba(16, 185, 129, 0.5); }
-    }
-    
-    .hero-h1 {
-      font-size: 3.3rem;
-      font-weight: 900;
-      line-height: 1.15;
-      margin-bottom: 1.5rem;
-      background: var(--gradient-text);
+    .text-grad {
+      background: var(--grad-text);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
-      letter-spacing: -0.03em;
-    }
-    
-    .hero-p {
-      font-size: 1.25rem;
-      color: var(--text-muted);
-      max-width: 820px;
-      margin: 0 auto 2.5rem auto;
-      font-weight: 400;
-    }
-    
-    .hero-manifesto {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-left: 4px solid var(--brand-green);
-      border-radius: 16px;
-      padding: 2rem;
-      max-width: 900px;
-      margin: 0 auto 3rem auto;
-      text-align: left;
-      box-shadow: var(--shadow-card);
-      position: relative;
-    }
-    
-    .manifesto-tag {
-      font-size: 0.75rem;
-      font-weight: 800;
-      color: var(--brand-green);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.5rem;
-    }
-    .manifesto-text {
-      font-size: 1.15rem;
-      font-weight: 500;
-      color: #ffffff;
-      line-height: 1.6;
-    }
-    
-    .hero-ctas {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1.2rem;
-      flex-wrap: wrap;
-    }
-    
-    .btn-hero-primary {
-      background: var(--gradient-brand);
-      color: #ffffff;
-      font-weight: 800;
-      font-size: 1.05rem;
-      padding: 1rem 2.2rem;
-      border-radius: 35px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
-    }
-    .btn-hero-primary:hover {
-      transform: translateY(-4px) scale(1.03);
-      box-shadow: 0 15px 35px rgba(16, 185, 129, 0.6);
-    }
-    
-    .btn-hero-whatsapp {
-      background: #25d366;
-      color: #ffffff;
-      font-weight: 800;
-      font-size: 1.05rem;
-      padding: 1rem 2.2rem;
-      border-radius: 35px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
-    }
-    .btn-hero-whatsapp:hover {
-      transform: translateY(-4px) scale(1.03);
-      box-shadow: 0 15px 35px rgba(37, 211, 102, 0.6);
-      background: #20ba5a;
-    }
-
-    /* Stats Banner (REMOVIDO MÉTRO 3 MESES CONFORME SOLICITADO) */
-    .stats-banner {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-      margin: 2rem 0 4rem 0;
-    }
-    
-    .stat-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 1.6rem;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-    .stat-card:hover {
-      border-color: var(--border-accent);
-      transform: translateY(-5px);
-    }
-    
-    .stat-number {
-      font-size: 2.4rem;
-      font-weight: 900;
-      color: var(--brand-green);
-      margin-bottom: 0.2rem;
-    }
-    .stat-label {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    /* Pitch Deck Section (Seller Mode Only) */
-    .pitch-deck {
-      display: none;
-      background: #1e1b4b;
-      border: 2px solid var(--brand-gold);
-      border-radius: 20px;
-      padding: 2.5rem;
-      margin-bottom: 4rem;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-      animation: fadeInDown 0.4s ease;
-    }
-    body.seller-mode-active .pitch-deck {
-      display: block;
-    }
-    
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    .pitch-title {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--brand-gold);
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .pitch-subtitle {
-      color: #cbd5e1;
-      font-size: 0.95rem;
-      margin-bottom: 2rem;
-    }
-    
-    .pitch-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-    }
-    
-    .pitch-card {
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(245, 158, 11, 0.3);
-      border-radius: 14px;
-      padding: 1.4rem;
-    }
-    .pitch-card h4 {
-      color: var(--brand-green);
-      font-size: 1.1rem;
-      margin-bottom: 0.6rem;
-    }
-    .pitch-card p {
-      font-size: 0.88rem;
-      color: #cbd5e1;
-      line-height: 1.5;
-    }
-
-    /* AI Roadmap Section (NOVA SEÇÃO VISUAL ILUSTRATIVA) */
-    .ai-roadmap-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border-accent);
-      border-radius: 24px;
-      padding: 3rem 2rem;
-      margin-bottom: 5rem;
-    }
-    
-    .roadmap-steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1.2rem;
-      margin-top: 2rem;
-    }
-    
-    .step-card {
-      background: rgba(15, 23, 42, 0.7);
-      border: 1px solid var(--border-color);
-      border-radius: 14px;
-      padding: 1.2rem;
-      position: relative;
-    }
-    .step-num {
-      font-size: 0.8rem;
-      font-weight: 800;
-      color: var(--brand-green);
-      background: rgba(16, 185, 129, 0.15);
-      padding: 2px 8px;
-      border-radius: 10px;
+      color: var(--accent-text);
       display: inline-block;
-      margin-bottom: 0.6rem;
     }
-    .step-title {
-      font-size: 1rem;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 0.4rem;
+    .chip {
+      display: inline-flex; align-items: center; gap: var(--sp-2);
+      padding: var(--sp-2) var(--sp-4); border-radius: var(--r-full);
+      background: var(--accent-surface); color: var(--accent-text);
+      border: 1px solid var(--accent-border);
+      font-size: var(--fs-sm); font-weight: var(--fw-semibold);
+      width: fit-content;
     }
-    .step-desc {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      line-height: 1.4;
+    .chip__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+
+    .callout {
+      border-left: 3px solid var(--accent);
+      background: var(--accent-surface);
+      padding: var(--sp-5) var(--sp-6);
+      border-radius: 0 var(--r-md) var(--r-md) 0;
     }
 
-    /* Section Styling */
-    .section-header {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-    .section-tag {
-      font-size: 0.8rem;
-      font-weight: 800;
-      color: var(--brand-green);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 0.5rem;
-    }
-    .section-title {
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.8rem;
-    }
-    .section-desc {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      max-width: 650px;
-      margin: 0 auto;
+    /* SEÇÃO 6 — CARDS E BENTO GRID */
+    .bento { display: grid; gap: var(--sp-4); grid-template-columns: 1fr; }
+    @media (min-width: 720px) {
+      .bento { grid-template-columns: repeat(6, 1fr); grid-auto-rows: minmax(190px, auto); gap: var(--sp-5); }
+      .bento__item { grid-column: span 2; }
+      .bento__item--wide { grid-column: span 4; }
     }
 
-    /* Filter Tabs & Search */
-    .catalog-controls {
+    .card {
+      background: var(--surface-raised);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: var(--sp-8);
+      display: flex; flex-direction: column; justify-content: space-between;
+      transition: border-color var(--dur-base) var(--ease-out),
+                  box-shadow var(--dur-base) var(--ease-out),
+                  transform var(--dur-base) var(--ease-out);
+    }
+    .card--interactive:hover {
+      border-color: var(--border-strong);
+      box-shadow: var(--sh-md);
+      transform: translateY(-2px);
+    }
+
+    .card--spotlight { position: relative; overflow: hidden; }
+    .card--spotlight::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+      background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%),
+                  color-mix(in srgb, var(--accent) 20%, transparent), transparent 70%);
+      transition: opacity var(--dur-base) var(--ease-out);
+    }
+    .card--spotlight:hover::after { opacity: 1; }
+
+    .tile {
+      width: 48px; height: 48px; display: grid; place-items: center;
+      border-radius: var(--r-md); flex: none;
+      background: var(--grad-brand); color: #fff; box-shadow: var(--sh-glow);
+      margin-bottom: var(--sp-3);
+    }
+    .tile--accent { background: var(--accent-surface); color: var(--accent-text); border: 1px solid var(--accent-border); box-shadow: none; }
+    .tile--warm   { background: var(--highlight-surface); color: var(--highlight-text); border: 1px solid var(--highlight-border); box-shadow: none; }
+
+    .card--glass {
+      background: color-mix(in srgb, var(--surface-raised) 70%, transparent);
+      backdrop-filter: blur(16px) saturate(150%);
+      -webkit-backdrop-filter: blur(16px) saturate(150%);
+      border-color: color-mix(in srgb, var(--text) 10%, transparent);
+      box-shadow: var(--sh-md);
+    }
+
+    .kpi { display: flex; gap: var(--sp-4); align-items: stretch; }
+    .kpi__bar { width: 4px; border-radius: var(--r-full); background: var(--grad-brand); flex: none; }
+    .kpi__value { font-family: var(--font-display); font-size: var(--fs-3xl); font-weight: var(--fw-bold); letter-spacing: var(--ls-tight); line-height: 1; }
+    .kpi__label { font-size: var(--fs-sm); color: var(--text-secondary); margin-top: var(--sp-2); }
+
+    /* SEÇÃO 7 — MOLDURAS & MARQUEE */
+    .frame {
+      margin: 0; border-radius: var(--r-xl); overflow: hidden;
+      border: 1px solid var(--border); background: var(--surface-raised);
+      box-shadow: var(--sh-stack);
+    }
+    .frame__bar {
+      display: flex; align-items: center; gap: 6px;
+      padding: 10px 14px; background: var(--surface-subtle);
+      border-bottom: 1px solid var(--border);
+    }
+    .frame__bar > span { width: 10px; height: 10px; border-radius: 50%; background: var(--border-strong); }
+    .frame__bar em {
+      margin-left: var(--sp-4); font-style: normal; font-size: var(--fs-xs); color: var(--text-muted);
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-full); padding: 3px 12px;
+    }
+
+    .media-aura { position: relative; isolation: isolate; }
+    .media-aura > * { position: relative; z-index: 1; }
+    .media-aura::before {
+      content: ""; position: absolute; inset: -14% -6% -20%; z-index: 0; border-radius: 50%;
+      background: var(--grad-brand); filter: blur(72px); opacity: .28;
+    }
+
+    .marquee {
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+              mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    }
+    .marquee__track {
+      display: flex; align-items: center; gap: clamp(2.5rem, 5vw, 4.5rem);
+      width: max-content; list-style: none; padding: 0; margin: 0;
+      animation: marquee 34s linear infinite;
+    }
+    .marquee:hover .marquee__track { animation-play-state: paused; }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+
+    /* Header Navbar */
+    .site-header {
+      position: sticky; top: 0; z-index: var(--z-header);
+      background: color-mix(in srgb, var(--surface) 85%, transparent);
+      backdrop-filter: saturate(160%) blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .site-header__inner { display: flex; align-items: center; justify-content: space-between; min-height: 72px; }
+
+    .brand { display: flex; align-items: center; gap: var(--sp-3); text-decoration: none; }
+    .brand img { height: 40px; width: auto; }
+    .brand__name { font-size: 1.15rem; font-weight: var(--fw-bold); color: #fff; }
+    .brand__sub { font-size: 0.72rem; color: var(--action); font-weight: var(--fw-semibold); text-transform: uppercase; letter-spacing: var(--ls-wide); }
+
+    /* Botões */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: var(--sp-2);
+      min-height: 48px; padding: 0 var(--sp-6);
+      border: 1px solid transparent; border-radius: var(--r-lg);
+      font-size: var(--fs-base); font-weight: var(--fw-semibold); line-height: 1;
+      text-decoration: none; cursor: pointer; white-space: nowrap;
+      transition: background var(--dur-fast) var(--ease-out),
+                  border-color var(--dur-fast) var(--ease-out),
+                  transform var(--dur-fast) var(--ease-out);
+    }
+    .btn:hover { text-decoration: none; }
+    .btn:active { transform: translateY(1px); }
+
+    .btn--primary { background: var(--action); color: var(--on-action); font-weight: var(--fw-bold); }
+    .btn--primary:hover { background: var(--action-hover); }
+
+    .btn--whatsapp { background: #25D366; color: #FFFFFF; font-weight: var(--fw-bold); }
+    .btn--whatsapp:hover { background: #20BA5A; }
+
+    .btn--secondary { background: transparent; color: var(--text); border-color: var(--border-strong); }
+    .btn--secondary:hover { border-color: var(--text); background: var(--surface-subtle); }
+
+    .btn--lg { min-height: 56px; padding-inline: var(--sp-8); font-size: var(--fs-md); }
+    .btn--sm { min-height: 38px; padding-inline: var(--sp-4); font-size: var(--fs-sm); }
+    .btn--block { width: 100%; }
+
+    /* Catálogo & Cards */
+    .badge {
+      display: inline-flex; align-items: center; gap: var(--sp-2);
+      padding: var(--sp-1) var(--sp-3); border-radius: var(--r-full);
+      font-size: var(--fs-xs); font-weight: var(--fw-semibold);
+      letter-spacing: var(--ls-wide); text-transform: uppercase;
+      background: var(--action-subtle); color: var(--text-brand);
+      width: fit-content; margin-bottom: var(--sp-3);
+    }
+    .badge--gold { background: var(--highlight-surface); color: var(--highlight-text); border: 1px solid var(--highlight-border); }
+    .badge--blue { background: var(--accent-surface); color: var(--accent-text); border: 1px solid var(--accent-border); }
+
+    .card-footer-box {
+      border-top: 1px solid var(--border);
+      padding-top: var(--sp-4);
+      margin-top: auto;
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
-      margin-bottom: 2.5rem;
+      gap: var(--sp-4);
     }
-    
-    .search-box {
-      position: relative;
-      max-width: 500px;
-      margin: 0 auto;
-      width: 100%;
-    }
+    .price-val { font-size: var(--fs-xl); font-weight: var(--fw-bold); color: var(--action); }
+    .price-model { font-size: var(--fs-xs); color: var(--text-muted); margin-top: var(--sp-1); }
+    .card-btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-2); width: 100%; }
+
+    .catalog-bar { display: flex; flex-direction: column; gap: var(--sp-4); align-items: center; margin-bottom: var(--sp-8); }
     .search-input {
-      width: 100%;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 30px;
-      padding: 0.9rem 1.5rem 0.9rem 3rem;
-      color: #fff;
-      font-size: 0.95rem;
-      outline: none;
-      transition: all 0.3s ease;
+      width: 100%; max-width: 480px; min-height: 48px; padding: 0 var(--sp-6);
+      background: var(--surface-inset); border: 1px solid var(--border-interactive);
+      border-radius: var(--r-full); color: #fff; font-size: var(--fs-base); outline: none;
     }
-    .search-input:focus {
-      border-color: var(--brand-green);
-      box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
-    }
-    .search-icon {
-      position: absolute;
-      left: 1.2rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-dim);
-      font-size: 1.1rem;
-    }
-    
-    .category-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-    }
-    
+    .search-input:focus { border-color: var(--border-focus); }
+
+    .cat-tabs { display: flex; gap: var(--sp-2); flex-wrap: wrap; justify-content: center; }
     .cat-tab {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      color: var(--text-muted);
-      padding: 0.65rem 1.3rem;
-      border-radius: 25px;
-      font-size: 0.88rem;
-      font-weight: 600;
+      background: var(--surface-raised); border: 1px solid var(--border);
+      color: var(--text-secondary); padding: var(--sp-2) var(--sp-4);
+      border-radius: var(--r-full); font-size: var(--fs-sm); font-weight: var(--fw-semibold); cursor: pointer;
+    }
+    .cat-tab:hover, .cat-tab.active { background: var(--action); color: var(--on-action); border-color: var(--action); }
+
+    /* ESTILIZAÇÃO COMPLETA DO FAQ (DESIGN.MD ELEGANT CARDS) */
+    .faq-wrapper { display: flex; flex-direction: column; gap: var(--sp-4); }
+    .faq-card {
+      background: var(--surface-raised);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: var(--sp-6);
+      transition: all var(--dur-base) var(--ease-out);
+    }
+    .faq-card:hover {
+      border-color: var(--border-strong);
+      box-shadow: var(--sh-md);
+    }
+    .faq-card summary {
       cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .cat-tab:hover, .cat-tab.active {
-      background: var(--brand-green);
-      color: #000000;
-      border-color: var(--brand-green);
-      font-weight: 700;
-      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-    }
-
-    /* Product Grid */
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 1.8rem;
-      margin-bottom: 5rem;
-    }
-    
-    .product-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 20px;
-      padding: 1.8rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: var(--shadow-card);
-    }
-    .product-card:hover {
-      transform: translateY(-8px);
-      border-color: var(--border-accent);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), var(--shadow-glow);
-    }
-    
-    .card-top {
-      margin-bottom: 1.2rem;
-    }
-    
-    .product-badge {
-      display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 4px 12px;
-      border-radius: 20px;
-      margin-bottom: 1rem;
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--text-muted);
-    }
-    .product-badge.saas { background: rgba(16, 185, 129, 0.15); color: var(--brand-green); border: 1px solid rgba(16, 185, 129, 0.3); }
-    .product-badge.high-ticket { background: rgba(245, 158, 11, 0.15); color: var(--brand-gold); border: 1px solid rgba(245, 158, 11, 0.3); }
-    .product-badge.educacao { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
-    
-    .product-name {
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 0.4rem;
-      line-height: 1.3;
-    }
-    
-    .product-sku {
-      font-size: 0.75rem;
-      font-family: monospace;
-      color: var(--text-dim);
-      margin-bottom: 1rem;
-    }
-    
-    .product-desc {
-      font-size: 0.93rem;
-      color: var(--text-muted);
-      line-height: 1.55;
-    }
-    
-    /* Seller Info Overlay inside Card */
-    .seller-box {
-      display: none;
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid var(--brand-gold);
-      border-radius: 12px;
-      padding: 1rem;
-      margin-top: 1rem;
-      font-size: 0.83rem;
-    }
-    body.seller-mode-active .seller-box {
-      display: block;
-    }
-    
-    .seller-label {
-      color: var(--brand-gold);
-      font-weight: 800;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-top: 0.5rem;
-    }
-    .seller-value {
-      color: #e2e8f0;
-      margin-top: 0.1rem;
-    }
-
-    .card-footer {
-      border-top: 1px solid var(--border-color);
-      padding-top: 1.2rem;
-      margin-top: 1.5rem;
+      font-size: var(--fs-lg);
+      font-weight: var(--fw-semibold);
+      color: #FFF;
+      list-style: none;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 0.5rem;
+      gap: var(--sp-4);
+      user-select: none;
     }
-    
-    .price-group {
-      display: flex;
-      flex-direction: column;
+    .faq-card summary::-webkit-details-marker { display: none; }
+    .faq-icon-tile {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--accent-surface); border: 1px solid var(--accent-border);
+      color: var(--accent-text); display: grid; place-items: center;
+      font-weight: var(--fw-bold); font-size: 1.2rem; flex: none;
+      transition: transform var(--dur-fast) var(--ease-out), background var(--dur-fast);
     }
-    .price-tag {
-      font-size: 1.3rem;
-      font-weight: 900;
-      color: var(--brand-green);
+    .faq-card[open] .faq-icon-tile {
+      transform: rotate(45deg);
+      background: var(--action); color: var(--on-action); border-color: var(--action);
     }
-    .price-sub {
-      font-size: 0.75rem;
-      color: var(--text-dim);
-    }
-    
-    .card-actions {
-      display: flex;
-      gap: 0.4rem;
-    }
-
-    .btn-view-page {
-      background: rgba(16, 185, 129, 0.15);
-      color: var(--brand-green);
-      border: 1px solid var(--border-accent);
-      padding: 0.55rem 0.9rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-    .btn-view-page:hover {
-      background: var(--brand-green);
-      color: #000;
-    }
-
-    .btn-card-action {
-      background: #25d366;
-      color: #fff;
-      padding: 0.55rem 0.9rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-    .btn-card-action:hover {
-      background: #20ba5a;
-    }
-
-    /* ROI Simulator Section */
-    .simulator-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border-accent);
-      border-radius: 24px;
-      padding: 3rem 2rem;
-      margin-bottom: 5rem;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-    }
-    
-    .sim-layout {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 2.5rem;
-      align-items: start;
-    }
-    @media (max-width: 868px) {
-      .sim-layout { grid-template-columns: 1fr; }
-      .hero-h1 { font-size: 2.2rem; }
-    }
-    
-    .sim-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-      max-height: 420px;
-      overflow-y: auto;
-      padding-right: 0.5rem;
-    }
-    .sim-list::-webkit-scrollbar {
-      width: 6px;
-    }
-    .sim-list::-webkit-scrollbar-thumb {
-      background: var(--border-color);
-      border-radius: 10px;
-    }
-    
-    .sim-item {
-      background: rgba(15, 23, 42, 0.6);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1rem 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      transition: all 0.25s ease;
-    }
-    .sim-item:hover, .sim-item.active {
-      border-color: var(--brand-green);
-      background: rgba(16, 185, 129, 0.1);
-    }
-    
-    .sim-item-title {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #fff;
-    }
-    .sim-item-price {
-      font-size: 0.95rem;
-      font-weight: 800;
-      color: var(--brand-green);
-    }
-    
-    .sim-summary {
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid var(--border-color);
-      border-radius: 20px;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 380px;
-    }
-    
-    .sim-sum-title {
-      font-size: 1rem;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-    .sim-sum-price {
-      font-size: 2.8rem;
-      font-weight: 900;
-      color: var(--brand-green);
-      margin: 0.5rem 0;
-      letter-spacing: -0.03em;
-    }
-    .sim-sum-items {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-      line-height: 1.6;
-    }
-    
-    .btn-sim-whatsapp {
-      background: #25d366;
-      color: #ffffff;
-      text-align: center;
-      font-weight: 800;
-      font-size: 1rem;
-      padding: 1rem;
-      border-radius: 30px;
-      text-decoration: none;
-      display: block;
-      transition: all 0.3s ease;
-      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-    }
-    .btn-sim-whatsapp:hover {
-      background: #20ba5a;
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.6);
-    }
-
-    /* Departments Section */
-    .departments-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 5rem;
-    }
-    
-    .dept-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 1.6rem;
-      transition: all 0.3s ease;
-    }
-    .dept-card:hover {
-      border-color: var(--brand-green);
-      transform: translateY(-4px);
-    }
-    
-    .dept-badge {
-      font-size: 0.75rem;
-      font-weight: 800;
-      color: var(--brand-green);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.4rem;
-    }
-    .dept-name {
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 0.4rem;
-    }
-    .dept-lead {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-    }
-    .dept-desc {
-      font-size: 0.9rem;
-      color: #cbd5e1;
-      line-height: 1.55;
-    }
-
-    /* Partners Section (NOME CORRIGIDO: KHELVEN) */
-    .partners-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.2rem;
-      margin-bottom: 5rem;
-    }
-    
-    .partner-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 14px;
-      padding: 1.4rem;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-    .partner-card:hover {
-      border-color: var(--brand-cyan);
-      transform: translateY(-3px);
-    }
-    
-    .partner-name {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 0.3rem;
-    }
-    .partner-role {
-      font-size: 0.8rem;
-      color: var(--brand-cyan);
-      font-weight: 600;
+    .faq-card[open] summary { color: var(--accent-text); }
+    .faq-card p {
+      color: var(--text-secondary);
+      font-size: var(--fs-base);
+      line-height: var(--lh-normal);
+      margin-top: var(--sp-4);
+      padding-top: var(--sp-4);
+      border-top: 1px solid var(--border);
     }
 
     /* Footer */
-    footer {
-      background: #070a12;
-      border-top: 1px solid var(--border-color);
-      padding: 3.5rem 1.5rem 2.5rem 1.5rem;
-      position: relative;
-      z-index: 10;
-    }
-    
-    .footer-content {
-      max-width: 1280px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 3rem;
-      margin-bottom: 3rem;
-    }
-    @media (max-width: 768px) {
-      .footer-content { grid-template-columns: 1fr; }
-    }
-    
-    .footer-brand-title {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 0.8rem;
-    }
-    .footer-brand-desc {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      max-width: 450px;
-      line-height: 1.6;
-    }
-    
-    .footer-col-title {
-      font-size: 0.95rem;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    
-    .footer-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-    .footer-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.2s ease;
-    }
-    .footer-links a:hover {
-      color: var(--brand-green);
-    }
-    
-    .footer-bottom {
-      max-width: 1280px;
-      margin: 0 auto;
-      border-top: 1px solid var(--border-color);
-      padding-top: 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      font-size: 0.85rem;
-      color: var(--text-dim);
-    }
-    
-    .footer-powered a {
-      color: var(--brand-green);
-      font-weight: 700;
-      text-decoration: none;
-    }
-    .footer-powered a:hover {
-      text-decoration: underline;
-    }
+    .site-footer { background: var(--surface-subtle); border-top: 1px solid var(--border); padding-block: var(--sp-16) var(--sp-8); }
+    .site-footer__cols { display: grid; gap: var(--sp-8); grid-template-columns: repeat(auto-fit, minmax(min(220px,100%),1fr)); }
+    .site-footer h3 { font-size: var(--fs-sm); text-transform: uppercase; letter-spacing: var(--ls-wide); color: var(--text-muted); margin-bottom: var(--sp-4); }
+    .site-footer a { color: var(--text-secondary); text-decoration: none; }
+    .site-footer a:hover { color: var(--text); }
+    .site-footer__legal { margin-top: var(--sp-12); padding-top: var(--sp-6); border-top: 1px solid var(--border); font-size: var(--fs-sm); color: var(--text-muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--sp-4); }
   </style>
 </head>
 <body>
 
-  <div class="bg-grid-overlay"></div>
-  <div class="bg-shape-1"></div>
-  <div class="bg-shape-2"></div>
+  <!-- Sticky Navbar (SEM BOTÃO MODO VENDEDOR, WHATSAPP COM RÓTULO LIMPO) -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a href="#" class="brand">
+        <img src="https://raw.githubusercontent.com/Clebito2/ConsultoriaLive/main/Logo%20live%20oficial-21.png" alt="Ecossistema Live Logo">
+        <div>
+          <div class="brand__name">Ecossistema Live</div>
+          <div class="brand__sub">Hub de Inteligência Empresarial</div>
+        </div>
+      </a>
 
-  <!-- Header / Navigation -->
-  <header>
-    <a href="#" class="logo-container">
-      <img src="https://raw.githubusercontent.com/Clebito2/ConsultoriaLive/main/Logo%20live%20oficial-21.png" alt="Ecossistema Live Logo" class="logo-img">
-      <div>
-        <div class="brand-title">Ecossistema Live</div>
-        <div class="brand-tagline">Hub de Inteligência Empresarial</div>
-      </div>
-    </a>
-    
-    <div class="nav-actions">
-      <button class="btn-seller-mode" id="btnToggleSeller" title="Alternar visão executiva/vendedor">
-        💼 Modo Reunião / Vendedor
-      </button>
-      
-      <!-- WHATSAPP CORRIGIDO: 61 996993134 -->
-      <a href="https://wa.me/5561996993134?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20produtos%20do%20Ecossistema%20Live." target="_blank" class="btn-contact-whatsapp">
-        💬 WhatsApp: 61 996993134
+      <!-- RÓTULO LIMPO CONFORME SOLICITADO -->
+      <a href="https://wa.me/5561996993134?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20produtos%20do%20Ecossistema%20Live." target="_blank" class="btn btn--whatsapp btn--sm">
+        💬 Falar no WhatsApp
       </a>
     </div>
   </header>
 
-  <div class="container">
-    
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="hero-badge">
-        ✨ Hub de Governança, Soluções Modulares & IA Empresarial
-      </div>
-      
-      <h1 class="hero-h1">
-        Transformamos a Gestão da sua Empresa com Produtos Modulares e IA
-      </h1>
-      
-      <p class="hero-p">
-        Eliminamos o modelo ultrapassado de consultoria perpétua. Entregamos governança estruturada, diagnóstico rápido por inteligência artificial e processos com início, meio e fim.
-      </p>
-      
-      <div class="hero-manifesto">
-        <div class="manifesto-tag">Posicionamento Oficial Mandatório</div>
-        <div class="manifesto-text">
-          "Não fazemos consultoria tradicional. Estruturamos governança, diagnosticamos gargalos através de IA, desenvolvemos lideranças e entregamos produtos de gestão modulares com início, meio e fim."
-        </div>
-      </div>
-      
-      <div class="hero-ctas">
-        <a href="#catalogo" class="btn-hero-primary">
-          Explore os 21 Produtos Modulares
-        </a>
-        <a href="https://wa.me/5561996993134?text=Ol%C3%A1!%20Quero%20agendar%20um%20Diagn%C3%B3stico%20Express%20para%20minha%20empresa." target="_blank" class="btn-hero-whatsapp">
-          📲 Agendar Diagnóstico Express (R$ 250)
-        </a>
-      </div>
-    </section>
+  <main>
+    <!-- HERO SECTION COM AURA RADIAL, DOTS & MOLDURA DE NAVEGADOR -->
+    <section class="section hero bg bg--aura bg--dots">
+      <div class="container split">
+        <div class="hero__copy">
+          <p class="chip"><span class="chip__dot"></span>Governança & Soluções Modulares por IA</p>
+          <h1>Transformamos a Gestão da sua Empresa com <span class="text-grad">Produtos Modulares e IA</span></h1>
+          <p class="hero__sub">
+            Eliminamos o modelo ultrapassado de consultoria perpétua. Entregamos governança estruturada, diagnóstico por inteligência artificial e processos com <span class="mark">início, meio e fim</span>.
+          </p>
 
-    <!-- Stats Banner (RETIRADO O MÉTRICO 3 MESES DE CONFORME SOLICITADO) -->
-    <section class="stats-banner">
-      <div class="stat-card">
-        <div class="stat-number">21</div>
-        <div class="stat-label">Produtos Modulares Mapeados</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">6</div>
-        <div class="stat-label">Departamentos Especializados</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">100%</div>
-        <div class="stat-label">Foco na Defesa do CNPJ</div>
-      </div>
-    </section>
-
-    <!-- Pitch Deck (Only Active in Seller Mode) -->
-    <section class="pitch-deck" id="pitchDeck">
-      <div class="pitch-title">
-        💼 Modo Reunião — Guia Rápido do Vendedor (Pitch Deck Executivo)
-      </div>
-      <div class="pitch-subtitle">
-        Utilize estes 4 passos estratégicos durante a apresentação presencial ou via conferência.
-      </div>
-      
-      <div class="pitch-grid">
-        <div class="pitch-card">
-          <h4>1. O Que É o Ecossistema Live?</h4>
-          <p>Um hub de inteligência que substitui consultorias perétuas por produtos de gestão modulares com escopo fechado e suporte de IA.</p>
-        </div>
-        
-        <div class="pitch-card">
-          <h4>2. Por Que Escolher Nossos Produtos?</h4>
-          <p>Zero dependência de consultores em horas avulsas, 100% de previsibilidade de custos e desintermediação de parceiros (faturamento direto com o especialista).</p>
-        </div>
-        
-        <div class="pitch-card">
-          <h4>3. Régua de Atendimento B+</h4>
-          <p>Atendemos diretamente empresas de R$ 500k a R$ 5M/ano. Contas acima de R$ 5M/ano são direcionadas para o parceiro Marcelo Nogueira (Ecossistema B+).</p>
-        </div>
-        
-        <div class="pitch-card">
-          <h4>4. Como Começar Hoje?</h4>
-          <p>Inicie pelo <strong>Diagnóstico Express (R$ 250 em 12x)</strong> ou pelo <strong>Almoço com o CEO no Voya</strong>. É a forma mais barata de mapear as dores reais da empresa.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- AI Implementation Roadmap Section (ELEMENTO VISUAL PARA PRODUTOS DE IA) -->
-    <section class="ai-roadmap-box" id="etapas-ia">
-      <div class="section-header" style="margin-bottom: 1.5rem;">
-        <div class="section-tag">Engenharia de Implantação</div>
-        <h2 class="section-title">Requisitos & Etapas de Implantação das IAs Corporativas</h2>
-        <p class="section-desc">Como funcionam o Júlio Bot, Jarvis Operacional, RH Tech e Agentes Jurídicos na sua empresa.</p>
-      </div>
-
-      <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-color); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem;">
-        <h4 style="color: var(--brand-green); font-size: 1.1rem; margin-bottom: 0.8rem;">📌 Requisitos Técnicos Mínimos para Implantação de IA:</h4>
-        <ul style="color: #cbd5e1; font-size: 0.92rem; padding-left: 1.2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0.6rem;">
-          <li>Acesso à internet banda larga constante.</li>
-          <li>Navegador moderno (Google Chrome / Edge).</li>
-          <li>Arquivos de POPs, manuais e tabelas em PDF ou Docx.</li>
-          <li>Conta de WhatsApp Comercial logada (se aplicável).</li>
-          <li>Definição de 1 responsável interno como sponsor.</li>
-        </ul>
-      </div>
-
-      <h4 style="color: #fff; font-size: 1.1rem; margin-bottom: 1rem; text-align: center;">⚡ As 6 Etapas da Jornada de Implantação da IA:</h4>
-
-      <div class="roadmap-steps">
-        <div class="step-card">
-          <span class="step-num">Etapa 1</span>
-          <div class="step-title">Levantamento</div>
-          <div class="step-desc">Diagnóstico de infraestrutura, computadores e rede interna.</div>
-        </div>
-
-        <div class="step-card">
-          <span class="step-num">Etapa 2</span>
-          <div class="step-title">Skills & POPs</div>
-          <div class="step-desc">Mapeamento dos manuais, regras e perguntas frequentes.</div>
-        </div>
-
-        <div class="step-card">
-          <span class="step-num">Etapa 3</span>
-          <div class="step-title">RAG & Tenant</div>
-          <div class="step-desc">Estruturação do banco vetorial isolado em `/tenants/{tenantId}`.</div>
-        </div>
-
-        <div class="step-card">
-          <span class="step-num">Etapa 4</span>
-          <div class="step-title">Parametrização</div>
-          <div class="step-desc">Ajuste de tom de voz e testes de precisão (mín. 85% de acerto).</div>
-        </div>
-
-        <div class="step-card">
-          <span class="step-num">Etapa 5</span>
-          <div class="step-title">Treinamento</div>
-          <div class="step-desc">Capacitação prática da equipe em sessão de até 2 horas.</div>
-        </div>
-
-        <div class="step-card" style="border-color: var(--brand-green);">
-          <span class="step-num" style="background:var(--brand-green); color:#000;">Etapa 6</span>
-          <div class="step-title">Go-Live</div>
-          <div class="step-desc">Liberação total do acesso com suporte contínuo P0 a P3.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Catalog Section -->
-    <section id="catalogo">
-      <div class="section-header">
-        <div class="section-tag">Portfólio Completo</div>
-        <h2 class="section-title">Catálogo Oficial de Soluções Modulares (21 SKUs)</h2>
-        <p class="section-desc">Clique no botão "📄 Ver Página do Produto" para abrir a apresentação dedicada de cada SKU.</p>
-      </div>
-
-      <div class="catalog-controls">
-        <div class="search-box">
-          <span class="search-icon">🔍</span>
-          <input type="text" id="searchInput" class="search-input" placeholder="Buscar por produto, palavra-chave ou SKU...">
-        </div>
-        
-        <div class="category-tabs" id="categoryTabs">
-          <button class="cat-tab active" data-cat="all">Todos os SKUs (21)</button>
-          <button class="cat-tab" data-cat="saas">SaaS & IA Corporativa</button>
-          <button class="cat-tab" data-cat="rh">RH Tech & Recrutamento</button>
-          <button class="cat-tab" data-cat="cx">CX & Pesquisa de Mercado</button>
-          <button class="cat-tab" data-cat="governanca">Governança & High-Ticket</button>
-          <button class="cat-tab" data-cat="educacao">Educação Executiva & Eventos</button>
-        </div>
-      </div>
-
-      <!-- Products Grid -->
-      <div class="products-grid" id="productsGrid">
-        <!-- Rendered via JavaScript -->
-      </div>
-    </section>
-
-    <!-- ROI Simulator Section -->
-    <section class="simulator-box" id="simulador">
-      <div class="section-header" style="margin-bottom: 2rem;">
-        <div class="section-tag">Calculadora de Investimento</div>
-        <h2 class="section-title">Simulador de ROI & Montagem de Pacotes</h2>
-        <p class="section-desc">Selecione as soluções de interesse e veja o valor consolidado da proposta.</p>
-      </div>
-
-      <div class="sim-layout">
-        <div>
-          <h4 style="color:#fff; font-size:1.1rem; margin-bottom:1rem;">Selecione os Produtos Desejados:</h4>
-          <div class="sim-list" id="simList">
-            <!-- Rendered by JS -->
-          </div>
-        </div>
-
-        <div class="sim-summary">
-          <div>
-            <div class="sim-sum-title">Investimento Total Estimado</div>
-            <div class="sim-sum-price" id="simTotalPrice">R$ 0,00</div>
-            <div class="sim-sum-items" id="simSelectedItems">Nenhum produto selecionado. Clique nos itens ao lado para adicionar.</div>
+          <div class="callout" style="margin-bottom: var(--sp-6);">
+            <div style="font-size:var(--fs-xs); font-weight:var(--fw-bold); color:var(--accent-text); text-transform:uppercase; margin-bottom:0.2rem;">Posicionamento Oficial Mandatório</div>
+            <div style="font-size:var(--fs-base); font-weight:var(--fw-medium); color:#fff;">
+              "Não fazemos consultoria tradicional. Estruturamos governança, diagnosticamos gargalos através de IA, desenvolvemos lideranças e entregamos produtos de gestão modulares com início, meio e fim."
+            </div>
           </div>
 
-          <div>
-            <a href="#" id="btnSimWhatsApp" target="_blank" class="btn-sim-whatsapp">
-              📲 Enviar Proposta via WhatsApp (61 996993134)
+          <div style="display:flex; gap:var(--sp-3); flex-wrap:wrap;">
+            <a href="#catalogo" class="btn btn--primary btn--lg">Explore os 21 SKUs Modulares</a>
+            <a href="https://wa.me/5561996993134?text=Ol%C3%A1!%20Quero%20agendar%20um%20Diagn%C3%B3stico%20Express." target="_blank" class="btn btn--whatsapp btn--lg">
+              📲 Agendar Diagnóstico Express
             </a>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Departments Section -->
-    <section id="departamentos">
-      <div class="section-header">
-        <div class="section-tag">Engenharia Operacional</div>
-        <h2 class="section-title">Estrutura Departamental (6 Departamentos)</h2>
-        <p class="section-desc">Organograma leve e totalmente executável por agentes de IA e especialistas.</p>
-      </div>
+        <div class="media-aura">
+          <!-- MOLDURA DE NAVEGADOR (design.md 7.1) -->
+          <figure class="frame frame--browser">
+            <div class="frame__bar" aria-hidden="true">
+              <span></span><span></span><span></span>
+              <em>app.ecossistemalive.com.br</em>
+            </div>
+            <!-- BENTO KPIS DENTRO DA MOLDURA -->
+            <div style="padding:var(--sp-6); display:grid; gap:var(--sp-4);">
+              <div class="kpi">
+                <span class="kpi__bar"></span>
+                <div>
+                  <p class="kpi__value">21 SKUs</p>
+                  <p class="kpi__label">produtos modulares com escopo fechado</p>
+                </div>
+              </div>
 
-      <div class="departments-grid">
-        <div class="dept-card">
-          <div class="dept-badge">DEP-01</div>
-          <div class="dept-name">Comercial & Crescimento</div>
-          <div class="dept-lead">Líder: Luiz Portal | Agente: el-agente-prospeccao</div>
-          <p class="dept-desc">Pipeline autônomo P1→P4 no WhatsApp, qualificação de leads e régua B+ (< R$ 5M/ano).</p>
-        </div>
+              <div class="kpi kpi--warm">
+                <span class="kpi__bar"></span>
+                <div>
+                  <p class="kpi__value">6 Departamentos</p>
+                  <p class="kpi__label">estrutura operacional com gate antagônico</p>
+                </div>
+              </div>
 
-        <div class="dept-card">
-          <div class="dept-badge">DEP-02</div>
-          <div class="dept-name">Tecnologia & Produtos de IA</div>
-          <div class="dept-lead">Líder: Cléber Donato (CTO) | Agente: el-julio-suporte-onboarding</div>
-          <p class="dept-desc">Infraestrutura Netlify/Firebase multi-tenant, Júlio Bot v8.0, Jarvis Operacional e RH Tech.</p>
-        </div>
-
-        <div class="dept-card">
-          <div class="dept-badge">DEP-03</div>
-          <div class="dept-name">Educação Executiva & Eventos</div>
-          <div class="dept-lead">Líder: Luiz Portal | Parceiro: Restaurante Voya</div>
-          <p class="dept-desc">Formação Nova Liderança, workshops, mentorias executivas e Almoço com o CEO no Restaurante Voya.</p>
-        </div>
-
-        <div class="dept-card">
-          <div class="dept-badge">DEP-04</div>
-          <div class="dept-name">Governança & Estratégia</div>
-          <div class="dept-lead">Líder: Luiz Portal | Mentor: Ibrahim Boufleur</div>
-          <p class="dept-desc">Conselho Familiar (Modelo 3 Círculos), Planejamento Estratégico OKRs 12M e Mediação de M&A.</p>
-        </div>
-
-        <div class="dept-card">
-          <div class="dept-badge">DEP-05</div>
-          <div class="dept-name">CX & Inteligência de Mercado</div>
-          <div class="dept-lead">Líder: Cléber Donato | Parceira: Juliana Canuto</div>
-          <p class="dept-desc">Service Blueprint para PMEs e indústrias, formulários proprietários, pesquisas qualitativas e NPS.</p>
-        </div>
-
-        <div class="dept-card" style="border-color: var(--brand-gold);">
-          <div class="dept-badge" style="color:var(--brand-gold);">DEP-06 — TRANSVERSAL</div>
-          <div class="dept-name">Qualidade, Compliance & Defesa do CNPJ</div>
-          <div class="dept-lead">Guardião: el-antagonista-defesa-cnpj</div>
-          <p class="dept-desc">Gate antagônico obrigatório com poder de VETO. Preserva a solvência e a governança do CNPJ.</p>
+              <div class="kpi">
+                <span class="kpi__bar"></span>
+                <div>
+                  <p class="kpi__value">100% CNPJ</p>
+                  <p class="kpi__label">foco em solvência e governança perétua</p>
+                </div>
+              </div>
+            </div>
+          </figure>
         </div>
       </div>
     </section>
 
-    <!-- Partners Section (NOME CORRIGIDO: KHELVEN) -->
-    <section id="parceiros">
-      <div class="section-header">
-        <div class="section-tag">Hub de Alianças</div>
-        <h2 class="section-title">Rede Homologada de Parceiros</h2>
-        <p class="section-desc">Desintermediação total: faturamento e contrato diretos entre cliente e parceiro.</p>
-      </div>
+    <hr class="divider">
 
-      <div class="partners-grid">
-        <div class="partner-card">
-          <div class="partner-name">Agregar (Khelven)</div>
-          <div class="partner-role">BPO Financeiro & DRE</div>
+    <!-- PROVA SOCIAL — MARQUEE SLIDER DE LOGOS (design.md 7.5) -->
+    <section class="section section--tight marquee">
+      <div class="container">
+        <p style="text-align:center; font-size:var(--fs-sm); color:var(--text-muted); margin-bottom:var(--sp-6);">Empresas e Alianças que confiam no Ecossistema Live</p>
+        <ul class="marquee__track">
+          <li><strong style="color:#fff; font-size:1.1rem;">Agregar (Khelven) BPO</strong></li>
+          <li><strong style="color:#fff; font-size:1.1rem;">Juliana Canuto CX</strong></li>
+          <li><strong style="color:#fff; font-size:1.1rem;">Restaurante Voya</strong></li>
+          <li><strong style="color:#fff; font-size:1.1rem;">Marcelo Nogueira (B+)</strong></li>
+          <li aria-hidden="true"><strong style="color:#fff; font-size:1.1rem;">Agregar (Khelven) BPO</strong></li>
+          <li aria-hidden="true"><strong style="color:#fff; font-size:1.1rem;">Juliana Canuto CX</strong></li>
+          <li aria-hidden="true"><strong style="color:#fff; font-size:1.1rem;">Restaurante Voya</strong></li>
+          <li aria-hidden="true"><strong style="color:#fff; font-size:1.1rem;">Marcelo Nogueira (B+)</strong></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SEÇÃO REQUISITOS TÉCNICOS & MAPEAMENTO DE IA -->
+    <section class="section bg bg--dots" id="etapas-ia">
+      <div class="container">
+        <div style="text-align:center; max-width:68ch; margin-inline:auto; margin-bottom:var(--sp-12);">
+          <p class="chip" style="margin-inline:auto;"><span class="chip__dot"></span>Engenharia de Inteligência Artificial</p>
+          <h2 style="font-size:var(--fs-2xl); color:#fff; margin-top:var(--sp-3);">Requisitos Técnicos & Mapeamento de IA Corporativa</h2>
+          <p style="color:var(--text-secondary); margin-top:var(--sp-3);">Como estruturamos os agentes Júlio Bot, Jarvis Operacional, RH Tech e Agente Jurídico Themis na sua empresa.</p>
         </div>
-        <div class="partner-card">
-          <div class="partner-name">Juliana Canuto</div>
-          <div class="partner-role">CX & NPS Indústrias</div>
+
+        <!-- REQUISITOS TÉCNICOS (BENTO GRID 6.1) -->
+        <div class="bento" style="margin-bottom:var(--sp-12);">
+          <article class="card card--spotlight bento__item bento__item--wide">
+            <div class="tile tile--accent">🖥️</div>
+            <h3>Hardware Mínimo Exigido</h3>
+            <p style="color:var(--text-secondary); margin-top:var(--sp-2);">Computador com pelo menos <span class="mark">16GB de RAM</span>, processador Intel Core i5 ou superior (ou processadores M1/M2/M3 para Mac).</p>
+          </article>
+
+          <article class="card card--spotlight bento__item">
+            <div class="tile">☁️</div>
+            <h3>Armazenamento Cloud</h3>
+            <p style="color:var(--text-secondary); margin-top:var(--sp-2);">Serviços de armazenamento corporativo em nuvem para ingestão de documentos.</p>
+          </article>
+
+          <article class="card card--spotlight bento__item">
+            <div class="tile tile--warm">📋</div>
+            <h3>Gestão de Demandas</h3>
+            <p style="color:var(--text-secondary); margin-top:var(--sp-2);">Plataforma de demandas/tarefas (pode ser conta gratuita conforme o volume).</p>
+          </article>
+
+          <article class="card card--spotlight bento__item bento__item--wide">
+            <div class="tile tile--accent">🔑</div>
+            <h3>APIs de IA Corporativa</h3>
+            <p style="color:var(--text-secondary); margin-top:var(--sp-2);">Assinatura de serviços de IA com funcionalidade de API externa ativa (OpenAI, Gemini etc.).</p>
+          </article>
         </div>
-        <div class="partner-card">
-          <div class="partner-name">Restaurante Voya</div>
-          <div class="partner-role">Almoço com o CEO</div>
+
+        <!-- EXPLICAÇÃO SOBRE O MAPEAMENTO DA IA -->
+        <div class="callout" style="background:var(--surface-raised); border-left-color:var(--accent); border-radius:var(--r-xl); padding:var(--sp-8); margin-bottom:var(--sp-12);">
+          <h3 style="color:var(--accent-text); margin-bottom:var(--sp-3);">🔍 Mapeamento das Ferramentas, Jornada Diária & TMA</h3>
+          <p style="color:var(--text-secondary); margin-bottom:var(--sp-6);">Antes de programar os agentes, nossa equipe mapeia em profundidade 3 pilares da sua operação:</p>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:var(--sp-5);">
+            <div style="background:var(--surface-inset); padding:var(--sp-5); border-radius:var(--r-lg); border:1px solid var(--border);">
+              <h4 style="color:#fff; margin-bottom:var(--sp-2);">1. Ferramentas e Sistemas Utilizados</h4>
+              <p style="font-size:var(--fs-sm); color:var(--text-muted);">Mapeamento de CRM, Google Workspace, Blip, ERPs e assinaturas de IA corporativa utilizadas no dia a dia.</p>
+            </div>
+
+            <div style="background:var(--surface-inset); padding:var(--sp-5); border-radius:var(--r-lg); border:1px solid var(--border);">
+              <h4 style="color:#fff; margin-bottom:var(--sp-2);">2. Jornada de Atendimento & TMA</h4>
+              <p style="font-size:var(--fs-sm); color:var(--text-muted);">Trâmite de atendimento, setores envolvidos, documentos gerados/acessados e o TMA (Tempo Médio de Atendimento).</p>
+            </div>
+
+            <div style="background:var(--surface-inset); padding:var(--sp-5); border-radius:var(--r-lg); border:1px solid var(--border);">
+              <h4 style="color:#fff; margin-bottom:var(--sp-2);">3. Recursos Adicionais Diários</h4>
+              <p style="font-size:var(--fs-sm); color:var(--text-muted);">Levantamento de sites especializados, ferramentas de consulta pública, bancos de pareceres e serviços externos.</p>
+            </div>
+          </div>
         </div>
-        <div class="partner-card">
-          <div class="partner-name">Visual Work</div>
-          <div class="partner-role">Design & Identidade Visual</div>
+
+        <!-- ORGANOGRAMA DE IMPLANTAÇÃO DE 45 DIAS -->
+        <div style="text-align:center; margin-bottom:var(--sp-6);">
+          <h3 style="color:#fff;">📅 Organograma de Implantação Personalizada (Ciclo de 45 Dias)</h3>
         </div>
-        <div class="partner-card">
-          <div class="partner-name">Marcelo Nogueira (B+)</div>
-          <div class="partner-role">Contas > R$ 5.000.000/ano</div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:var(--sp-4);">
+          <div class="card card--spotlight">
+            <span class="badge">Fase 1 (Dias 1 a 10)</span>
+            <h4>Planejamento & Coleta</h4>
+            <p style="font-size:var(--fs-sm); color:var(--text-secondary); margin-top:var(--sp-2);">Levantamento de ferramentas, jornadas de atendimento, TMA e regras internas.</p>
+          </div>
+
+          <div class="card card--spotlight">
+            <span class="badge">Fase 2 (Dias 11 a 25)</span>
+            <h4>Desenvolvimento & RAG</h4>
+            <p style="font-size:var(--fs-sm); color:var(--text-secondary); margin-top:var(--sp-2);">Construção dos agentes de IA, engenharia de prompt e ingestão vetorial multi-tenant.</p>
+          </div>
+
+          <div class="card card--spotlight">
+            <span class="badge">Fase 3 (Dias 26 a 35)</span>
+            <h4>Testes & Treinamento</h4>
+            <p style="font-size:var(--fs-sm); color:var(--text-secondary); margin-top:var(--sp-2);">Testes de acerto (mín. 85% de precisão) e capacitação prática da equipe.</p>
+          </div>
+
+          <div class="card card--spotlight">
+            <span class="badge badge--gold">Fase 4 (Dias 36 a 45)</span>
+            <h4>Execução em Produção</h4>
+            <p style="font-size:var(--fs-sm); color:var(--text-secondary); margin-top:var(--sp-2);">Lançamento oficial (Go-Live), transição operacional e suporte contínuo P0 a P3.</p>
+          </div>
         </div>
       </div>
     </section>
 
-  </div>
+    <!-- CATÁLOGO DOS 21 SKUS -->
+    <section class="section bg bg--grid" id="catalogo">
+      <div class="container">
+        <div style="text-align:center; max-width:68ch; margin-inline:auto; margin-bottom:var(--sp-8);">
+          <p class="chip" style="margin-inline:auto;"><span class="chip__dot"></span>Portfólio de Soluções Modulares</p>
+          <h2 style="font-size:var(--fs-2xl); color:#fff; margin-top:var(--sp-3);">Catálogo Oficial de Soluções Modulares (21 SKUs)</h2>
+          <p style="color:var(--text-secondary); margin-top:var(--sp-3);">Clique no botão "📄 Ver Página" para abrir a apresentação dedicada de cada produto.</p>
+        </div>
 
-  <!-- Footer -->
-  <footer>
-    <div class="footer-content">
+        <div class="catalog-bar">
+          <input type="text" id="searchInput" class="search-input" placeholder="Buscar por produto, palavra-chave ou SKU...">
+          
+          <div class="cat-tabs" id="categoryTabs">
+            <button class="cat-tab active" data-cat="all">Todos os SKUs (21)</button>
+            <button class="cat-tab" data-cat="saas">SaaS & IA Corporativa</button>
+            <button class="cat-tab" data-cat="rh">RH Tech & Recrutamento</button>
+            <button class="cat-tab" data-cat="cx">CX & Pesquisa de Mercado</button>
+            <button class="cat-tab" data-cat="governanca">Governança & High-Ticket</button>
+            <button class="cat-tab" data-cat="educacao">Educação Executiva & Eventos</button>
+          </div>
+        </div>
+
+        <!-- PRODUCTS GRID (POSICIONAMENTO DOS BOTÕES E PREÇO CORRIGIDOS) -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(340px, 1fr)); gap:var(--sp-6);" id="productsGrid">
+          <!-- Renderizado via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SIMULADOR DE ROI -->
+    <section class="section" id="simulador">
+      <div class="container">
+        <div class="card card--glass" style="padding:var(--sp-8);">
+          <div style="text-align:center; margin-bottom:var(--sp-6);">
+            <p class="chip" style="margin-inline:auto;"><span class="chip__dot"></span>Calculadora de Investimento</p>
+            <h2 style="font-size:var(--fs-2xl); color:#fff; margin-top:var(--sp-2);">Simulador de ROI & Montagem de Pacotes</h2>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1.2fr 0.8fr; gap:var(--sp-8);">
+            <div>
+              <h4 style="color:#fff; margin-bottom:var(--sp-3);">Selecione os Produtos Desejados:</h4>
+              <div style="display:flex; flex-direction:column; gap:var(--sp-2); max-height:380px; overflow-y:auto; padding-right:var(--sp-2);" id="simList">
+                <!-- Renderizado via JS -->
+              </div>
+            </div>
+
+            <div style="background:var(--surface-inset); border:1px solid var(--border); border-radius:var(--r-xl); padding:var(--sp-6); display:flex; flex-direction:column; justify-content:space-between; min-height:320px;">
+              <div>
+                <div style="font-size:var(--fs-sm); color:var(--text-muted);">Investimento Total Estimado</div>
+                <div style="font-size:var(--fs-3xl); font-weight:var(--fw-black); color:var(--action); margin-block:var(--sp-2);" id="simTotalPrice">R$ 0,00</div>
+                <div id="simSelectedItems" style="font-size:var(--fs-sm); color:var(--text-muted); margin-bottom:var(--sp-6);">Nenhum produto selecionado.</div>
+              </div>
+
+              <a href="#" id="btnSimWhatsApp" target="_blank" class="btn btn--whatsapp btn--block btn--lg">
+                📲 Enviar Proposta no WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEPARTAMENTOS (BENTO GRID 6.1) -->
+    <section class="section section--subtle" id="departamentos">
+      <div class="container">
+        <div style="text-align:center; max-width:68ch; margin-inline:auto; margin-bottom:var(--sp-12);">
+          <p class="chip" style="margin-inline:auto;"><span class="chip__dot"></span>Estrutura Operacional</p>
+          <h2 style="font-size:var(--fs-2xl); color:#fff; margin-top:var(--sp-3);">6 Departamentos Especializados</h2>
+        </div>
+
+        <div class="bento">
+          <article class="card card--spotlight bento__item">
+            <span class="badge">DEP-01</span>
+            <h3>Comercial & Crescimento</h3>
+            <p style="font-size:var(--fs-xs); color:var(--text-muted); margin-top:var(--sp-1);">Líder: Luiz Portal | Agente: el-agente-prospeccao</p>
+            <p style="font-size:var(--fs-base); color:var(--text-secondary); margin-top:var(--sp-3);">Prospecção B2B autônoma P1→P4 no WhatsApp e régua B+ (< R$ 5M/ano).</p>
+          </article>
+
+          <article class="card card--spotlight bento__item">
+            <span class="badge">DEP-02</span>
+            <h3>Tecnologia & Produtos de IA</h3>
+            <p style="font-size:var(--fs-xs); color:var(--text-muted); margin-top:var(--sp-1);">Líder: Cléber Donato (CTO) | Agente: el-julio-suporte-onboarding</p>
+            <p style="font-size:var(--fs-base); color:var(--text-secondary); margin-top:var(--sp-3);">Infraestrutura Netlify/Firebase multi-tenant, Júlio Bot v8.0 e Jarvis Operacional.</p>
+          </article>
+
+          <article class="card card--spotlight bento__item">
+            <span class="badge">DEP-03</span>
+            <h3>Educação Executiva & Eventos</h3>
+            <p style="font-size:var(--fs-xs); color:var(--text-muted); margin-top:var(--sp-1);">Líder: Luiz Portal | Parceiro: Restaurante Voya</p>
+            <p style="font-size:var(--fs-base); color:var(--text-secondary); margin-top:var(--sp-3);">O Código da Nova Liderança e Almoço com o CEO no Restaurante Voya.</p>
+          </article>
+
+          <article class="card card--spotlight bento__item">
+            <span class="badge">DEP-04</span>
+            <h3>Governança & Estratégia</h3>
+            <p style="font-size:var(--fs-xs); color:var(--text-muted); margin-top:var(--sp-1);">Líder: Luiz Portal</p>
+            <p style="font-size:var(--fs-base); color:var(--text-secondary); margin-top:var(--sp-3);">Conselho Familiar (3 Círculos de Gersick) e Planejamento OKRs 12M.</p>
+          </article>
+
+          <article class="card card--spotlight bento__item">
+            <span class="badge">DEP-05</span>
+            <h3>CX & Inteligência de Mercado</h3>
+            <p style="font-size:var(--fs-xs); color:var(--text-muted); margin-top:var(--sp-1);">Líder: Cléber Donato | Parceira: Juliana Canuto</p>
+            <p style="font-size:var(--fs-base); color:var(--text-secondary); margin-top:var(--sp-3);">Service Blueprint para PMEs e indústrias, formulários proprietários e NPS.</p>
+          </article>
+
+          <article class="card card--spotlight bento__item" style="border-color:var(--highlight-border);">
+            <span class="badge badge--gold">DEP-06 — TRANSVERSAL</span>
+            <h3>Qualidade, Compliance & Defesa do CNPJ</h3>
+            <p style="font-size:var(--fs-xs); color:var(--text-muted); margin-top:var(--sp-1);">Guardião: el-antagonista-defesa-cnpj</p>
+            <p style="font-size:var(--fs-base); color:var(--text-secondary); margin-top:var(--sp-3);">Gate antagônico com poder de VETO. Preserva a solvência e perenidade do CNPJ.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO APRESENTAÇÕES & RELATÓRIOS EXECUTIVOS (design.md BENTO & CARDS) -->
+    <section class="section section--subtle" id="apresentacoes">
+      <div class="container">
+        <div style="text-align:center; margin-bottom:var(--sp-8);">
+          <p class="chip" style="margin-inline:auto;"><span class="chip__dot"></span>Materiais & Documentação</p>
+          <h2 style="font-size:var(--fs-2xl); color:#fff; margin-top:var(--sp-2);">Apresentações & Relatórios Executivos</h2>
+          <p style="color:var(--text-secondary); margin-top:var(--sp-2);">Histórico de apresentações executivas, relatórios de prospecção e documentação técnica da consultoria.</p>
+        </div>
+
+        <div id="apresentacoesGrid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:var(--sp-5);">
+          <!-- Preenchido dinamicamente via JS em ordem cronológica reversa -->
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ TOTALMENTE REFORMULADO E ESTILIZADO (design.md CARDS & TILES) -->
+    <section class="section" id="faq">
+      <div class="container container--text">
+        <div style="text-align:center; margin-bottom:var(--sp-8);">
+          <p class="chip" style="margin-inline:auto;"><span class="chip__dot"></span>Tire suas dúvidas</p>
+          <h2 style="font-size:var(--fs-2xl); color:#fff; margin-top:var(--sp-2);">Perguntas Frequentes</h2>
+          <p style="color:var(--text-secondary); margin-top:var(--sp-2);">Tudo o que você precisa saber sobre o modelo de governança e produtos modulares.</p>
+        </div>
+
+        <div class="faq-wrapper">
+          <details class="faq-card" open>
+            <summary>
+              <span>Qual a diferença entre o Ecossistema Live e uma consultoria tradicional?</span>
+              <span class="faq-icon-tile">+</span>
+            </summary>
+            <p>Nós não vendemos horas avulsas nem mantemos contratos abertos sem fim. Entregamos produtos de gestão modulares com escopo fechado, início, meio e fim, apoiados por inteligência artificial.</p>
+          </details>
+
+          <details class="faq-card">
+            <summary>
+              <span>Quais são os requisitos mínimos para usar as IAs corporativas?</span>
+              <span class="faq-icon-tile">+</span>
+            </summary>
+            <p>Computador com no mínimo 16GB de RAM, processador Intel Core i5 ou M1 Mac, conexão à internet e assinaturas dos serviços de armazenamento e API de IA quando aplicável.</p>
+          </details>
+
+          <details class="faq-card">
+            <summary>
+              <span>Quanto tempo leva a implantação de uma IA personalizada?</span>
+              <span class="faq-icon-tile">+</span>
+            </summary>
+            <p>Nossa jornada padrão leva 45 dias divididos em 4 fases: Planejamento & Levantamento (1-10d), Desenvolvimento & RAG (11-25d), Testes & Treinamento (26-35d) e Execução em Produção (36-45d).</p>
+          </details>
+
+          <details class="faq-card">
+            <summary>
+              <span>Como funciona a desintermediação de parceiros?</span>
+              <span class="faq-icon-tile">+</span>
+            </summary>
+            <p>Serviços complementares (BPO financeiro com Khelven/Agregar, pesquisas com Juliana Canuto) são faturados diretamente pelo parceiro ao cliente. O Ecossistema Live não cobra taxas de intermediação.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="section" id="contato">
+      <div class="container">
+        <div style="background:var(--surface-raised); border:1px solid var(--border-strong); border-radius:var(--r-2xl); padding:clamp(var(--sp-10), 6vw, var(--sp-16)); text-align:center; display:grid; justify-items:center; gap:var(--sp-5);">
+          <h2 style="font-size:var(--fs-3xl); color:#fff;">Pronto para transformar a gestão da sua empresa?</h2>
+          <p style="color:var(--text-secondary); max-width:54ch;">Agende um Diagnóstico Empresarial Express por R$ 250 ou fale diretamente com a equipe técnica no WhatsApp.</p>
+          <a class="btn btn--whatsapp btn--lg" href="https://wa.me/5561996993134?text=Ol%C3%A1!%20Quero%20agendar%20um%20Diagn%C3%B3stico%20Express." target="_blank">📲 Falar no WhatsApp Agora</a>
+          <p style="font-size:var(--fs-sm); color:var(--text-muted);">Sem compromisso · Resposta em até 24h úteis</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container site-footer__cols">
       <div>
-        <div class="footer-brand-title">LUIZ E A PORTAL (Ecossistema Live)</div>
-        <p class="footer-brand-desc">
+        <div style="font-size:1.2rem; font-weight:800; color:#fff; margin-bottom:0.6rem;">LUIZ E A PORTAL (Ecossistema Live)</div>
+        <p style="font-size:var(--fs-sm); color:var(--text-muted); max-width:400px;">
           Hub de Inteligência Empresarial, Governança por IA, Diagnóstico de Gestão e Soluções Modulares com início, meio e fim.
         </p>
       </div>
 
       <div>
-        <div class="footer-col-title">Navegação</div>
-        <ul class="footer-links">
-          <li><a href="#catalogo">Catálogo de Produtos</a></li>
-          <li><a href="#etapas-ia">Etapas de IA</a></li>
-          <li><a href="#simulador">Simulador de ROI</a></li>
-          <li><a href="#departamentos">Departamentos</a></li>
-          <li><a href="#parceiros">Rede de Parceiros</a></li>
-        </ul>
+        <h3>Navegação</h3>
+        <p><a href="#catalogo">Catálogo de Produtos</a></p>
+        <p><a href="#etapas-ia">Etapas de IA</a></p>
+        <p><a href="#simulador">Simulador de ROI</a></p>
+        <p><a href="#departamentos">Departamentos</a></p>
+        <p><a href="#apresentacoes">Apresentações & Relatórios</a></p>
       </div>
 
       <div>
-        <div class="footer-col-title">Contato Direto</div>
-        <ul class="footer-links">
-          <li><a href="https://wa.me/5561996993134" target="_blank">WhatsApp: 61 996993134</a></li>
-          <li><a href="mailto:contato@ecossistemalive.com.br">contato@ecossistemalive.com.br</a></li>
-          <li><a href="mailto:cleberdonato@ecossistemalive.com.br">cleberdonato@ecossistemalive.com.br</a></li>
-        </ul>
+        <h3>Contato Direto</h3>
+        <p><a href="https://wa.me/5561996993134" target="_blank">Falar no WhatsApp</a></p>
+        <p><a href="mailto:contato@ecossistemalive.com.br">contato@ecossistemalive.com.br</a></p>
+        <p><a href="mailto:cleberdonato@ecossistemalive.com.br">cleberdonato@ecossistemalive.com.br</a></p>
       </div>
     </div>
 
-    <div class="footer-bottom">
+    <div class="container site-footer__legal">
       <div>CNPJ: 52.887.139/0001-00 | Goiânia - GO</div>
-      <div class="footer-powered">
-        &copy; Powered by <a href="mailto:cleberdonato@ecossistemalive.com.br">Cléber Donato</a>. Todos os direitos reservados.
+      <div>
+        &copy; Powered by <a href="mailto:cleberdonato@ecossistemalive.com.br" style="color:var(--action); font-weight:700;">Cléber Donato</a>. Todos os direitos reservados.
       </div>
     </div>
   </footer>
 
-  <!-- JavaScript -->
+  <!-- SCRIPT SPOTLIGHT E RENDERIZAÇÃO DO CATÁLOGO (design.md 6.3) -->
   <script>
-    // Full dataset for 21 SKUs
+    document.querySelectorAll('.card--spotlight').forEach(c => {
+      c.addEventListener('pointermove', e => {
+        const r = c.getBoundingClientRect();
+        c.style.setProperty('--mx', `${e.clientX - r.left}px`);
+        c.style.setProperty('--my', `${e.clientY - r.top}px`);
+      });
+    });
+
     const products = [
-      {
-        id: "SAAS-DIAG-01",
-        cat: "saas",
-        badge: "saas",
-        badgeText: "SaaS Entrada",
-        name: "Diagnóstico Empresarial Express (SaaS)",
-        desc: "IA + Formulário de 4 Eixos (Financeiro, Operacional, Pessoal, Comercial) gerando PDF de vulnerabilidade em tempo real.",
-        priceStr: "R$ 250,00",
-        priceVal: 250,
-        model: "Pagamento Único / 12x",
-        pitch: "Entrada sem fricção. Mostre ao cliente que por R$ 250 ele descobre onde está perdendo margem em menos de 10 minutos.",
-        obj: "'Preciso mesmo de diagnóstico?' -> Resposta: Sim, o relatório indica se a empresa está no quadrante Verde, Amarelo ou Vermelho."
-      },
-      {
-        id: "JULIO-NETLIFY",
-        cat: "saas",
-        badge: "saas",
-        badgeText: "Assinatura MRR",
-        name: "Júlio Bot v8.0 (Copiloto de Gestão)",
-        desc: "Web App SPA no Netlify com Firebase Auth e Firestore multi-tenant. Copiloto de gestão com rotinas, alertas e cadernos.",
-        priceStr: "R$ 120,00",
-        priceVal: 120,
-        model: "Mensal / Assinatura",
-        pitch: "Um gestor de bolso que cobra tarefas e organiza a rotina da empresa por menos de R$ 4/dia.",
-        obj: "'Meus funcionários vão usar?' -> Resposta: Interface simples estilo chat, sem necessidade de treinamentos longos."
-      },
-      {
-        id: "JARVIS-OPERAC",
-        cat: "saas",
-        badge: "saas",
-        badgeText: "Implantação + MRR",
-        name: "Jarvis Operacional (IA Corporativa)",
-        desc: "IA treinada nos POPs, manuais e políticas internas da empresa cliente. Responde dúvidas operacionais da equipe instantaneamente.",
-        priceStr: "R$ 1.500 setup + R$ 350/mês",
-        priceVal: 1850,
-        model: "Setup + Recorrente",
-        pitch: "Elimina a perda de tempo dos diretores respondendo perguntas repetitivas de funcionários.",
-        obj: "'E se os dados vazarem?' -> Resposta: Arquitetura isolada multi-tenant no Firestore com chave exclusiva do cliente."
-      },
-      {
-        id: "CADERNOS-ATIV",
-        cat: "saas",
-        badge: "saas",
-        badgeText: "Conteúdo PDF",
-        name: "Cadernos de Ativação / Micro-Agentes",
-        desc: "Manuais operacionais em PDF/Markdown parametrizados para delegação rápida de tarefas a estagiários e assistentes.",
-        priceStr: "R$ 50,00",
-        priceVal: 50,
-        model: "Por Caderno",
-        pitch: "Instrução passo-a-passo pronta para o funcionário executar tarefas complexas sem errar.",
-        obj: "'O que é isso?' -> Resposta: Um script de processos testado em dezenas de empresas."
-      },
-      {
-        id: "RH-TECH-DIY",
-        cat: "rh",
-        badge: "saas",
-        badgeText: "Por Processo",
-        name: "RH Tech DIY (Recrutamento via IA)",
-        desc: "Formulário de 4 perguntas, geração de anúncio via IA, triagem de currículos em PDF e cálculo de Fit Score com parecer.",
-        priceStr: "R$ 250,00",
-        priceVal: 250,
-        model: "Por Vaga Fechada",
-        pitch: "Economize milhares de reais em consultorias tradicionais de RH fazendo a triagem com 100% de imparcialidade.",
-        obj: "'Vocês fazem as entrevistas?' -> Resposta: Na modalidade DIY a IA entrega o Fit Score. Para entrevistas completas oferecemos o Full-Service."
-      },
-      {
-        id: "RH-FULL-SERV",
-        cat: "rh",
-        badge: "high-ticket",
-        badgeText: "Full Service",
-        name: "RH Tech Full-Service (Headhunting)",
-        desc: "Condução integral do processo seletivo por especialistas com entrevistas STAR, temperamentos e garantia de reposição de 30 dias.",
-        priceStr: "1º Salário Integral",
-        priceVal: 3500,
-        model: "Por Contratação",
-        pitch: "Garantia total de fit cultural e técnico para cargos estratégicos ou de liderança.",
-        obj: "'E se o candidato sair em 2 semanas?' -> Resposta: Garantia contratual de reposição sem custo adicional por 30 dias."
-      },
-      {
-        id: "CX-NPS-BLUE",
-        cat: "cx",
-        badge: "high-ticket",
-        badgeText: "Projeto 25d",
-        name: "CX & Service Blueprint (PMEs)",
-        desc: "Mapeamento da jornada do cliente, cálculo de NPS/CSAT/CES via formulários proprietários e entrega de Service Blueprint visual.",
-        priceStr: "R$ 4.500,00",
-        priceVal: 4500,
-        model: "50% Entrada + 50% Entrega",
-        pitch: "Descubra onde seus clientes estão abandonando sua marca e implemente os Top 3 Quick Wins imediatamente.",
-        obj: "'Vocês usam Google Forms?' -> Resposta: Não. Usamos formulários proprietários com identidade visual do cliente."
-      },
-      {
-        id: "CX-NPS-CORP",
-        cat: "cx",
-        badge: "high-ticket",
-        badgeText: "Qualitativo 55d",
-        name: "CX Indústrias / Grandes Contas",
-        desc: "Entrevistas em profundidade conduzidas por Juliana Canuto com clientes, fornecedores e colaboradores da indústria.",
-        priceStr: "R$ 12.000,00",
-        priceVal: 12000,
-        model: "Projeto Fechado",
-        pitch: "Pesquisa qualitativa de alto nível para indústrias que precisam entender gargalos na cadeia de suprimentos e vendas.",
-        obj: "'Quem faz as entrevistas?' -> Resposta: Juliana Canuto, especialista renomada em pesquisas industriais."
-      },
-      {
-        id: "PESQ-MERCADO",
-        cat: "cx",
-        badge: "high-ticket",
-        badgeText: "Projeto 30d",
-        name: "Pesquisa de Mercado & Concorrência",
-        desc: "Benchmarking competitivo, análise de precificação setorial e identificação de oportunidades não exploradas no mercado.",
-        priceStr: "R$ 6.000,00",
-        priceVal: 6000,
-        model: "Projeto Fechado",
-        pitch: "Dados precisos para fundamentar planos de expansão ou lançamento de novos produtos sem dar passos no escuro.",
-        obj: "'De onde vêm os dados?' -> Resposta: Fontes primárias de campo e dados secundários auditados."
-      },
-      {
-        id: "CONSELHO-FAM-3M",
-        cat: "governanca",
-        badge: "high-ticket",
-        badgeText: "Governança 3M",
-        name: "Estruturação de Conselho Familiar (3M)",
-        desc: "Aplicação dos 3 Círculos de Gersick & Davis (Propriedade, Família, Gestão), elaboração de Acordo de Sócios e regra de herdeiros.",
-        priceStr: "R$ 12.000,00",
-        priceVal: 12000,
-        model: "3 Parcelas Mensais",
-        pitch: "Proteja o patrimônio e garanta a perenidade da empresa familiar separando o afeto das decisões do CNPJ.",
-        obj: "'Minha família não aceita regras' -> Resposta: O processo é conduzido por mediadores neutros com o protocolo Defesa do CNPJ."
-      },
-      {
-        id: "PLAN-ESTRAT-3M",
-        cat: "governanca",
-        badge: "high-ticket",
-        badgeText: "Estratégia 3M",
-        name: "Planejamento Estratégico (OKRs 12M)",
-        desc: "Construção do plano de 12 meses traduzido em OKRs trimestrais, matriz de iniciativas e acompanhamento inicial de 90 dias.",
-        priceStr: "R$ 10.000,00",
-        priceVal: 10000,
-        model: "3 Parcelas Mensais",
-        pitch: "Alinhe toda a diretoria em torno das mesmas 3 metas globais com métricas claras de execução semanal.",
-        obj: "'Já fizemos planejamento e ficou na gaveta' -> Resposta: Nosso formato inclui acompanhamento prático."
-      },
-      {
-        id: "ACOMP-CONSELHO",
-        cat: "governanca",
-        badge: "saas",
-        badgeText: "Recorrência",
-        name: "Acompanhamento de Conselho (Retainer)",
-        desc: "Participação presencial/online em 2 reuniões mensais de Conselho Consultivo com emissão de atas formais em até 24h.",
-        priceStr: "R$ 2.300,00 / mês",
-        priceVal: 2300,
-        model: "Mensalidade",
-        pitch: "Tenha um conselheiro neutro nas reuniões mensais cobrando resultados e prazos da diretoria.",
-        obj: "'Quantas reuniões?' -> Resposta: 2 encontros mensais de 1h30 com ata oficial."
-      },
-      {
-        id: "M&A-NEGOCIACAO",
-        cat: "governanca",
-        badge: "high-ticket",
-        badgeText: "M&A / Valuation",
-        name: "Negociação, Mediação & M&A",
-        desc: "Valuation simplificado, mediação de conflitos societários e assessoria de fusão/aquisição para PMEs.",
-        priceStr: "R$ 15.000,00",
-        priceVal: 15000,
-        model: "Retainer + Exito",
-        pitch: "Maximize o valor da sua empresa em uma negociação de venda ou resolva impasses de fusão com segurança.",
-        obj: "'E para empresas grandes?' -> Resposta: Empresas > R$ 5M/ano são atendidas em conjunto com Marcelo Nogueira (B+)."
-      },
-      {
-        id: "DIAG-360-SESS",
-        cat: "governanca",
-        badge: "saas",
-        badgeText: "Sessão 2h",
-        name: "Diagnóstico via Entrevista 360°",
-        desc: "Sessão de 2 horas de entrevista em profundidade com Luiz Portal + parecer executivo entregue em 48h.",
-        priceStr: "R$ 1.100,00",
-        priceVal: 1100,
-        model: "Antecipado / 3x",
-        pitch: "Sessão intensiva para sócios que precisam de uma segunda opinião estratégica imediata.",
-        obj: "'Pode ser online?' -> Resposta: Sim, presencial em Goiânia ou online via conferência."
-      },
-      {
-        id: "COD-NOVA-LIDER",
-        cat: "educacao",
-        badge: "educacao",
-        badgeText: "Turma Aberta",
-        name: "Formação: O Código da Nova Liderança",
-        desc: "Formação executiva de 16h para gerentes e diretores com foco em gestão antifrágil, OKRs e liderança por IA.",
-        priceStr: "R$ 2.900,00 / aluno",
-        priceVal: 2900,
-        model: "Por Inscrição",
-        pitch: "Transforme seus supervisores em líderes autônomos que gerenciam processos por indicadores.",
-        obj: "'Tem desconto para turmas?' -> Resposta: Sim, acima de 3 alunos concedemos 15% off."
-      },
-      {
-        id: "LIDER-IN-COMPANY",
-        cat: "educacao",
-        badge: "educacao",
-        badgeText: "In-Company 16h",
-        name: "Formação Nova Liderança (In-Company)",
-        desc: "Treinamento exclusivo ministrado na sede do cliente (16h em 2 dias) com customização dos casos práticos da empresa.",
-        priceStr: "R$ 18.000,00",
-        priceVal: 18000,
-        model: "Contrato PJ",
-        pitch: "Treine toda a sua equipe de gestão simultaneamente resolvendo os problemas reais da empresa durante as aulas.",
-        obj: "'Pode adicionar mais horas?' -> Resposta: Sim, +10% do valor contratado por módulo extra."
-      },
-      {
-        id: "MENTORIA-EXEC",
-        cat: "educacao",
-        badge: "educacao",
-        badgeText: "Mentoria 3M-6M",
-        name: "Mentoria Executiva (Individual / Grupo)",
-        desc: "Acompanhamento direto de Luiz Portal para CEOs e fundadores com sessões quinzenais de direcionamento.",
-        priceStr: "R$ 9.000,00",
-        priceVal: 9000,
-        model: "Pacote Trimestral",
-        pitch: "Aconselhamento executivo direto com quem tem décadas de experiência em M&A e governança.",
-        obj: "'Qual a frequência?' -> Resposta: Encontros quinzenais de 1h30 com acompanhamento via WhatsApp."
-      },
-      {
-        id: "WORKSHOP-PITCH",
-        cat: "educacao",
-        badge: "educacao",
-        badgeText: "Evento 2h-4h",
-        name: "Workshop com Pitch Comercial",
-        desc: "Workshop de 2h a 4h ministrado para associações ou empresas com autorização para apresentação comercial ao final.",
-        priceStr: "R$ 890,00",
-        priceVal: 890,
-        model: "Por Evento",
-        pitch: "Conteúdo executivo de alto impacto a um valor acessível para eventos corporativos.",
-        obj: "'Qual o tema?' -> Resposta: Inteligência Artificial na Gestão, Governança ou Liderança."
-      },
-      {
-        id: "WORKSHOP-PURO",
-        cat: "educacao",
-        badge: "educacao",
-        badgeText: "Evento 2h-4h",
-        name: "Workshop Não-Comercial (Conteúdo Puro)",
-        desc: "Workshop 100% focado em transferência de conhecimento técnico/executivo, sem qualquer pitch de vendas ao final.",
-        priceStr: "R$ 1.500,00",
-        priceVal: 1500,
-        model: "Por Evento",
-        pitch: "Treinamento focado e livre de abordagens comerciais para convenções internas.",
-        obj: "'Emite nota fiscal?' -> Resposta: Sim, faturamento direto via CNPJ LUIZ E A PORTAL."
-      },
-      {
-        id: "PALESTRA-EXEC",
-        cat: "educacao",
-        badge: "educacao",
-        badgeText: "Por Hora",
-        name: "Palestra Executiva",
-        desc: "Palestra motivacional-estratégica ministrada por Luiz Portal para grandes públicos ou convenções de vendas.",
-        priceStr: "R$ 2.000,00 / hora",
-        priceVal: 2000,
-        model: "50% Reserva + 50% Evento",
-        pitch: "Provocação executiva de alto nível sobre o futuro dos negócios e o impacto da inteligência artificial.",
-        obj: "'Reserva com quanta antecedência?' -> Resposta: Mínimo 15 dias de antecedência."
-      },
-      {
-        id: "ALMOCO-COM-CEO",
-        cat: "educacao",
-        badge: "educacao",
-        badgeText: "Encontro C-Level",
-        name: "Almoço com o CEO (Restaurante Voya)",
-        desc: "Encontro exclusivo de 3 horas para até 20 empresários C-Level no Restaurante Voya com almoço executivo e rodada de negócios.",
-        priceStr: "R$ 200,00",
-        priceVal: 200,
-        model: "Ingresso Antecipado",
-        pitch: "Networking de altíssimo nível com outros tomadores de decisão em um ambiente gastronômico reservado.",
-        obj: "'O que inclui?' -> Resposta: Menu degustação Voya + brinde executivo + rodada temática de insights."
-      }
+      { id: "SAAS-DIAG-01", cat: "saas", badge: "saas", badgeText: "SaaS Entrada", name: "Diagnóstico Empresarial Express (SaaS)", desc: "IA + Formulário de 4 Eixos (Financeiro, Operacional, Pessoal, Comercial) gerando PDF de vulnerabilidade em tempo real.", priceStr: "R$ 250,00", priceVal: 250, model: "Pagamento Único / 12x" },
+      { id: "JULIO-NETLIFY", cat: "saas", badge: "saas", badgeText: "Assinatura MRR", name: "Júlio Bot v8.0 (Copiloto de Gestão)", desc: "Web App SPA no Netlify com Firebase Auth e Firestore multi-tenant. Copiloto de gestão com rotinas, alertas e cadernos.", priceStr: "R$ 120,00", priceVal: 120, model: "Mensal / Assinatura" },
+      { id: "JARVIS-OPERAC", cat: "saas", badge: "saas", badgeText: "Implantação + MRR", name: "Jarvis Operacional (IA Corporativa)", desc: "IA treinada nos POPs, manuais e políticas internas da empresa cliente. Responde dúvidas operacionais da equipe instantaneamente.", priceStr: "R$ 1.500 setup + R$ 350/mês", priceVal: 1850, model: "Setup + Recorrente" },
+      { id: "CADERNOS-ATIV", cat: "saas", badge: "saas", badgeText: "Conteúdo PDF", name: "Cadernos de Ativação / Micro-Agentes", desc: "Manuais operacionais em PDF/Markdown parametrizados para delegação rápida de tarefas a estagiários e assistentes.", priceStr: "R$ 50,00", priceVal: 50, model: "Por Caderno" },
+      { id: "RH-TECH-DIY", cat: "rh", badge: "saas", badgeText: "Por Processo", name: "RH Tech DIY (Recrutamento via IA)", desc: "Formulário de 4 perguntas, geração de anúncio via IA, triagem de currículos em PDF e cálculo de Fit Score com parecer.", priceStr: "R$ 250,00", priceVal: 250, model: "Por Vaga Fechada" },
+      { id: "RH-FULL-SERV", cat: "rh", badge: "high-ticket", badgeText: "Full Service", name: "RH Tech Full-Service (Headhunting)", desc: "Condução integral do processo seletivo por especialistas com entrevistas STAR, temperamentos e garantia de reposição de 30 dias.", priceStr: "1º Salário Integral", priceVal: 3500, model: "Por Contratação" },
+      { id: "CX-NPS-BLUE", cat: "cx", badge: "high-ticket", badgeText: "Projeto 25d", name: "CX & Service Blueprint (PMEs)", desc: "Mapeamento da jornada do cliente, cálculo de NPS/CSAT/CES via formulários proprietários e entrega de Service Blueprint visual.", priceStr: "R$ 4.500,00", priceVal: 4500, model: "50% Entrada + 50% Entrega" },
+      { id: "CX-NPS-CORP", cat: "cx", badge: "high-ticket", badgeText: "Qualitativo 55d", name: "CX Indústrias / Grandes Contas", desc: "Entrevistas em profundidade conduzidas por Juliana Canuto com clientes, fornecedores e colaboradores da indústria.", priceStr: "R$ 12.000,00", priceVal: 12000, model: "Projeto Fechado" },
+      { id: "PESQ-MERCADO", cat: "cx", badge: "high-ticket", badgeText: "Projeto 30d", name: "Pesquisa de Mercado & Concorrência", desc: "Benchmarking competitivo, análise de precificação setorial e identificação de oportunidades não exploradas no mercado.", priceStr: "R$ 6.000,00", priceVal: 6000, model: "Projeto Fechado" },
+      { id: "CONSELHO-FAM-3M", cat: "governanca", badge: "high-ticket", badgeText: "Governança 3M", name: "Estruturação de Conselho Familiar (3M)", desc: "Aplicação dos 3 Círculos de Gersick & Davis (Propriedade, Família, Gestão), elaboração de Acordo de Sócios e regra de herdeiros.", priceStr: "R$ 12.000,00", priceVal: 12000, model: "3 Parcelas Mensais" },
+      { id: "PLAN-ESTRAT-3M", cat: "governanca", badge: "high-ticket", badgeText: "Estratégia 3M", name: "Planejamento Estratégico (OKRs 12M)", desc: "Construção do plano de 12 meses traduzido em OKRs trimestrais, matriz de iniciativas e acompanhamento inicial de 90 dias.", priceStr: "R$ 10.000,00", priceVal: 10000, model: "3 Parcelas Mensais" },
+      { id: "ACOMP-CONSELHO", cat: "governanca", badge: "saas", badgeText: "Recorrência", name: "Acompanhamento de Conselho (Retainer)", desc: "Participação presencial/online em 2 reuniões mensais de Conselho Consultivo com emissão de atas formais em até 24h.", priceStr: "R$ 2.300,00 / mês", priceVal: 2300, model: "Mensalidade" },
+      { id: "M&A-NEGOCIACAO", cat: "governanca", badge: "high-ticket", badgeText: "M&A / Valuation", name: "Negociação, Mediação & M&A", desc: "Valuation simplificado, mediação de conflitos societários e assessoria de fusão/aquisição para PMEs.", priceStr: "R$ 15.000,00", priceVal: 15000, model: "Retainer + Exito" },
+      { id: "DIAG-360-SESS", cat: "governanca", badge: "saas", badgeText: "Sessão 2h", name: "Diagnóstico via Entrevista 360°", desc: "Sessão de 2 horas de entrevista em profundidade com Luiz Portal + parecer executivo entregue em 48h.", priceStr: "R$ 1.100,00", priceVal: 1100, model: "Antecipado / 3x" },
+      { id: "COD-NOVA-LIDER", cat: "educacao", badge: "educacao", badgeText: "Turma Aberta", name: "Formação: O Código da Nova Liderança", desc: "Formação executiva de 16h para gerentes e diretores com foco em gestão antifrágil, OKRs e liderança por IA.", priceStr: "R$ 2.900,00 / aluno", priceVal: 2900, model: "Por Inscrição" },
+      { id: "LIDER-IN-COMPANY", cat: "educacao", badge: "educacao", badgeText: "In-Company 16h", name: "Formação Nova Liderança (In-Company)", desc: "Treinamento exclusivo ministrado na sede do cliente (16h em 2 dias) com customização dos casos práticos da empresa.", priceStr: "R$ 18.000,00", priceVal: 18000, model: "Contrato PJ" },
+      { id: "MENTORIA-EXEC", cat: "educacao", badge: "educacao", badgeText: "Mentoria 3M-6M", name: "Mentoria Executiva (Individual / Grupo)", desc: "Acompanhamento direto de Luiz Portal para CEOs e fundadores com sessões quinzenais de direcionamento.", priceStr: "R$ 9.000,00", priceVal: 9000, model: "Pacote Trimestral" },
+      { id: "WORKSHOP-PITCH", cat: "educacao", badge: "educacao", badgeText: "Evento 2h-4h", name: "Workshop com Pitch Comercial", desc: "Workshop de 2h a 4h ministrado para associações ou empresas com autorização para apresentação comercial ao final.", priceStr: "R$ 890,00", priceVal: 890, model: "Por Evento" },
+      { id: "WORKSHOP-PURO", cat: "educacao", badge: "educacao", badgeText: "Evento 2h-4h", name: "Workshop Não-Comercial (Conteúdo Puro)", desc: "Workshop 100% focado em transferência de conhecimento técnico/executivo, sem qualquer pitch de vendas ao final.", priceStr: "R$ 1.500,00", priceVal: 1500, model: "Por Evento" },
+      { id: "PALESTRA-EXEC", cat: "educacao", badge: "educacao", badgeText: "Por Hora", name: "Palestra Executiva", desc: "Palestra motivacional-estratégica ministrada por Luiz Portal para grandes públicos ou convenções de vendas.", priceStr: "R$ 2.000,00 / hora", priceVal: 2000, model: "50% Reserva + 50% Evento" },
+      { id: "ALMOCO-COM-CEO", cat: "educacao", badge: "educacao", badgeText: "Encontro C-Level", name: "Almoço com o CEO (Restaurante Voya)", desc: "Encontro exclusivo de 3 horas para até 20 empresários C-Level no Restaurante Voya com almoço executivo e rodada de negócios.", priceStr: "R$ 200,00", priceVal: 200, model: "Ingresso Antecipado" }
     ];
 
-    // Render Products Grid
     function renderProductsGrid(catFilter = 'all', searchQuery = '') {
       const grid = document.getElementById('productsGrid');
       grid.innerHTML = '';
       
       let filtered = products;
-      
-      if (catFilter !== 'all') {
-        filtered = filtered.filter(p => p.cat === catFilter);
-      }
-      
+      if (catFilter !== 'all') filtered = filtered.filter(p => p.cat === catFilter);
       if (searchQuery.trim() !== '') {
-        const query = searchQuery.toLowerCase();
-        filtered = filtered.filter(p => 
-          p.name.toLowerCase().includes(query) || 
-          p.desc.toLowerCase().includes(query) || 
-          p.id.toLowerCase().includes(query)
-        );
+        const q = searchQuery.toLowerCase();
+        filtered = filtered.filter(p => p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q) || p.id.toLowerCase().includes(q));
       }
 
       if (filtered.length === 0) {
-        grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:3rem; color:var(--text-muted);">Nenhum produto encontrado para a busca.</div>`;
+        grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:3rem; color:var(--text-muted);">Nenhum produto encontrado.</div>`;
         return;
       }
 
       filtered.forEach(p => {
         const card = document.createElement('div');
-        card.className = 'product-card';
+        card.className = 'card card--spotlight card--interactive';
         
-        // WHATSAPP LINK CORRIGIDO: 61 996993134 (5561996993134)
-        const waUrl = `https://wa.me/5561996993134?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20produto%3A%20${encodeURIComponent(p.name)}%20(SKU%3A%20${p.id}).`;
-        const pageUrl = `./produtos/${p.id}.html`;
-        
-        card.innerHTML = `
-          <div class="card-top">
-            <span class="product-badge ${p.badge}">${p.badgeText}</span>
-            <h3 class="product-name">${p.name}</h3>
-            <div class="product-sku">SKU: ${p.id}</div>
-            <p class="product-desc">${p.desc}</p>
+        const waUrl = "https://wa.me/5561996993134?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%3A%20" + encodeURIComponent(p.name);
+        const pageUrl = "./produtos/" + p.id + ".html";
+        const badgeClass = p.badge === 'high-ticket' ? 'badge--gold' : p.badge === 'educacao' ? 'badge--blue' : '';
 
-            <div class="seller-box">
-              <div class="seller-label">🎯 Argumento de Venda (Pitch)</div>
-              <div class="seller-value">${p.pitch}</div>
-              <div class="seller-label">🛡️ Objeção & Resposta</div>
-              <div class="seller-value">${p.obj}</div>
-            </div>
+        card.innerHTML = `
+          <div>
+            <span class="badge ${badgeClass}">${p.badgeText}</span>
+            <h3 style="font-size:1.25rem; font-weight:800; color:#fff; margin-bottom:0.3rem; line-height:1.3;">${p.name}</h3>
+            <div style="font-family:monospace; font-size:0.75rem; color:var(--text-muted); margin-bottom:0.8rem;">SKU: ${p.id}</div>
+            <p style="font-size:0.92rem; color:var(--text-secondary); line-height:1.55; margin-bottom:1.2rem;">${p.desc}</p>
           </div>
 
-          <div class="card-footer">
-            <div class="price-group">
-              <div class="price-tag">${p.priceStr}</div>
-              <div class="price-sub">${p.model}</div>
+          <div class="card-footer-box">
+            <div>
+              <div class="price-val">${p.priceStr}</div>
+              <div class="price-model">${p.model}</div>
             </div>
             
-            <div class="card-actions">
-              <a href="${pageUrl}" class="btn-view-page">
-                📄 Ver Página
-              </a>
-              <a href="${waUrl}" target="_blank" class="btn-card-action">
-                💬 WhatsApp
-              </a>
+            <div class="card-btn-group">
+              <a href="${pageUrl}" class="btn btn--secondary btn--sm">📄 Ver Página</a>
+              <a href="${waUrl}" target="_blank" class="btn btn--whatsapp btn--sm">💬 WhatsApp</a>
             </div>
           </div>
         `;
-        
+
+        card.addEventListener('pointermove', e => {
+          const r = card.getBoundingClientRect();
+          card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+          card.style.setProperty('--my', `${e.clientY - r.top}px`);
+        });
+
         grid.appendChild(card);
       });
     }
 
-    // Render Simulator Items
     function renderSimItems() {
       const list = document.getElementById('simList');
       list.innerHTML = '';
-
       products.forEach(p => {
         const item = document.createElement('div');
-        item.className = 'sim-item';
+        item.style.cssText = "background:var(--surface-inset); border:1px solid var(--border); border-radius:var(--r-md); padding:0.8rem 1rem; display:flex; justify-between; align-items:center; cursor:pointer;";
         item.dataset.id = p.id;
         item.dataset.price = p.priceVal;
         item.dataset.name = p.name;
-
-        item.innerHTML = `
-          <div class="sim-item-title">${p.name}</div>
-          <div class="sim-item-price">${p.priceStr}</div>
-        `;
-
+        item.innerHTML = `<div style="font-size:0.9rem;"><strong>${p.name}</strong></div><div style="color:var(--action); font-weight:700; font-size:0.9rem;">${p.priceStr}</div>`;
         item.addEventListener('click', () => {
           item.classList.toggle('active');
+          if (item.classList.contains('active')) {
+            item.style.borderColor = 'var(--action)';
+            item.style.background = 'var(--action-subtle)';
+          } else {
+            item.style.borderColor = 'var(--border)';
+            item.style.background = 'var(--surface-inset)';
+          }
           updateSimulatorSummary();
         });
-
         list.appendChild(item);
       });
     }
 
-    // Update Simulator Summary
     function updateSimulatorSummary() {
-      const activeItems = document.querySelectorAll('.sim-item.active');
+      const activeItems = document.querySelectorAll('#simList > div.active');
       let total = 0;
       let names = [];
-
       activeItems.forEach(item => {
         total += parseFloat(item.dataset.price);
         names.push(item.dataset.name);
       });
 
-      const formattedPrice = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-      document.getElementById('simTotalPrice').innerText = formattedPrice;
+      const formatted = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      document.getElementById('simTotalPrice').innerText = formatted;
 
       const summaryText = document.getElementById('simSelectedItems');
       const waBtn = document.getElementById('btnSimWhatsApp');
 
       if (names.length === 0) {
         summaryText.innerText = "Nenhum produto selecionado. Clique nos itens ao lado para adicionar.";
-        waBtn.href = "https://wa.me/5561996993134?text=Ol%C3%A1!%20Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20os%20produtos%20do%20Ecossistema%20Live.";
+        waBtn.href = "https://wa.me/5561996993134?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20Ecossistema%20Live.";
       } else {
         summaryText.innerHTML = `<strong>${names.length} produto(s) selecionado(s):</strong><br>` + names.join('<br>');
-        
-        const message = `Ol%C3%A1!%20Simulei%20uma%20proposta%20no%20site%20do%20Ecossistema%20Live%20com%20os%20seguintes%20produtos%3A%0A%0A- %20` + 
-          encodeURIComponent(names.join('\n- ')) + 
-          `%0A%0A*Total%20Estimado%3A%20${encodeURIComponent(formattedPrice)}*%0A%0AGostaria%20de%20agendar%20uma%20reuni%C3%A3o%20para%20formalizar%20o%20projeto.`;
-        
-        waBtn.href = `https://wa.me/5561996993134?text=${message}`;
+        const text = "Ol%C3%A1!%20Simulei%20uma%20proposta%20no%20site%20do%20Ecossistema%20Live%3A%0A%0A- " + encodeURIComponent(names.join('\n- ')) + "%0A%0A*Total%3A%20" + encodeURIComponent(formatted) + "*";
+        waBtn.href = "https://wa.me/5561996993134?text=" + text;
       }
     }
 
-    // Event Listeners
+    // ── APRESENTAÇÕES & RELATÓRIOS (ORDEM CRONOLÓGICA REVERSA) ──
+    const apresentacoes = [
+      {
+        date: "2026-10-01",
+        title: "Relatório de Prospecção — Operação e Dados",
+        desc: "Do levantamento das empresas no Google Places ao disparo por e-mail e WhatsApp: métricas de conversão, canais, proteções da conta e próximos passos.",
+        file: "./index_2026-10-01_relatorio-prospeccao.html",
+        badge: "Novo · 01/10/2026",
+        badgeType: "gold"
+      },
+      {
+        date: "2026-09-09",
+        title: "Live Estratégia OS — Planejamento Estratégico",
+        desc: "Apresentação executiva em rolagem contínua do produto de governança e planejamento modular com inteligência artificial.",
+        file: "./apresentacao-live-estrategia-os.html",
+        badge: "Governança & IA",
+        badgeType: "blue"
+      },
+      {
+        date: "2026-09-09",
+        title: "Panorama Geral da Operação & Engenharia de IA",
+        desc: "Live V6.0 — Arquitetura de agentes autônomos, esteira técnica multicloud e governança de tecnologia.",
+        file: "./apresentacao-panorama-geral.html",
+        badge: "Engenharia IA",
+        badgeType: ""
+      },
+      {
+        date: "2026-09-08",
+        title: "Apresentação Técnica — Sistema Themis & Agentes",
+        desc: "Apresentação técnica e pedagógica do ecossistema de agentes autônomos e cooperação multi-agente para governança jurídica.",
+        file: "./apresentacao-agentes.html",
+        badge: "Tecnologia",
+        badgeType: ""
+      },
+      {
+        date: "2026-09-02",
+        title: "Apresentação Executiva — Ecossistema Live & Nirvana-OS",
+        desc: "Visão estratégica institucional sobre o Nirvana-OS, pilares de gestão e modelo de consultoria modular com início, meio e fim.",
+        file: "./apresentacao-executiva-ecossistema-live.html",
+        badge: "Institucional",
+        badgeType: ""
+      }
+    ];
+
+    function renderApresentacoesGrid() {
+      const grid = document.getElementById('apresentacoesGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      apresentacoes.forEach(a => {
+        const card = document.createElement('div');
+        card.className = 'card card--spotlight card--interactive';
+        const badgeClass = a.badgeType === 'gold' ? 'badge--gold' : a.badgeType === 'blue' ? 'badge--blue' : '';
+        card.innerHTML = `
+          <div>
+            <span class="badge ${badgeClass}">${a.badge}</span>
+            <div style="font-family:monospace; font-size:0.75rem; color:var(--action); margin-bottom:0.4rem;">${a.date}</div>
+            <h3 style="font-size:1.2rem; font-weight:700; color:#fff; margin-bottom:0.5rem; line-height:1.35;">${a.title}</h3>
+            <p style="font-size:0.92rem; color:var(--text-secondary); line-height:1.6; margin-bottom:1.2rem;">${a.desc}</p>
+          </div>
+          <div style="border-top:1px solid var(--border); padding-top:var(--sp-4); margin-top:auto;">
+            <a href="${a.file}" class="btn btn--secondary btn--sm btn--block" target="_blank">📄 Abrir Relatório / Apresentação</a>
+          </div>
+        `;
+        card.addEventListener('pointermove', e => {
+          const r = card.getBoundingClientRect();
+          card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+          card.style.setProperty('--my', `${e.clientY - r.top}px`);
+        });
+        grid.appendChild(card);
+      });
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       renderProductsGrid();
       renderSimItems();
+      renderApresentacoesGrid();
 
-      // Seller Mode Toggle
-      const btnSeller = document.getElementById('btnToggleSeller');
-      btnSeller.addEventListener('click', () => {
-        document.body.classList.toggle('seller-mode-active');
-        btnSeller.classList.toggle('active');
-        if (document.body.classList.contains('seller-mode-active')) {
-          btnSeller.innerText = '💼 Desativar Modo Reunião';
-        } else {
-          btnSeller.innerText = '💼 Modo Reunião / Vendedor';
-        }
-      });
-
-      // Category Tabs Filter
       const catTabs = document.querySelectorAll('.cat-tab');
       catTabs.forEach(tab => {
         tab.addEventListener('click', () => {
           catTabs.forEach(t => t.classList.remove('active'));
           tab.classList.add('active');
-          const cat = tab.dataset.cat;
-          const query = document.getElementById('searchInput').value;
-          renderProductsGrid(cat, query);
+          renderProductsGrid(tab.dataset.cat, document.getElementById('searchInput').value);
         });
       });
 
-      // Search Input Filter
-      const searchInput = document.getElementById('searchInput');
-      searchInput.addEventListener('input', (e) => {
+      document.getElementById('searchInput').addEventListener('input', (e) => {
         const activeTab = document.querySelector('.cat-tab.active').dataset.cat;
         renderProductsGrid(activeTab, e.target.value);
       });

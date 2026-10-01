@@ -1,0 +1,1054 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Relatório Executivo · Prospecção Operação e Dados | Ecossistema Live</title>
+  <meta name="description" content="Relatório da campanha de prospecção Operação e Dados: levantamento, auditoria, abordagem e próximos passos.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Serif:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── TOKENS & VARIÁVEIS (Regra 60-30-10 & Design System Live) ─── */
+    :root {
+      /* Base Claro (Platinado) */
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-subtle: #f1f5f9;
+      --surface-raised: #ffffff;
+      --fg: #0f172a;
+      --fg-heading: #07131b;
+      --muted: #475569;
+      --line: #e2e8f0;
+      --line-strong: #cbd5e1;
+
+      /* Identidade da Marca (Navy + Teal/Ciano + Âmbar) */
+      --navy: #0b1726;
+      --navy-fg: #f1f5f9;
+      --accent: #0b7a75;
+      --accent-soft: #e0f2f1;
+      --accent-fg: #075a56;
+      --brand: #4f46e5;
+      --brand-soft: #eef2ff;
+
+      /* Semáforo & Destaques */
+      --warn: #b45309;
+      --warn-soft: #fef3c7;
+      --warn-border: #fcd34d;
+      --bad: #b91c1c;
+      --bad-soft: #fee2e2;
+      --bad-border: #fca5a5;
+      --ok: #047857;
+      --ok-soft: #d1fae5;
+      --ok-border: #6ee7b7;
+
+      --bar: #0b7a75;
+      --bar2: #38b2ac;
+      --bar-track: #e2e8f0;
+
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.07);
+      --shadow-lg: 0 12px 30px rgba(0,0,0,0.08);
+
+      --r-md: 10px;
+      --r-lg: 16px;
+      --r-full: 9999px;
+    }
+
+    /* Dark Mode (Padrão Executivo Noturno) */
+    :root[data-theme="dark"],
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #070d18;
+        --surface: #0f192c;
+        --surface-subtle: #142238;
+        --surface-raised: #182740;
+        --fg: #e2e8f0;
+        --fg-heading: #f8fafc;
+        --muted: #94a3b8;
+        --line: rgba(148, 163, 184, 0.16);
+        --line-strong: rgba(148, 163, 184, 0.28);
+
+        --navy: #050b14;
+        --navy-fg: #f8fafc;
+        --accent: #2dd4bf;
+        --accent-soft: rgba(45, 212, 191, 0.12);
+        --accent-fg: #5eead4;
+        --brand: #818cf8;
+        --brand-soft: rgba(129, 140, 248, 0.12);
+
+        --warn: #fbbf24;
+        --warn-soft: rgba(251, 191, 36, 0.14);
+        --warn-border: rgba(251, 191, 36, 0.35);
+        --bad: #f87171;
+        --bad-soft: rgba(248, 113, 113, 0.14);
+        --bad-border: rgba(248, 113, 113, 0.35);
+        --ok: #34d399;
+        --ok-soft: rgba(52, 211, 153, 0.14);
+        --ok-border: rgba(52, 211, 153, 0.35);
+
+        --bar: #2dd4bf;
+        --bar2: #0d9488;
+        --bar-track: #1e293b;
+
+        --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+        --shadow-md: 0 6px 20px rgba(0,0,0,0.45);
+        --shadow-lg: 0 16px 36px rgba(0,0,0,0.55);
+        color-scheme: dark;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--fg);
+      font-family: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+      font-size: 18px; /* Tipografia executiva confortável */
+      line-height: 1.78;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ─── TEXTURA DE FUNDO SUTIL (SVG Noise) ─── */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    /* ─── BARRA DE PROGRESSO NO TOPO ─── */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--brand), var(--accent));
+      z-index: 99999;
+      transition: width 0.12s ease-out;
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    /* ─── LAYOUT & WRAPPER ─── */
+    .wrap {
+      max-width: 1040px;
+      margin-inline: auto;
+      padding-inline: clamp(20px, 4vw, 36px);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ─── HEADER EXECUTIVO ─── */
+    header.top {
+      background: linear-gradient(180deg, var(--navy) 0%, rgba(11, 23, 38, 0.95) 100%);
+      color: var(--navy-fg);
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header.top::after {
+      content: "";
+      position: absolute;
+      top: -40%;
+      right: -20%;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(45, 212, 191, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    header.top .wrap {
+      padding-block: clamp(48px, 6vw, 64px) clamp(40px, 5vw, 56px);
+    }
+
+    .top-bar-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font: 600 13px/1 "IBM Plex Mono", monospace;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 6px 14px;
+      border-radius: var(--r-full);
+      border: 1px solid var(--accent-fg);
+    }
+
+    .theme-toggle-btn {
+      background: var(--surface-subtle);
+      border: 1px solid var(--line-strong);
+      color: var(--fg);
+      padding: 6px 12px;
+      border-radius: var(--r-full);
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .theme-toggle-btn:hover {
+      background: var(--surface-raised);
+      border-color: var(--accent);
+    }
+
+    h1 {
+      font: 700 clamp(30px, 5.2vw, 46px)/1.18 "IBM Plex Serif", Georgia, serif;
+      color: #ffffff;
+      margin: 14px 0 16px;
+      text-wrap: balance;
+      letter-spacing: -0.015em;
+    }
+
+    header.top p.sub {
+      font-size: clamp(17px, 2vw, 19.5px);
+      line-height: 1.68;
+      max-width: 68ch;
+      color: #cbd5e1;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 32px;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 14.5px;
+      color: #94a3b8;
+    }
+    .meta b {
+      color: #f1f5f9;
+      font-weight: 600;
+    }
+
+    /* ─── MAIN CONTENT ─── */
+    main {
+      padding-block: 48px 80px;
+    }
+
+    section {
+      margin-block: 0 60px;
+    }
+
+    h2 {
+      font: 700 clamp(23px, 3.4vw, 30px)/1.28 "IBM Plex Serif", Georgia, serif;
+      color: var(--fg-heading);
+      margin: 0 0 10px;
+      text-wrap: balance;
+      letter-spacing: -0.01em;
+    }
+
+    h2 .n {
+      font: 600 14px "IBM Plex Mono", monospace;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 6px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.7;
+      margin: 0 0 24px;
+      max-width: 74ch;
+    }
+
+    p {
+      max-width: 76ch;
+      margin-bottom: 16px;
+    }
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ─── KPIS ─── */
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 16px;
+      margin-block: 16px 0;
+    }
+
+    .kpi {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      padding: 20px 20px 18px;
+      min-width: 0;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .kpi:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      box-shadow: var(--shadow-md);
+    }
+    .kpi .v {
+      font: 600 34px/1.1 "IBM Plex Mono", monospace;
+      font-variant-numeric: tabular-nums;
+      color: var(--accent);
+    }
+    .kpi .l {
+      font-size: 14.5px;
+      color: var(--muted);
+      margin-top: 8px;
+      line-height: 1.45;
+    }
+
+    /* ─── CARDS & GRIDS ─── */
+    .cols {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .card:hover {
+      border-color: var(--line-strong);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .card h3 {
+      font: 700 17px/1.35 "IBM Plex Sans", sans-serif;
+      color: var(--fg-heading);
+      margin: 0 0 8px;
+    }
+    .card p {
+      margin: 0;
+      font-size: 15.5px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    .tag {
+      display: inline-block;
+      font: 600 11.5px/1 "IBM Plex Mono", monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 9px;
+      border-radius: 4px;
+      background: var(--accent-soft);
+      color: var(--accent-fg);
+      margin-bottom: 12px;
+      border: 1px solid var(--accent-fg);
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* ─── FUNIL DE CONVERSÃO ─── */
+    .funnel {
+      display: grid;
+      gap: 14px;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: minmax(140px, 230px) 1fr auto;
+      gap: 16px;
+      align-items: center;
+    }
+    .row .name {
+      font-size: 15.5px;
+      font-weight: 500;
+      color: var(--fg-heading);
+    }
+    .row .track {
+      background: var(--bar-track);
+      border-radius: 6px;
+      height: 24px;
+      overflow: hidden;
+    }
+    .row .fill {
+      height: 100%;
+      background: var(--bar);
+      border-radius: 6px;
+      transition: width 0.6s ease;
+    }
+    .row .fill.alt {
+      background: var(--bar2);
+    }
+    .row .num {
+      font: 600 15.5px "IBM Plex Mono", monospace;
+      font-variant-numeric: tabular-nums;
+      min-width: 64px;
+      text-align: right;
+      color: var(--fg-heading);
+    }
+    @media (max-width: 600px) {
+      .row { grid-template-columns: 1fr auto; }
+      .row .track { grid-column: 1 / -1; order: 3; }
+    }
+
+    /* ─── TABELAS ─── */
+    .tw {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 15.5px;
+      min-width: 540px;
+    }
+    th, td {
+      text-align: left;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      line-height: 1.6;
+    }
+    th {
+      font: 700 13px "IBM Plex Mono", monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--surface-subtle);
+    }
+    tr:last-child td {
+      border-bottom: 0;
+    }
+    td.n, th.n {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    /* ─── TIMELINE ─── */
+    .timeline {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border-left: 2px solid var(--line-strong);
+      margin-left: 8px;
+    }
+    .timeline li {
+      position: relative;
+      padding: 0 0 28px 26px;
+    }
+    .timeline li:last-child {
+      padding-bottom: 0;
+    }
+    .timeline li::before {
+      content: "";
+      position: absolute;
+      left: -8px;
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--surface);
+      box-shadow: 0 0 0 1px var(--line-strong);
+    }
+    .timeline .d {
+      font: 600 13.5px "IBM Plex Mono", monospace;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+    }
+    .timeline b {
+      display: block;
+      font-size: 16.5px;
+      font-weight: 700;
+      color: var(--fg-heading);
+      margin-top: 2px;
+    }
+    .timeline span.t {
+      color: var(--muted);
+      font-size: 15.5px;
+      line-height: 1.65;
+      display: block;
+      margin-top: 4px;
+    }
+
+    /* ─── ALERTAS & NOTAS EXECUTIVAS ─── */
+    .note {
+      border-left: 4px solid var(--warn);
+      background: var(--warn-soft);
+      border-radius: 0 var(--r-md) var(--r-md) 0;
+      padding: 16px 20px;
+      margin-block: 18px 0;
+      border-top: 1px solid var(--warn-border);
+      border-right: 1px solid var(--warn-border);
+      border-bottom: 1px solid var(--warn-border);
+    }
+    .note.bad {
+      border-left-color: var(--bad);
+      background: var(--bad-soft);
+      border-top-color: var(--bad-border);
+      border-right-color: var(--bad-border);
+      border-bottom-color: var(--bad-border);
+    }
+    .note.ok {
+      border-left-color: var(--ok);
+      background: var(--ok-soft);
+      border-top-color: var(--ok-border);
+      border-right-color: var(--ok-border);
+      border-bottom-color: var(--ok-border);
+    }
+    .note p {
+      margin: 0;
+      font-size: 15.5px;
+      line-height: 1.65;
+      color: var(--fg);
+    }
+    .note b {
+      font-weight: 700;
+    }
+
+    /* ─── CAIXA DE MENSAGEM / EXEMPLO ─── */
+    .msg {
+      background: var(--surface-subtle);
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--r-md);
+      padding: 18px 22px;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--fg);
+      margin-top: 16px;
+    }
+    .msg small {
+      display: block;
+      color: var(--accent);
+      font: 600 12px "IBM Plex Mono", monospace;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    /* ─── FOOTER EXECUTIVO ─── */
+    footer {
+      border-top: 1px solid var(--line);
+      padding-block: 32px 56px;
+      color: var(--muted);
+      font-size: 14px;
+      background: var(--surface-subtle);
+    }
+    footer .wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ─── LINKS DE NAVEGAÇÃO RÁPIDA ─── */
+    .quick-nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .quick-nav a {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: #94a3b8;
+      text-decoration: none;
+      padding: 4px 10px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.06);
+      transition: all 0.15s;
+    }
+    .quick-nav a:hover {
+      color: #ffffff;
+      background: rgba(255,255,255,0.12);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra de Progresso no Topo -->
+  <div id="progress-bar"></div>
+
+  <!-- Header Executivo -->
+  <header class="top">
+    <div class="wrap">
+      <div class="top-bar-nav">
+        <span class="eyebrow">Ecossistema Live · Consultoria</span>
+        <button id="themeToggle" class="theme-toggle-btn" aria-label="Alternar tema">
+          <span id="themeIcon">☀️</span> Modo Claro
+        </button>
+      </div>
+
+      <h1>Relatório da campanha de prospecção “Operação e Dados”</h1>
+      <p class="sub">Do levantamento das empresas ao disparo por e-mail e WhatsApp: como a base foi montada, quem foi abordado, por quais canais, em que volume e o que vem a seguir.</p>
+
+      <div class="quick-nav">
+        <a href="#sec-01">01 Resumo</a>
+        <a href="#sec-02">02 Levantamento</a>
+        <a href="#sec-03">03 Filtros & Filas</a>
+        <a href="#sec-04">04 Mensagem</a>
+        <a href="#sec-05">05 Canais & Volumes</a>
+        <a href="#sec-06">06 Proteção da Conta</a>
+        <a href="#sec-07">07 Linha do Tempo</a>
+        <a href="#sec-08">08 Respostas</a>
+        <a href="#sec-09">09 Lições & Incidentes</a>
+        <a href="#sec-10">10 Próximos Passos</a>
+      </div>
+
+      <div class="meta">
+        <span><b>Responsável:</b> Cléber, consultor de negócios</span>
+        <span><b>Região:</b> Goiânia e entorno (DDD 62)</span>
+        <span><b>Posição em:</b> 01/10/2026</span>
+        <span><b>Status do Repositório:</b> Sincronizado GitHub Pages</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal Longform -->
+  <main class="wrap">
+
+    <!-- 01 Resumo Executivo -->
+    <section id="sec-01">
+      <h2><span class="n">01</span>Resumo executivo</h2>
+      <p class="lead">A campanha oferece a pequenas e médias empresas de três setores um painel modelo gratuito, adaptado ao negócio em 48 horas, ancorado na mudança tributária que chega em 2027. O quadro consolidado até aqui:</p>
+      
+      <div class="kpis">
+        <div class="kpi">
+          <div class="v">1.895</div>
+          <div class="l">empresas levantadas no Google Places</div>
+        </div>
+        <div class="kpi">
+          <div class="v">924</div>
+          <div class="l">empresas auditadas (site, contato, porte)</div>
+        </div>
+        <div class="kpi">
+          <div class="v">163</div>
+          <div class="l">e-mails enviados (152 sem retorno de erro)</div>
+        </div>
+        <div class="kpi">
+          <div class="v">49</div>
+          <div class="l">mensagens de WhatsApp desta campanha</div>
+        </div>
+        <div class="kpi">
+          <div class="v">2</div>
+          <div class="l">recusas explícitas; nenhuma resposta positiva ainda</div>
+        </div>
+        <div class="kpi">
+          <div class="v">316</div>
+          <div class="l">leads de WhatsApp ainda na fila</div>
+        </div>
+      </div>
+
+      <div class="note">
+        <p><b>Leitura honesta dos números:</b> o volume de contatos já é relevante, mas as respostas recebidas até agora são recusas e mensagens automáticas de empresas. O follow-up agendado para 02/10 é o primeiro teste real de conversão.</p>
+      </div>
+    </section>
+
+    <!-- 02 Levantamento das Informações -->
+    <section id="sec-02">
+      <h2><span class="n">02</span>Levantamento das informações</h2>
+      <p class="lead">A base nasceu de uma varredura sistemática no Google Places, depois enriquecida e filtrada antes de qualquer contato.</p>
+      
+      <div class="cols">
+        <div class="card">
+          <span class="tag">Coleta</span>
+          <h3>18 nichos × 8 regiões</h3>
+          <p>Combinações de segmento e região de Goiânia e entorno, resultando em 1.895 empresas únicas, com nome, endereço, telefone, site e avaliações.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Auditoria</span>
+          <h3>924 empresas analisadas</h3>
+          <p>Cada empresa foi classificada pelo que o negócio mostra publicamente: presença digital, canais de contato e sinais de operação com rotina de dados e processos.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Enriquecimento</span>
+          <h3>E-mails e CNPJ</h3>
+          <p>241 endereços de e-mail localizados e 80 CNPJs identificados, usados para validar que o domínio pertence mesmo à empresa abordada.</p>
+        </div>
+      </div>
+
+      <p style="margin-top:24px;">A auditoria dividiu os leads em dois níveis de prioridade: <b>490 de nível A</b> (maior aderência ao serviço) e <b>434 de nível B</b>. As rodadas de coleta e auditoria foram registradas em 30/08, 31/08, 05/09, 08/09 e 30/09/2026.</p>
+
+      <div class="tw" style="margin-top:16px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Setor-alvo</th>
+              <th>Quem é</th>
+              <th>Dor trabalhada na abordagem</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>Obra e instalação</b></td>
+              <td>Construtoras, empreiteiras, instaladores</td>
+              <td>Controle de obras, medições, compras e custos espalhados em planilhas e conversas</td>
+            </tr>
+            <tr>
+              <td><b>Frota e logística leve</b></td>
+              <td>Transportadoras pequenas, entregas, locação de veículos</td>
+              <td>Rotas, manutenção, documentos e custos por veículo sem visão única</td>
+            </tr>
+            <tr>
+              <td><b>Condomínios e facilities</b></td>
+              <td>Administradoras, empresas de limpeza, portaria e manutenção</td>
+              <td>Contratos, ordens de serviço, prestadores e inadimplência em fontes separadas</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 03 Filtros de Qualidade e Formação das Filas -->
+    <section id="sec-03">
+      <h2><span class="n">03</span>Filtros de qualidade e formação das filas</h2>
+      <p class="lead">Antes de entrar na fila, cada lead passou por regras estritas que reduzem ruído e mitigam risco de reclamação.</p>
+
+      <div class="panel">
+        <div class="funnel">
+          <div class="row">
+            <div class="name">Empresas levantadas</div>
+            <div class="track"><div class="fill" style="width:100%"></div></div>
+            <div class="num">1.895</div>
+          </div>
+          <div class="row">
+            <div class="name">Auditadas</div>
+            <div class="track"><div class="fill" style="width:48.8%"></div></div>
+            <div class="num">924</div>
+          </div>
+          <div class="row">
+            <div class="name">Prioridade A</div>
+            <div class="track"><div class="fill alt" style="width:25.9%"></div></div>
+            <div class="num">490</div>
+          </div>
+          <div class="row">
+            <div class="name">Fila de WhatsApp</div>
+            <div class="track"><div class="fill alt" style="width:19.3%"></div></div>
+            <div class="num">366</div>
+          </div>
+          <div class="row">
+            <div class="name">Em revisão manual</div>
+            <div class="track"><div class="fill alt" style="width:4.9%"></div></div>
+            <div class="num">93</div>
+          </div>
+        </div>
+      </div>
+
+      <p style="margin-top:22px;">Os filtros removeram nomes cortados ou sujos, empresas com nome genérico, fretes informais, síndicos pessoa física, números fora do DDD 62 e telefones fixos (WhatsApp exige celular de 11 dígitos). Domínios de e-mail que não batem com a empresa, lojas de produto no lugar de locadoras e transporte de passageiros foram descartados do e-mail. Contatos já abordados e a lista de exclusão são cruzados antes de cada lote.</p>
+    </section>
+
+    <!-- 04 Mensagem e Gancho Comercial -->
+    <section id="sec-04">
+      <h2><span class="n">04</span>Mensagem e gancho comercial</h2>
+      <p class="lead">Uma abordagem curta, sem link no primeiro contato, com uma oferta concreta e um motivo de calendário para responder agora.</p>
+
+      <div class="cols">
+        <div class="card">
+          <h3>Oferta Concreta</h3>
+          <p>Painel modelo gratuito, adaptado ao negócio da empresa em 48 horas, sem compromisso. Entrega a prova de valor antes de qualquer proposta comercial.</p>
+        </div>
+        <div class="card">
+          <h3>Gancho de Calendário</h3>
+          <p>A CBS substitui PIS e COFINS a partir de 01/01/2027, e o split payment chega em 2028. Quem organiza dados e processos agora chega preparado.</p>
+        </div>
+        <div class="card">
+          <h3>Postura & Compliance</h3>
+          <p>Toda mensagem informa expressamente “Não sou contador”: o foco é organização operacional e inteligência de dados, não consultoria tributária.</p>
+        </div>
+      </div>
+
+      <div class="msg">
+        <small>Padrão do primeiro contato</small>
+        Texto curto, personalizado com o nome da empresa e o setor, uma única pergunta de abertura e a oferta do painel modelo. Sem emoji e sem link, para reduzir drasticamente risco de bloqueio e de filtro anti-spam.
+      </div>
+    </section>
+
+    <!-- 05 Canais e Quantidades -->
+    <section id="sec-05">
+      <h2><span class="n">05</span>Canais e quantidades</h2>
+      <p class="lead">Dois canais operacionais, com regras próprias de ritmo, proteção e registro minucioso.</p>
+
+      <div class="tw">
+        <table>
+          <thead>
+            <tr>
+              <th>Canal</th>
+              <th class="n">Enviados</th>
+              <th class="n">Retorno de erro</th>
+              <th class="n">Descartados</th>
+              <th>Observação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>Gmail</b></td>
+              <td class="n">163</td>
+              <td class="n">11</td>
+              <td class="n">7</td>
+              <td>152 entregues sem erro. A fila de e-mail está zerada.</td>
+            </tr>
+            <tr>
+              <td><b>WhatsApp Business</b></td>
+              <td class="n">49</td>
+              <td class="n">—</td>
+              <td class="n">1 pulado</td>
+              <td>Contatos salvos com sincronização ligada e adicionados à lista “Lead live”.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="cols" style="margin-top:22px;">
+        <div class="card">
+          <span class="tag">Gmail</span>
+          <h3>Envio e Controle</h3>
+          <p>Envio por Gmail com um registro em planilha para cada mensagem (enviado, retorno de erro, descartado). Após cada lote, a caixa é conferida em busca de mensagens de endereço inexistente.</p>
+        </div>
+        <div class="card">
+          <span class="tag">WhatsApp</span>
+          <h3>Envio e Organização</h3>
+          <p>Envio pelo WhatsApp Web, com intervalos aleatórios entre mensagens. Cada contato novo é salvo com o nome da empresa e a conversa entra na lista “Lead live”, que alimenta o follow-up.</p>
+        </div>
+      </div>
+
+      <p style="margin-top:22px;">O histórico de contatos registrado soma 118 telefones únicos: 49 desta campanha e 69 de rodadas anteriores e contatos manuais. Cinco empresas estão na lista de exclusão e não recebem novas mensagens.</p>
+    </section>
+
+    <!-- 06 Cadência e Regras de Proteção da Conta -->
+    <section id="sec-06">
+      <h2><span class="n">06</span>Cadência e regras de proteção da conta</h2>
+      <p class="lead">O WhatsApp Business é o ativo mais sensível da operação, portanto todo o procedimento prioriza preservar a integridade do número.</p>
+
+      <div class="cols">
+        <div class="card">
+          <h3>Ritmo Controlado</h3>
+          <p>Intervalo de 60 a 120 segundos entre envios, sem rajadas. O histórico acumulado recomenda prudência com teto de 20 a 30 contatos por dia.</p>
+        </div>
+        <div class="card">
+          <h3>Parada Automática</h3>
+          <p>Qualquer aviso da Meta (limite, spam, transmissão comercial ou reverificação) interrompe o disparo imediatamente e é registrado no log. Nada é contornado.</p>
+        </div>
+        <div class="card">
+          <h3>Gestão de Conversas</h3>
+          <p>Respostas só recebem mensagens de modelos aprovados. Recusas e pedidos para parar vão diretamente para a lista de exclusão sem novas mensagens.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 Linha do Tempo -->
+    <section id="sec-07">
+      <h2><span class="n">07</span>Linha do tempo</h2>
+      <ul class="timeline" style="margin-top:24px;">
+        <li>
+          <span class="d">30/08 a 05/09</span>
+          <b>Primeiras coletas e auditorias</b>
+          <span class="t">Levantamento inicial por nicho e região, auditoria dos primeiros leads e testes de mensagem.</span>
+        </li>
+        <li>
+          <span class="d">08/09</span>
+          <b>Rodada de e-mail e WhatsApp</b>
+          <span class="t">Cerca de 38 contatos no dia. A conta do WhatsApp recebeu um aviso da Meta, e o disparo foi interrompido na hora.</span>
+        </li>
+        <li>
+          <span class="d">30/09</span>
+          <b>Nova base “Operação e Dados”</b>
+          <span class="t">Coleta e auditoria refeitas para os três setores, com filas separadas de WhatsApp, e-mail e revisão manual.</span>
+        </li>
+        <li>
+          <span class="d">01/10</span>
+          <b>Disparo do dia</b>
+          <span class="t">Envio dos 47 e-mails restantes (45 enviados e 2 descartados na checagem) e de 20 mensagens de WhatsApp, com contatos salvos na lista “Lead live”, totalizando 49 conversas ativas.</span>
+        </li>
+        <li>
+          <span class="d">02/10 · 09h</span>
+          <b>Agendado: 50 leads no WhatsApp</b>
+          <span class="t">Próximo lote da fila, com o mesmo processo seguro de salvar o contato e adicionar à lista operacional.</span>
+        </li>
+        <li>
+          <span class="d">02/10 · 12h</span>
+          <b>Agendado: follow-up</b>
+          <span class="t">Identifica quem respondeu na lista “Lead live” e envia a mensagem qualificada adequada a cada resposta.</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 08 Respostas Recebidas -->
+    <section id="sec-08">
+      <h2><span class="n">08</span>Respostas recebidas</h2>
+      <div class="tw">
+        <table>
+          <thead>
+            <tr>
+              <th>Tipo de Interação</th>
+              <th class="n">Quantidade</th>
+              <th>Tratamento Operacional</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Recusas explícitas</td>
+              <td class="n">2</td>
+              <td>Registradas na lista de exclusão, sem nova mensagem</td>
+            </tr>
+            <tr>
+              <td>Respostas automáticas de empresas</td>
+              <td class="n">Maioria</td>
+              <td>Ignoradas pelo follow-up, que não responde mensagem automática</td>
+            </tr>
+            <tr>
+              <td>Respostas positivas</td>
+              <td class="n">0</td>
+              <td>Nenhuma até a posição de fechamento deste relatório</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="margin-top:22px;">O procedimento de follow-up classifica cada resposta (positiva, pergunta, pedido de e-mail, negativa, pedido para parar ou caso para o consultor) e envia o modelo correspondente. No máximo duas mensagens automáticas por lead; tudo o que fugir dos modelos vira pendência para atendimento pessoal.</p>
+    </section>
+
+    <!-- 09 Incidentes e Lições -->
+    <section id="sec-09">
+      <h2><span class="n">09</span>Incidentes e lições aprendidas</h2>
+      <div class="note bad">
+        <p><b>Aviso da Meta em 08/09.</b> Com cerca de 38 contatos no dia, a conta recebeu um aviso de spam. O disparo foi encerrado na hora e o teto diário passou a ser monitorado de perto.</p>
+      </div>
+      <div class="note">
+        <p><b>Ligação por engano em 01/10.</b> Um clique em ícone do cabeçalho iniciou uma chamada de voz para uma empresa. A chamada foi encerrada em segundos, sem acesso ao microfone. O procedimento agora exige conferir a tela antes de clicar nos ícones do cabeçalho.</p>
+      </div>
+      <div class="note">
+        <p><b>Nomes de contato truncados.</b> Dois contatos foram salvos com nome incompleto ou repetido e corrigidos pelo editor de contato. A digitação do nome passou a limpar o campo antes de escrever.</p>
+      </div>
+      <div class="note ok">
+        <p><b>Risco em aberto.</b> O lote agendado de 50 envios em um dia é maior que o patamar de 20 a 30 do histórico e superior ao volume que precedeu o aviso de 08/09. Se a Meta voltar a emitir alertas, o procedimento para imediatamente e documenta.</p>
+      </div>
+    </section>
+
+    <!-- 10 Situação da Base e Próximos Passos -->
+    <section id="sec-10">
+      <h2><span class="n">10</span>Situação da base e próximos passos</h2>
+      <div class="tw">
+        <table>
+          <thead>
+            <tr>
+              <th>Fila de Operação</th>
+              <th class="n">Quantidade</th>
+              <th>Situação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>WhatsApp — enviados</td>
+              <td class="n">49</td>
+              <td>Salvos e integrados na lista “Lead live”</td>
+            </tr>
+            <tr>
+              <td>WhatsApp — a enviar</td>
+              <td class="n">316</td>
+              <td>50 agendados para 02/10 às 09h; 266 restam depois</td>
+            </tr>
+            <tr>
+              <td>E-mail</td>
+              <td class="n">0</td>
+              <td>Fila concluída integralmente</td>
+            </tr>
+            <tr>
+              <td>Em revisão manual</td>
+              <td class="n">93</td>
+              <td>Dependem de decisão antes de entrar em qualquer canal</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="margin-top:22px;">Dois agendamentos automáticos estão ativos: o disparo de 50 leads em 02/10 às 09h e o follow-up em 02/10 às 12h. Se o disparo ainda estiver usando o WhatsApp Web ao meio-dia, o follow-up adia a execução em 30 minutos, até três vezes. Os registros de cada execução ficam na pasta Consultoria, em <b>operacao/prospeccao-ativa/saidas</b>.</p>
+    </section>
+
+  </main>
+
+  <!-- Rodapé Executivo -->
+  <footer>
+    <div class="wrap">
+      <div><b>Ecossistema Live</b> · Relatório Interno de Prospecção Ativa · Consultoria de Governança & IA</div>
+      <div style="font-size:13px; opacity:0.8;">“Não sou contador”: as menções tributárias são gancho de contexto operacional, não orientação fiscal. Dados confidenciais de contato dos leads não constam publicamente neste documento.</div>
+      <div style="font-size:12.5px; opacity:0.65; margin-top:8px;">
+        Publicado via GitHub Pages · Repositório: <a href="https://github.com/EcossistemaLive/apresentacoes-live" target="_blank">EcossistemaLive/apresentacoes-live</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script de Interatividade & Progresso -->
+  <script>
+    // Barra de Progresso de Leitura
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progress-bar').style.width = scrolled + '%';
+    });
+
+    // Alternância de Tema Claro / Escuro
+    const themeBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const root = document.documentElement;
+
+    function setTheme(theme) {
+      root.setAttribute('data-theme', theme);
+      localStorage.setItem('live_theme', theme);
+      if (theme === 'light') {
+        themeIcon.textContent = '🌙';
+        themeBtn.innerHTML = '🌙 Modo Escuro';
+      } else {
+        themeIcon.textContent = '☀️';
+        themeBtn.innerHTML = '☀️ Modo Claro';
+      }
+    }
+
+    // Carregar tema salvo ou preferência do sistema
+    const savedTheme = localStorage.getItem('live_theme');
+    if (savedTheme) {
+      setTheme(savedTheme);
+    } else {
+      setTheme('dark');
+    }
+
+    themeBtn.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme');
+      setTheme(current === 'light' ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

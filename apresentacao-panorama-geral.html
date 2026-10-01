@@ -1,0 +1,1963 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panorama Geral da Operação & Engenharia de Produtos de IA — Ecossistema Live</title>
+  
+  <!-- Google Fonts: Space Grotesk, Inter, JetBrains Mono, Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome 6 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Space Grotesk"', '"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            sans: ['"Inter"', '"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace']
+          },
+          colors: {
+            live: {
+              deep: '#040d1a',
+              dark: '#06192a',
+              card: 'rgba(10, 36, 61, 0.72)',
+              cardLight: 'rgba(255, 255, 255, 0.94)',
+              border: 'rgba(0, 232, 0, 0.22)',
+              subtle: 'rgba(255, 255, 255, 0.08)',
+              accent: '#00e800',
+              accentGlow: 'rgba(0, 232, 0, 0.35)',
+              cyan: '#06b6d4',
+              indigo: '#6366f1',
+              amber: '#f59e0b',
+              crimson: '#f43f5e'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    :root {
+      --live-deep: #040d1a;
+      --live-dark: #06192a;
+      --live-glass: rgba(10, 36, 61, 0.75);
+      --live-accent: #00e800;
+      --live-accent-glow: rgba(0, 232, 0, 0.25);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --spring-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    
+    /* Base background styling with offline fallback */
+    body {
+      background-color: #040d1a;
+      color: #f1f5f9;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      overflow-x: hidden;
+    }
+    
+    .live-bg-pattern {
+      background-color: #040d1a;
+      background-image: radial-gradient(rgba(0, 232, 0, 0.07) 1px, transparent 1px),
+                        radial-gradient(rgba(99, 102, 241, 0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+      background-position: 0 0, 16px 16px;
+    }
+
+    .light .live-bg-pattern {
+      background-color: #f8fafc;
+      color: #0f172a;
+      background-image: radial-gradient(rgba(0, 180, 0, 0.12) 1px, transparent 1px);
+    }
+    
+    /* Glassmorphism Refractive */
+    .glass-card {
+      background: rgba(8, 25, 43, 0.78);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s var(--spring-bounce);
+    }
+    
+    .light .glass-card {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.06);
+    }
+    
+    .glass-card:hover {
+      border-color: rgba(0, 232, 0, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 16px 36px -10px rgba(0, 232, 0, 0.15);
+    }
+
+    .border-glow-accent {
+      border-color: #00e800;
+      box-shadow: 0 0 15px rgba(0, 232, 0, 0.25);
+    }
+
+    .neon-badge {
+      background: rgba(0, 232, 0, 0.12);
+      border: 1px solid rgba(0, 232, 0, 0.4);
+      color: #00e800;
+      text-shadow: 0 0 8px rgba(0, 232, 0, 0.3);
+    }
+
+    .light .neon-badge {
+      background: rgba(0, 180, 0, 0.1);
+      border-color: rgba(0, 160, 0, 0.4);
+      color: #047857;
+      text-shadow: none;
+    }
+
+    /* Kinetic Title Gradient */
+    .title-kinetic {
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 45%, #00e800 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .light .title-kinetic {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #059669 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(4, 13, 26, 0.95);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 232, 0, 0.3);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 232, 0, 0.6);
+    }
+
+    /* Print styling */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .glass-card {
+        background: #ffffff !important;
+        border: 1px solid #cccccc !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+      }
+      .slide-container {
+        display: block !important;
+        height: auto !important;
+      }
+      .slide-page {
+        page-break-after: always;
+        margin-bottom: 2.5rem;
+        display: flex !important;
+      }
+    }
+
+    /* Presentation Modes */
+    .mode-presentation .doc-only {
+      display: none !important;
+    }
+    .mode-document .slide-only {
+      display: none !important;
+    }
+
+    .slide-page {
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    /* Scroll-Spy Active Pill */
+    .spy-pill.active-spy {
+      background: rgba(0, 232, 0, 0.18) !important;
+      border-color: #00e800 !important;
+      color: #00e800 !important;
+      font-weight: 700;
+      box-shadow: 0 0 10px rgba(0, 232, 0, 0.25);
+    }
+    .light .spy-pill.active-spy {
+      background: rgba(5, 150, 105, 0.15) !important;
+      border-color: #059669 !important;
+      color: #059669 !important;
+      box-shadow: none;
+    }
+
+    /* Floating Back to Top Button */
+    #back-to-top {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    #back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  </style>
+</head>
+<body class="live-bg-pattern min-h-screen text-slate-100 flex flex-col selection:bg-emerald-500 selection:text-black">
+
+  <!-- Top Announcement / Sovereign Banner -->
+  <div class="no-print bg-gradient-to-r from-emerald-950 via-slate-900 to-indigo-950 border-b border-emerald-500/30 px-4 py-2 text-xs text-center flex items-center justify-center gap-3">
+    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500 text-black">
+      <i class="fa-solid fa-shield-halved mr-1"></i> DIRETRIZ SOBERANA
+    </span>
+    <span class="font-medium text-slate-300">
+      Transição Estratégica Vigente: Banimento total do termo <em>"consultoria"</em>. Entregamos <strong>Produtos Modulares de Gestão & IA com início, meio e fim</strong>.
+    </span>
+    <span class="hidden md:inline-block text-emerald-400 font-mono text-[11px]">| Defesa Pétrea do CNPJ</span>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="no-print sticky top-0 z-50 backdrop-blur-xl bg-slate-950/90 border-b border-slate-800/80 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Brand & Context -->
+        <div class="flex items-center space-x-4">
+          <div class="relative w-12 h-12 rounded-xl bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-950 p-[1px] border border-emerald-500/40 shadow-lg shadow-emerald-950/40 flex items-center justify-center">
+            <span class="font-display font-black text-xl text-emerald-400 tracking-tighter">LIVE</span>
+            <div class="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full animate-ping"></div>
+            <div class="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full"></div>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-display font-extrabold text-lg sm:text-xl tracking-tight text-white">
+                PANORAMA GERAL DA OPERAÇÃO
+              </span>
+              <span class="neon-badge text-[10px] px-2 py-0.5 rounded-md font-mono font-bold tracking-wider">
+                V6.0 ELITE
+              </span>
+            </div>
+            <p class="text-xs text-slate-400 font-medium">
+              Hub de Governança, Soluções Modulares & Synkra AIOX-Core
+            </p>
+          </div>
+        </div>
+
+        <!-- Controls: Search, View Mode, Theme, Shortcuts, Print -->
+        <div class="flex items-center space-x-2 sm:space-x-3">
+          
+          <!-- View Mode Switcher -->
+          <div class="flex items-center bg-slate-900/90 border border-slate-700/80 rounded-xl p-1 shadow-inner">
+            <button id="btn-mode-slides" onclick="setViewMode('slides')" class="px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all text-emerald-400 bg-emerald-950/60 border border-emerald-500/30">
+              <i class="fa-solid fa-expand"></i>
+              <span class="hidden md:inline">Modo Slides</span>
+            </button>
+            <button id="btn-mode-doc" onclick="setViewMode('document')" class="px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all text-slate-400 hover:text-white">
+              <i class="fa-solid fa-book-open"></i>
+              <span class="hidden md:inline">Modo Leitura</span>
+            </button>
+          </div>
+
+          <!-- Quick Jump / Search Trigger -->
+          <button onclick="toggleQuickModal()" class="px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-emerald-400 hover:border-emerald-500/40 text-xs font-medium flex items-center gap-2 transition" title="Pesquisa rápida (Ctrl+K)">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span class="hidden lg:inline">Pesquisar</span>
+            <kbd class="hidden sm:inline-block font-mono text-[10px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded border border-slate-700">Ctrl+K</kbd>
+          </button>
+
+          <!-- Theme Toggle -->
+          <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-emerald-400 transition" title="Alternar Tema (T)">
+            <i id="theme-icon" class="fa-solid fa-moon"></i>
+          </button>
+
+          <!-- Shortcuts Help Button -->
+          <button onclick="toggleShortcutsModal()" class="hidden sm:flex p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-emerald-400 transition" title="Atalhos do Teclado (?)">
+            <i class="fa-solid fa-keyboard"></i>
+          </button>
+
+          <!-- Print Button -->
+          <button onclick="window.print()" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition" title="Exportar / Imprimir PDF">
+            <i class="fa-solid fa-print"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Slide Navigation Bar (Active in Slide Mode) -->
+    <div id="slide-nav-bar" class="bg-slate-950 border-t border-slate-800/80 px-4 py-2 flex items-center justify-between text-xs">
+      <div class="flex items-center space-x-3">
+        <span class="font-mono text-emerald-400 font-bold tracking-wider" id="slide-counter">SLIDE 01 / 08</span>
+        <span class="text-slate-600 hidden sm:inline">|</span>
+        <span class="text-slate-400 truncate max-w-[200px] sm:max-w-md font-medium" id="slide-current-title">1. Visão Executiva & Diretriz Soberana</span>
+      </div>
+      
+      <!-- Progress Bar -->
+      <div class="flex-1 max-w-xs mx-4 bg-slate-800 rounded-full h-1.5 overflow-hidden">
+        <div id="slide-progress" class="bg-gradient-to-r from-emerald-500 to-cyan-400 h-full w-[12.5%] transition-all duration-300"></div>
+      </div>
+
+      <div class="flex items-center space-x-1.5">
+        <button onclick="prevSlide()" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition flex items-center gap-1 font-semibold" title="Slide Anterior (←)">
+          <i class="fa-solid fa-arrow-left"></i> <span class="hidden md:inline">Anterior</span>
+        </button>
+        <button onclick="nextSlide()" class="px-2.5 py-1 rounded bg-emerald-600 hover:bg-emerald-500 text-black font-bold transition flex items-center gap-1" title="Próximo Slide (→ / Espaço)">
+          <span class="hidden md:inline">Próximo</span> <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Document Scroll-Spy Sub-Header (Active in Document Mode) -->
+    <div id="doc-spy-bar" class="hidden bg-slate-950/95 border-t border-slate-800 px-4 py-2 text-xs items-center justify-between gap-4 overflow-x-auto">
+      <div class="flex items-center gap-2 shrink-0">
+        <span class="neon-badge px-2 py-0.5 rounded font-mono font-bold text-[10px]">LEITURA CONTÍNUA</span>
+        <span id="doc-current-label" class="font-mono text-slate-300 text-[11px] truncate max-w-xs">Seção 1 de 8: Visão Executiva</span>
+      </div>
+
+      <!-- Quick Section Jump Pills -->
+      <div class="flex items-center gap-1.5 shrink-0" id="spy-pills-container">
+        <button onclick="goToSection(1)" class="spy-pill active-spy px-2.5 py-1 rounded-md text-[11px] font-mono text-slate-400 hover:text-white bg-slate-900 border border-slate-800 transition" data-target="slide-1">1. Visão</button>
+        <button onclick="goToSection(2)" class="spy-pill px-2.5 py-1 rounded-md text-[11px] font-mono text-slate-400 hover:text-white bg-slate-900 border border-slate-800 transition" data-target="slide-2">2. DEP 01-07</button>
+        <button onclick="goToSection(3)" class="spy-pill px-2.5 py-1 rounded-md text-[11px] font-mono text-slate-400 hover:text-white bg-slate-900 border border-slate-800 transition" data-target="slide-3">3. 9 Artefatos</button>
+        <button onclick="goToSection(4)" class="spy-pill px-2.5 py-1 rounded-md text-[11px] font-mono text-slate-400 hover:text-white bg-slate-900 border border-slate-800 transition" data-target="slide-4">4. Themis MLP</button>
+        <button onclick="goToSection(5)" class="spy-pill px-2.5 py-1 rounded-md text-[11px] font-mono text-slate-400 hover:text-white bg-slate-900 border border-slate-800 transition" data-target="slide-5">5. Clientes</button>
+        <button onclick="goToSection(6)" class="spy-pill px-2.5 py-1 rounded-md text-[11px] font-mono text-slate-400 hover:text-white bg-slate-900 border border-slate-800 transition" data-target="slide-6">6. Produtos IA</button>
+        <button onclick="goToSection(7)" class="spy-pill px-2.5 py-1 rounded-md text-[11px] font-mono text-slate-400 hover:text-white bg-slate-900 border border-slate-800 transition" data-target="slide-7">7. Synkra AIOX</button>
+        <button onclick="goToSection(8)" class="spy-pill px-2.5 py-1 rounded-md text-[11px] font-mono text-slate-400 hover:text-white bg-slate-900 border border-slate-800 transition" data-target="slide-8">8. Roadmap</button>
+      </div>
+
+      <!-- Page Reading Progress -->
+      <div class="hidden sm:flex items-center gap-2 shrink-0">
+        <span class="text-[10px] text-slate-500 font-mono" id="doc-progress-text">0%</span>
+        <div class="w-20 bg-slate-800 rounded-full h-1.5 overflow-hidden">
+          <div id="doc-scroll-progress" class="bg-emerald-400 h-full w-0 transition-all duration-150"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- ================================================================= -->
+    <!-- SLIDE 1: CAPA & DIRETRIZ SOBERANA (REGRAS-CONSULTORIA.MD) -->
+    <!-- ================================================================= -->
+    <section id="slide-1" class="slide-page space-y-8 min-h-[calc(100vh-12rem)] flex flex-col justify-center">
+      
+      <!-- Top Badges & Meta -->
+      <div class="flex flex-wrap items-center gap-2.5">
+        <span class="neon-badge px-3 py-1 rounded-full text-xs font-mono font-bold">
+          <i class="fa-solid fa-circle-check mr-1.5"></i> SISTEMA EM OPERAÇÃO
+        </span>
+        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-indigo-950/80 border border-indigo-500/40 text-indigo-300">
+          <i class="fa-solid fa-cube mr-1.5"></i> Modelo de Soluções Modulares
+        </span>
+        <span class="px-3 py-1 rounded-full text-xs font-mono bg-slate-900 border border-slate-800 text-slate-400">
+          CNPJ: 52.887.139/0001-00
+        </span>
+        <span class="px-3 py-1 rounded-full text-xs font-mono bg-slate-900 border border-slate-800 text-slate-400">
+          Data Ref.: Setembro / 2026
+        </span>
+      </div>
+
+      <!-- Hero Title -->
+      <div class="space-y-4 max-w-4xl">
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-display tracking-tight leading-tight title-kinetic">
+          Panorama da Operação & Portfólio de Engenharia de IA
+        </h1>
+        <p class="text-base sm:text-xl text-slate-300 leading-relaxed font-light">
+          A transição definitiva da consultoria tradicional para uma esteira escalável de <strong class="text-white font-semibold">produtos modulares de gestão, IA local-first, governança de processos e framework multi-agente</strong> com início, meio e fim.
+        </p>
+      </div>
+
+      <!-- 3 Pillars Grid: Ruptura Estratégica -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+        
+        <!-- Card 1: Banimento do Termo Consultoria -->
+        <div class="glass-card rounded-2xl p-6 relative overflow-hidden border-t-2 border-t-emerald-500">
+          <div class="w-12 h-12 rounded-xl bg-emerald-950/80 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-xl mb-4 shadow-lg shadow-emerald-950/50">
+            <i class="fa-solid fa-ban"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white font-display mb-2 flex items-center gap-2">
+            Banimento da "Consultoria"
+          </h3>
+          <p class="text-sm text-slate-300 leading-relaxed">
+            Eliminação total de horas abertas e pareceres estéreis. Operamos via <strong class="text-emerald-400">produtos modulares tangíveis</strong>, com escopos blindados de até 90 dias, entregáveis físicos/digitais e SLAs auditáveis.
+          </p>
+          <div class="mt-4 pt-3 border-t border-slate-800 text-xs font-mono text-emerald-400 flex items-center gap-1.5">
+            <i class="fa-solid fa-check"></i> Posicionamento de Alto Valor
+          </div>
+        </div>
+
+        <!-- Card 2: Soberania da Defesa do CNPJ -->
+        <div class="glass-card rounded-2xl p-6 relative overflow-hidden border-t-2 border-t-indigo-500">
+          <div class="w-12 h-12 rounded-xl bg-indigo-950/80 border border-indigo-500/40 flex items-center justify-center text-indigo-400 text-xl mb-4 shadow-lg shadow-indigo-950/50">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white font-display mb-2 flex items-center gap-2">
+            Cláusula Pétrea de Defesa do CNPJ
+          </h3>
+          <p class="text-sm text-slate-300 leading-relaxed">
+            A perenidade do negócio e a solvência jurídica se sobrepõem às vontades de sócios, familiares ou herdeiros. O <strong class="text-indigo-400">DEP-06 (Compliance)</strong> possui poder de veto absoluto sobre qualquer proposta ou contrato.
+          </p>
+          <div class="mt-4 pt-3 border-t border-slate-800 text-xs font-mono text-indigo-400 flex items-center gap-1.5">
+            <i class="fa-solid fa-lock"></i> Governança Inviolável
+          </div>
+        </div>
+
+        <!-- Card 3: Desintermediação e Isenção Financeira -->
+        <div class="glass-card rounded-2xl p-6 relative overflow-hidden border-t-2 border-t-cyan-500">
+          <div class="w-12 h-12 rounded-xl bg-cyan-950/80 border border-cyan-500/40 flex items-center justify-center text-cyan-400 text-xl mb-4 shadow-lg shadow-cyan-950/50">
+            <i class="fa-solid fa-handshake-slash"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white font-display mb-2 flex items-center gap-2">
+            Desintermediação de Parceiros
+          </h3>
+          <p class="text-sm text-slate-300 leading-relaxed">
+            Isenção absoluta: parceiros homologados (como <strong class="text-cyan-400">Agregar</strong> para BPO financeiro, <strong class="text-cyan-400">Juliana Canuto</strong> para CX, <strong class="text-cyan-400">Voya</strong> para eventos) faturam <em>diretamente</em> com o cliente final, sem comissões ocultas ou bitributação.
+          </p>
+          <div class="mt-4 pt-3 border-t border-slate-800 text-xs font-mono text-cyan-400 flex items-center gap-1.5">
+            <i class="fa-solid fa-scale-balanced"></i> Zero Risco Tributário
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Quick Summary Stat Bar -->
+      <div class="glass-card rounded-2xl p-5 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+        <div>
+          <div class="text-2xl sm:text-3xl font-black text-emerald-400 font-mono">15</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Clientes Mapeados</div>
+        </div>
+        <div>
+          <div class="text-2xl sm:text-3xl font-black text-cyan-400 font-mono">9 / 9</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Artefatos Canônicos</div>
+        </div>
+        <div>
+          <div class="text-2xl sm:text-3xl font-black text-indigo-400 font-mono">12</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Agentes Synkra AIOX</div>
+        </div>
+        <div>
+          <div class="text-2xl sm:text-3xl font-black text-amber-400 font-mono">Local-First</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Soberania de Dados</div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- SLIDE 2: ARQUITETURA DEPARTAMENTAL DO ECOSSISTEMA LIVE (DEP-01 A DEP-07) -->
+    <!-- ================================================================= -->
+    <section id="slide-2" class="slide-page space-y-8 min-h-[calc(100vh-12rem)] flex flex-col justify-center">
+      
+      <div class="border-b border-slate-800 pb-4">
+        <div class="flex items-center gap-2 text-emerald-400 text-xs font-mono uppercase tracking-widest">
+          <i class="fa-solid fa-sitemap"></i> Governança Funcional & Matriz Operacional
+        </div>
+        <h2 class="text-2xl sm:text-4xl font-extrabold font-display text-white mt-1">
+          Matriz Departamental do Ecossistema Live (DEP-01 a DEP-07)
+        </h2>
+        <p class="text-slate-400 text-sm mt-1">
+          Estrutura integrada de 7 departamentos com governança soberana do DEP-06, pilotada por agentes autônomos e sócios executivos.
+        </p>
+      </div>
+
+      <!-- Governance Cross-Cutting Banner: DEP-06 (Veto Total) -->
+      <div class="p-5 rounded-2xl bg-gradient-to-r from-rose-950/70 via-slate-900 to-indigo-950/70 border-2 border-rose-500/50 shadow-xl relative overflow-hidden">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-xl bg-rose-900/60 border border-rose-500/50 flex items-center justify-center text-rose-400 text-2xl shadow-lg">
+              <i class="fa-solid fa-gavel"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs px-2.5 py-0.5 rounded-full font-mono font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40">
+                  DEP-06 — TRANSVERSAL SOBERANO
+                </span>
+                <span class="text-xs font-bold text-rose-400">Poder de Veto Total</span>
+              </div>
+              <h3 class="text-lg font-bold text-white font-display mt-0.5">
+                Qualidade, Compliance & Defesa do CNPJ
+              </h3>
+              <p class="text-xs text-slate-300 max-w-3xl mt-1">
+                Agente guardião autônomo: <code class="text-rose-300 font-mono font-semibold">el-antagonista-defesa-cnpj</code>. Nenhum contrato, aditivo, proposta comercial ou cronograma é homologado sem aprovação formal deste gate. Avalia riscos de passivo trabalhista, desintermediação e cláusulas pétreas.
+              </p>
+            </div>
+          </div>
+          <div class="flex md:flex-col items-end justify-center text-right font-mono text-xs text-slate-400 border-l border-slate-800 pl-4">
+            <span class="text-rose-400 font-bold text-sm">Gate Obrigatório</span>
+            <span>100% dos Contratos</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Departments Grid: DEP-01 to DEP-05 + DEP-07 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        
+        <!-- DEP-01: Comercial & Crescimento -->
+        <div class="glass-card rounded-xl p-5 border-t-2 border-t-emerald-500 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-500/30">DEP-01</span>
+              <span class="text-xs text-slate-400 font-medium">Líder: Luiz Portal</span>
+            </div>
+            <h4 class="font-bold text-white text-base font-display mb-1 flex items-center gap-2">
+              <i class="fa-solid fa-chart-line text-emerald-400"></i> Comercial & Crescimento
+            </h4>
+            <p class="text-xs text-slate-300 mb-3">
+              Prospecção multicanal, pipeline B2B e fechamento de contratos de soluções modulares.
+            </p>
+            <div class="bg-slate-900/80 rounded-lg p-2.5 border border-slate-800 space-y-1 text-[11px]">
+              <div class="text-slate-400"><strong class="text-slate-200">Agentes:</strong> <span class="font-mono text-emerald-400">el-agente-prospeccao</span>, <span class="font-mono text-slate-300">el-secretaria-atendimento</span></div>
+              <div class="text-slate-400"><strong class="text-slate-200">Esteira:</strong> P1-Buscar, P2-Auditar, P3-Copy, P4-Disparar</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DEP-02: Tecnologia & Produtos de IA -->
+        <div class="glass-card rounded-xl p-5 border-t-2 border-t-cyan-500 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-400 border border-cyan-500/30">DEP-02</span>
+              <span class="text-xs text-slate-400 font-medium">Líder: Cléber Donato</span>
+            </div>
+            <h4 class="font-bold text-white text-base font-display mb-1 flex items-center gap-2">
+              <i class="fa-solid fa-microchip text-cyan-400"></i> Tecnologia & Produtos de IA
+            </h4>
+            <p class="text-xs text-slate-300 mb-3">
+              Fábrica de software, orquestração de LLMs, engenharia de prompts e produtos SaaS.
+            </p>
+            <div class="bg-slate-900/80 rounded-lg p-2.5 border border-slate-800 space-y-1 text-[11px]">
+              <div class="text-slate-400"><strong class="text-slate-200">Produtos:</strong> Júlio Bot v8, Themis, Jarvis, RH Tech, Diagnóstico</div>
+              <div class="text-slate-400"><strong class="text-slate-200">Engenharia:</strong> Synkra AIOX-Core Multi-IDE</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DEP-03: Educação Executiva & Eventos -->
+        <div class="glass-card rounded-xl p-5 border-t-2 border-t-indigo-500 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-indigo-950 text-indigo-400 border border-indigo-500/30">DEP-03</span>
+              <span class="text-xs text-slate-400 font-medium">Líder: Luiz Portal</span>
+            </div>
+            <h4 class="font-bold text-white text-base font-display mb-1 flex items-center gap-2">
+              <i class="fa-solid fa-graduation-cap text-indigo-400"></i> Educação Executiva & Eventos
+            </h4>
+            <p class="text-xs text-slate-300 mb-3">
+              Formação de líderes ("O Código da Nova Liderança"), workshops executivos e networking estratégico.
+            </p>
+            <div class="bg-slate-900/80 rounded-lg p-2.5 border border-slate-800 space-y-1 text-[11px]">
+              <div class="text-slate-400"><strong class="text-slate-200">Eventos C-Level:</strong> Almoço com o CEO (Restaurante Voya)</div>
+              <div class="text-slate-400"><strong class="text-slate-200">Entregáveis:</strong> Roteiros de Imersão e Manuais</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DEP-04: Governança & Estratégia -->
+        <div class="glass-card rounded-xl p-5 border-t-2 border-t-amber-500 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-amber-950 text-amber-400 border border-amber-500/30">DEP-04</span>
+              <span class="text-xs text-slate-400 font-medium">Líder: Luiz Portal</span>
+            </div>
+            <h4 class="font-bold text-white text-base font-display mb-1 flex items-center gap-2">
+              <i class="fa-solid fa-chess text-amber-400"></i> Governança & Estratégia
+            </h4>
+            <p class="text-xs text-slate-300 mb-3">
+              Estruturação de Conselho Familiar/Consultivo, Planejamento Estratégico 12M e M&A / Mediação.
+            </p>
+            <div class="bg-slate-900/80 rounded-lg p-2.5 border border-slate-800 space-y-1 text-[11px]">
+              <div class="text-slate-400"><strong class="text-slate-200">Foco:</strong> Perenidade, sucessão e mediação (Case Okamoto)</div>
+              <div class="text-slate-400"><strong class="text-slate-200">Modelos:</strong> Contratos fechados de 90 dias com OKRs</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DEP-05: CX & Inteligência de Mercado -->
+        <div class="glass-card rounded-xl p-5 border-t-2 border-t-purple-500 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-purple-950 text-purple-400 border border-purple-500/30">DEP-05</span>
+              <span class="text-xs text-slate-400 font-medium">Líder: Cléber Donato</span>
+            </div>
+            <h4 class="font-bold text-white text-base font-display mb-1 flex items-center gap-2">
+              <i class="fa-solid fa-users-viewfinder text-purple-400"></i> CX & Inteligência de Mercado
+            </h4>
+            <p class="text-xs text-slate-300 mb-3">
+              Service Blueprint, pesquisas de profundidade NPS/CSAT e análise competitiva de mercado.
+            </p>
+            <div class="bg-slate-900/80 rounded-lg p-2.5 border border-slate-800 space-y-1 text-[11px]">
+              <div class="text-slate-400"><strong class="text-slate-200">Parceira Homologada:</strong> Juliana Canuto CX</div>
+              <div class="text-slate-400"><strong class="text-slate-200">Segmentação:</strong> PMEs (R$ 3.5k–6k) e Grandes (R$ 12k+)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DEP-07: Alianças Estratégicas, BPO & Rede Homologada -->
+        <div class="glass-card rounded-xl p-5 border-t-2 border-t-emerald-400 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-400/40 font-bold">DEP-07</span>
+              <span class="text-xs text-slate-400 font-medium">Gestão: Hub de Conexão</span>
+            </div>
+            <h4 class="font-bold text-white text-base font-display mb-1 flex items-center gap-2">
+              <i class="fa-solid fa-handshake-angle text-emerald-400"></i> Alianças Estratégicas & BPO
+            </h4>
+            <p class="text-xs text-slate-300 mb-3">
+              Operação de parceiros homologados sem intermediação financeira e encaminhamento pela régua B+.
+            </p>
+            <div class="bg-slate-900/80 rounded-lg p-2.5 border border-slate-800 space-y-1 text-[11px]">
+              <div class="text-slate-400"><strong class="text-slate-200">BPO Financeiro:</strong> Agregar (Kelvin) direto c/ cliente</div>
+              <div class="text-slate-400"><strong class="text-slate-200">Régua B+:</strong> Clientes > R$ 5M/ano com Marcelo Nogueira</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Rituais de Governança Footer Strip -->
+      <div class="glass-card rounded-xl p-3.5 bg-slate-900/60 border border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div class="flex items-center gap-2 text-slate-300">
+          <i class="fa-solid fa-clock-rotate-left text-emerald-400"></i>
+          <span class="font-bold text-white">Rituais Semanais:</span>
+          <span>Segunda 08h30 (Executiva) · Quarta 17h00 (Técnica) · Sexta 16h00 (Comercial + Gate DEP-06)</span>
+        </div>
+        <div class="text-slate-400 font-mono text-[11px]">
+          SLA rígido & Governança interdepartamental
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- SLIDE 3: O PADRÃO OBRIGATÓRIO DOS 9 ARTEFATOS POR CLIENTE -->
+    <!-- ================================================================= -->
+    <section id="slide-3" class="slide-page space-y-8 min-h-[calc(100vh-12rem)] flex flex-col justify-center">
+      
+      <div class="border-b border-slate-800 pb-4">
+        <div class="flex items-center gap-2 text-emerald-400 text-xs font-mono uppercase tracking-widest">
+          <i class="fa-solid fa-folder-tree"></i> Rigor de Execução & Padrão de Repositório
+        </div>
+        <h2 class="text-2xl sm:text-4xl font-extrabold font-display text-white mt-1">
+          O Padrão Obrigatório dos 9 Artefatos
+        </h2>
+        <p class="text-slate-400 text-sm mt-1">
+          Nenhum cliente é considerado completo sem a presença física e digital dos 9 artefatos canônicos padronizados no repositório.
+        </p>
+      </div>
+
+      <!-- The 9 Artifacts Interactive Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        
+        <!-- 01-proposta -->
+        <div class="glass-card rounded-xl p-4.5 border-l-4 border-l-emerald-500 hover:bg-slate-900/90 transition">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="font-mono text-emerald-400 font-bold text-xs">01-proposta/</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">Age Quod Agis v2</span>
+          </div>
+          <h4 class="text-sm font-bold text-white font-display">Proposta Comercial M.A.P.C.A</h4>
+          <p class="text-xs text-slate-400 mt-1">
+            Template Live V6.0, gerada via agente autônomo, publicada automaticamente no GitHub Pages com escopo de entrega fechado.
+          </p>
+        </div>
+
+        <!-- 02-contrato -->
+        <div class="glass-card rounded-xl p-4.5 border-l-4 border-l-rose-500 hover:bg-slate-900/90 transition">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="font-mono text-rose-400 font-bold text-xs">02-contrato/</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">Defesa do CNPJ</span>
+          </div>
+          <h4 class="text-sm font-bold text-white font-display">Contrato Jurídico Blindado</h4>
+          <p class="text-xs text-slate-400 mt-1">
+            Versões assinadas com cláusula pétrea de perenidade do CNPJ, não-intermediação de terceiros e prazos máximos de 90 dias.
+          </p>
+        </div>
+
+        <!-- 03-plano-de-acao -->
+        <div class="glass-card rounded-xl p-4.5 border-l-4 border-l-cyan-500 hover:bg-slate-900/90 transition">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="font-mono text-cyan-400 font-bold text-xs">03-plano-de-acao/</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">Markdown Vivo</span>
+          </div>
+          <h4 class="text-sm font-bold text-white font-display">Plano de Ação Operacional</h4>
+          <p class="text-xs text-slate-400 mt-1">
+            Detalhamento de tarefas, matrizes de legitimidade, especificações de agentes e diretrizes de execução acionáveis.
+          </p>
+        </div>
+
+        <!-- 04-calendario-execucao -->
+        <div class="glass-card rounded-xl p-4.5 border-l-4 border-l-indigo-500 hover:bg-slate-900/90 transition">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="font-mono text-indigo-400 font-bold text-xs">04-calendario-execucao/</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">SLA & Dependências</span>
+          </div>
+          <h4 class="text-sm font-bold text-white font-display">Calendário de Execução</h4>
+          <p class="text-xs text-slate-400 mt-1">
+            Cronograma com responsáveis, prazos fatais, prioridade (P1 a P4) e dependências cruzadas entre áreas.
+          </p>
+        </div>
+
+        <!-- 05-agenda-reunioes -->
+        <div class="glass-card rounded-xl p-4.5 border-l-4 border-l-amber-500 hover:bg-slate-900/90 transition">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="font-mono text-amber-400 font-bold text-xs">05-agenda-reunioes/</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">Ritmo de Gestão</span>
+          </div>
+          <h4 class="text-sm font-bold text-white font-display">Agenda de Reuniões & Marcos</h4>
+          <p class="text-xs text-slate-400 mt-1">
+            Cadência de alinhamento com conselhos, comitês executivos e validações com diretores e stakeholders.
+          </p>
+        </div>
+
+        <!-- 06-dashboard -->
+        <div class="glass-card rounded-xl p-4.5 border-l-4 border-l-emerald-500 hover:bg-slate-900/90 transition">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="font-mono text-emerald-400 font-bold text-xs">06-dashboard/</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">HTML Offline + JSON</span>
+          </div>
+          <h4 class="text-sm font-bold text-white font-display">Dashboard Kanban Offline</h4>
+          <p class="text-xs text-slate-400 mt-1">
+            Quadro interativo ClickUp/Notion style rodando no browser com persistência no LocalStorage e importação/exportação JSON.
+          </p>
+        </div>
+
+        <!-- 07-reunioes -->
+        <div class="glass-card rounded-xl p-4.5 border-l-4 border-l-purple-500 hover:bg-slate-900/90 transition">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="font-mono text-purple-400 font-bold text-xs">07-reunioes/</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">AAAA-MM-DD</span>
+          </div>
+          <h4 class="text-sm font-bold text-white font-display">Atas de Alta Fidelidade</h4>
+          <p class="text-xs text-slate-400 mt-1">
+            Gravação bruta, transcrição Whisper e geração de atas formais com decisões, pendências e responsáveis catalogados.
+          </p>
+        </div>
+
+        <!-- 08-apresentacoes -->
+        <div class="glass-card rounded-xl p-4.5 border-l-4 border-l-blue-500 hover:bg-slate-900/90 transition">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="font-mono text-blue-400 font-bold text-xs">08-apresentacoes/</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">GitHub Pages</span>
+          </div>
+          <h4 class="text-sm font-bold text-white font-display">Apresentações em HTML</h4>
+          <p class="text-xs text-slate-400 mt-1">
+            Slides interativos, catálogos e relatórios visuais com <code class="text-blue-300 font-mono">index.md</code> atualizado automaticamente a cada publicação.
+          </p>
+        </div>
+
+        <!-- 09-jornada-do-cliente -->
+        <div class="glass-card rounded-xl p-4.5 border-l-4 border-l-emerald-400 hover:bg-slate-900/90 transition bg-emerald-950/20">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="font-mono text-emerald-400 font-bold text-xs">09-jornada-do-cliente/</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-900/60 text-emerald-300 font-mono">skill jornada-cliente</span>
+          </div>
+          <h4 class="text-sm font-bold text-white font-display">Jornada Narrativa Viva</h4>
+          <p class="text-xs text-slate-400 mt-1">
+            Documento vivo (<code class="text-emerald-300 font-mono">jornada.md</code>) que registra Marcos 🎯, Decisões 🤔, Desafios ⚠️, Implementações ✅ e Aprendizados.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Feature Highlight: Jornada do Cliente -->
+      <div class="glass-card rounded-xl p-4 bg-slate-900/60 border border-slate-800 flex items-center gap-4">
+        <div class="w-10 h-10 rounded-lg bg-emerald-900/40 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0">
+          <i class="fa-solid fa-route text-lg"></i>
+        </div>
+        <p class="text-xs text-slate-300">
+          <strong class="text-white">Princípios da Jornada:</strong> Captura quente (logo após o evento), narrativa desburocratizada, fonte obrigatória para cada citação e <em>anti-vazamento absoluto</em> entre clientes (cada jornada vive exclusivamente na pasta do respectivo cliente).
+        </p>
+      </div>
+
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- SLIDE 4: CASO DE DESTAQUE 1 — MLP ADVOGADOS & ESTAÇÃO THEMIS -->
+    <!-- ================================================================= -->
+    <section id="slide-4" class="slide-page space-y-8 min-h-[calc(100vh-12rem)] flex flex-col justify-center">
+      
+      <div class="border-b border-slate-800 pb-4">
+        <div class="flex items-center gap-2 text-emerald-400 text-xs font-mono uppercase tracking-widest">
+          <i class="fa-solid fa-scale-balanced"></i> Caso de Destaque #1 — IA Jurídica On-Premise
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mt-1">
+          <h2 class="text-2xl sm:text-4xl font-extrabold font-display text-white">
+            MLP Advogados — Estação Themis v0.1
+          </h2>
+          <span class="px-3 py-1 rounded-full text-xs font-mono bg-emerald-950 border border-emerald-500/40 text-emerald-300 self-start">
+            Direito Tributário & IA Local-First
+          </span>
+        </div>
+        <p class="text-slate-400 text-sm mt-1">
+          Colaborador digital em estação dedicada no escritório: 7 princípios fundacionais, 11 skills modulares, transcrição Whisper Large-v3 com diarização e WhatsApp Web sem API oficial.
+        </p>
+      </div>
+
+      <!-- Themis Top Summary: 7 Principles + Core Architecture -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left: 7 Principles (6 cols) -->
+        <div class="lg:col-span-6 glass-card rounded-2xl p-5 space-y-3">
+          <h3 class="text-sm font-bold text-white font-display flex items-center gap-2 border-b border-slate-800 pb-2">
+            <i class="fa-solid fa-landmark text-emerald-400"></i> Os 7 Princípios Fundacionais Themis
+          </h3>
+          
+          <div class="space-y-2 text-xs">
+            <div class="p-2 rounded bg-slate-900/80 border border-slate-800 flex items-start gap-2.5">
+              <span class="font-mono font-bold text-emerald-400 bg-slate-800 px-1.5 py-0.5 rounded text-[10px]">01</span>
+              <div><strong class="text-white">Observar antes de agir:</strong> Themis nasce em modo <em>read-only</em>, medindo SLAs antes de emitir respostas.</div>
+            </div>
+            <div class="p-2 rounded bg-slate-900/80 border border-slate-800 flex items-start gap-2.5">
+              <span class="font-mono font-bold text-emerald-400 bg-slate-800 px-1.5 py-0.5 rounded text-[10px]">02</span>
+              <div><strong class="text-white">Local primeiro, nuvem por exceção:</strong> Triagem roda na máquina local. Apenas raciocínio complexo aciona API.</div>
+            </div>
+            <div class="p-2 rounded bg-slate-900/80 border border-slate-800 flex items-start gap-2.5">
+              <span class="font-mono font-bold text-emerald-400 bg-slate-800 px-1.5 py-0.5 rounded text-[10px]">03</span>
+              <div><strong class="text-white">Nenhuma afirmação sem fonte:</strong> Respostas jurídicas citam número CNJ, página e documento (zero alucinação).</div>
+            </div>
+            <div class="p-2 rounded bg-slate-900/80 border border-slate-800 flex items-start gap-2.5">
+              <span class="font-mono font-bold text-emerald-400 bg-slate-800 px-1.5 py-0.5 rounded text-[10px]">04</span>
+              <div><strong class="text-white">Motor fixo, config por cliente:</strong> Motor agnóstico reutilizável com regras em Markdown auditáveis.</div>
+            </div>
+            <div class="p-2 rounded bg-slate-900/80 border border-slate-800 flex items-start gap-2.5">
+              <span class="font-mono font-bold text-emerald-400 bg-slate-800 px-1.5 py-0.5 rounded text-[10px]">05</span>
+              <div><strong class="text-white">Escopo fechado com recusa elegante:</strong> Barreira contra prompt injection e recusa de parecer de mérito sem advogado.</div>
+            </div>
+            <div class="p-2 rounded bg-slate-900/80 border border-slate-800 flex items-start gap-2.5">
+              <span class="font-mono font-bold text-emerald-400 bg-slate-800 px-1.5 py-0.5 rounded text-[10px]">06</span>
+              <div><strong class="text-white">Autonomia graduada:</strong> 3 níveis operacionais: <em>Observa</em> → <em>Sugere</em> (fila de aprovação) → <em>Executa</em>.</div>
+            </div>
+            <div class="p-2 rounded bg-slate-900/80 border border-slate-800 flex items-start gap-2.5">
+              <span class="font-mono font-bold text-emerald-400 bg-slate-800 px-1.5 py-0.5 rounded text-[10px]">07</span>
+              <div><strong class="text-white">Nada é destrutivo:</strong> Arquivos originais nunca são sobrescritos; toda ação gera log de auditoria de 12M.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: The 3 Agents & Tech Stack (6 cols) -->
+        <div class="lg:col-span-6 space-y-3">
+          
+          <!-- Box Agentes da MLP -->
+          <div class="glass-card rounded-2xl p-4 border-t-2 border-t-cyan-500">
+            <h4 class="text-xs font-bold text-white font-display mb-2 flex items-center justify-between">
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-robot text-cyan-400"></i> Trio de Agentes Operacionais MLP</span>
+              <span class="text-[10px] font-mono text-slate-400">Instalados no Hermes</span>
+            </h4>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+              <div class="p-2 rounded bg-slate-900/80 border border-slate-800">
+                <span class="text-cyan-400 font-bold font-mono text-[11px] block">1. Argos</span>
+                <span class="text-[10px] text-slate-300">Vigília silenciosa em 100+ grupos de WhatsApp e sync ClickUp.</span>
+              </div>
+              <div class="p-2 rounded bg-slate-900/80 border border-slate-800">
+                <span class="text-emerald-400 font-bold font-mono text-[11px] block">2. Secretária</span>
+                <span class="text-[10px] text-slate-300">Concierge tributário, onboarding de clientes e triagem MAPCA.</span>
+              </div>
+              <div class="p-2 rounded bg-slate-900/80 border border-slate-800">
+                <span class="text-indigo-400 font-bold font-mono text-[11px] block">3. Mentor</span>
+                <span class="text-[10px] text-slate-300">Apoio a estagiários e paralegais na execução de rotinas e POPs.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Box Whisper & WhatsApp Anti-Ban -->
+          <div class="glass-card rounded-2xl p-4 border-t-2 border-t-emerald-500 text-xs space-y-2">
+            <div class="flex items-center justify-between">
+              <h4 class="text-xs font-bold text-white font-display flex items-center gap-2">
+                <i class="fa-solid fa-shield-virus text-emerald-400"></i> Blindagem Anti-Ban WhatsApp Web
+              </h4>
+              <span class="neon-badge px-2 py-0.5 rounded text-[10px] font-mono">Sem API Não Oficial</span>
+            </div>
+            <p class="text-slate-300 text-[11px] leading-relaxed">
+              Automação via perfil persistente no navegador isolado (Go-Rod / Playwright), delays humanos dinâmicos (30–180s), sem rajadas. Abertura de conversas restrita ao botão <strong class="text-white">+ (Nova Conversa)</strong> com número formatado em DDD+Número e dupla checagem anti-duplicação.
+            </p>
+            <div class="flex items-center justify-between text-[11px] font-mono text-slate-400 pt-1 border-t border-slate-800">
+              <span class="text-cyan-300"><i class="fa-solid fa-headphones mr-1"></i> Whisper Large-v3 Local</span>
+              <span class="text-emerald-400"><i class="fa-solid fa-users mr-1"></i> Diarização de Oradores (Vozes Separadas)</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- THE 11 MODULAR JURIDICAL SKILLS CATALOG -->
+      <div class="glass-card rounded-2xl p-5 border-t-2 border-t-indigo-500 space-y-3">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-2">
+          <div class="flex items-center gap-2">
+            <span class="neon-badge px-2.5 py-0.5 rounded text-xs font-mono font-bold">CATÁLOGO MODULAR</span>
+            <h3 class="text-sm sm:text-base font-bold text-white font-display">
+              As 11 Skills Jurídicas da Estação Themis
+            </h3>
+          </div>
+          <span class="text-xs font-mono text-slate-400">Régua de Autonomia: Observa · Sugere · Executa</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 text-xs">
+          
+          <!-- S00 -->
+          <div class="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-emerald-500/40 transition">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-mono font-bold text-emerald-400 text-[11px]">00_Vigilia_de_Grupos</span>
+              <span class="px-1.5 py-0.2 rounded bg-slate-800 text-emerald-300 font-mono text-[9px]">Observa (Perm.)</span>
+            </div>
+            <p class="text-[11px] text-slate-300">Varredura contínua de 100+ grupos, classificação local de mensagens e sincronização com cards ClickUp.</p>
+          </div>
+
+          <!-- S01 -->
+          <div class="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-cyan-500/40 transition">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-mono font-bold text-cyan-400 text-[11px]">01_Rotina_Whatsapp</span>
+              <span class="px-1.5 py-0.2 rounded bg-slate-800 text-cyan-300 font-mono text-[9px]">Obs. → Sugere</span>
+            </div>
+            <p class="text-[11px] text-slate-300">Respostas assistidas com envelope restrito. Coloca na fila de aprovação humana da coordenação antes do envio.</p>
+          </div>
+
+          <!-- S02 -->
+          <div class="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-emerald-500/40 transition">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-mono font-bold text-emerald-400 text-[11px]">02_Painel_SLA</span>
+              <span class="px-1.5 py-0.2 rounded bg-emerald-950 text-emerald-400 font-mono text-[9px] border border-emerald-500/30">Executa</span>
+            </div>
+            <p class="text-[11px] text-slate-300">Geração local de dashboards matemáticos D0, D1 e vencidos. <strong>Zero consumo de tokens LLM</strong>.</p>
+          </div>
+
+          <!-- S03 -->
+          <div class="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-indigo-500/40 transition">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-mono font-bold text-indigo-400 text-[11px]">03_Dossie_Peticionamento</span>
+              <span class="px-1.5 py-0.2 rounded bg-slate-800 text-indigo-300 font-mono text-[9px]">Sugere</span>
+            </div>
+            <p class="text-[11px] text-slate-300">Indexação RAG do processo, resgate probatório e linha do tempo documental com citação exata de fonte.</p>
+          </div>
+
+          <!-- S04 -->
+          <div class="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-amber-500/40 transition">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-mono font-bold text-amber-400 text-[11px]">04_Prazos_e_Andamentos</span>
+              <span class="px-1.5 py-0.2 rounded bg-slate-800 text-amber-300 font-mono text-[9px]">Observa</span>
+            </div>
+            <p class="text-[11px] text-slate-300">Leitura do LegalOne e diários oficiais com tripla régua (D2, D1, Fatal) e alerta emergencial NX para notificações DTE.</p>
+          </div>
+
+          <!-- S05 -->
+          <div class="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-cyan-500/40 transition">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-mono font-bold text-cyan-400 text-[11px]">05_Controladoria</span>
+              <span class="px-1.5 py-0.2 rounded bg-slate-800 text-cyan-300 font-mono text-[9px]">Obs. → Executa</span>
+            </div>
+            <p class="text-[11px] text-slate-300">Conciliação diária de horas apontadas vs franquia contratual via adaptador de sistema jurídico agnóstico.</p>
+          </div>
+
+          <!-- S06 -->
+          <div class="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-purple-500/40 transition">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-mono font-bold text-purple-400 text-[11px]">06_Onboarding_Cliente</span>
+              <span class="px-1.5 py-0.2 rounded bg-slate-800 text-purple-300 font-mono text-[9px]">Sugere</span>
+            </div>
+            <p class="text-[11px] text-slate-300">Acolhimento de novos clientes, checklist de procurações e documentos societários (framework M.A.P.C.A).</p>
+          </div>
+
+          <!-- S07 -->
+          <div class="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-emerald-500/40 transition">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-mono font-bold text-emerald-400 text-[11px]">07_Mentor_Interno</span>
+              <span class="px-1.5 py-0.2 rounded bg-slate-800 text-emerald-300 font-mono text-[9px]">Sugere</span>
+            </div>
+            <p class="text-[11px] text-slate-300">Orientação a estagiários sobre rotinas processuais, consulta instantânea a POPs e manuais internos do escritório.</p>
+          </div>
+
+          <!-- S08 -->
+          <div class="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-indigo-500/40 transition">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-mono font-bold text-indigo-400 text-[11px]">08_Ata_de_Reuniao</span>
+              <span class="px-1.5 py-0.2 rounded bg-slate-800 text-indigo-300 font-mono text-[9px]">Sugere</span>
+            </div>
+            <p class="text-[11px] text-slate-300">Processamento de transcrições Whisper Large-v3 local → ata formal de alta fidelidade e cards ClickUp.</p>
+          </div>
+
+          <!-- S09 -->
+          <div class="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-rose-500/40 transition">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-mono font-bold text-rose-400 text-[11px]">09_Proposta_e_Contrato</span>
+              <span class="px-1.5 py-0.2 rounded bg-slate-800 text-rose-300 font-mono text-[9px]">Sugere (Teto Perm.)</span>
+            </div>
+            <p class="text-[11px] text-slate-300">Geração de minutas com cláusulas contratuais Live V6.0; envio condicionado à assinatura do sócio.</p>
+          </div>
+
+          <!-- S10 -->
+          <div class="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-amber-500/40 transition">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-mono font-bold text-amber-400 text-[11px]">10_Regua_de_Cobranca</span>
+              <span class="px-1.5 py-0.2 rounded bg-slate-800 text-amber-300 font-mono text-[9px]">Sugere (Teto Perm.)</span>
+            </div>
+            <p class="text-[11px] text-slate-300">Preparação do lote de faturamento, cálculo de reajustes e controle de inadimplência sem disparo desgovernado.</p>
+          </div>
+
+          <!-- Summary Pill -->
+          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center text-center">
+            <div>
+              <span class="text-emerald-400 font-mono font-bold text-xs">Total: 11 Skills</span>
+              <p class="text-[10px] text-slate-400 mt-0.5">Adaptáveis a outros escritórios</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- SLIDE 5: CASO INDUSTRIAL — VISUAL WORK & CARTEIRA DE CLIENTES -->
+    <!-- ================================================================= -->
+    <section id="slide-5" class="slide-page space-y-8 min-h-[calc(100vh-12rem)] flex flex-col justify-center">
+      
+      <div class="border-b border-slate-800 pb-4">
+        <div class="flex items-center gap-2 text-emerald-400 text-xs font-mono uppercase tracking-widest">
+          <i class="fa-solid fa-industry"></i> Caso Industrial & Portfólio de Atendimento
+        </div>
+        <h2 class="text-2xl sm:text-4xl font-extrabold font-display text-white mt-1">
+          Visual Work & Ecossistema de Clientes
+        </h2>
+        <p class="text-slate-400 text-sm mt-1">
+          Engenharia de processos para manufatura pesada aliada à gestão de carteira com 15 empresas mapeadas.
+        </p>
+      </div>
+
+      <!-- Visual Work Detailed Showcase -->
+      <div class="glass-card rounded-2xl p-6 border-l-4 border-l-amber-500 relative overflow-hidden">
+        <div class="flex flex-col lg:flex-row gap-6 items-start">
+          <div class="lg:w-2/3 space-y-3">
+            <div class="flex items-center gap-2">
+              <span class="neon-badge px-2.5 py-0.5 rounded font-mono text-xs font-bold">CASE INDUSTRIAL</span>
+              <span class="text-xs text-slate-400 font-mono">Setor: Têxtil / EPIs Técnicos</span>
+            </div>
+            <h3 class="text-xl font-bold text-white font-display">
+              Visual Work Uniformes & Equipamentos de Proteção Individual
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              Estruturação e organização de processos produtivos para confecção de EPIs de alta complexidade. Proteção contra arco elétrico e fogo repentino utilizando <strong class="text-amber-400">Tecido Jupiter</strong>, ensaios térmicos laboratoriais e rigorosa conformidade com as normas <strong class="text-white">INMETRO 672 / ISO 9001</strong>.
+            </p>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-slate-300">
+                <i class="fa-solid fa-certificate text-amber-400 mr-1"></i> Certificação INMETRO 672
+              </span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-slate-300">
+                <i class="fa-solid fa-fire-flame-curved text-rose-400 mr-1"></i> Norma NR-10 / Arco Elétrico
+              </span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-slate-300">
+                <i class="fa-solid fa-boxes-packing text-cyan-400 mr-1"></i> Rastreabilidade de Lotes
+              </span>
+            </div>
+          </div>
+
+          <div class="lg:w-1/3 w-full bg-slate-900/80 rounded-xl p-4 border border-slate-800 text-xs space-y-2">
+            <div class="text-slate-400 font-mono font-bold text-[11px] uppercase tracking-wider text-emerald-400">
+              <i class="fa-solid fa-circle-nodes mr-1"></i> Esclarecimento de Papel
+            </div>
+            <p class="text-slate-300 leading-relaxed">
+              <strong class="text-white">Atenção Estratégica:</strong> A Visual Work é um <em>cliente da consultoria</em> no segmento de manufatura/EPIs, e não uma agência parceira de design ou branding.
+            </p>
+            <div class="text-[11px] text-slate-400 pt-2 border-t border-slate-800">
+              <span class="text-slate-200">Líderes do Projeto:</span> Luiz Portal & Cléber Donato
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Complete Directory of Active Clients (15 total) -->
+      <div>
+        <h4 class="text-sm font-bold text-slate-300 font-display mb-3 flex items-center gap-2">
+          <i class="fa-solid fa-users text-emerald-400"></i> Carteira Completa de Empresas Mapeadas & Ativas
+        </h4>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 text-xs">
+          
+          <div class="glass-card rounded-lg p-3 text-center border-t-2 border-t-emerald-500">
+            <div class="font-bold text-white truncate">Casas Goianita</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">Diagnóstico & Varejo</div>
+          </div>
+
+          <div class="glass-card rounded-lg p-3 text-center border-t-2 border-t-cyan-500">
+            <div class="font-bold text-white truncate">BuyOff</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">Parceria Minerva</div>
+          </div>
+
+          <div class="glass-card rounded-lg p-3 text-center border-t-2 border-t-indigo-500">
+            <div class="font-bold text-white truncate">AutoCare</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">Pneucar / Automotivo</div>
+          </div>
+
+          <div class="glass-card rounded-lg p-3 text-center border-t-2 border-t-purple-500">
+            <div class="font-bold text-white truncate">Plur Movimento</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">Agente Plur 2 WhatsApp</div>
+          </div>
+
+          <div class="glass-card rounded-lg p-3 text-center border-t-2 border-t-amber-500">
+            <div class="font-bold text-white truncate">Mundo dos Filtros</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">Estrutura & Proposta v1</div>
+          </div>
+
+          <div class="glass-card rounded-lg p-3 text-center border-t-2 border-t-rose-500">
+            <div class="font-bold text-white truncate">WMX Global</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">Maquila Paraguai / Drone</div>
+          </div>
+
+          <div class="glass-card rounded-lg p-3 text-center border-t-2 border-t-slate-600">
+            <div class="font-bold text-white truncate">IPV</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">Gestão Integrada</div>
+          </div>
+
+          <div class="glass-card rounded-lg p-3 text-center border-t-2 border-t-slate-600">
+            <div class="font-bold text-white truncate">Lokkoo</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">Planejamento Live</div>
+          </div>
+
+          <div class="glass-card rounded-lg p-3 text-center border-t-2 border-t-slate-600">
+            <div class="font-bold text-white truncate">Nagel</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">Mapeamento Industrial</div>
+          </div>
+
+          <div class="glass-card rounded-lg p-3 text-center border-t-2 border-t-slate-600">
+            <div class="font-bold text-white truncate">Pérola</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">Comercial & Processos</div>
+          </div>
+
+          <div class="glass-card rounded-lg p-3 text-center border-t-2 border-t-slate-600">
+            <div class="font-bold text-white truncate">ViDi</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">Auditoria Operacional</div>
+          </div>
+
+          <div class="glass-card rounded-lg p-3 text-center border-t-2 border-t-slate-600">
+            <div class="font-bold text-white truncate">Washington WMX</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">Comércio Exterior</div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- SLIDE 6: PORTFÓLIO DE PRODUTOS DE IA & SAAS -->
+    <!-- ================================================================= -->
+    <section id="slide-6" class="slide-page space-y-8 min-h-[calc(100vh-12rem)] flex flex-col justify-center">
+      
+      <div class="border-b border-slate-800 pb-4">
+        <div class="flex items-center gap-2 text-emerald-400 text-xs font-mono uppercase tracking-widest">
+          <i class="fa-solid fa-boxes-stacked"></i> Fábrica de Soluções & Produtos Modulares
+        </div>
+        <h2 class="text-2xl sm:text-4xl font-extrabold font-display text-white mt-1">
+          Portfólio de Produtos de IA & SaaS
+        </h2>
+        <p class="text-slate-400 text-sm mt-1">
+          Aplicações autônomas que geram receita direta, destravam a gestão de PMEs e escalam a operação sem novos headcount seniores.
+        </p>
+      </div>
+
+      <!-- 6 Flagship Products Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Produto 1: Júlio Bot v8.0 -->
+        <div class="glass-card rounded-2xl p-6 border-t-2 border-t-emerald-400 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="neon-badge px-2 py-0.5 rounded text-[10px] font-mono font-bold">SPA + FIREBASE</span>
+              <span class="text-emerald-400 text-xs font-mono">v8.0 Produção</span>
+            </div>
+            <h3 class="text-lg font-bold text-white font-display flex items-center gap-2">
+              <i class="fa-solid fa-user-graduate text-emerald-400"></i> Júlio Bot v8.0
+            </h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              SPA hospedada no Netlify com Firebase Auth e Firestore multi-tenant. Agente de onboarding, cultura corporativa e tutoria diária de estagiários e novos colaboradores.
+            </p>
+            <ul class="text-xs text-slate-400 space-y-1.5 pt-2 border-t border-slate-800">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400 text-[10px]"></i> Onboarding interativo de funcionários</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400 text-[10px]"></i> Tutoria guiada de Cadernos de Ativação</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400 text-[10px]"></i> Isolamento estrito por tenant/empresa</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Produto 2: Agente de R&S / RH Tech -->
+        <div class="glass-card rounded-2xl p-6 border-t-2 border-t-indigo-400 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-indigo-950 text-indigo-300 border border-indigo-500/30">RH TECH B2B</span>
+              <span class="text-indigo-300 text-xs font-mono">DIY ou Full</span>
+            </div>
+            <h3 class="text-lg font-bold text-white font-display flex items-center gap-2">
+              <i class="fa-solid fa-user-check text-indigo-400"></i> Agente de R&S / RH Tech
+            </h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Motor de triagem semântica de currículos com IA, engenharia de descritivo de perfil, roteiros de entrevista comportamental e Parecer de Fit Executivo V6.0.
+            </p>
+            <ul class="text-xs text-slate-400 space-y-1.5 pt-2 border-t border-slate-800">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-400 text-[10px]"></i> <strong>DIY (R$ 250 / vaga):</strong> IA com autosserviço</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-400 text-[10px]"></i> <strong>Full-Service (1 Salário):</strong> Garantia de 30 dias</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-400 text-[10px]"></i> Elimina vieses e acelera contratações em 70%</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Produto 3: Diagnóstico Empresarial Express -->
+        <div class="glass-card rounded-2xl p-6 border-t-2 border-t-amber-400 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-950 text-amber-300 border border-amber-500/30">TRIPWIRE SAAS</span>
+              <span class="text-amber-400 text-xs font-mono font-bold">R$ 250 (12x)</span>
+            </div>
+            <h3 class="text-lg font-bold text-white font-display flex items-center gap-2">
+              <i class="fa-solid fa-stethoscope text-amber-400"></i> Diagnóstico Express
+            </h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              SaaS tripwire acessível contra a miopia gerencial de PMEs. Calcula o <strong class="text-white">Índice de Vulnerabilidade Operacional</strong> em 4 eixos e gera lead qualificado para projetos avançados.
+            </p>
+            <ul class="text-xs text-slate-400 space-y-1.5 pt-2 border-t border-slate-800">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400 text-[10px]"></i> Finanças, Processos, Pessoas e Vendas</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400 text-[10px]"></i> Pagamento em 12x de ~R$ 25 no cartão</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400 text-[10px]"></i> Relatório executivo gerado em 5 minutos</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Produto 4: Jarvis Operacional -->
+        <div class="glass-card rounded-2xl p-6 border-t-2 border-t-cyan-400 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-cyan-950 text-cyan-300 border border-cyan-500/30">RAG CORPORATIVO</span>
+              <span class="text-cyan-400 text-xs font-mono">POPs & Manuais</span>
+            </div>
+            <h3 class="text-lg font-bold text-white font-display flex items-center gap-2">
+              <i class="fa-solid fa-brain text-cyan-400"></i> Jarvis Operacional
+            </h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Inteligência Artificial corporativa treinada diretamente nos Procedimentos Operacionais Padrão (POPs) e manuais internos da contratante para respostas instantâneas à equipe.
+            </p>
+            <ul class="text-xs text-slate-400 space-y-1.5 pt-2 border-t border-slate-800">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400 text-[10px]"></i> Respostas 24/7 sem consultar a diretoria</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400 text-[10px]"></i> Citação do manual e página exata</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400 text-[10px]"></i> Redução drástica de dúvidas repetitivas</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Produto 5: Cadernos de Ativação -->
+        <div class="glass-card rounded-2xl p-6 border-t-2 border-t-purple-400 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-purple-950 text-purple-300 border border-purple-500/30">MÉTODO LIVE</span>
+              <span class="text-purple-400 text-xs font-mono">Execução Guiada</span>
+            </div>
+            <h3 class="text-lg font-bold text-white font-display flex items-center gap-2">
+              <i class="fa-solid fa-book-bookmark text-purple-400"></i> Cadernos de Ativação
+            </h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Manuais de campo ultra-detalhados passo a passo. Permitem que estagiários e assistentes locais executem tarefas complexas com rigor sênior e zero dependência dos sócios.
+            </p>
+            <ul class="text-xs text-slate-400 space-y-1.5 pt-2 border-t border-slate-800">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400 text-[10px]"></i> Checklist atômico e templates pré-configurados</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400 text-[10px]"></i> Testes de verificação antes de dar por concluído</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400 text-[10px]"></i> Autonomia real para o time júnior do cliente</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Produto 6: Esteira Autônoma de Prospecção B2B -->
+        <div class="glass-card rounded-2xl p-6 border-t-2 border-t-emerald-500 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="neon-badge px-2 py-0.5 rounded text-[10px] font-mono font-bold">PIPELINE B2B</span>
+              <span class="text-emerald-400 text-xs font-mono font-bold">P1 → P4</span>
+            </div>
+            <h3 class="text-lg font-bold text-white font-display flex items-center gap-2">
+              <i class="fa-solid fa-bullseye text-emerald-400"></i> Esteira de Prospecção B2B
+            </h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Scripts autônomos para geração de demanda qualificada: mineração de dados por CNAE, auditoria de presença digital, personalização de copy via LLM e abordagem humanizada.
+            </p>
+            <ul class="text-xs text-slate-400 space-y-1.5 pt-2 border-t border-slate-800">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400 text-[10px]"></i> <strong>P1-Buscar:</strong> Filtro por CNAE, região e capital</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400 text-[10px]"></i> <strong>P2-Auditar:</strong> Varredura de sócios e site</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400 text-[10px]"></i> <strong>P3/P4:</strong> Copy IA e disparo com anti-duplicação</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- SLIDE 7: FRAMEWORK MULTI-AGENTE SYNKRA AIOX-CORE & CAMADA MULTI-IDE -->
+    <!-- ================================================================= -->
+    <section id="slide-7" class="slide-page space-y-8 min-h-[calc(100vh-12rem)] flex flex-col justify-center">
+      
+      <div class="border-b border-slate-800 pb-4">
+        <div class="flex items-center gap-2 text-emerald-400 text-xs font-mono uppercase tracking-widest">
+          <i class="fa-solid fa-network-wired"></i> Engenharia Multi-Agente & Orquestração
+        </div>
+        <h2 class="text-2xl sm:text-4xl font-extrabold font-display text-white mt-1">
+          Framework Synkra AIOX-Core & Camadas Multi-IDE
+        </h2>
+        <p class="text-slate-400 text-sm mt-1">
+          Infraestrutura autônoma de desenvolvimento e governança com 12 agentes especializados, 14 workflows declarativos e espelhamento em 5 IDEs.
+        </p>
+      </div>
+
+      <!-- Overview Box -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Left: AIOX-Core Numbers & Constitution -->
+        <div class="glass-card rounded-2xl p-6 space-y-4 lg:col-span-1 border-t-2 border-t-emerald-500">
+          <div class="flex items-center justify-between">
+            <span class="neon-badge px-2 py-0.5 rounded text-[10px] font-mono font-bold">AIOX-CORE v2.0</span>
+            <span class="text-xs text-slate-400 font-mono">Constitution</span>
+          </div>
+          <h3 class="text-lg font-bold text-white font-display">
+            Constituição & Quality Gates
+          </h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            O repositório é governado pela Constituição (<code class="text-emerald-300 font-mono">.aiox-core/constitution.md</code>), estabelecendo regras inflexíveis de integridade de código e documentação.
+          </p>
+          
+          <div class="space-y-2 pt-2 border-t border-slate-800 text-xs">
+            <div class="flex items-center justify-between p-2 rounded bg-slate-900 border border-slate-800">
+              <span class="text-slate-300">12 Agentes Especializados</span>
+              <span class="font-mono text-emerald-400 font-bold">@aiox-*</span>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded bg-slate-900 border border-slate-800">
+              <span class="text-slate-300">14 Workflows Declarativos</span>
+              <span class="font-mono text-cyan-400 font-bold">YAML/MD</span>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded bg-slate-900 border border-slate-800">
+              <span class="text-slate-300">211 Tasks Padronizadas</span>
+              <span class="font-mono text-indigo-400 font-bold">Atômicas</span>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded bg-slate-900 border border-slate-800">
+              <span class="text-slate-300">Regra de Ouro</span>
+              <span class="font-mono text-amber-400 font-bold">CLI First → Obs. → UI</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center & Right: The 12 Agents Grid & Multi-IDE Mirroring -->
+        <div class="glass-card rounded-2xl p-6 lg:col-span-2 space-y-5 border-t-2 border-t-cyan-500">
+          
+          <!-- 12 Agents Catalog -->
+          <div>
+            <h4 class="text-sm font-bold text-white font-display mb-3 flex items-center justify-between">
+              <span class="flex items-center gap-2"><i class="fa-solid fa-users-gear text-cyan-400"></i> Os 12 Agentes Especializados do AIOX-Core</span>
+              <span class="text-[10px] font-mono text-slate-400">Ativação via /skills ou @nome</span>
+            </h4>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 text-xs">
+              <div class="p-2 rounded bg-slate-900/90 border border-slate-800 hover:border-emerald-500/40 transition">
+                <span class="font-mono font-bold text-emerald-400 block">@aiox-master</span>
+                <span class="text-[10px] text-slate-400">Orquestrador supremo</span>
+              </div>
+              <div class="p-2 rounded bg-slate-900/90 border border-slate-800 hover:border-cyan-500/40 transition">
+                <span class="font-mono font-bold text-cyan-400 block">@architect</span>
+                <span class="text-[10px] text-slate-400">Design de sistemas & ADRs</span>
+              </div>
+              <div class="p-2 rounded bg-slate-900/90 border border-slate-800 hover:border-indigo-500/40 transition">
+                <span class="font-mono font-bold text-indigo-400 block">@pm</span>
+                <span class="text-[10px] text-slate-400">Gestão de produto & visão</span>
+              </div>
+              <div class="p-2 rounded bg-slate-900/90 border border-slate-800 hover:border-indigo-500/40 transition">
+                <span class="font-mono font-bold text-indigo-400 block">@po</span>
+                <span class="text-[10px] text-slate-400">Backlog, stories & critérios</span>
+              </div>
+              <div class="p-2 rounded bg-slate-900/90 border border-slate-800 hover:border-amber-500/40 transition">
+                <span class="font-mono font-bold text-amber-400 block">@sm</span>
+                <span class="text-[10px] text-slate-400">Scrum Master & cadência</span>
+              </div>
+              <div class="p-2 rounded bg-slate-900/90 border border-slate-800 hover:border-amber-500/40 transition">
+                <span class="font-mono font-bold text-amber-400 block">@analyst</span>
+                <span class="text-[10px] text-slate-400">Requisitos & eliciação</span>
+              </div>
+              <div class="p-2 rounded bg-slate-900/90 border border-slate-800 hover:border-emerald-500/40 transition">
+                <span class="font-mono font-bold text-emerald-400 block">@dev</span>
+                <span class="text-[10px] text-slate-400">Implementação TDD</span>
+              </div>
+              <div class="p-2 rounded bg-slate-900/90 border border-slate-800 hover:border-rose-500/40 transition">
+                <span class="font-mono font-bold text-rose-400 block">@qa</span>
+                <span class="text-[10px] text-slate-400">Quality gate & testes</span>
+              </div>
+              <div class="p-2 rounded bg-slate-900/90 border border-slate-800 hover:border-purple-500/40 transition">
+                <span class="font-mono font-bold text-purple-400 block">@data-engineer</span>
+                <span class="text-[10px] text-slate-400">Pipelines & esquemas</span>
+              </div>
+              <div class="p-2 rounded bg-slate-900/90 border border-slate-800 hover:border-pink-500/40 transition">
+                <span class="font-mono font-bold text-pink-400 block">@ux-design</span>
+                <span class="text-[10px] text-slate-400">Design System V6.0</span>
+              </div>
+              <div class="p-2 rounded bg-slate-900/90 border border-slate-800 hover:border-blue-500/40 transition">
+                <span class="font-mono font-bold text-blue-400 block">@devops</span>
+                <span class="text-[10px] text-slate-400">CI/CD & infraestrutura</span>
+              </div>
+              <div class="p-2 rounded bg-slate-900/90 border border-slate-800 hover:border-teal-500/40 transition">
+                <span class="font-mono font-bold text-teal-400 block">@squad-creator</span>
+                <span class="text-[10px] text-slate-400">Geração de novos agentes</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Multi-IDE Interoperability Bar -->
+          <div class="pt-3 border-t border-slate-800">
+            <h5 class="text-xs font-bold text-slate-300 font-display mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-code-compare text-emerald-400"></i> Espelhamento & Suporte Multi-IDE Simultâneo
+            </h5>
+            <div class="flex flex-wrap gap-2 text-[11px] font-mono">
+              <span class="px-2.5 py-1 rounded bg-slate-900 border border-emerald-500/40 text-emerald-300">
+                <i class="fa-solid fa-check mr-1 text-emerald-400"></i> Antigravity
+              </span>
+              <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-slate-300">
+                <i class="fa-solid fa-check mr-1 text-emerald-400"></i> Claude Code (.claude/)
+              </span>
+              <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-slate-300">
+                <i class="fa-solid fa-check mr-1 text-emerald-400"></i> Codex CLI (.codex/)
+              </span>
+              <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-slate-300">
+                <i class="fa-solid fa-check mr-1 text-emerald-400"></i> Cursor (.cursorrules)
+              </span>
+              <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-slate-300">
+                <i class="fa-solid fa-check mr-1 text-emerald-400"></i> Gemini CLI
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- SLIDE 8: IMPACTO CONSOLIDADO, ROADMAP & FECHAMENTO -->
+    <!-- ================================================================= -->
+    <section id="slide-8" class="slide-page space-y-8 min-h-[calc(100vh-12rem)] flex flex-col justify-center">
+      
+      <div class="border-b border-slate-800 pb-4">
+        <div class="flex items-center gap-2 text-emerald-400 text-xs font-mono uppercase tracking-widest">
+          <i class="fa-solid fa-chart-pie"></i> Resultados & Visão Futura
+        </div>
+        <h2 class="text-2xl sm:text-4xl font-extrabold font-display text-white mt-1">
+          Impacto Consolidado & Próximos Passos
+        </h2>
+        <p class="text-slate-400 text-sm mt-1">
+          Consolidação da operação em números, auditoria contínua de prazos e roadmap de escala para 2026/2027.
+        </p>
+      </div>
+
+      <!-- 4 Key Impact Numbers -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        
+        <div class="glass-card rounded-2xl p-5 border-t-2 border-t-emerald-400 text-center">
+          <div class="text-3xl sm:text-4xl font-black text-emerald-400 font-mono mb-1">100%</div>
+          <div class="text-sm font-bold text-white font-display">Sem Vínculo Trabalhista</div>
+          <p class="text-xs text-slate-400 mt-1">Parceiros com faturamento direto e blindagem contratual pétrea do CNPJ.</p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 border-t-2 border-t-cyan-400 text-center">
+          <div class="text-3xl sm:text-4xl font-black text-cyan-400 font-mono mb-1">0%</div>
+          <div class="text-sm font-bold text-white font-display">Alucinação em Juízo</div>
+          <p class="text-xs text-slate-400 mt-1">Princípio Themis: toda afirmação cita o documento e a página exata da fonte.</p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 border-t-2 border-t-indigo-400 text-center">
+          <div class="text-3xl sm:text-4xl font-black text-indigo-400 font-mono mb-1">5x</div>
+          <div class="text-sm font-bold text-white font-display">Velocidade de Onboarding</div>
+          <p class="text-xs text-slate-400 mt-1">Júlio Bot v8.0 e Cadernos de Ativação garantem ramp-up imediato de estagiários.</p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 border-t-2 border-t-amber-400 text-center">
+          <div class="text-3xl sm:text-4xl font-black text-amber-400 font-mono mb-1">&lt; 90d</div>
+          <div class="text-sm font-bold text-white font-display">Ciclo de Entrega Finito</div>
+          <p class="text-xs text-slate-400 mt-1">Projetos com início, meio e fim, eliminando escopos abertos e desgastes.</p>
+        </div>
+
+      </div>
+
+      <!-- Roadmap Box: 2026/2027 -->
+      <div class="glass-card rounded-2xl p-6 border-l-4 border-l-emerald-500">
+        <h3 class="text-base font-bold text-white font-display mb-4 flex items-center gap-2">
+          <i class="fa-solid fa-map-location-dot text-emerald-400"></i> Roadmap de Expansão & Produtos
+        </h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1">
+            <span class="text-emerald-400 font-mono font-bold">Fase 1: Piloto Consolidado (Q3/2026)</span>
+            <p class="text-slate-300">Validação da Estação Themis em produção na MLP Advogados e esteira autônoma de prospecção do DEP-01.</p>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1">
+            <span class="text-cyan-400 font-mono font-bold">Fase 2: Escala dos SaaS (Q4/2026)</span>
+            <p class="text-slate-300">Lançamento do Diagnóstico Empresarial Express a R$ 250 e pacote RH Tech DIY para PMEs.</p>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1">
+            <span class="text-indigo-400 font-mono font-bold">Fase 3: Rede de Franquia/Canal (2027)</span>
+            <p class="text-slate-300">Replicação da Estação Themis para a rede de escritórios do Dr. Rogério e licenciamento dos Cadernos de Ativação.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Closing Commitment Box -->
+      <div class="p-6 rounded-2xl bg-gradient-to-r from-emerald-950/60 via-slate-900 to-indigo-950/60 border border-emerald-500/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="space-y-1 text-center sm:text-left">
+          <h4 class="text-base font-bold text-white font-display">Operação Auditada & Em Conformidade Contínua</h4>
+          <p class="text-xs text-slate-300">
+            Todos os artefatos, atas, dashboards e códigos estão sob controle de versão local e redundância segura.
+          </p>
+        </div>
+        <a href="mailto:cleberdonato@ecossistemalive.com.br" class="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs transition flex items-center gap-2 shadow-lg shadow-emerald-500/20 shrink-0">
+          <i class="fa-solid fa-envelope"></i> Contatar Sócios / Engenharia
+        </a>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Floating Back to Top Button (Active in Document Mode) -->
+  <button id="back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" class="no-print fixed bottom-6 right-6 z-40 p-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold shadow-lg shadow-emerald-500/30 transition flex items-center justify-center" title="Voltar ao Topo">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- Global Quick Modal (Ctrl+K) -->
+  <div id="quick-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="glass-card w-full max-w-xl rounded-2xl p-6 border border-slate-700 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2 text-emerald-400 font-bold text-sm">
+          <i class="fa-solid fa-magnifying-glass"></i> Navegação Rápida & Pesquisa Global
+        </div>
+        <button onclick="toggleQuickModal()" class="text-slate-400 hover:text-white text-sm">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <input type="text" id="modal-search-input" onkeyup="filterQuickLinks()" placeholder="Digite palavras-chave (ex: themis, whisper, 11 skills, dep-07, artefatos, bpo, jupiter)..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 font-sans">
+
+      <div id="quick-links-container" class="max-h-72 overflow-y-auto space-y-1.5 text-xs">
+        <a href="#slide-1" onclick="goToSlide(1); toggleQuickModal();" class="quick-link-item block p-2.5 rounded-lg bg-slate-900/60 hover:bg-emerald-950/60 border border-slate-800 hover:border-emerald-500/40 text-slate-200 hover:text-emerald-400 transition" data-keywords="visao executiva diretriz soberana banimento consultoria defesa cnpj regras-consultoria">
+          <strong class="text-white block">1. Visão Executiva & Diretriz Soberana</strong>
+          <span class="text-[11px] text-slate-400">Banimento da consultoria, defesa pétrea do CNPJ e isenção absoluta com parceiros.</span>
+        </a>
+        <a href="#slide-2" onclick="goToSlide(2); toggleQuickModal();" class="quick-link-item block p-2.5 rounded-lg bg-slate-900/60 hover:bg-emerald-950/60 border border-slate-800 hover:border-emerald-500/40 text-slate-200 hover:text-emerald-400 transition" data-keywords="matriz departamental dep-01 dep-02 dep-03 dep-04 dep-05 dep-06 dep-07 veto total antagonista bpo agregar voya regua b+ marcelo nogueira">
+          <strong class="text-white block">2. Matriz Departamental (DEP-01 a DEP-07)</strong>
+          <span class="text-[11px] text-slate-400">DEP-06 Compliance transversal com poder de veto soberano, 5 verticais de produtos e DEP-07 de Alianças e BPO.</span>
+        </a>
+        <a href="#slide-3" onclick="goToSlide(3); toggleQuickModal();" class="quick-link-item block p-2.5 rounded-lg bg-slate-900/60 hover:bg-emerald-950/60 border border-slate-800 hover:border-emerald-500/40 text-slate-200 hover:text-emerald-400 transition" data-keywords="9 artefatos proposta contrato plano acao calendario reunioes dashboard kanban jornada cliente live v6">
+          <strong class="text-white block">3. O Padrão dos 9 Artefatos Obrigatórios</strong>
+          <span class="text-[11px] text-slate-400">01-Proposta a 09-Jornada do Cliente viva, kanban offline e atas AAAA-MM-DD.</span>
+        </a>
+        <a href="#slide-4" onclick="goToSlide(4); toggleQuickModal();" class="quick-link-item block p-2.5 rounded-lg bg-slate-900/60 hover:bg-emerald-950/60 border border-slate-800 hover:border-emerald-500/40 text-slate-200 hover:text-emerald-400 transition" data-keywords="mlp advogados themis 7 principios 11 skills juridicas whisper large-v3 diarizacao whatsapp anti-ban argos secretaria mentor tributario">
+          <strong class="text-white block">4. MLP Advogados — Estação Themis v0.1</strong>
+          <span class="text-[11px] text-slate-400">7 princípios fundacionais, 11 skills modulares, Whisper local e agentes Argos, Secretária e Mentor.</span>
+        </a>
+        <a href="#slide-5" onclick="goToSlide(5); toggleQuickModal();" class="quick-link-item block p-2.5 rounded-lg bg-slate-900/60 hover:bg-emerald-950/60 border border-slate-800 hover:border-emerald-500/40 text-slate-200 hover:text-emerald-400 transition" data-keywords="visual work epi tecido jupiter inmetro 672 iso 9001 carteira clientes casas goianita buyoff autocare plur wmx">
+          <strong class="text-white block">5. Visual Work & Carteira de Clientes</strong>
+          <span class="text-[11px] text-slate-400">Caso industrial têxtil/EPI (tecido Jupiter/INMETRO 672) e 15 clientes catalogados.</span>
+        </a>
+        <a href="#slide-6" onclick="goToSlide(6); toggleQuickModal();" class="quick-link-item block p-2.5 rounded-lg bg-slate-900/60 hover:bg-emerald-950/60 border border-slate-800 hover:border-emerald-500/40 text-slate-200 hover:text-emerald-400 transition" data-keywords="produtos ia saas julio bot v8 rh tech r&s diagnostico express tripwire 250 jarvis cadernos ativacao prospeccao b2b">
+          <strong class="text-white block">6. Portfólio de Produtos de IA & SaaS</strong>
+          <span class="text-[11px] text-slate-400">Júlio Bot v8, RH Tech, Diagnóstico Express (R$ 250 em 12x), Jarvis, Cadernos e Prospecção B2B.</span>
+        </a>
+        <a href="#slide-7" onclick="goToSlide(7); toggleQuickModal();" class="quick-link-item block p-2.5 rounded-lg bg-slate-900/60 hover:bg-emerald-950/60 border border-slate-800 hover:border-emerald-500/40 text-slate-200 hover:text-emerald-400 transition" data-keywords="synkra aiox-core multi-ide 12 agentes 14 workflows 211 tasks constitution antigravity claude code codex cursor gemini">
+          <strong class="text-white block">7. Framework Synkra AIOX-Core & Camada Multi-IDE</strong>
+          <span class="text-[11px] text-slate-400">12 agentes especializados, 14 workflows declarativos, 211 tasks e espelhamento em 5 IDEs.</span>
+        </a>
+        <a href="#slide-8" onclick="goToSlide(8); toggleQuickModal();" class="quick-link-item block p-2.5 rounded-lg bg-slate-900/60 hover:bg-emerald-950/60 border border-slate-800 hover:border-emerald-500/40 text-slate-200 hover:text-emerald-400 transition" data-keywords="impacto consolidado roadmap 2026 2027 resultados proximos passos conclusao">
+          <strong class="text-white block">8. Impacto Consolidado & Roadmap</strong>
+          <span class="text-[11px] text-slate-400">Métricas consolidadas, auditoria contínua de prazos e expansão 2026/2027.</span>
+        </a>
+      </div>
+
+      <div class="text-[10px] text-slate-500 text-center font-mono border-t border-slate-800 pt-2">
+        Pressione <kbd class="bg-slate-800 px-1.5 py-0.5 rounded text-slate-300">ESC</kbd> para fechar
+      </div>
+    </div>
+  </div>
+
+  <!-- Keyboard Shortcuts Modal (?) -->
+  <div id="shortcuts-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="glass-card w-full max-w-md rounded-2xl p-6 border border-slate-700 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2 text-emerald-400 font-bold text-sm">
+          <i class="fa-solid fa-keyboard"></i> Atalhos do Teclado
+        </div>
+        <button onclick="toggleShortcutsModal()" class="text-slate-400 hover:text-white text-sm">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="space-y-2.5 text-xs">
+        <div class="flex items-center justify-between p-2 rounded bg-slate-900 border border-slate-800">
+          <span class="text-slate-300">Próximo slide / Seção</span>
+          <span class="font-mono text-emerald-400 bg-slate-800 px-2 py-0.5 rounded border border-slate-700">→ / Espaço / PgDn</span>
+        </div>
+        <div class="flex items-center justify-between p-2 rounded bg-slate-900 border border-slate-800">
+          <span class="text-slate-300">Slide anterior / Seção</span>
+          <span class="font-mono text-emerald-400 bg-slate-800 px-2 py-0.5 rounded border border-slate-700">← / PgUp</span>
+        </div>
+        <div class="flex items-center justify-between p-2 rounded bg-slate-900 border border-slate-800">
+          <span class="text-slate-300">Alternar Modo (Slides / Leitura)</span>
+          <span class="font-mono text-cyan-400 bg-slate-800 px-2 py-0.5 rounded border border-slate-700">M</span>
+        </div>
+        <div class="flex items-center justify-between p-2 rounded bg-slate-900 border border-slate-800">
+          <span class="text-slate-300">Alternar Tema (Dark / Light)</span>
+          <span class="font-mono text-indigo-400 bg-slate-800 px-2 py-0.5 rounded border border-slate-700">T</span>
+        </div>
+        <div class="flex items-center justify-between p-2 rounded bg-slate-900 border border-slate-800">
+          <span class="text-slate-300">Pesquisa rápida global</span>
+          <span class="font-mono text-amber-400 bg-slate-800 px-2 py-0.5 rounded border border-slate-700">Ctrl + K</span>
+        </div>
+        <div class="flex items-center justify-between p-2 rounded bg-slate-900 border border-slate-800">
+          <span class="text-slate-300">Ver ajuda de atalhos</span>
+          <span class="font-mono text-slate-400 bg-slate-800 px-2 py-0.5 rounded border border-slate-700">?</span>
+        </div>
+      </div>
+
+      <div class="text-[10px] text-slate-500 text-center font-mono border-t border-slate-800 pt-2">
+        Pressione <kbd class="bg-slate-800 px-1 py-0.5 rounded text-slate-300">ESC</kbd> para fechar
+      </div>
+    </div>
+  </div>
+
+  <!-- Mandatory Footer (REGRAS-CONSULTORIA.MD & Guia Live V6.0) -->
+  <footer class="no-print bg-slate-950/95 border-t border-slate-800/80 py-8 px-4 sm:px-6 lg:px-8 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+      
+      <div class="flex items-center space-x-3">
+        <div class="w-8 h-8 rounded-lg bg-emerald-950 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-bold font-display">
+          L
+        </div>
+        <div>
+          <span class="font-bold text-white block">Ecossistema Live & Soluções Modulares</span>
+          <span class="text-slate-500">LUIZ E A PORTAL (Empresário Individual) — CNPJ: 52.887.139/0001-00</span>
+        </div>
+      </div>
+
+      <div class="text-center md:text-right space-y-1">
+        <div>
+          <!-- Regra estrita de rodapé: © Powered by Cléber Donato com link mailto -->
+          <a href="mailto:cleberdonato@ecossistemalive.com.br" class="text-emerald-400 hover:text-emerald-300 font-bold transition hover:underline">
+            &copy; Powered by Cl&eacute;ber Donato
+          </a>
+        </div>
+        <div class="text-slate-500 font-mono text-[11px]">
+          Design System Live V6.0 | Space Grotesk · Inter · JetBrains Mono
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Interactive JavaScript Application Logic & Scroll-Spy Engine -->
+  <script>
+    // State management
+    let currentSlide = 1;
+    const totalSlides = 8;
+    let viewMode = 'slides'; // 'slides' | 'document'
+    let observer = null;
+
+    const slideTitles = [
+      "1. Visão Executiva & Diretriz Soberana",
+      "2. Matriz Departamental (DEP-01 a DEP-07)",
+      "3. O Padrão dos 9 Artefatos Obrigatórios",
+      "4. MLP Advogados — Estação Themis v0.1",
+      "5. Visual Work & Carteira de Clientes",
+      "6. Portfólio de Produtos de IA & SaaS",
+      "7. Framework Synkra AIOX-Core & Camada Multi-IDE",
+      "8. Impacto Consolidado, Resultados & Roadmap"
+    ];
+
+    // Set View Mode (Slides or Continuous Document with Scroll-Spy)
+    function setViewMode(mode) {
+      viewMode = mode;
+      const btnSlides = document.getElementById('btn-mode-slides');
+      const btnDoc = document.getElementById('btn-mode-doc');
+      const slideNavBar = document.getElementById('slide-nav-bar');
+      const docSpyBar = document.getElementById('doc-spy-bar');
+      const allSlides = document.querySelectorAll('.slide-page');
+
+      if (mode === 'slides') {
+        document.body.classList.remove('mode-document');
+        document.body.classList.add('mode-presentation');
+        btnSlides.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all text-emerald-400 bg-emerald-950/60 border border-emerald-500/30';
+        btnDoc.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all text-slate-400 hover:text-white';
+        slideNavBar.classList.remove('hidden');
+        slideNavBar.classList.add('flex');
+        docSpyBar.classList.remove('flex');
+        docSpyBar.classList.add('hidden');
+        
+        // Hide all except currentSlide
+        allSlides.forEach((s, idx) => {
+          if (idx + 1 === currentSlide) {
+            s.style.display = 'flex';
+          } else {
+            s.style.display = 'none';
+          }
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        updateSlideHeader();
+      } else {
+        document.body.classList.remove('mode-presentation');
+        document.body.classList.add('mode-document');
+        btnDoc.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all text-emerald-400 bg-emerald-950/60 border border-emerald-500/30';
+        btnSlides.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all text-slate-400 hover:text-white';
+        slideNavBar.classList.remove('flex');
+        slideNavBar.classList.add('hidden');
+        docSpyBar.classList.remove('hidden');
+        docSpyBar.classList.add('flex');
+        
+        // Show all slides for continuous reading
+        allSlides.forEach(s => {
+          s.style.display = 'flex';
+        });
+
+        // Smooth scroll to the active section
+        const target = document.getElementById(`slide-${currentSlide}`);
+        if (target) {
+          setTimeout(() => {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        }
+
+        setupScrollSpy();
+      }
+    }
+
+    // Go to specific slide / section
+    function goToSlide(n) {
+      if (n < 1) n = 1;
+      if (n > totalSlides) n = totalSlides;
+      currentSlide = n;
+
+      if (viewMode === 'slides') {
+        const allSlides = document.querySelectorAll('.slide-page');
+        allSlides.forEach((s, idx) => {
+          if (idx + 1 === currentSlide) {
+            s.style.display = 'flex';
+          } else {
+            s.style.display = 'none';
+          }
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        updateSlideHeader();
+      } else {
+        goToSection(n);
+      }
+    }
+
+    function goToSection(n) {
+      currentSlide = n;
+      const target = document.getElementById(`slide-${n}`);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+      updateSpyPills(n);
+    }
+
+    function nextSlide() {
+      if (viewMode === 'slides') {
+        if (currentSlide < totalSlides) {
+          goToSlide(currentSlide + 1);
+        } else {
+          goToSlide(1); // loop back
+        }
+      } else {
+        if (currentSlide < totalSlides) {
+          goToSection(currentSlide + 1);
+        }
+      }
+    }
+
+    function prevSlide() {
+      if (viewMode === 'slides') {
+        if (currentSlide > 1) {
+          goToSlide(currentSlide - 1);
+        }
+      } else {
+        if (currentSlide > 1) {
+          goToSection(currentSlide - 1);
+        }
+      }
+    }
+
+    function updateSlideHeader() {
+      const counter = document.getElementById('slide-counter');
+      const title = document.getElementById('slide-current-title');
+      const progress = document.getElementById('slide-progress');
+
+      if (counter) counter.innerText = `SLIDE 0${currentSlide} / 0${totalSlides}`;
+      if (title) title.innerText = slideTitles[currentSlide - 1] || "";
+      if (progress) progress.style.width = `${(currentSlide / totalSlides) * 100}%`;
+    }
+
+    // Scroll-Spy Setup with IntersectionObserver
+    function setupScrollSpy() {
+      if (observer) {
+        observer.disconnect();
+      }
+
+      const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -60% 0px',
+        threshold: [0, 0.2]
+      };
+
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            const slideNum = parseInt(id.replace('slide-', ''));
+            if (!isNaN(slideNum)) {
+              currentSlide = slideNum;
+              updateSpyPills(slideNum);
+            }
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.slide-page').forEach(section => {
+        observer.observe(section);
+      });
+    }
+
+    function updateSpyPills(activeNum) {
+      const pills = document.querySelectorAll('.spy-pill');
+      pills.forEach((p, idx) => {
+        if (idx + 1 === activeNum) {
+          p.classList.add('active-spy');
+        } else {
+          p.classList.remove('active-spy');
+        }
+      });
+
+      const label = document.getElementById('doc-current-label');
+      if (label && slideTitles[activeNum - 1]) {
+        label.innerText = `Seção ${activeNum} de ${totalSlides}: ${slideTitles[activeNum - 1]}`;
+      }
+    }
+
+    // Scroll Progress Listener in Document Mode
+    window.addEventListener('scroll', () => {
+      if (viewMode === 'document') {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+        
+        const progressBar = document.getElementById('doc-scroll-progress');
+        const progressText = document.getElementById('doc-progress-text');
+        const btt = document.getElementById('back-to-top');
+
+        if (progressBar) progressBar.style.width = `${progress}%`;
+        if (progressText) progressText.innerText = `${Math.round(progress)}%`;
+
+        if (btt) {
+          if (scrollTop > 300) {
+            btt.classList.add('visible');
+          } else {
+            btt.classList.remove('visible');
+          }
+        }
+      }
+    });
+
+    // Toggle Theme (Dark / Light)
+    function toggleTheme() {
+      const html = document.documentElement;
+      const themeIcon = document.getElementById('theme-icon');
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        html.classList.add('light');
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+      } else {
+        html.classList.remove('light');
+        html.classList.add('dark');
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+      }
+    }
+
+    // Modals
+    function toggleQuickModal() {
+      const modal = document.getElementById('quick-modal');
+      modal.classList.toggle('hidden');
+      if (!modal.classList.contains('hidden')) {
+        setTimeout(() => {
+          document.getElementById('modal-search-input').focus();
+        }, 50);
+      }
+    }
+
+    function toggleShortcutsModal() {
+      const modal = document.getElementById('shortcuts-modal');
+      modal.classList.toggle('hidden');
+    }
+
+    // Search Filter
+    function filterQuickLinks() {
+      const q = document.getElementById('modal-search-input').value.toLowerCase().trim();
+      const items = document.querySelectorAll('.quick-link-item');
+      items.forEach(item => {
+        const text = (item.innerText + " " + (item.getAttribute('data-keywords') || '')).toLowerCase();
+        if (!q || text.includes(q)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    // Keyboard Shortcuts Listener
+    window.addEventListener('keydown', (e) => {
+      // If typing in input, ignore navigation keys
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+        if (e.key === 'Escape') {
+          toggleQuickModal();
+        }
+        return;
+      }
+
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'm' || e.key === 'M') {
+        setViewMode(viewMode === 'slides' ? 'document' : 'slides');
+      } else if (e.key === 't' || e.key === 'T') {
+        toggleTheme();
+      } else if (e.key === '?' || (e.shiftKey && e.key === '/')) {
+        toggleShortcutsModal();
+      } else if (e.key === 'k' && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        toggleQuickModal();
+      } else if (e.key === 'Escape') {
+        document.getElementById('quick-modal').classList.add('hidden');
+        document.getElementById('shortcuts-modal').classList.add('hidden');
+      }
+    });
+
+    // Initialize in Slide Mode
+    document.addEventListener('DOMContentLoaded', () => {
+      setViewMode('slides');
+      updateSlideHeader();
+    });
+  </script>
+</body>
+</html>
