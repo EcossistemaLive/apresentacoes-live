@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnóstico Estratégico & Governança de Quarteirizados | Grupo Tektron</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f2744;
+      --primary-light: #1e3a8a;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --success: #059669;
+      --success-bg: #ecfdf5;
+      --warning: #d97706;
+      --warning-bg: #fffbeb;
+      --danger: #dc2626;
+      --danger-bg: #fef2f2;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top Navigation */
+    .navbar {
+      background: rgba(15, 39, 68, 0.95);
+      backdrop-filter: blur(12px);
+      color: #fff;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-logo {
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: -1px;
+    }
+
+    .brand-text h1 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .brand-text span {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      display: block;
+    }
+
+    .nav-tags {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .badge-blue { background: rgba(59, 130, 246, 0.2); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.3); }
+    .badge-gold { background: rgba(245, 158, 11, 0.2); color: #fde68a; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-green { background: var(--success-bg); color: var(--success); border: 1px solid #a7f3d0; }
+    .badge-danger { background: var(--danger-bg); color: var(--danger); border: 1px solid #fecaca; }
+
+    /* Layout */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    /* Hero Header */
+    .hero {
+      background: linear-gradient(135deg, #0f2744 0%, #1e3a8a 100%);
+      color: #fff;
+      border-radius: 16px;
+      padding: 3rem 2.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: #cbd5e1;
+      max-width: 800px;
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.875rem;
+      color: #94a3b8;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      padding-top: 1.25rem;
+    }
+
+    .hero-meta strong {
+      color: #f8fafc;
+    }
+
+    /* KPI Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .kpi-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .kpi-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .kpi-value {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+
+    .kpi-sub {
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+
+    /* Section Headers */
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      letter-spacing: -0.3px;
+    }
+
+    /* Cards & Containers */
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.75rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+    }
+
+    /* Gargalos Accordion / Grid */
+    .gargalos-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .gargalo-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--accent);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .gargalo-card.danger { border-left-color: var(--danger); }
+    .gargalo-card.warning { border-left-color: var(--warning); }
+    .gargalo-card.blue { border-left-color: var(--accent); }
+
+    .gargalo-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+    }
+
+    .gargalo-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .gargalo-body p {
+      font-size: 0.925rem;
+      color: #334155;
+      margin-bottom: 0.75rem;
+    }
+
+    .highlight-box {
+      background: #f1f5f9;
+      border-radius: 8px;
+      padding: 0.85rem 1.15rem;
+      font-size: 0.875rem;
+      border-left: 3px solid #64748b;
+      margin-top: 0.75rem;
+    }
+
+    .highlight-box.alert {
+      background: #fef2f2;
+      border-left-color: var(--danger);
+      color: #991b1b;
+    }
+
+    .highlight-box.action {
+      background: #f0fdf4;
+      border-left-color: var(--success);
+      color: #166534;
+    }
+
+    /* Pipeline 7 Etapas */
+    .pipeline-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 0.75rem;
+      margin: 1.5rem 0;
+    }
+
+    .pipeline-step {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 0.85rem;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .pipeline-step:hover {
+      background: #f0f9ff;
+      border-color: #bae6fd;
+    }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .step-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .step-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Decisões Diretoria Table */
+    .propostas-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .proposta-item {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .proposta-num {
+      background: #eff6ff;
+      color: var(--accent);
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+
+    .proposta-content h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.35rem;
+    }
+
+    .proposta-content p {
+      font-size: 0.875rem;
+      color: #475569;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+
+    /* Print Styles */
+    @media print {
+      .navbar { display: none; }
+      body { background: #fff; }
+      .hero { box-shadow: none; border: 1px solid #ccc; }
+      .card { box-shadow: none; border: 1px solid #ddd; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="navbar">
+    <div class="brand">
+      <div class="brand-logo">T</div>
+      <div class="brand-text">
+        <h1>GRUPO TEKTRON</h1>
+        <span>Diretoria Estratégica & Gestão de Contratos</span>
+      </div>
+    </div>
+    <div class="nav-tags">
+      <span class="badge badge-gold">Diagnóstico Estratégico</span>
+      <span class="badge badge-blue">Versão Executiva 1.0</span>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Hero Header -->
+    <section class="hero">
+      <h2 class="hero-title">Diagnóstico Estratégico & Governança de Quarteirizados</h2>
+      <p class="hero-subtitle">
+        Panorama operacional, mapeamento de vulnerabilidades herdadas, contorno de gargalos sensíveis e a nova estrutura de governança digital do Grupo Tektron.
+      </p>
+      <div class="hero-meta">
+        <div><strong>Responsável:</strong> Cléber Donato (Gestor de Contratos)</div>
+        <div><strong>Diretoria:</strong> Diretoria Estratégica</div>
+        <div><strong>Data:</strong> Outubro de 2026</div>
+        <div><strong>Abrangência:</strong> 135 Condomínios / 30 Prestadores</div>
+      </div>
+    </section>
+
+    <!-- KPI Grid -->
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">Condomínios Ativos</div>
+        <div class="kpi-value">135</div>
+        <div class="kpi-sub">Postos com contratos vigentes</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Serviços Sob Gestão</div>
+        <div class="kpi-value">521</div>
+        <div class="kpi-sub">7 especialidades técnicas</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Prestadores Parceiros</div>
+        <div class="kpi-value">30</div>
+        <div class="kpi-sub">Empresas quarteirizadas ativas</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">CNPJs Tomadores</div>
+        <div class="kpi-value">4</div>
+        <div class="kpi-sub">TCL, TSL, GYN, TAS</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Conformidade Fiscal</div>
+        <div class="kpi-value">100%</div>
+        <div class="kpi-sub">Validação cruzada implementada</div>
+      </div>
+    </section>
+
+    <!-- Cenário Herdado -->
+    <section class="card">
+      <h3 class="section-title">🔍 Cenário Herdado: A Realidade Operacional Inicial</h3>
+      <p style="margin-bottom: 1rem; color: #475569;">
+        Durante as primeiras semanas de imersão e mapeamento prático, foram detectados vícios operacionais da gestão anterior que geravam ineficiência crônica e vulnerabilidades jurídicas:
+      </p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 1.15rem;">
+          <h4 style="color: var(--primary); font-size: 0.95rem; margin-bottom: 0.35rem;">1. Descentralização de Dados</h4>
+          <p style="font-size: 0.85rem; color: #64748b;">Planilhas locais e pastas no Drive desconexas. Ausência de agenda corporativa: telefones e responsáveis restritos ao WhatsApp pessoal da gestora anterior.</p>
+        </div>
+        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 1.15rem;">
+          <h4 style="color: var(--primary); font-size: 0.95rem; margin-bottom: 0.35rem;">2. Compliance "Maquiado" para ISO</h4>
+          <p style="font-size: 0.85rem; color: #64748b;">Prática de mover empresas inaptas ou com NRs vencidas para pastas fora do escopo antes de auditorias externas, mantendo o risco operacional ativo na ponta.</p>
+        </div>
+        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 1.15rem;">
+          <h4 style="color: var(--primary); font-size: 0.95rem; margin-bottom: 0.35rem;">3. Falta de Trava entre Período e Pagamento</h4>
+          <p style="font-size: 0.85rem; color: #64748b;">Inexistência de barreira sistêmica impedindo faturamentos repetidos de serviços semestrais ou notas fiscais emitidas contra o CNPJ tomador errado do grupo.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gargalos Sensíveis -->
+    <section>
+      <h3 class="section-title">🚨 Os 5 Maiores Gargalos Operacionais e Riscos Sensíveis</h3>
+      <div class="gargalos-grid">
+
+        <!-- Gargalo 1 -->
+        <div class="gargalo-card danger">
+          <div class="gargalo-header">
+            <div class="gargalo-title">1. Execuções Fora de Periodicidade por Pressão de Clientes e Notas Recusadas</div>
+            <span class="badge badge-danger">Risco Financeiro / Contratual</span>
+          </div>
+          <div class="gargalo-body">
+            <p><strong>O Problema:</strong> Síndicos ou zeladores pressionam diretamente os funcionários dos prestadores na ponta para antecipar manutenções semestrais sem qualquer autorização da Gestão de Contratos da Tektron. O prestador cede à pressão do cliente e emite a nota fiscal para pagamento imediato.</p>
+            <div class="highlight-box alert">
+              <strong>Caso Real Documentado & Nota Recusada:</strong> No condomínio <em>The One</em>, a empresa prestadora realizou limpeza de prumadas em setembro atendendo exigência da síndica, apesar de o serviço já ter sido executado e pago regularmente em <strong>junho</strong>. A nota fiscal de <strong>R$ 3.058,54</strong> foi tempestivamente <strong>recusada e retirada do lote de pagamento</strong> pelo gestor.
+            </div>
+            <div class="highlight-box action">
+              <strong>Tratativa Estratégica em Aberto:</strong> Alinhamento entre Gestão de Contratos, Comercial (Alessandro/Pablo) e Financeiro (Dayane) para definir se haverá cobrança avulsa ao condomínio como serviço extra autorizado pela síndica ou compensação na competência regular futura.
+            </div>
+          </div>
+        </div>
+
+        <!-- Gargalo 2 -->
+        <div class="gargalo-card warning">
+          <div class="gargalo-header">
+            <div class="gargalo-title">2. Impedimentos de Entrada e Vistorias Frustradas em Campo</div>
+            <span class="badge badge-gold">Atrito com Prestador</span>
+          </div>
+          <div class="gargalo-body">
+            <p><strong>O Problema:</strong> Equipes técnicas se deslocam com hidrojato, caminhão de sucção ou operadores de jardinagem e a portaria do condomínio não autoriza a entrada por falta de aviso interno ou ausência do síndico.</p>
+            <p><strong>Consequência:</strong> Prestador cobra taxa de deslocamento frustrado ("visita improdutiva"), atrasa o cronograma mensal da Tektron e gera desgaste severo na parceria.</p>
+            <div class="highlight-box">
+              <strong>Solução em Implantação:</strong> SLA obrigatório de agendamento com antecedência mínima de 3 dias enviado formalmente pela Tektron ao condomínio, com termo de ciência de que portaria barrada gerará repasse de taxa ao cliente.
+            </div>
+          </div>
+        </div>
+
+        <!-- Gargalo 3 -->
+        <div class="gargalo-card warning">
+          <div class="gargalo-header">
+            <div class="gargalo-title">3. Resistência de Síndicos em Substituir Prestadores Sem Documentação</div>
+            <span class="badge badge-gold">Conflito Comercial</span>
+          </div>
+          <div class="gargalo-body">
+            <p><strong>O Problema:</strong> Condomínios antigos exigem manter prestadores históricos ("amigos do conselho") que não possuem alvarás sanitários, PGR, PCMSO ou treinamentos de segurança (NR-33, NR-35).</p>
+            <p><strong>Consequência:</strong> A Tektron é colocada no fogo cruzado entre o rigor legal da ISO/Ministério do Trabalho e o risco de atrito comercial com o síndico insatisfeito.</p>
+          </div>
+        </div>
+
+        <!-- Gargalo 4 -->
+        <div class="gargalo-card blue">
+          <div class="gargalo-header">
+            <div class="gargalo-title">4. Monopólios Regionais e Pressão por Reajuste Acima do Dissídio</div>
+            <span class="badge badge-blue">Risco de Fornecimento</span>
+          </div>
+          <div class="gargalo-body">
+            <p><strong>O Problema:</strong> Serviços de alta periculosidade, especialmente <strong>Vidros em Altura</strong>, contam com pouquíssimas empresas em Goiânia que operam dentro da tabela praticada pela Tektron (ex: custos proibitivos de caminhão Munck para fachadas verticais).</p>
+            <p><strong>Ação Estratégica:</strong> Proposta à Diretoria para abertura de homologação ativa de prestadores reservas para quebrar a dependência de fornecedores únicos.</p>
+          </div>
+        </div>
+
+        <!-- Gargalo 5 -->
+        <div class="gargalo-card blue">
+          <div class="gargalo-header">
+            <div class="gargalo-title">5. Morosidade na Emissão de Orçamentos para o Comercial</div>
+            <span class="badge badge-blue">Agilidade Comercial</span>
+          </div>
+          <div class="gargalo-body">
+            <p><strong>O Problema:</strong> O Comercial precisa de resposta em até 24h para fechar contratos com novos clientes, mas o processo anterior cotava cada serviço em visitas separadas.</p>
+            <div class="highlight-box action">
+              <strong>Nova Diretriz do "Pacote Unificado":</strong> Quando o prestador for orçar Caixa de Gordura/Água, ele é obrigado a orçar conjuntamente Dedetização e as 3 Prumadas na mesma visita técnica, reduzindo em 70% o tempo de proposta ao cliente.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Pipeline 7 Etapas -->
+    <section class="card">
+      <h3 class="section-title">⚙️ O Pipeline Mensal de Fechamento em 7 Etapas</h3>
+      <p style="color: #475569; font-size: 0.95rem;">
+        Nenhuma nota fiscal ou medição é liberada para a Dayane (Financeiro) sem passar pelo fluxo completo de conferência auditável:
+      </p>
+
+      <div class="pipeline-grid">
+        <div class="pipeline-step">
+          <div class="step-num">1</div>
+          <div class="step-title">OS no sispoli</div>
+          <div class="step-desc">Gerada no mês corrente</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">2</div>
+          <div class="step-title">Agendamento</div>
+          <div class="step-desc">Aviso prévio de 3 dias</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">3</div>
+          <div class="step-title">Execução</div>
+          <div class="step-desc">Checagem IT-OVD-01</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">4</div>
+          <div class="step-title">OS Assinada</div>
+          <div class="step-desc">Ateste com "Sim"</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">5</div>
+          <div class="step-title">Conferência Fiscal</div>
+          <div class="step-desc">CNPJ Tomador Tektron</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">6</div>
+          <div class="step-title">Baixa sispoli</div>
+          <div class="step-desc">Item ou contrato</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">7</div>
+          <div class="step-title">Financeiro</div>
+          <div class="step-desc">Lote para o dia 13</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Decisões Solicitadas -->
+    <section class="card" style="border-left: 5px solid var(--primary);">
+      <h3 class="section-title">🎯 Decisões & Encaminhamentos com a Diretoria</h3>
+      <div class="propostas-list">
+        
+        <div class="proposta-item">
+          <div class="proposta-num">1</div>
+          <div class="proposta-content">
+            <h4>Tratativa para o Caso The One (Serviço Executado por Pressão de Síndico)</h4>
+            <p>Alinhamento formal com o Comercial (Alessandro/Pablo) para cobrar a execução extra diretamente do condomínio com aval da síndica, mantendo a retenção da nota recusada de R$ 3.058,54 até o recebimento do aditivo.</p>
+          </div>
+        </div>
+
+        <div class="proposta-item">
+          <div class="proposta-num">2</div>
+          <div class="proposta-content">
+            <h4>Instituição de SLA de Entrada e Taxa de Deslocamento</h4>
+            <p>Formalização de comunicado a todos os condomínios: visitas programadas e confirmadas que forem barradas pela portaria gerarão cobrança de deslocamento de equipe ao cliente.</p>
+          </div>
+        </div>
+
+        <div class="proposta-item">
+          <div class="proposta-num">3</div>
+          <div class="proposta-content">
+            <h4>Homologação de Fornecedores Reservas</h4>
+            <p>Autorização para prospecção ativa de novas empresas no mercado goiano para serviços em altura e prumadas complexas, desfazendo a dependência de fornecedores únicos.</p>
+          </div>
+        </div>
+
+        <div class="proposta-item">
+          <div class="proposta-num">4</div>
+          <div class="proposta-content">
+            <h4>Adoção Oficial da Super Planilha Dinâmica & ClickUp</h4>
+            <p>Consolidação do painel executivo com linhas retráteis (+/-) e checkboxes de 7 etapas como o instrumento oficial de prestação de contas mensal entre a Gestão de Contratos e a Diretoria Estratégica.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Grupo Tektron &bull; Diretoria Estratégica &bull; Gestão de Contratos Quarteirizados</p>
+    <p style="margin-top: 0.25rem; font-size: 0.75rem;">Elaborado por Cléber Donato &bull; Outubro de 2026 &bull; Todos os direitos reservados</p>
+  </footer>
+
+</body>
+</html>
