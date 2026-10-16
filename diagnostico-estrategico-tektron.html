@@ -489,6 +489,51 @@
       .pipeline-grid { grid-template-columns: 1fr; }
       .hero-meta { flex-direction: column; gap: 0.5rem; }
     }
+
+    /* ---- Registro de atividades ---- */
+    .timeline { position: relative; padding-left: 1.75rem; }
+    .timeline::before { content: ''; position: absolute; left: 7px; top: 6px; bottom: 6px;
+      width: 2px; background: var(--border); }
+    .tl-day { position: relative; margin-bottom: 1.75rem; }
+    .tl-day:last-child { margin-bottom: 0; }
+    .tl-day::before { content: ''; position: absolute; left: -1.75rem; top: 5px; width: 16px;
+      height: 16px; border-radius: 50%; background: var(--accent); border: 3px solid var(--card-bg);
+      box-shadow: 0 0 0 2px var(--accent); }
+    .tl-day.is-today::before { background: var(--success); box-shadow: 0 0 0 2px var(--success); }
+    .tl-date { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 600;
+      color: var(--accent); letter-spacing: 0.04em; text-transform: uppercase; }
+    .tl-title { font-size: 1.05rem; font-weight: 700; margin: 0.15rem 0 0.6rem; color: var(--primary); }
+    .tl-items { list-style: none; display: grid; gap: 0.45rem; }
+    .tl-items li { position: relative; padding-left: 1.1rem; font-size: 0.93rem; color: #334155; }
+    .tl-items li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 5px;
+      height: 5px; border-radius: 50%; background: var(--text-muted); }
+    .tl-items li strong { color: var(--primary); font-weight: 600; }
+
+    /* ---- Barras de esforço ---- */
+    .ebars { display: grid; gap: 0.85rem; margin-top: 0.4rem; }
+    .ebar-row { display: grid; grid-template-columns: 220px 1fr 92px; align-items: center;
+      gap: 0.85rem; font-size: 0.9rem; }
+    .ebar-label { color: #334155; }
+    .ebar-track { height: 12px; background: #eef2f7; border-radius: 4px; overflow: hidden; }
+    .ebar-fill { height: 100%; background: var(--accent); border-radius: 0 4px 4px 0; }
+    .ebar-val { text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem;
+      color: var(--text-muted); font-weight: 600; }
+    .ebar-note { margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted); }
+
+    /* ---- Métricas de volume ---- */
+    .metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 0.85rem; margin-top: 0.4rem; }
+    .metric-tile { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px;
+      padding: 0.95rem 1rem; }
+    .metric-tile b { display: block; font-size: 1.5rem; font-weight: 800; color: var(--primary);
+      line-height: 1.15; letter-spacing: -0.02em; }
+    .metric-tile span { display: block; font-size: 0.78rem; color: var(--text-muted);
+      margin-top: 0.25rem; line-height: 1.4; }
+
+    @media (max-width: 720px) {
+      .ebar-row { grid-template-columns: 1fr; gap: 0.3rem; }
+      .ebar-val { text-align: left; }
+    }
   </style>
 </head>
 <body>
@@ -543,13 +588,13 @@
       </div>
       <div class="kpi-card">
         <div class="kpi-label">Custo Anualizado Base</div>
-        <div class="kpi-value">R$ 1,54 Mi</div>
-        <div class="kpi-sub">R$ 128.492/mês normalizado</div>
+        <div class="kpi-value">R$ 1,41 Mi</div>
+        <div class="kpi-sub">R$ 117.803/mês normalizado</div>
       </div>
       <div class="kpi-card highlight-kpi">
         <div class="kpi-label">Meta de Saving (30%)</div>
-        <div class="kpi-value">R$ 462.572</div>
-        <div class="kpi-sub">Economia anual / R$ 38.548 mês</div>
+        <div class="kpi-value">R$ 424.091</div>
+        <div class="kpi-sub">Economia anual / R$ 35.341 mês</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-label">CNPJs Tomadores</div>
@@ -567,7 +612,7 @@
         A auditoria minuciosa da planilha de origem (<code>PROGRAMAÇÃO ANUAL 2026 - 4,26%.xlsx</code>) revelou que a aba <code>valor total</code> que circulava como referência financeira da empresa apontava <strong>R$ 168.135,36</strong>. A soma real das linhas da aba mestra <code>2026</code> apurou <strong>R$ 187.363,85</strong>.
       </p>
       <p style="font-size: 0.85rem; color: #1e40af;">
-        <strong>Impacto:</strong> Uma defasagem de <strong>R$ 19.228,49 (11,4% a menos)</strong> no número oficial herdado. A linha de base foi saneada e congelada na competência de outubro/2026 em R$ 1.541.908/ano para servir de régua confiável na apuração da meta de 30% de economia.
+        <strong>Impacto:</strong> Uma defasagem de <strong>R$ 19.228,49 (11,4% a menos)</strong> no número oficial herdado. A linha de base foi saneada e congelada na competência de outubro/2026 em <strong>R$ 1.413.638/ano</strong> — já excluídas as 32 linhas divergentes, que ficam fora da régua até definição com a Ouvidoria — para servir de base confiável na apuração da meta de 30%.
       </p>
     </section>
 
@@ -750,15 +795,203 @@
     </section>
 
     <!-- Decisões Solicitadas -->
-    <section class="card" style="border-left: 5px solid var(--primary);">
+      <!-- ================= REGISTRO DE ATIVIDADES ================= -->
+  <section class="card">
+    <h3 class="section-title">🗓️ Registro de Atividades — Primeiros 4 Dias de Gestão</h3>
+    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+      Cronologia do trabalho executado desde a assunção da função em 13/10/2026, da imersão documental
+      à entrega do sistema de gestão em operação.
+    </p>
+
+    <div class="timeline">
+      <div class="tl-day">
+        <div class="tl-date">Segunda-feira · 13/10</div>
+        <div class="tl-title">Assunção da função e imersão operacional</div>
+        <ul class="tl-items">
+          <li>Início do contrato CLT como <strong>Gestor de Contratos Quarteirizados</strong>.</li>
+          <li>Passagem de bastão com <strong>Marcos César (Ouvidoria)</strong> — mapeamento da rotina real
+              de geração de OS no sispoli, aviso prévio de 3 dias e conferência de CNPJ tomador.</li>
+          <li>Recebimento e triagem dos <strong>Docs internos</strong>: procedimento 02.03, programação
+              anual 2026, contrato de piscinas e transcrição da transição.</li>
+          <li>Estruturação da pasta de trabalho do departamento em 10 frentes padronizadas.</li>
+        </ul>
+      </div>
+
+      <div class="tl-day">
+        <div class="tl-date">Terça-feira · 14/10</div>
+        <div class="tl-title">Alinhamento estratégico, compliance e base de relacionamento</div>
+        <ul class="tl-items">
+          <li>Alinhamento com a <strong>Diretoria Estratégica</strong> e definição da nova linha de
+              subordinação da função.</li>
+          <li>Análise integral do <strong>Sistema de Gestão da Qualidade</strong>: 14 arquivos, 12 documentos
+              distintos (DS-007, DS-013, DS-015, Mapa de Processos, PR.QTZ.001, IT-OVD-01, RE-003) com
+              <strong>15 não conformidades mapeadas</strong>, entre elas NR-33 citada como NR-35 e retenção
+              da planilha de pagamento abaixo do prazo legal.</li>
+          <li>Elaboração do <strong>Descritivo da Função</strong> com matriz completa de NRs por serviço
+              (NR-01, 06, 07, 10, 12, 17, 26, 33 e 35).</li>
+          <li>Elaboração do <strong>Dossiê Jurídico-Trabalhista</strong> — raio-x societário dos 4 CNPJs,
+              exposição ao TRT-18, Súmula 331 e risco de pejotização dos MEIs.</li>
+          <li>Montagem da estrutura operacional no ClickUp: <strong>5 listas</strong> no folder Tek Tron.</li>
+          <li>Resgate da base de relacionamento: <strong>399 contatos</strong> catalogados em planilha
+              única — informação que estava restrita ao WhatsApp pessoal da gestão anterior.</li>
+        </ul>
+      </div>
+
+      <div class="tl-day">
+        <div class="tl-date">Quarta-feira · 15/10</div>
+        <div class="tl-title">Auditoria da base, apresentação executiva e especificação do sistema</div>
+        <ul class="tl-items">
+          <li><strong>Auditoria completa da planilha de origem</strong>: 13 abas, 1.093 linhas e
+              9.946 células reconciliadas uma a uma, aba mestra contra abas de serviço.</li>
+          <li>Identificação da <strong>defasagem de R$ 19.228,49</strong> no consolidado herdado e de
+              <strong>32 divergências</strong> — 18 de prestador, 10 de valor e 4 serviços fora de
+              qualquer consolidado.</li>
+          <li>Deduplicação do cadastro: o que constava como 30 prestadores são, de fato,
+              <strong>20 empresas distintas</strong>.</li>
+          <li>Construção da <strong>Super Planilha 2026</strong> com matriz dinâmica das 7 etapas e
+              status automático por linha.</li>
+          <li>Publicação da <strong>apresentação executiva em HTML</strong> para a Diretoria.</li>
+          <li>Elaboração do <strong>guia de comunicação</strong> com prestadores e síndicos — mensagem
+              universal, versões por público, versão curta e roteiro de áudio.</li>
+          <li>Especificação funcional do sistema de gestão e briefing técnico de construção.</li>
+        </ul>
+      </div>
+
+      <div class="tl-day is-today">
+        <div class="tl-date">Quinta e sexta · 15 e 16/10</div>
+        <div class="tl-title">Sistema em operação e arquitetura do portal</div>
+        <ul class="tl-items">
+          <li><strong>Importador automatizado em produção</strong>: lê a planilha de origem, normaliza
+              grafias, separa escopos, reconcilia abas e devolve a base saneada — 137 postos,
+              20 prestadores e 513 vínculos, com as divergências isoladas fora da linha de base.</li>
+          <li><strong>Painel de gestão operacional</strong> com 5 telas: painel executivo, lente por
+              prestador, lente por condomínio, controle financeiro e divergências.</li>
+          <li>Recuperação da <strong>programação anual de 227 vínculos</strong> que já possuem meses de
+              execução definidos — base para o agente de prevenção de atrasos.</li>
+          <li>Especificação do <strong>portal multiperfil</strong>: acesso segmentado para condomínio,
+              prestador, financeiro, atendimento e diretoria, com dossiê de habilitação por
+              funcionário e bloqueio automático de escalação de equipe sem NR válida.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PAINEL DE ESFORÇO ================= -->
+  <section class="card">
+    <h3 class="section-title">📊 Painel de Esforço — O Que Foi Processado e Produzido</h3>
+    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+      Dimensionamento objetivo do trabalho realizado no período de diagnóstico e transição.
+    </p>
+
+    <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-bottom: 0.9rem;">
+      Produção documental por frente <span style="font-weight: 400; color: var(--text-muted);">— em caracteres</span>
+    </h4>
+    <div class="ebars">
+        <div class="ebar-row">
+          <div class="ebar-label">Especificação do sistema</div>
+          <div class="ebar-track"><div class="ebar-fill" style="width: 100.0%"></div></div>
+          <div class="ebar-val">112,3 mil</div>
+        </div>
+        <div class="ebar-row">
+          <div class="ebar-label">Diagnóstico e apresentações</div>
+          <div class="ebar-track"><div class="ebar-fill" style="width: 31.5%"></div></div>
+          <div class="ebar-val">35,4 mil</div>
+        </div>
+        <div class="ebar-row">
+          <div class="ebar-label">Plano de ação e auditoria</div>
+          <div class="ebar-track"><div class="ebar-fill" style="width: 26.5%"></div></div>
+          <div class="ebar-val">29,8 mil</div>
+        </div>
+        <div class="ebar-row">
+          <div class="ebar-label">Descritivo da função e dossiê jurídico</div>
+          <div class="ebar-track"><div class="ebar-fill" style="width: 21.4%"></div></div>
+          <div class="ebar-val">24,0 mil</div>
+        </div>
+        <div class="ebar-row">
+          <div class="ebar-label">Arquitetura de dados e ClickUp</div>
+          <div class="ebar-track"><div class="ebar-fill" style="width: 11.6%"></div></div>
+          <div class="ebar-val">13,0 mil</div>
+        </div>
+    </div>
+    <p class="ebar-note">
+      Total de <strong>214,5 mil caracteres</strong> de documentação técnica autoral produzida —
+      equivalente a aproximadamente <strong>120 páginas</strong> de texto corrido.
+    </p>
+
+    <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--primary); margin: 2rem 0 0.9rem;">
+      Material analisado e base reconstruída
+    </h4>
+    <div class="metric-grid">
+      <div class="metric-tile"><b>9.946</b><span>Células auditadas em 13 abas da planilha de origem</span></div>
+      <div class="metric-tile"><b>1.093</b><span>Linhas reconciliadas uma a uma entre abas</span></div>
+      <div class="metric-tile"><b>187 mil</b><span>Caracteres de transcrições e históricos analisados</span></div>
+      <div class="metric-tile"><b>14</b><span>Documentos do SGQ analisados e criticados</span></div>
+      <div class="metric-tile"><b>110</b><span>Arquivos organizados na base do departamento</span></div>
+      <div class="metric-tile"><b>893</b><span>Linhas de código do importador e do painel</span></div>
+      <div class="metric-tile"><b>32</b><span>Divergências de cadastro identificadas e isoladas</span></div>
+      <div class="metric-tile"><b>R$ 19.228</b><span>Defasagem encontrada no consolidado herdado</span></div>
+    </div>
+  </section>
+
+  <!-- ================= RELACIONAMENTO ================= -->
+  <section class="card">
+    <h3 class="section-title">📣 Frente de Relacionamento — Apresentação e Base de Contatos</h3>
+    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+      A gestão anterior mantinha os contatos de prestadores e síndicos exclusivamente no WhatsApp
+      pessoal. A base foi reconstruída, catalogada e passou a ser patrimônio da empresa.
+    </p>
+
+    <div class="ebars">
+        <div class="ebar-row">
+          <div class="ebar-label">Condomínios — síndicos, zeladores, portaria</div>
+          <div class="ebar-track"><div class="ebar-fill" style="width: 100.0%"></div></div>
+          <div class="ebar-val">279</div>
+        </div>
+        <div class="ebar-row">
+          <div class="ebar-label">Empresas prestadoras</div>
+          <div class="ebar-track"><div class="ebar-fill" style="width: 26.5%"></div></div>
+          <div class="ebar-val">74</div>
+        </div>
+        <div class="ebar-row">
+          <div class="ebar-label">Equipe interna Tektron</div>
+          <div class="ebar-track"><div class="ebar-fill" style="width: 10.4%"></div></div>
+          <div class="ebar-val">29</div>
+        </div>
+        <div class="ebar-row">
+          <div class="ebar-label">Outros contatos operacionais</div>
+          <div class="ebar-track"><div class="ebar-fill" style="width: 3.9%"></div></div>
+          <div class="ebar-val">11</div>
+        </div>
+        <div class="ebar-row">
+          <div class="ebar-label">Administradoras de condomínio</div>
+          <div class="ebar-track"><div class="ebar-fill" style="width: 2.2%"></div></div>
+          <div class="ebar-val">6</div>
+        </div>
+    </div>
+    <p class="ebar-note">
+      <strong>399 contatos</strong> catalogados com empresa, responsável, cargo, telefone e serviços
+      atendidos. Cobertura de <strong>45 empresas prestadoras</strong> e de praticamente toda a carteira
+      de postos.
+    </p>
+
+    <div class="highlight-box action" style="margin-top: 1.5rem;">
+      <strong>Apresentação formal aos parceiros.</strong> Foi estruturado e iniciado o contato direto
+      por WhatsApp com os prestadores-chave e com síndicos, posicionando a Gestão de Contratos como
+      canal único, presente e ágil. O guia de comunicação prevê mensagem universal, versão para
+      prestadores, versão para clientes, versão curta e roteiro de áudio — padronizando o discurso
+      institucional em todos os pontos de contato do departamento.
+    </div>
+  </section>
+
+  <section class="card" style="border-left: 5px solid var(--primary);">
       <h3 class="section-title">🎯 Decisões & Encaminhamentos com a Diretoria Estratégica</h3>
       <div class="propostas-list">
         
         <div class="proposta-item">
           <div class="proposta-num">1</div>
           <div class="proposta-content">
-            <h4>Pactuação da Meta de Saving de 30% (R$ 462.572 / ano)</h4>
-            <p>Homologação da linha de base de R$ 1.541.908/ano apurada em 15/10/2026 e início da captura mensal de R$ 38.548/mês via renegociação por pacote e precificação paramétrica.</p>
+            <h4>Pactuação da Meta de Saving de 30% (R$ 424.091 / ano)</h4>
+            <p>Homologação da linha de base de R$ 1.413.638/ano apurada em 15/10/2026 e início da captura mensal de R$ 35.341/mês via renegociação por pacote e precificação paramétrica.</p>
           </div>
         </div>
 
