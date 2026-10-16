@@ -45,7 +45,7 @@
 
     /* Top Navigation */
     .navbar {
-      background: rgba(15, 39, 68, 0.95);
+      background: rgba(15, 39, 68, 0.96);
       backdrop-filter: blur(12px);
       color: #fff;
       padding: 1rem 2rem;
@@ -150,7 +150,7 @@
     .hero-subtitle {
       font-size: 1.15rem;
       color: #cbd5e1;
-      max-width: 800px;
+      max-width: 850px;
       margin-bottom: 1.5rem;
       font-weight: 400;
     }
@@ -158,7 +158,7 @@
     .hero-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 1.5rem;
+      gap: 1.75rem;
       font-size: 0.875rem;
       color: #94a3b8;
       border-top: 1px solid rgba(255, 255, 255, 0.15);
@@ -172,15 +172,15 @@
     /* KPI Grid */
     .kpi-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 1.25rem;
-      margin-bottom: 2.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+      gap: 1.15rem;
+      margin-bottom: 2rem;
     }
 
     .kpi-card {
       background: var(--card-bg);
       border-radius: 12px;
-      padding: 1.5rem;
+      padding: 1.35rem;
       border: 1px solid var(--border);
       box-shadow: var(--shadow-sm);
       transition: transform 0.2s, box-shadow 0.2s;
@@ -191,17 +191,26 @@
       box-shadow: var(--shadow-md);
     }
 
+    .kpi-card.highlight-kpi {
+      border-top: 4px solid var(--success);
+      background: linear-gradient(to bottom, #f0fdf4, #ffffff);
+    }
+
+    .kpi-card.highlight-kpi .kpi-value {
+      color: var(--success);
+    }
+
     .kpi-label {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       text-transform: uppercase;
       font-weight: 700;
       color: var(--text-muted);
       letter-spacing: 0.5px;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
 
     .kpi-value {
-      font-size: 2.25rem;
+      font-size: 1.85rem;
       font-weight: 800;
       color: var(--primary);
       line-height: 1;
@@ -209,13 +218,13 @@
     }
 
     .kpi-sub {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: #64748b;
     }
 
     /* Section Headers */
     .section-title {
-      font-size: 1.5rem;
+      font-size: 1.45rem;
       font-weight: 800;
       color: var(--primary);
       margin-bottom: 1.25rem;
@@ -233,6 +242,28 @@
       border: 1px solid var(--border);
       box-shadow: var(--shadow-sm);
       margin-bottom: 2rem;
+    }
+
+    /* Audit Box */
+    .audit-alert-box {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-left: 5px solid var(--accent);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .audit-alert-title {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     /* Gargalos Accordion / Grid */
@@ -255,12 +286,14 @@
     .gargalo-card.danger { border-left-color: var(--danger); }
     .gargalo-card.warning { border-left-color: var(--warning); }
     .gargalo-card.blue { border-left-color: var(--accent); }
+    .gargalo-card.success { border-left-color: var(--success); }
 
     .gargalo-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.85rem;
+      gap: 1rem;
     }
 
     .gargalo-title {
@@ -276,102 +309,155 @@
     }
 
     .highlight-box {
-      background: #f1f5f9;
       border-radius: 8px;
       padding: 0.85rem 1.15rem;
       font-size: 0.875rem;
-      border-left: 3px solid #64748b;
       margin-top: 0.75rem;
+      background: #f1f5f9;
+      border-left: 3px solid #94a3b8;
     }
 
     .highlight-box.alert {
-      background: #fef2f2;
+      background: var(--danger-bg);
       border-left-color: var(--danger);
       color: #991b1b;
     }
 
     .highlight-box.action {
-      background: #f0fdf4;
+      background: var(--success-bg);
       border-left-color: var(--success);
-      color: #166534;
+      color: #065f46;
     }
 
-    /* Pipeline 7 Etapas */
+    .highlight-box.info {
+      background: #f0f9ff;
+      border-left-color: #0284c7;
+      color: #0369a1;
+    }
+
+    /* The 2 Root Bottlenecks Box */
+    .two-bottlenecks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .bottleneck-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.35rem;
+    }
+
+    .bottleneck-box h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Pipeline 7 Steps Grid */
     .pipeline-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 0.75rem;
-      margin: 1.5rem 0;
+      margin-top: 1.5rem;
     }
 
     .pipeline-step {
       background: #f8fafc;
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1rem 0.85rem;
+      border-radius: 8px;
+      padding: 1.1rem 0.85rem;
       text-align: center;
-      transition: all 0.2s;
-    }
-
-    .pipeline-step:hover {
-      background: #f0f9ff;
-      border-color: #bae6fd;
+      position: relative;
     }
 
     .step-num {
-      width: 28px;
-      height: 28px;
-      background: var(--primary);
+      width: 26px;
+      height: 26px;
+      background: var(--primary-light);
       color: #fff;
       border-radius: 50%;
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 700;
-      margin-bottom: 0.5rem;
+      margin: 0 auto 0.5rem auto;
     }
 
     .step-title {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 700;
       color: var(--primary);
       margin-bottom: 0.25rem;
     }
 
     .step-desc {
-      font-size: 0.75rem;
-      color: var(--text-muted);
+      font-size: 0.72rem;
+      color: #64748b;
+      line-height: 1.3;
     }
 
-    /* Decisões Diretoria Table */
+    /* Architecture Layers */
+    .arch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .arch-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.15rem;
+    }
+
+    .arch-card h4 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.35rem;
+    }
+
+    .arch-card p {
+      font-size: 0.825rem;
+      color: #64748b;
+    }
+
+    /* Decision List */
     .propostas-list {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 1.25rem;
     }
 
     .proposta-item {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.25rem;
       display: flex;
       gap: 1rem;
       align-items: flex-start;
+      padding: 1.15rem;
+      background: #f8fafc;
+      border-radius: 8px;
+      border: 1px solid var(--border);
     }
 
     .proposta-num {
-      background: #eff6ff;
-      color: var(--accent);
       width: 32px;
       height: 32px;
       border-radius: 8px;
+      background: var(--primary);
+      color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      font-size: 0.95rem;
       flex-shrink: 0;
     }
 
@@ -385,24 +471,23 @@
     .proposta-content p {
       font-size: 0.875rem;
       color: #475569;
+      line-height: 1.5;
     }
 
-    /* Footer */
     footer {
       text-align: center;
       padding: 2.5rem 1rem;
-      color: var(--text-muted);
-      font-size: 0.85rem;
+      color: #64748b;
+      font-size: 0.875rem;
       border-top: 1px solid var(--border);
       margin-top: 3rem;
     }
 
-    /* Print Styles */
-    @media print {
-      .navbar { display: none; }
-      body { background: #fff; }
-      .hero { box-shadow: none; border: 1px solid #ccc; }
-      .card { box-shadow: none; border: 1px solid #ddd; }
+    @media (max-width: 768px) {
+      .hero { padding: 2rem 1.5rem; }
+      .hero-title { font-size: 1.75rem; }
+      .pipeline-grid { grid-template-columns: 1fr; }
+      .hero-meta { flex-direction: column; gap: 0.5rem; }
     }
   </style>
 </head>
@@ -414,12 +499,12 @@
       <div class="brand-logo">T</div>
       <div class="brand-text">
         <h1>GRUPO TEKTRON</h1>
-        <span>Diretoria Estratégica & Gestão de Contratos</span>
+        <span>Diretoria Estratégica &bull; Gestão de Contratos Quarteirizados</span>
       </div>
     </div>
     <div class="nav-tags">
-      <span class="badge badge-gold">Diagnóstico Estratégico</span>
-      <span class="badge badge-blue">Versão Executiva 1.0</span>
+      <span class="badge badge-gold">Diagnóstico &bull; Versão 2.0 Auditada</span>
+      <span class="badge badge-blue">Meta Saving: 30%</span>
     </div>
   </header>
 
@@ -429,13 +514,13 @@
     <section class="hero">
       <h2 class="hero-title">Diagnóstico Estratégico & Governança de Quarteirizados</h2>
       <p class="hero-subtitle">
-        Panorama operacional, mapeamento de vulnerabilidades herdadas, contorno de gargalos sensíveis e a nova estrutura de governança digital do Grupo Tektron.
+        Auditoria estrutural da carteira de 2026, eliminação de distorções herdadas, arquitetura digital em camadas e diretrizes para captura de 30% de economia anual.
       </p>
       <div class="hero-meta">
         <div><strong>Responsável:</strong> Cléber Donato (Gestor de Contratos)</div>
-        <div><strong>Diretoria:</strong> Diretoria Estratégica</div>
-        <div><strong>Data:</strong> Outubro de 2026</div>
-        <div><strong>Abrangência:</strong> 137 Condomínios / 20 Prestadores Homologados</div>
+        <div><strong>Subordinação Direta:</strong> Diretoria Estratégica (Coronel Campos)</div>
+        <div><strong>Data Base:</strong> Outubro de 2026</div>
+        <div><strong>Escopo Real:</strong> 137 Condomínios / 20 Prestadores / 7 Especialidades</div>
       </div>
     </section>
 
@@ -449,65 +534,89 @@
       <div class="kpi-card">
         <div class="kpi-label">Serviços Sob Gestão</div>
         <div class="kpi-value">513</div>
-        <div class="kpi-sub">7 especialidades técnicas</div>
+        <div class="kpi-sub">382 faturados + 104 cortesia + 27 conf.</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label">Prestadores Parceiros</div>
+        <div class="kpi-label">Prestadores Homologados</div>
         <div class="kpi-value">20</div>
-        <div class="kpi-sub">Empresas quarteirizadas ativas</div>
+        <div class="kpi-sub">Empresas deduplicadas</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Custo Anualizado Base</div>
+        <div class="kpi-value">R$ 1,54 Mi</div>
+        <div class="kpi-sub">R$ 128.492/mês normalizado</div>
+      </div>
+      <div class="kpi-card highlight-kpi">
+        <div class="kpi-label">Meta de Saving (30%)</div>
+        <div class="kpi-value">R$ 462.572</div>
+        <div class="kpi-sub">Economia anual / R$ 38.548 mês</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-label">CNPJs Tomadores</div>
         <div class="kpi-value">4</div>
         <div class="kpi-sub">TCL, TSL, GYN, TAS</div>
       </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Conformidade Fiscal</div>
-        <div class="kpi-value">100%</div>
-        <div class="kpi-sub">Validação cruzada implementada</div>
-      </div>
     </section>
 
-    <!-- Cenário Herdado -->
-    <section class="card">
-      <h3 class="section-title">🔍 Cenário Herdado: A Realidade Operacional Inicial</h3>
-      <p style="margin-bottom: 1rem; color: #475569;">
-        Durante as primeiras semanas de imersão e mapeamento prático, foram detectados vícios operacionais da gestão anterior que geravam ineficiência crônica e vulnerabilidades jurídicas:
+    <!-- Alerta de Auditoria Financeira -->
+    <section class="audit-alert-box">
+      <div class="audit-alert-title">
+        <span>⚠️</span> <strong>Achado Crítico de Auditoria: A Distorção do Consolidado Herdado da Gestão Anterior</strong>
+      </div>
+      <p style="font-size: 0.9rem; color: #1e3a8a;">
+        A auditoria minuciosa da planilha de origem (<code>PROGRAMAÇÃO ANUAL 2026 - 4,26%.xlsx</code>) revelou que a aba <code>valor total</code> que circulava como referência financeira da empresa apontava <strong>R$ 168.135,36</strong>. A soma real das linhas da aba mestra <code>2026</code> apurou <strong>R$ 187.363,85</strong>.
       </p>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
-        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 1.15rem;">
-          <h4 style="color: var(--primary); font-size: 0.95rem; margin-bottom: 0.35rem;">1. Descentralização de Dados</h4>
-          <p style="font-size: 0.85rem; color: #64748b;">Planilhas locais e pastas no Drive desconexas. Ausência de agenda corporativa: telefones e responsáveis restritos ao WhatsApp pessoal da gestora anterior.</p>
+      <p style="font-size: 0.85rem; color: #1e40af;">
+        <strong>Impacto:</strong> Uma defasagem de <strong>R$ 19.228,49 (11,4% a menos)</strong> no número oficial herdado. A linha de base foi saneada e congelada na competência de outubro/2026 em R$ 1.541.908/ano para servir de régua confiável na apuração da meta de 30% de economia.
+      </p>
+    </section>
+
+    <!-- Os Dois Gargalos Reais do Gestor -->
+    <section class="card">
+      <h3 class="section-title">⏱️ O Diagnóstico Real: Os Dois Gargalos que Consomem o Dia do Gestor</h3>
+      <p style="color: #475569; font-size: 0.95rem;">
+        Historicamente, os serviços quarteirizados foram tratados na Tektron como "brinde" ou moeda de troca comercial. Isso gerou uma rotina sufocada por duas ineficiências graves:
+      </p>
+      <div class="two-bottlenecks-grid">
+        <div class="bottleneck-box">
+          <h4>📉 Gargalo 1 — Cotação Manual (Consome ≈80% do Tempo)</h4>
+          <p style="font-size: 0.875rem; color: #475569; margin-bottom: 0.5rem;">
+            Cada condomínio novo demandava uma visita do prestador, que "escolhia" um preço arbitrário em vez de calculá-lo tecnicamente. Em seguida vinha uma barganha informal ("faço mais barato se me der outros postos"), criando dívida moral e amarrações com fornecedores.
+          </p>
+          <div class="highlight-box action">
+            <strong>Solução do Sistema:</strong> <em>Preço Paramétrico</em> (calculado a partir de atributos físicos: m³ de piscina, m² de jardim, litragem de caixas d'água) e <em>precificação por pacote</em> (a dedetização gratuita está embutida no valor da caixa d'água — Regra R5).
+          </div>
         </div>
-        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 1.15rem;">
-          <h4 style="color: var(--primary); font-size: 0.95rem; margin-bottom: 0.35rem;">2. Compliance "Maquiado" para ISO</h4>
-          <p style="font-size: 0.85rem; color: #64748b;">Prática de mover empresas inaptas ou com NRs vencidas para pastas fora do escopo antes de auditorias externas, mantendo o risco operacional ativo na ponta.</p>
-        </div>
-        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 1.15rem;">
-          <h4 style="color: var(--primary); font-size: 0.95rem; margin-bottom: 0.35rem;">3. Falta de Trava entre Período e Pagamento</h4>
-          <p style="font-size: 0.85rem; color: #64748b;">Inexistência de barreira sistêmica impedindo faturamentos repetidos de serviços semestrais ou notas fiscais emitidas contra o CNPJ tomador errado do grupo.</p>
+        <div class="bottleneck-box">
+          <h4>🚨 Gargalo 2 — Qualidade Reativa (Reclamação vs. Prevenção)</h4>
+          <p style="font-size: 0.875rem; color: #475569; margin-bottom: 0.5rem;">
+            O síndico ligava furioso cobrando serviço não realizado agendado há 6 meses. O gestor só descobria o atraso quando a reclamação já havia explodido na mesa da diretoria, gerando atrito comercial agudo.
+          </p>
+          <div class="highlight-box action">
+            <strong>Solução do Sistema:</strong> <em>Confirmação Antecipada (Agente A8 Agenda)</em> em D-3 e D-1, transformando dez reclamações reativas em três ligações preventivas com condomínio e prestador.
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Gargalos Sensíveis -->
+    <!-- Gargalos Sensíveis Mapeados -->
     <section>
-      <h3 class="section-title">🚨 Os 5 Maiores Gargalos Operacionais e Riscos Sensíveis</h3>
+      <h3 class="section-title">🚨 Os 5 Maiores Gargalos Operacionais e Riscos de Campo</h3>
       <div class="gargalos-grid">
 
         <!-- Gargalo 1 -->
         <div class="gargalo-card danger">
           <div class="gargalo-header">
-            <div class="gargalo-title">1. Execuções Fora de Periodicidade por Pressão de Clientes e Notas Recusadas</div>
+            <div class="gargalo-title">1. Execuções Fora de Periodicidade por Pressão e Notas Recusadas</div>
             <span class="badge badge-danger">Risco Financeiro / Contratual</span>
           </div>
           <div class="gargalo-body">
-            <p><strong>O Problema:</strong> Síndicos ou zeladores pressionam diretamente os funcionários dos prestadores na ponta para antecipar manutenções semestrais sem qualquer autorização da Gestão de Contratos da Tektron. O prestador cede à pressão do cliente e emite a nota fiscal para pagamento imediato.</p>
+            <p><strong>O Problema:</strong> Síndicos ou zeladores pressionam diretamente as equipes de campo para antecipar limpezas semestrais sem autorização da gestão Tektron. O prestador cede e emite nota fiscal cobrando duplicidade.</p>
             <div class="highlight-box alert">
-              <strong>Caso Real Documentado & Nota Recusada:</strong> No condomínio <em>The One</em>, a empresa prestadora realizou limpeza de prumadas em setembro atendendo exigência da síndica, apesar de o serviço já ter sido executado e pago regularmente em <strong>junho</strong>. A nota fiscal de <strong>R$ 3.058,54</strong> foi tempestivamente <strong>recusada e retirada do lote de pagamento</strong> pelo gestor.
+              <strong>Caso Real Documentado (The One):</strong> A empresa <em>A Prestativa</em> executou limpeza de prumadas em setembro por exigência da síndica, embora o serviço já tivesse sido pago em <strong>junho</strong>. A nota fiscal de <strong>R$ 3.058,54</strong> foi tempestivamente <strong>recusada</strong> no fechamento.
             </div>
-            <div class="highlight-box action">
-              <strong>Tratativa Estratégica em Aberto:</strong> Alinhamento entre Gestão de Contratos, Comercial (Alessandro/Pablo) e Financeiro (Dayane) para definir se haverá cobrança avulsa ao condomínio como serviço extra autorizado pela síndica ou compensação na competência regular futura.
+            <div class="highlight-box info">
+              <strong>Achado Tático da Auditoria:</strong> Descobriu-se que o condomínio <em>The One</em> possui um contrato de <strong>caixa de gordura com A Prestativa de R$ 477,01</strong> que constava apenas na aba de serviço e fora dos consolidados. Essa relação comercial será utilizada como trunfo tático para negociar a cobrança do extra da prumada com a síndica.
             </div>
           </div>
         </div>
@@ -516,13 +625,12 @@
         <div class="gargalo-card warning">
           <div class="gargalo-header">
             <div class="gargalo-title">2. Impedimentos de Entrada e Vistorias Frustradas em Campo</div>
-            <span class="badge badge-gold">Atrito com Prestador</span>
+            <span class="badge badge-gold">Atrito Operacional</span>
           </div>
           <div class="gargalo-body">
-            <p><strong>O Problema:</strong> Equipes técnicas se deslocam com hidrojato, caminhão de sucção ou operadores de jardinagem e a portaria do condomínio não autoriza a entrada por falta de aviso interno ou ausência do síndico.</p>
-            <p><strong>Consequência:</strong> Prestador cobra taxa de deslocamento frustrado ("visita improdutiva"), atrasa o cronograma mensal da Tektron e gera desgaste severo na parceria.</p>
-            <div class="highlight-box">
-              <strong>Solução em Implantação:</strong> SLA obrigatório de agendamento com antecedência mínima de 3 dias enviado formalmente pela Tektron ao condomínio, com termo de ciência de que portaria barrada gerará repasse de taxa ao cliente.
+            <p><strong>O Problema:</strong> Equipes se deslocam com caminhões auto-vácuo ou máquinas e são barradas na portaria por falta de aviso interno ou desconfiança dos porteiros.</p>
+            <div class="highlight-box action">
+              <strong>Solução em Implantação:</strong> SLA obrigatório com aviso prévio mínimo de 3 dias enviado formalmente pela Tektron ao condomínio, com termo de ciência de que portaria barrada injustificadamente gerará repasse do custo de deslocamento ao cliente.
             </div>
           </div>
         </div>
@@ -530,37 +638,37 @@
         <!-- Gargalo 3 -->
         <div class="gargalo-card warning">
           <div class="gargalo-header">
-            <div class="gargalo-title">3. Resistência de Síndicos em Substituir Prestadores Sem Documentação</div>
-            <span class="badge badge-gold">Conflito Comercial</span>
+            <div class="gargalo-title">3. Resistência de Síndicos em Relação ao Compliance Trabalhista</div>
+            <span class="badge badge-gold">Risco Jurídico / TST</span>
           </div>
           <div class="gargalo-body">
-            <p><strong>O Problema:</strong> Condomínios antigos exigem manter prestadores históricos ("amigos do conselho") que não possuem alvarás sanitários, PGR, PCMSO ou treinamentos de segurança (NR-33, NR-35).</p>
-            <p><strong>Consequência:</strong> A Tektron é colocada no fogo cruzado entre o rigor legal da ISO/Ministério do Trabalho e o risco de atrito comercial com o síndico insatisfeito.</p>
+            <p><strong>O Problema:</strong> Condomínios antigos exigem a manutenção de prestadores informais desprovidos de alvarás, PGR, PCMSO e certificações de NR-33 e NR-35.</p>
+            <p><strong>Mitigação:</strong> Aplicação estrita da Súmula 331 do TST. Prestador sem documentação regularizada é bloqueado de medição e substituído com notificação formal respaldada pela Diretoria Estratégica.</p>
           </div>
         </div>
 
         <!-- Gargalo 4 -->
         <div class="gargalo-card blue">
           <div class="gargalo-header">
-            <div class="gargalo-title">4. Monopólios Regionais e Pressão por Reajuste Acima do Dissídio</div>
+            <div class="gargalo-title">4. Concentração em Fornecedores Únicos (Fachadas / Grupo F)</div>
             <span class="badge badge-blue">Risco de Fornecimento</span>
           </div>
           <div class="gargalo-body">
-            <p><strong>O Problema:</strong> Serviços de alta periculosidade, especialmente <strong>Vidros em Altura</strong>, contam com pouquíssimas empresas em Goiânia que operam dentro da tabela praticada pela Tektron (ex: custos proibitivos de caminhão Munck para fachadas verticais).</p>
-            <p><strong>Ação Estratégica:</strong> Proposta à Diretoria para abertura de homologação ativa de prestadores reservas para quebrar a dependência de fornecedores únicos.</p>
+            <p><strong>O Problema:</strong> Serviços de alta periculosidade (Vidros em Altura e Fachadas) concentram-se no <em>Grupo F</em>, gerando vulnerabilidade em caso de paralisação ou custos elevados de caminhão Munck.</p>
+            <p><strong>Ação Estratégica:</strong> Proposta para abertura de homologação ativa de fornecedores reservas no mercado de Goiânia.</p>
           </div>
         </div>
 
         <!-- Gargalo 5 -->
         <div class="gargalo-card blue">
           <div class="gargalo-header">
-            <div class="gargalo-title">5. Morosidade na Emissão de Orçamentos para o Comercial</div>
+            <div class="gargalo-title">5. Morosidade na Emissão de Orçamentos Comerciais</div>
             <span class="badge badge-blue">Agilidade Comercial</span>
           </div>
           <div class="gargalo-body">
-            <p><strong>O Problema:</strong> O Comercial precisa de resposta em até 24h para fechar contratos com novos clientes, mas o processo anterior cotava cada serviço em visitas separadas.</p>
+            <p><strong>O Problema:</strong> Demora de dias para retorno de cotações de novos postos devido a visitas isoladas de prestadores.</p>
             <div class="highlight-box action">
-              <strong>Nova Diretriz do "Pacote Unificado":</strong> Quando o prestador for orçar Caixa de Gordura/Água, ele é obrigado a orçar conjuntamente Dedetização e as 3 Prumadas na mesma visita técnica, reduzindo em 70% o tempo de proposta ao cliente.
+              <strong>Nova Diretriz do "Pacote Unificado":</strong> Visita técnica obrigatória para orçar Caixa de Gordura, Caixa d'Água, Dedetização e Prumadas simultaneamente, alimentando o motor paramétrico em até 24 horas.
             </div>
           </div>
         </div>
@@ -570,9 +678,9 @@
 
     <!-- Pipeline 7 Etapas -->
     <section class="card">
-      <h3 class="section-title">⚙️ O Pipeline Mensal de Fechamento em 7 Etapas</h3>
+      <h3 class="section-title">⚙️ O Pipeline Mensal de Fechamento em 7 Etapas Auditáveis</h3>
       <p style="color: #475569; font-size: 0.95rem;">
-        Nenhuma nota fiscal ou medição é liberada para a Dayane (Financeiro) sem passar pelo fluxo completo de conferência auditável:
+        Fluxo obrigatório que rege todas as medições para pagamento no dia 13 (NF do prestador até dia 05; lote à Dayane até dia 06):
       </p>
 
       <div class="pipeline-grid">
@@ -599,55 +707,90 @@
         <div class="pipeline-step">
           <div class="step-num">5</div>
           <div class="step-title">Conferência Fiscal</div>
-          <div class="step-desc">CNPJ Tomador Tektron</div>
+          <div class="step-desc">TCL, TSL, GYN ou TAS</div>
         </div>
         <div class="pipeline-step">
           <div class="step-num">6</div>
           <div class="step-title">Baixa sispoli</div>
-          <div class="step-desc">Item ou contrato</div>
+          <div class="step-desc">Data real do serviço</div>
         </div>
         <div class="pipeline-step">
           <div class="step-num">7</div>
           <div class="step-title">Financeiro</div>
-          <div class="step-desc">Lote para o dia 13</div>
+          <div class="step-desc">Lote p/ Dayane (dia 06)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nova Arquitetura em Camadas -->
+    <section class="card">
+      <h3 class="section-title">🏛️ Nova Arquitetura de Governança Digital</h3>
+      <p style="color: #475569; font-size: 0.95rem;">
+        Transição de planilhas manuais para uma estrutura de governança digital em camadas, evitando duplicidade e retrabalho:
+      </p>
+
+      <div class="arch-grid">
+        <div class="arch-card">
+          <h4>🔥 1. Fonte da Verdade (Firestore)</h4>
+          <p>Repositório único canônico de condomínios, prestadores, vínculos contratuais e histórico financeiro.</p>
+        </div>
+        <div class="arch-card">
+          <h4>💻 2. Interface Operacional (app/web/)</h4>
+          <p>Painel de gestão com lentes dinâmicas de Prestador, Cliente, Cotação e conciliação de divergências.</p>
+        </div>
+        <div class="arch-card">
+          <h4>📊 3. Super Planilha 2026 (Exportação)</h4>
+          <p>Gerada automaticamente pelo sistema para acompanhamento executivo da Diretoria e do Financeiro (Dayane).</p>
+        </div>
+        <div class="arch-card">
+          <h4>📌 4. ClickUp & Documentos</h4>
+          <p>Espelho interno de uma via e biblioteca de documentos padronizados com preenchimento via placeholders (DOC-01 a DOC-10).</p>
         </div>
       </div>
     </section>
 
     <!-- Decisões Solicitadas -->
     <section class="card" style="border-left: 5px solid var(--primary);">
-      <h3 class="section-title">🎯 Decisões & Encaminhamentos com a Diretoria</h3>
+      <h3 class="section-title">🎯 Decisões & Encaminhamentos com a Diretoria Estratégica</h3>
       <div class="propostas-list">
         
         <div class="proposta-item">
           <div class="proposta-num">1</div>
           <div class="proposta-content">
-            <h4>Tratativa para o Caso The One (Serviço Executado por Pressão de Síndico)</h4>
-            <p>Alinhamento formal com o Comercial (Alessandro/Pablo) para cobrar a execução extra diretamente do condomínio com aval da síndica, mantendo a retenção da nota recusada de R$ 3.058,54 até o recebimento do aditivo.</p>
+            <h4>Pactuação da Meta de Saving de 30% (R$ 462.572 / ano)</h4>
+            <p>Homologação da linha de base de R$ 1.541.908/ano apurada em 15/10/2026 e início da captura mensal de R$ 38.548/mês via renegociação por pacote e precificação paramétrica.</p>
           </div>
         </div>
 
         <div class="proposta-item">
           <div class="proposta-num">2</div>
           <div class="proposta-content">
-            <h4>Instituição de SLA de Entrada e Taxa de Deslocamento</h4>
-            <p>Formalização de comunicado a todos os condomínios: visitas programadas e confirmadas que forem barradas pela portaria gerarão cobrança de deslocamento de equipe ao cliente.</p>
+            <h4>Autorização para Levantamento de Atributos Físicos</h4>
+            <p>Disparo das 5 planilhas pré-preenchidas para os maiores prestadores informarem as medições físicas dos postos (m³ de piscina, m² de jardim, litragem de caixas d'água) para alimentar o motor paramétrico.</p>
           </div>
         </div>
 
         <div class="proposta-item">
           <div class="proposta-num">3</div>
           <div class="proposta-content">
-            <h4>Homologação de Fornecedores Reservas</h4>
-            <p>Autorização para prospecção ativa de novas empresas no mercado goiano para serviços em altura e prumadas complexas, desfazendo a dependência de fornecedores únicos.</p>
+            <h4>Estratégia Integrada para o Caso The One (Prestativa)</h4>
+            <p>Conduzir alinhamento com a síndica utilizando o vínculo da caixa de gordura (R$ 477,01) para formalizar a cobrança extra da prumada adiantada (R$ 3.058,54) com respaldo do Comercial.</p>
           </div>
         </div>
 
         <div class="proposta-item">
           <div class="proposta-num">4</div>
           <div class="proposta-content">
-            <h4>Adoção Oficial da Super Planilha Dinâmica & ClickUp</h4>
-            <p>Consolidação do painel executivo com linhas retráteis (+/-) e checkboxes de 7 etapas como o instrumento oficial de prestação de contas mensal entre a Gestão de Contratos e a Diretoria Estratégica.</p>
+            <h4>Implementação da Agenda Preventiva (D-3 e D-1)</h4>
+            <p>Ativação de rotina automatizada para confirmação de datas e emissão de comunicados aos condomínios, eliminando faltas de prestadores e visitas frustradas na portaria.</p>
+          </div>
+        </div>
+
+        <div class="proposta-item">
+          <div class="proposta-num">5</div>
+          <div class="proposta-content">
+            <h4>Homologação de Prestadores Reservas para Serviços Críticos</h4>
+            <p>Abertura de cotação com novos parceiros em Goiânia para quebrar o monopólio em vidros de fachadas verticais e prumadas complexas.</p>
           </div>
         </div>
 
@@ -658,7 +801,7 @@
 
   <footer>
     <p>Grupo Tektron &bull; Diretoria Estratégica &bull; Gestão de Contratos Quarteirizados</p>
-    <p style="margin-top: 0.25rem; font-size: 0.75rem;">Elaborado por Cléber Donato &bull; Outubro de 2026 &bull; Todos os direitos reservados</p>
+    <p style="margin-top: 0.25rem; font-size: 0.75rem;">Elaborado por Cléber Donato &bull; Outubro de 2026 &bull; Versão 2.0 Auditada</p>
   </footer>
 
 </body>
