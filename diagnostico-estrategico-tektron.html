@@ -562,7 +562,7 @@
         Auditoria estrutural da carteira de 2026, eliminação de distorções herdadas, arquitetura digital em camadas e diretrizes para captura de 30% de economia anual.
       </p>
       <div class="hero-meta">
-        <div><strong>Responsável:</strong> Cléber Donato (Gestor de Contratos)</div>
+        <div><strong>Responsável:</strong> Cléber Donato (Analista de Contratos e Serviços)</div>
         <div><strong>Subordinação Direta:</strong> Diretoria Estratégica (Coronel Campos)</div>
         <div><strong>Data Base:</strong> Outubro de 2026</div>
         <div><strong>Escopo Real:</strong> 137 Condomínios / 20 Prestadores / 7 Especialidades</div>
@@ -609,11 +609,145 @@
         <span>⚠️</span> <strong>Achado Crítico de Auditoria: A Distorção do Consolidado Herdado da Gestão Anterior</strong>
       </div>
       <p style="font-size: 0.9rem; color: #1e3a8a;">
-        A auditoria minuciosa da planilha de origem (<code>PROGRAMAÇÃO ANUAL 2026 - 4,26%.xlsx</code>) revelou que a aba <code>valor total</code> que circulava como referência financeira da empresa apontava <strong>R$ 168.135,36</strong>. A soma real das linhas da aba mestra <code>2026</code> apurou <strong>R$ 187.363,85</strong>.
+        O número que circulava como referência financeira do setor estava
+        <strong>R$ 19.228,49 abaixo do valor real</strong> — uma defasagem de 11,4%. A seguir, como se
+        chegou a essa conclusão.
       </p>
-      <p style="font-size: 0.85rem; color: #1e40af;">
-        <strong>Impacto:</strong> Uma defasagem de <strong>R$ 19.228,49 (11,4% a menos)</strong> no número oficial herdado. A linha de base foi saneada e congelada na competência de outubro/2026 em <strong>R$ 1.413.638/ano</strong> — já excluídas as 32 linhas divergentes, que ficam fora da régua até definição com a Ouvidoria — para servir de base confiável na apuração da meta de 30%.
+    </section>
+
+    <section class="card">
+      <h3 class="section-title">🔍 Como a Auditoria Foi Conduzida</h3>
+
+      <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+        O arquivo auditado foi <code>PROGRAMAÇÃO ANUAL 2026 - 4,26%.xlsx</code>, a planilha que a gestão
+        anterior utilizava como controle único de toda a carteira de quarteirizados. A auditoria
+        percorreu <strong>13 abas, 1.093 linhas e 9.946 células</strong>, conferindo registro por registro.
       </p>
+
+      <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-bottom: 0.9rem;">
+        Etapa 1 — Entendimento da estrutura do arquivo
+      </h4>
+      <p style="font-size: 0.92rem; color: #334155; margin-bottom: 1.25rem;">
+        A planilha opera em duas camadas que deveriam espelhar uma à outra. A aba <code>2026</code> é a
+        <strong>mestra</strong>: cada linha é um condomínio, com pares de colunas
+        <em>EMPRESA + VALOR</em> para cada um dos 7 serviços. As demais abas
+        (<code>cx gordura 26</code>, <code>cx dágua 26</code>, <code>Dedetização 26</code>,
+        <code>Prumadas 26</code>, <code>Jardim 26</code>, <code>Piscina 26</code>,
+        <code>Vidros 26</code>) são o <strong>detalhamento por serviço</strong>, com o cálculo do
+        reajuste de 4,26% linha a linha. Uma terceira aba, <code>valor total</code>, consolidava os
+        somatórios — e era dela que saía o número divulgado.
+      </p>
+
+      <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-bottom: 0.9rem;">
+        Etapa 2 — Reconciliação cruzada, registro por registro
+      </h4>
+      <p style="font-size: 0.92rem; color: #334155; margin-bottom: 0.75rem;">
+        Cada par <em>condomínio × serviço</em> da aba mestra foi confrontado com o mesmo par na aba de
+        serviço correspondente. O processo foi automatizado para eliminar erro de conferência manual e
+        aplicou cinco tratamentos antes da comparação:
+      </p>
+      <ul class="tl-items" style="margin-bottom: 1.25rem;">
+        <li><strong>Normalização de grafias</strong> — <code>Universal Services</code> e
+            <code>Universal services</code>, <code>SEMPRE LIMPA</code> e <code>Sempre Limpa</code>
+            eram contados como empresas diferentes.</li>
+        <li><strong>Separação de escopo do nome</strong> — <code>TN - Gordura</code>,
+            <code>TN - Fluvial</code> e <code>TN esgoto</code> são a mesma empresa com escopos distintos,
+            e estavam inflando a contagem de fornecedores.</li>
+        <li><strong>Propagação de linhas compostas</strong> — em Prumadas, o condomínio aparece só na
+            primeira linha e os serviços seguintes ficam com a célula vazia; sem tratamento, esses
+            registros se perdem.</li>
+        <li><strong>Descarte de duplicatas</strong> — a aba <code>Cópia de cx dágua 26</code> replica a
+            aba original com valores arredondados, e a aba <code>cx dágua 26</code> carrega dois blocos
+            de valores lado a lado para os mesmos postos.</li>
+        <li><strong>Exclusão de linhas de totalização</strong> — havia linhas de <code>total</code>
+            misturadas ao corpo de dados em Prumadas e Jardim, que dobravam a soma se não filtradas.</li>
+      </ul>
+
+      <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-bottom: 0.9rem;">
+        Etapa 3 — O que a comparação revelou
+      </h4>
+
+      <div class="metric-grid" style="margin-bottom: 1.5rem;">
+        <div class="metric-tile"><b>R$ 168.135,36</b><span>Valor que a aba <code>valor total</code> informava</span></div>
+        <div class="metric-tile"><b>R$ 187.363,85</b><span>Soma real das linhas da aba mestra <code>2026</code></span></div>
+        <div class="metric-tile" style="border-color: #fecaca; background: #fef2f2;"><b style="color: var(--danger);">R$ 19.228,49</b><span>Defasagem apurada — 11,4% a menos</span></div>
+      </div>
+
+      <p style="font-size: 0.92rem; color: #334155; margin-bottom: 0.75rem;">
+        A diferença não vem de um erro único de digitação: ela é o acúmulo de registros que existiam na
+        operação mas não chegavam ao consolidado. Além da defasagem, a reconciliação expôs
+        <strong>32 divergências entre as duas camadas da planilha</strong>:
+      </p>
+      <ul class="tl-items" style="margin-bottom: 1.25rem;">
+        <li><strong>18 divergências de prestador</strong> — o mesmo serviço, no mesmo condomínio, com
+            empresas diferentes conforme a aba consultada. No <em>Alegria</em>, a mestra aponta
+            Universal Services e a aba de serviço aponta TN. No <em>West House</em>, a inversão ocorre
+            em quatro serviços ao mesmo tempo. No <em>America Tower</em>, em três.</li>
+        <li><strong>10 divergências de valor</strong> — no <em>Goyazes</em>, a caixa d'água aparece a
+            R$ 1.200,00 na mestra e a R$ 630,97 na aba de serviço; a caixa de gordura, a R$ 900,00
+            contra R$ 636,02.</li>
+        <li><strong>4 serviços invisíveis</strong> — existem apenas na aba de serviço e não entram em
+            nenhum consolidado. Entre eles, a caixa de gordura do <em>The One</em> com A Prestativa,
+            de R$ 477,01.</li>
+        <li><strong>1 posto sem lastro</strong> — <em>Praça Sudoeste</em> soma R$ 7.300,00 na aba mestra
+            e aparece zerado em todas as abas de serviço.</li>
+      </ul>
+
+      <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-bottom: 0.9rem;">
+        Etapa 4 — Correção do dimensionamento da carteira
+      </h4>
+      <p style="font-size: 0.92rem; color: #334155; margin-bottom: 1rem;">
+        O saneamento também corrigiu a dimensão do que se acreditava gerir. Os números que circulavam
+        internamente não resistiram à conferência:
+      </p>
+
+      <div style="overflow-x: auto; margin-bottom: 1.25rem;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--border);">
+              <th style="text-align: left; padding: 0.6rem 0.75rem; color: var(--text-muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em;">Indicador</th>
+              <th style="text-align: right; padding: 0.6rem 0.75rem; color: var(--text-muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em;">Número anterior</th>
+              <th style="text-align: right; padding: 0.6rem 0.75rem; color: var(--text-muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em;">Número auditado</th>
+              <th style="text-align: left; padding: 0.6rem 0.75rem; color: var(--text-muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em;">Motivo da correção</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 0.65rem 0.75rem;">Condomínios</td>
+              <td style="padding: 0.65rem 0.75rem; text-align: right; font-family: 'JetBrains Mono', monospace;">135</td>
+              <td style="padding: 0.65rem 0.75rem; text-align: right; font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--primary);">137</td>
+              <td style="padding: 0.65rem 0.75rem; color: #475569;">Dois postos existiam só nas abas de serviço</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 0.65rem 0.75rem;">Serviços contratados</td>
+              <td style="padding: 0.65rem 0.75rem; text-align: right; font-family: 'JetBrains Mono', monospace;">521</td>
+              <td style="padding: 0.65rem 0.75rem; text-align: right; font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--primary);">513</td>
+              <td style="padding: 0.65rem 0.75rem; color: #475569;">Linhas de total e linhas compostas contadas como serviço</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 0.65rem 0.75rem;">Prestadores</td>
+              <td style="padding: 0.65rem 0.75rem; text-align: right; font-family: 'JetBrains Mono', monospace;">30</td>
+              <td style="padding: 0.65rem 0.75rem; text-align: right; font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--primary);">20</td>
+              <td style="padding: 0.65rem 0.75rem; color: #475569;">Variações de grafia e sufixos de escopo contados como empresas distintas</td>
+            </tr>
+            <tr>
+              <td style="padding: 0.65rem 0.75rem;">Serviços em cortesia</td>
+              <td style="padding: 0.65rem 0.75rem; text-align: right; font-family: 'JetBrains Mono', monospace;">—</td>
+              <td style="padding: 0.65rem 0.75rem; text-align: right; font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--primary);">104</td>
+              <td style="padding: 0.65rem 0.75rem; color: #475569;">Nunca foram classificados: a planilha apenas deixava a célula de valor vazia</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="highlight-box alert">
+        <strong>Por que isso precisa ser decidido pela Diretoria.</strong> Uma célula vazia na planilha
+        significava, ao mesmo tempo, <em>serviço em cortesia</em> e <em>dado faltando</em> — não havia como
+        distinguir. Enquanto a ambiguidade existir, nenhum número de faturamento do setor é confiável.
+        No modelo saneado, cortesia passou a ser uma classificação explícita, e as 32 linhas divergentes
+        ficam marcadas e <strong>fora da linha de base</strong> até definição junto à Ouvidoria, para não
+        contaminar a apuração da meta de economia.
+      </div>
     </section>
 
     <!-- Os Dois Gargalos Reais do Gestor -->
@@ -646,7 +780,7 @@
 
     <!-- Gargalos Sensíveis Mapeados -->
     <section>
-      <h3 class="section-title">🚨 Os 5 Maiores Gargalos Operacionais e Riscos de Campo</h3>
+      <h3 class="section-title">🚨 Os 6 Maiores Gargalos Operacionais e Riscos de Campo</h3>
       <div class="gargalos-grid">
 
         <!-- Gargalo 1 -->
@@ -687,8 +821,15 @@
             <span class="badge badge-gold">Risco Jurídico / TST</span>
           </div>
           <div class="gargalo-body">
-            <p><strong>O Problema:</strong> Condomínios antigos exigem a manutenção de prestadores informais desprovidos de alvarás, PGR, PCMSO e certificações de NR-33 e NR-35.</p>
-            <p><strong>Mitigação:</strong> Aplicação estrita da Súmula 331 do TST. Prestador sem documentação regularizada é bloqueado de medição e substituído com notificação formal respaldada pela Diretoria Estratégica.</p>
+            <p><strong>O Problema:</strong> Condomínios antigos exigem a manutenção de prestadores de sua preferência mesmo quando a documentação regulatória está vencida — alvarás, PGR, PCMSO e certificações de NR-33 e NR-35. A Gestão de Contratos fica entre o rigor normativo e a ameaça de insatisfação do cliente.</p>
+
+            <p><strong>Caso concreto — Rocha Dedetização e Grupo Fibra.</strong> As duas empresas operam atualmente com documentação regulatória vencida. No caso da Rocha, há clientes que exigem nominalmente que o serviço continue sendo prestado por ela. O Grupo Fibra concentra os serviços de vidros em altura e fachadas, de alta periculosidade.</p>
+
+            <p><strong>O desvio de procedimento que isso gerou — e este é o achado mais grave.</strong> Para que essas duas empresas não aparecessem em auditoria com pendências, elas foram <strong>mantidas fora da pasta padrão de prestadores</strong>, e o trâmite financeiro delas também passou a ser conduzido <strong>por fora do procedimento oficial</strong>. Ou seja: o risco não foi eliminado, foi apenas retirado de vista. A empresa continua exposta — com o agravante de que a exposição agora não está registrada em lugar nenhum.</p>
+
+            <p><strong>Consequência prática:</strong> dois prestadores ativos em campo, em serviços de risco, fora do controle documental e fora do fluxo financeiro padrão. Em caso de acidente ou de reclamação trabalhista, a Tektron não terá como comprovar fiscalização — que é exatamente o que a Súmula 331 do TST exige para afastar a responsabilidade subsidiária.</p>
+
+            <p><strong>Mitigação proposta:</strong> trazer os dois prestadores de volta ao fluxo padrão com prazo formal de regularização; abrir homologação de fornecedores reservas para os serviços que eles concentram; e implantar bloqueio sistêmico — prestador com documento vencido não avança para faturamento, e funcionário sem NR válida não pode ser escalado. A conversa com o síndico deixa de ser uma negociação pessoal e passa a ser uma regra da empresa, respaldada pela Diretoria Estratégica.</p>
           </div>
         </div>
 
@@ -715,6 +856,23 @@
             <div class="highlight-box action">
               <strong>Nova Diretriz do "Pacote Unificado":</strong> Visita técnica obrigatória para orçar Caixa de Gordura, Caixa d'Água, Dedetização e Prumadas simultaneamente, alimentando o motor paramétrico em até 24 horas.
             </div>
+          </div>
+        </div>
+
+        <!-- Gargalo 6 -->
+        <div class="gargalo-card danger">
+          <div class="gargalo-header">
+            <div class="gargalo-title">6. Controle de Periodicidade Desatualizado — Trimestrais e Semestrais</div>
+            <span class="badge badge-danger">Risco de Execução / Passivo</span>
+          </div>
+          <div class="gargalo-body">
+            <p><strong>O Problema:</strong> A planilha de controle da execução dos serviços de periodicidade trimestral e semestral — caixa d'água, dedetização, desratização, prumadas e vidros em altura — foi deixada <strong>desatualizada pela gestão anterior</strong>. Não há, hoje, registro confiável de quando cada um desses serviços foi executado pela última vez em cada posto.</p>
+
+            <p><strong>Por que é grave:</strong> são justamente os serviços de maior intervalo e maior risco técnico. Um serviço semestral esquecido só se revela seis meses depois — pela reclamação do síndico, ou por uma ocorrência em campo. Sem o controle, não há como saber se a carteira está em dia nem como provar que esteve.</p>
+
+            <p><strong>O que isso exige agora:</strong> uma varredura completa de verificação junto às <strong>20 empresas prestadoras</strong>, levantando a última execução de cada serviço em cada posto e, em paralelo, a situação documental de <strong>cada colaborador</strong> que essas empresas colocam em campo — ASO, ficha de EPI, registro em carteira e certificados de NR-33 e NR-35 conforme o serviço.</p>
+
+            <p><strong>Encaminhamento:</strong> a verificação está sendo estruturada sobre a base saneada, que já recuperou a programação anual de <strong>227 vínculos</strong> com meses de execução definidos. O que falta é confrontar o previsto com o efetivamente realizado e reconstruir o histórico. Concluída a varredura, o controle passa a ser automático: alerta de proximidade, alerta de atraso e bloqueio de escalação de equipe sem documentação válida.</p>
           </div>
         </div>
 
@@ -808,7 +966,7 @@
         <div class="tl-date">Segunda-feira · 13/10</div>
         <div class="tl-title">Assunção da função e imersão operacional</div>
         <ul class="tl-items">
-          <li>Início do contrato CLT como <strong>Gestor de Contratos Quarteirizados</strong>.</li>
+          <li>Início do contrato CLT como <strong>Analista de Contratos e Serviços</strong>.</li>
           <li>Passagem de bastão com <strong>Marcos César (Ouvidoria)</strong> — mapeamento da rotina real
               de geração de OS no sispoli, aviso prévio de 3 dias e conferência de CNPJ tomador.</li>
           <li>Recebimento e triagem dos <strong>Docs internos</strong>: procedimento 02.03, programação
