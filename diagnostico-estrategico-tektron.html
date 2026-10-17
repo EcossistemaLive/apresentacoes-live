@@ -534,6 +534,22 @@
       .ebar-row { grid-template-columns: 1fr; gap: 0.3rem; }
       .ebar-val { text-align: left; }
     }
+
+    /* ---- Quadro de prestadoras ---- */
+    .bloco-prest { border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+      margin-bottom: 0.85rem; }
+    .bloco-head { display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; padding: 0.75rem 1rem; background: #f8fafc; border-bottom: 1px solid var(--border); }
+    .bloco-nome { font-weight: 700; font-size: 0.92rem; color: var(--primary); }
+    .bloco-qtd { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
+      color: var(--text-muted); white-space: nowrap; }
+    .chips { display: flex; flex-wrap: wrap; gap: 0.45rem; padding: 0.9rem 1rem; }
+    .chip { display: inline-flex; align-items: baseline; gap: 0.4rem; padding: 0.3rem 0.7rem;
+      border: 1px solid var(--border); border-radius: 999px; font-size: 0.85rem; background: #fff; }
+    .chip b { font-weight: 600; color: var(--primary); }
+    .chip span { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--text-muted); }
+    .chip.corrigido { border-color: #fcd34d; background: #fffbeb; }
+    .chip.corrigido b { color: var(--warning); }
   </style>
 </head>
 <body>
@@ -565,7 +581,7 @@
         <div><strong>Responsável:</strong> Cléber Donato (Analista de Contratos e Serviços)</div>
         <div><strong>Subordinação Direta:</strong> Diretoria Estratégica (Coronel Campos)</div>
         <div><strong>Data Base:</strong> Outubro de 2026</div>
-        <div><strong>Escopo Real:</strong> 137 Condomínios / 20 Prestadores / 7 Especialidades</div>
+        <div><strong>Escopo Real:</strong> 137 Condomínios / 17 Prestadoras / 7 Especialidades</div>
       </div>
     </section>
 
@@ -583,8 +599,8 @@
       </div>
       <div class="kpi-card">
         <div class="kpi-label">Prestadores Homologados</div>
-        <div class="kpi-value">20</div>
-        <div class="kpi-sub">Empresas deduplicadas</div>
+        <div class="kpi-value">17</div>
+        <div class="kpi-sub">Quadro oficial homologado</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-label">Custo Anualizado Base</div>
@@ -727,8 +743,8 @@
             <tr style="border-bottom: 1px solid var(--border);">
               <td style="padding: 0.65rem 0.75rem;">Prestadores</td>
               <td style="padding: 0.65rem 0.75rem; text-align: right; font-family: 'JetBrains Mono', monospace;">30</td>
-              <td style="padding: 0.65rem 0.75rem; text-align: right; font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--primary);">20</td>
-              <td style="padding: 0.65rem 0.75rem; color: #475569;">Variações de grafia e sufixos de escopo contados como empresas distintas</td>
+              <td style="padding: 0.65rem 0.75rem; text-align: right; font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--primary);">17</td>
+              <td style="padding: 0.65rem 0.75rem; color: #475569;">Grafias duplicadas, sufixos de escopo e colaboradores registrados no lugar da razão social</td>
             </tr>
             <tr>
               <td style="padding: 0.65rem 0.75rem;">Serviços em cortesia</td>
@@ -779,7 +795,126 @@
     </section>
 
     <!-- Gargalos Sensíveis Mapeados -->
-    <section>
+      <!-- ================= QUADRO OFICIAL DE PRESTADORAS ================= -->
+  <section class="card">
+    <h3 class="section-title">🏢 Quadro Oficial de Prestadoras Homologadas</h3>
+    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+      A matriz oficial da supervisão fecha o quadro em <strong>17 prestadoras ativas</strong>,
+      organizadas por especialidade. A conferência contra a base saneada confirmou o número com
+      exatidão: as 20 razões sociais que a planilha sugeria se resolvem em 17 empresas reais.
+    </p>
+
+      <div class="bloco-prest">
+        <div class="bloco-head">
+          <div class="bloco-nome">Bloco 1 — Caixa de gordura, caixa d'água, dedetização e prumadas</div>
+          <div class="bloco-qtd">6 prestadoras</div>
+        </div>
+        <div class="chips">
+          <span class="chip"><b>Planeta</b><span>54 vínculos</span></span>
+          <span class="chip corrigido"><b>Prestativa</b><span>7 vínculos</span></span>
+          <span class="chip corrigido"><b>Royal</b><span>46 vínculos</span></span>
+          <span class="chip"><b>TN</b><span>199 vínculos</span></span>
+          <span class="chip"><b>Universal</b><span>12 vínculos</span></span>
+          <span class="chip"><b>Universo</b><span>13 vínculos</span></span>
+        </div>
+      </div>
+      <div class="bloco-prest">
+        <div class="bloco-head">
+          <div class="bloco-nome">Bloco 2 — Piscinas</div>
+          <div class="bloco-qtd">7 prestadoras</div>
+        </div>
+        <div class="chips">
+          <span class="chip"><b>Azelar</b><span>4 vínculos</span></span>
+          <span class="chip"><b>Dourado</b><span>10 vínculos</span></span>
+          <span class="chip corrigido"><b>Gota de Cristal</b><span>1 vínculos</span></span>
+          <span class="chip"><b>H2O</b><span>23 vínculos</span></span>
+          <span class="chip"><b>Master</b><span>11 vínculos</span></span>
+          <span class="chip"><b>Sempre Limpa</b><span>15 vínculos</span></span>
+          <span class="chip"><b>Verbo</b><span>4 vínculos</span></span>
+        </div>
+      </div>
+      <div class="bloco-prest">
+        <div class="bloco-head">
+          <div class="bloco-nome">Bloco 3 — Jardins</div>
+          <div class="bloco-qtd">2 prestadoras</div>
+        </div>
+        <div class="chips">
+          <span class="chip corrigido"><b>Talita</b><span>30 vínculos</span></span>
+          <span class="chip"><b>WR</b><span>40 vínculos</span></span>
+        </div>
+      </div>
+      <div class="bloco-prest">
+        <div class="bloco-head">
+          <div class="bloco-nome">Bloco 4 — Dedetização</div>
+          <div class="bloco-qtd">1 prestadora</div>
+        </div>
+        <div class="chips">
+          <span class="chip"><b>Rocha</b><span>36 vínculos</span></span>
+        </div>
+      </div>
+      <div class="bloco-prest">
+        <div class="bloco-head">
+          <div class="bloco-nome">Bloco 5 — Vidros em altura</div>
+          <div class="bloco-qtd">1 prestadora</div>
+        </div>
+        <div class="chips">
+          <span class="chip corrigido"><b>Grupo Fibra</b><span>8 vínculos</span></span>
+        </div>
+      </div>
+
+    <p class="ebar-note" style="margin-top: 1.25rem;">
+      Destacadas em âmbar, as <strong>5 correções de cadastro</strong> que o cruzamento resolveu.
+    </p>
+
+    <div style="overflow-x: auto; margin-top: 1.25rem;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 0.6rem 0.75rem; color: var(--text-muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em;">Como constava na planilha</th>
+            <th style="text-align: left; padding: 0.6rem 0.75rem; color: var(--text-muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em;">Registro oficial</th>
+            <th style="text-align: left; padding: 0.6rem 0.75rem; color: var(--text-muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em;">Natureza do erro</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 0.65rem 0.75rem;"><code>Royal Prime</code> e <code>Royal</code></td>
+            <td style="padding: 0.65rem 0.75rem; font-weight: 600; color: var(--primary);">Royal</td>
+            <td style="padding: 0.65rem 0.75rem; color: #475569;">Mesma empresa em duas grafias — contava como duas</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 0.65rem 0.75rem;"><code>Prestativa</code> e <code>A Prestativa</code></td>
+            <td style="padding: 0.65rem 0.75rem; font-weight: 600; color: var(--primary);">Prestativa</td>
+            <td style="padding: 0.65rem 0.75rem; color: #475569;">Mesma empresa em duas grafias — contava como duas</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 0.65rem 0.75rem;"><code>Elivaldo</code> e <code>Gilberto</code></td>
+            <td style="padding: 0.65rem 0.75rem; font-weight: 600; color: var(--primary);">Talita</td>
+            <td style="padding: 0.65rem 0.75rem; color: #475569;">Nomes de pessoas lançados no lugar da razão social — ambos são da Talita Jardins</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 0.65rem 0.75rem;"><code>Gosta de Cristal</code></td>
+            <td style="padding: 0.65rem 0.75rem; font-weight: 600; color: var(--primary);">Gota de Cristal</td>
+            <td style="padding: 0.65rem 0.75rem; color: #475569;">Erro de digitação no cadastro</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.65rem 0.75rem;"><code>Grupo F</code></td>
+            <td style="padding: 0.65rem 0.75rem; font-weight: 600; color: var(--primary);">Grupo Fibra</td>
+            <td style="padding: 0.65rem 0.75rem; color: #475569;">Sigla abreviada usada como razão social</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="highlight-box info" style="margin-top: 1.5rem;">
+      <strong>Por que isso importa além da contagem.</strong> Com nomes duplicados, o custo de uma
+      mesma empresa aparecia repartido em dois registros — impedindo ver o volume real contratado de
+      cada parceiro e, com isso, qualquer negociação por pacote. Consolidado o quadro, a concentração
+      fica visível: a <strong>TN responde por 199 dos 513 serviços</strong>, quase 39% da carteira.
+      Esse é o número que define a prioridade da renegociação e o risco de dependência.
+    </div>
+  </section>
+
+  <section>
       <h3 class="section-title">🚨 Os 6 Maiores Gargalos Operacionais e Riscos de Campo</h3>
       <div class="gargalos-grid">
 
@@ -836,11 +971,11 @@
         <!-- Gargalo 4 -->
         <div class="gargalo-card blue">
           <div class="gargalo-header">
-            <div class="gargalo-title">4. Concentração em Fornecedores Únicos (Fachadas / Grupo F)</div>
+            <div class="gargalo-title">4. Concentração em Fornecedores Únicos (Fachadas / Grupo Fibra)</div>
             <span class="badge badge-blue">Risco de Fornecimento</span>
           </div>
           <div class="gargalo-body">
-            <p><strong>O Problema:</strong> Serviços de alta periculosidade (Vidros em Altura e Fachadas) concentram-se no <em>Grupo F</em>, gerando vulnerabilidade em caso de paralisação ou custos elevados de caminhão Munck.</p>
+            <p><strong>O Problema:</strong> Serviços de alta periculosidade (Vidros em Altura e Fachadas) concentram-se no <em>Grupo Fibra</em>, gerando vulnerabilidade em caso de paralisação ou custos elevados de caminhão Munck.</p>
             <p><strong>Ação Estratégica:</strong> Proposta para abertura de homologação ativa de fornecedores reservas no mercado de Goiânia.</p>
           </div>
         </div>
@@ -870,7 +1005,7 @@
 
             <p><strong>Por que é grave:</strong> são justamente os serviços de maior intervalo e maior risco técnico. Um serviço semestral esquecido só se revela seis meses depois — pela reclamação do síndico, ou por uma ocorrência em campo. Sem o controle, não há como saber se a carteira está em dia nem como provar que esteve.</p>
 
-            <p><strong>O que isso exige agora:</strong> uma varredura completa de verificação junto às <strong>20 empresas prestadoras</strong>, levantando a última execução de cada serviço em cada posto e, em paralelo, a situação documental de <strong>cada colaborador</strong> que essas empresas colocam em campo — ASO, ficha de EPI, registro em carteira e certificados de NR-33 e NR-35 conforme o serviço.</p>
+            <p><strong>O que isso exige agora:</strong> uma varredura completa de verificação junto às <strong>17 prestadoras homologadas</strong>, levantando a última execução de cada serviço em cada posto e, em paralelo, a situação documental de <strong>cada colaborador</strong> que essas empresas colocam em campo — ASO, ficha de EPI, registro em carteira e certificados de NR-33 e NR-35 conforme o serviço.</p>
 
             <p><strong>Encaminhamento:</strong> a verificação está sendo estruturada sobre a base saneada, que já recuperou a programação anual de <strong>227 vínculos</strong> com meses de execução definidos. O que falta é confrontar o previsto com o efetivamente realizado e reconstruir o histórico. Concluída a varredura, o controle passa a ser automático: alerta de proximidade, alerta de atraso e bloqueio de escalação de equipe sem documentação válida.</p>
           </div>
@@ -1005,7 +1140,7 @@
               <strong>32 divergências</strong> — 18 de prestador, 10 de valor e 4 serviços fora de
               qualquer consolidado.</li>
           <li>Deduplicação do cadastro: o que constava como 30 prestadores são, de fato,
-              <strong>20 empresas distintas</strong>.</li>
+              <strong>17 empresas homologadas</strong>, confirmadas contra a matriz oficial da supervisão.</li>
           <li>Construção da <strong>Super Planilha 2026</strong> com matriz dinâmica das 7 etapas e
               status automático por linha.</li>
           <li>Publicação da <strong>apresentação executiva em HTML</strong> para a Diretoria.</li>
@@ -1021,7 +1156,7 @@
         <ul class="tl-items">
           <li><strong>Importador automatizado em produção</strong>: lê a planilha de origem, normaliza
               grafias, separa escopos, reconcilia abas e devolve a base saneada — 137 postos,
-              20 prestadores e 513 vínculos, com as divergências isoladas fora da linha de base.</li>
+              17 prestadoras e 513 vínculos, com as divergências isoladas fora da linha de base.</li>
           <li><strong>Painel de gestão operacional</strong> com 5 telas: painel executivo, lente por
               prestador, lente por condomínio, controle financeiro e divergências.</li>
           <li>Recuperação da <strong>programação anual de 227 vínculos</strong> que já possuem meses de
@@ -1106,7 +1241,7 @@
           <div class="ebar-val">279</div>
         </div>
         <div class="ebar-row">
-          <div class="ebar-label">Empresas prestadoras</div>
+          <div class="ebar-label">Contatos em empresas prestadoras</div>
           <div class="ebar-track"><div class="ebar-fill" style="width: 26.5%"></div></div>
           <div class="ebar-val">74</div>
         </div>
@@ -1128,8 +1263,8 @@
     </div>
     <p class="ebar-note">
       <strong>399 contatos</strong> catalogados com empresa, responsável, cargo, telefone e serviços
-      atendidos. Cobertura de <strong>45 empresas prestadoras</strong> e de praticamente toda a carteira
-      de postos.
+      atendidos — cobrindo as <strong>17 prestadoras homologadas</strong>, as empresas de apoio e
+      praticamente toda a carteira de postos.
     </p>
 
     <div class="highlight-box action" style="margin-top: 1.5rem;">
