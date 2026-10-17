@@ -92,6 +92,8 @@
     .nav-tags {
       display: flex;
       gap: 0.5rem;
+      align-items: center;
+      flex-wrap: wrap;
     }
 
     .badge {
@@ -103,6 +105,12 @@
       align-items: center;
       gap: 0.35rem;
     }
+
+    .nav-link { padding: 0.3rem 0.85rem; border-radius: 9999px; font-size: 0.75rem;
+      font-weight: 600; color: #dbeafe; background: rgba(59, 130, 246, 0.22);
+      border: 1px solid rgba(59, 130, 246, 0.4); text-decoration: none;
+      transition: background .15s, color .15s; white-space: nowrap; }
+    .nav-link:hover { background: rgba(59, 130, 246, 0.4); color: #fff; }
 
     .badge-blue { background: rgba(59, 130, 246, 0.2); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.3); }
     .badge-gold { background: rgba(245, 158, 11, 0.2); color: #fde68a; border: 1px solid rgba(245, 158, 11, 0.3); }
@@ -550,6 +558,46 @@
     .chip span { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--text-muted); }
     .chip.corrigido { border-color: #fcd34d; background: #fffbeb; }
     .chip.corrigido b { color: var(--warning); }
+
+    /* ---- Convergência de demandas ---- */
+    .conv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 0.75rem; margin: 0.4rem 0 1.25rem; }
+    .conv-item { border: 1px solid var(--border); border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0; padding: 0.8rem 0.9rem; background: #f8fafc; }
+    .conv-item b { display: block; font-size: 0.88rem; color: var(--primary); font-weight: 600; }
+    .conv-item span { display: block; font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem; }
+    .quote-doc { background: #f8fafc; border: 1px solid var(--border); border-left: 4px solid var(--text-muted);
+      border-radius: 0 8px 8px 0; padding: 1rem 1.15rem; margin: 1rem 0;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.84rem; line-height: 1.75; color: #334155; }
+    .falhas { counter-reset: falha; list-style: none; display: grid; gap: 0.6rem; margin: 0.4rem 0 1rem; }
+    .falhas li { counter-increment: falha; position: relative; padding-left: 2.2rem;
+      font-size: 0.92rem; color: #334155; }
+    .falhas li::before { content: counter(falha); position: absolute; left: 0; top: 0;
+      width: 1.55rem; height: 1.55rem; border-radius: 50%; background: var(--danger-bg);
+      color: var(--danger); font-size: 0.78rem; font-weight: 700; display: flex;
+      align-items: center; justify-content: center; }
+
+    /* ---- Seção de IA e custos ---- */
+    .ia-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 0.85rem; margin: 0.4rem 0 1.5rem; }
+    .ia-card { border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.1rem;
+      background: #fff; }
+    .ia-card b { display: block; font-size: 0.9rem; color: var(--primary); font-weight: 700;
+      margin-bottom: 0.3rem; }
+    .ia-card p { font-size: 0.85rem; color: #475569; line-height: 1.6; margin: 0; }
+    .plano-destaque { background: var(--success-bg) !important; border-color: #6ee7b7 !important; }
+    .tbl-preco { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    .tbl-preco th { text-align: left; padding: 0.55rem 0.7rem; color: var(--text-muted);
+      font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.05em;
+      border-bottom: 2px solid var(--border); white-space: nowrap; }
+    .tbl-preco td { padding: 0.6rem 0.7rem; border-bottom: 1px solid var(--border); }
+    .tbl-preco tr:last-child td { border-bottom: 0; }
+    .tbl-preco .num { text-align: right; font-family: 'JetBrains Mono', monospace;
+      font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .tbl-preco tr.destaque td { background: var(--success-bg); font-weight: 600; }
+    .tbl-preco tr.total td { background: #f1f5f9; font-weight: 700; color: var(--primary);
+      border-top: 2px solid var(--border); }
+    .fonte { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.8rem; line-height: 1.6; }
   </style>
 </head>
 <body>
@@ -566,6 +614,7 @@
     <div class="nav-tags">
       <span class="badge badge-gold">Diagnóstico &bull; Versão 2.0 Auditada</span>
       <span class="badge badge-blue">Meta Saving: 30%</span>
+      <a class="nav-link" href="conferencia-defasagem-tektron.html">Conferência da defasagem &rarr;</a>
     </div>
   </header>
 
@@ -687,6 +736,27 @@
         <div class="metric-tile"><b>R$ 168.135,36</b><span>Valor que a aba <code>valor total</code> informava</span></div>
         <div class="metric-tile"><b>R$ 187.363,85</b><span>Soma real das linhas da aba mestra <code>2026</code></span></div>
         <div class="metric-tile" style="border-color: #fecaca; background: #fef2f2;"><b style="color: var(--danger);">R$ 19.228,49</b><span>Defasagem apurada — 11,4% a menos</span></div>
+      </div>
+
+      <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-left: 5px solid var(--accent); border-radius: 8px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem;">
+        <p style="font-size: 0.93rem; font-weight: 700; color: var(--primary); margin-bottom: 0.6rem;">
+          A defasagem está aberta para conferência &mdash; em documento próprio
+        </p>
+        <p style="font-size: 0.89rem; color: #1e3a8a; margin-bottom: 0.6rem;">
+          Nenhum número desta auditoria precisa ser aceito por confiança. A apuração completa está no
+          anexo técnico <strong>Conferência da Defasagem</strong>: a comparação das três camadas
+          serviço por serviço, os <strong>61 lançamentos divergentes com o número da linha de origem
+          em cada aba</strong>, o roteiro de conferência de 30 segundos e a planilha de apoio
+          <code>Conferencia_Defasagem_2026.xlsx</code>, construída com fórmulas vivas para que o
+          cálculo possa ser refeito do zero.
+        </p>
+        <p style="font-size: 0.89rem; color: #1e3a8a; margin-bottom: 0.9rem;">
+          O anexo também expõe o achado que o total geral esconde: <strong>em Prumadas a relação se
+          inverte</strong> &mdash; a aba mestra registra R$ 13.439,27 <em>a menos</em> que a aba de
+          serviço. As pontas se compensam, e a divergência bruta entre as camadas chega a
+          <strong>R$ 46.107,25</strong> antes de se anular até os R$ 19.228 líquidos.
+        </p>
+        <a class="nav-link" style="color: var(--accent); background: #dbeafe; border-color: #93c5fd; padding: 0.5rem 1.1rem; display: inline-block; font-size: 0.82rem;" href="conferencia-defasagem-tektron.html">Abrir a conferência da defasagem &rarr;</a>
       </div>
 
       <p style="font-size: 0.92rem; color: #334155; margin-bottom: 0.75rem;">
@@ -1273,6 +1343,531 @@
       canal único, presente e ágil. O guia de comunicação prevê mensagem universal, versão para
       prestadores, versão para clientes, versão curta e roteiro de áudio — padronizando o discurso
       institucional em todos os pontos de contato do departamento.
+    </div>
+  </section>
+
+    <!-- ================= CONVERGÊNCIA DE DEMANDAS ================= -->
+  <section class="card">
+    <h3 class="section-title">⚖️ Convergência de Demandas e Vazio de Registro</h3>
+    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+      A função tornou-se o ponto único de convergência de demandas de cinco origens, sem canal
+      formal de entrada, sem protocolo e sem histórico recuperável.
+    </p>
+
+    <div class="conv-grid">
+      <div class="conv-item"><b>Clientes e síndicos</b><span>reclamações e cobranças de execução</span></div>
+      <div class="conv-item"><b>Prestadores</b><span>agendamento, medição e documentação</span></div>
+      <div class="conv-item"><b>Fiscais de campo</b><span>ocorrências em tempo real</span></div>
+      <div class="conv-item"><b>Financeiro e Comercial</b><span>fechamento e orçamentos</span></div>
+      <div class="conv-item"><b>Jurídico e Diretoria</b><span>demandas com prazo</span></div>
+    </div>
+
+    <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-bottom: 0.9rem;">
+      A infraestrutura real do departamento hoje
+    </h4>
+    <p style="font-size: 0.92rem; color: #334155; margin-bottom: 1rem;">
+      O levantamento do canal corporativo de WhatsApp, realizado em 17/10, dimensionou o que
+      sustenta a operação na prática:
+    </p>
+
+    <div class="metric-grid" style="margin-bottom: 1.5rem;">
+      <div class="metric-tile"><b>48</b><span>Conversas ativas em 4 dias de operação</span></div>
+      <div class="metric-tile"><b>17</b><span>Prestadoras atendidas por esses contatos</span></div>
+      <div class="metric-tile"><b>7</b><span>Threads paralelas com uma única prestadora</span></div>
+      <div class="metric-tile"><b>0</b><span>Protocolos, históricos ou prazos registrados</span></div>
+    </div>
+
+    <p style="font-size: 0.92rem; color: #334155; margin-bottom: 1.25rem;">
+      Não existe canal único por prestadora: cada pessoa da empresa parceira abre uma conversa
+      própria, e a tratativa de um mesmo assunto se fragmenta. Uma cobrança de documento feita ao
+      financeiro de uma prestadora é invisível para quem fala com o operacional da mesma empresa.
+      O grupo de fiscais de campo, por sua vez, foi identificado como <strong>uma das principais
+      portas de entrada de demanda do departamento</strong> — inclusive de demandas jurídicas com prazo.
+    </p>
+
+    <div class="highlight-box alert">
+      <strong>O risco estrutural da função.</strong> Sem registro, a responsabilidade recai sobre
+      quem atende por último. Quem assume a função herda o passivo de decisões em que não participou
+      e sobre as quais não dispõe de prova. Isso não decorre de conduta individual: decorre de dois
+      vazios objetivos — <strong>responsabilidades não definidas por escrito</strong> e
+      <strong>informação que não chega a quem responde pela tratativa</strong>.
+    </div>
+
+    <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--primary); margin: 2rem 0 0.9rem;">
+      Caso Marfim — quatro falhas de processo em um único evento
+    </h4>
+
+    <p style="font-size: 0.92rem; color: #334155; margin-bottom: 0.5rem;">
+      Demanda recebida da representação jurídica da Tektron, encaminhada por fiscal de campo em 16/10,
+      classificada como urgente:
+    </p>
+
+    <div class="quote-doc">
+      "preciso de OS - Ordem de Serviços e nota fiscais, laudos (se houver) de todos os serviços
+      realizados no condomínio do período de <strong>01/01/2025 até a presente data</strong>"
+    </div>
+
+    <ol class="falhas">
+      <li>O limite de escopo do posto existe em contrato, mas <strong>não está registrado em local
+          acessível</strong> a quem precisa responder.</li>
+      <li>A demanda jurídica chega pelo grupo de campo, sem protocolo, sem prazo formal e
+          <strong>sem titular designado</strong>.</li>
+      <li>A tratativa corre simultaneamente em três canais — grupo de fiscais, Ouvidoria e contato
+          direto com o prestador — <strong>sem registro consolidado</strong>.</li>
+      <li>A consulta interna enviada em 16/10 às 17:07 <strong>segue sem resposta</strong>, enquanto
+          o prazo jurídico corre.</li>
+    </ol>
+
+    <p style="font-size: 0.92rem; color: #334155; margin-bottom: 1rem;">
+      Nenhuma dessas quatro falhas é sobre o serviço prestado. Todas são sobre registro.
+    </p>
+
+    <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--primary); margin: 1.75rem 0 0.9rem;">
+      O que a base auditada já respondeu
+    </h4>
+
+    <p style="font-size: 0.92rem; color: #334155; margin-bottom: 1rem;">
+      A consulta à base saneada devolveu, de imediato, a posição contratual do posto: o condomínio é
+      atendido pela <strong>Royal</strong> em caixa de gordura, caixa d'água e dedetização, e a coluna
+      de <strong>prumadas está vazia nos exercícios de 2024, 2025 e 2026</strong> — registro histórico
+      contínuo de que o serviço objeto do litígio nunca integrou o escopo da Tektron naquele posto.
+    </p>
+
+    <p style="font-size: 0.92rem; color: #334155; margin-bottom: 1rem;">
+      Para o período solicitado, o volume documental esperado é de <strong>32 ordens de serviço</strong>
+      — 22 de caixa de gordura, 3 de caixa d'água e 7 de dedetização — e as notas fiscais correspondentes.
+    </p>
+
+    <div class="highlight-box info">
+      <strong>A natureza exata do problema.</strong> A regra de retenção existe e está no procedimento
+      interno: ordens de serviço arquivadas por três anos. As notas fiscais passaram pelo fechamento
+      mensal e estão no Financeiro; as datas de execução estão registradas no sispoli; o acervo
+      documental está em unidade de rede indicada pela Ouvidoria. <strong>O que não existe é
+      índice.</strong> Recuperar a comprovação de um posto específico, sob prazo jurídico, depende
+      hoje de busca manual em repositórios não indexados e da memória de quem arquivou — o que, em
+      um litígio, produz o mesmo efeito prático de não dispor do documento.
+    </div>
+  </section>
+
+  <!-- ================= DECISÕES SOBRE GOVERNANÇA DA INFORMAÇÃO ================= -->
+  <section class="card" style="border-left: 5px solid var(--warning);">
+    <h3 class="section-title">📌 Decisões Solicitadas — Governança da Informação</h3>
+
+    <div class="proposta-content">
+      <div class="proposta-item">
+        <div class="proposta-num">1</div>
+        <div>
+          <h4>Definição formal, por escrito, da linha de comando e das interfaces</h4>
+          <p>Quem é gestor direto, quem é interface de cada área, quem autoriza o quê e quem responde
+          por demanda jurídica. Sem isso, cada demanda recebida exige negociação de titularidade antes
+          de qualquer tratativa.</p>
+        </div>
+      </div>
+
+      <div class="proposta-item">
+        <div class="proposta-num">2</div>
+        <div>
+          <h4>Canal único de entrada, com protocolo e prazo</h4>
+          <p>Toda demanda — de cliente, prestador, área interna ou jurídico — passa a ser registrada
+          com protocolo, titular designado e prazo de resposta de 72 horas. Encerra-se o atendimento
+          por grupo de WhatsApp e por contato direto sem registro, preservando os canais apenas como
+          meio de contato, nunca como repositório de tratativa.</p>
+        </div>
+      </div>
+
+      <div class="proposta-item">
+        <div class="proposta-num">3</div>
+        <div>
+          <h4>Matriz de responsabilidade da informação, com fonte e prazo designados</h4>
+          <p>A informação necessária já existe na empresa — está distribuída entre as áreas que a
+          detêm. A determinação precisa designar, para cada tipo de informação, a área responsável
+          pela entrega e o prazo correspondente.</p>
+
+          <div style="overflow-x: auto; margin: 1rem 0;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem;">
+              <thead>
+                <tr style="border-bottom: 2px solid var(--border);">
+                  <th style="text-align: left; padding: 0.55rem 0.7rem; color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">Informação</th>
+                  <th style="text-align: left; padding: 0.55rem 0.7rem; color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">Área que detém e entrega</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 0.55rem 0.7rem;">Escopo contratual por posto — serviços inclusos e excluídos</td><td style="padding: 0.55rem 0.7rem; font-weight: 600; color: var(--primary);">Comercial</td></tr>
+                <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 0.55rem 0.7rem;">Histórico de tratativas e acordos verbais anteriores</td><td style="padding: 0.55rem 0.7rem; font-weight: 600; color: var(--primary);">Ouvidoria / gestão anterior</td></tr>
+                <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 0.55rem 0.7rem;">Ocorrências e registros de execução em campo</td><td style="padding: 0.55rem 0.7rem; font-weight: 600; color: var(--primary);">Supervisão / Operacional</td></tr>
+                <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 0.55rem 0.7rem;">Notas fiscais, pagamentos e recusas por competência</td><td style="padding: 0.55rem 0.7rem; font-weight: 600; color: var(--primary);">Financeiro</td></tr>
+                <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 0.55rem 0.7rem;">Titularidade e canal de resposta de demandas jurídicas</td><td style="padding: 0.55rem 0.7rem; font-weight: 600; color: var(--primary);">Jurídico</td></tr>
+                <tr><td style="padding: 0.55rem 0.7rem;"><strong>Consolidação, guarda e disponibilização</strong></td><td style="padding: 0.55rem 0.7rem; font-weight: 600; color: var(--success);">Gestão de Contratos</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="highlight-box alert" style="margin-top: 0.5rem;">
+            <strong>Observação necessária.</strong> Uma determinação que apenas crie a exigência de
+            registro, sem designar a área que detém cada informação e o prazo de entrega, transfere à
+            Gestão de Contratos o ônus de levantar informação que não é sua — reproduzindo exatamente
+            o problema que se pretende corrigir.
+          </div>
+        </div>
+      </div>
+
+      <div class="proposta-item">
+        <div class="proposta-num">4</div>
+        <div>
+          <h4>Titularidade das demandas jurídicas</h4>
+          <p>Todo contato de representação jurídica passa a ser registrado com protocolo e encaminhado
+          ao Jurídico antes de qualquer resposta, com registro de quem respondeu o quê e quando.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box action" style="margin-top: 1.5rem;">
+      <strong>Como o sistema em implantação encerra cada uma dessas falhas.</strong> Protocolo com
+      prazo e titular na entrada; histórico por posto com o escopo contratual acessível em consulta;
+      registro imutável de quem respondeu o quê; e arquivamento indexado dos documentos por
+      condomínio, serviço e competência. A mesma pergunta do caso Marfim passaria a ser respondida em
+      segundos, com link direto para cada documento — e com a prova de que a fiscalização foi exercida.
+    </div>
+  </section>
+
+    <!-- ================= IA: MÉTODO, CUSTO E PROPOSTA ================= -->
+  <section class="card">
+    <h3 class="section-title">🤖 Inteligência Artificial: Como Este Diagnóstico Foi Produzido</h3>
+
+    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+      Todo o trabalho apresentado até aqui — auditoria, saneamento da base, documentação,
+      sistema e esta própria apresentação — foi produzido com assistência de inteligência
+      artificial, em quatro dias, por uma pessoa. Sem IA, o mesmo escopo exigiria uma equipe
+      e um trimestre.
+    </p>
+
+    <div class="ia-grid">
+      <div class="ia-card">
+        <b>Auditoria da base</b>
+        <p>Reconciliação automatizada de 9.946 células em 13 abas, célula a célula, com
+        detecção das 32 divergências e da defasagem de R$ 19.228 no consolidado. Conferência
+        manual equivalente: semanas, com risco alto de erro humano.</p>
+      </div>
+      <div class="ia-card">
+        <b>Saneamento e deduplicação</b>
+        <p>Normalização de grafias, separação de escopos e identificação de colaboradores
+        lançados como empresas — reduzindo 30 registros ao quadro real de 17 prestadoras
+        homologadas.</p>
+      </div>
+      <div class="ia-card">
+        <b>Análise normativa</b>
+        <p>Leitura dos 14 documentos do SGQ com mapeamento de 15 não conformidades, e
+        construção da matriz de NRs por tipo de serviço a partir das normas aplicáveis.</p>
+      </div>
+      <div class="ia-card">
+        <b>Análise jurídica preventiva</b>
+        <p>Dossiê societário e trabalhista dos 4 CNPJs, exposição ao TRT-18, Súmula 331 e
+        risco de reconhecimento de vínculo.</p>
+      </div>
+      <div class="ia-card">
+        <b>Levantamento de campo</b>
+        <p>Inventário do canal corporativo de WhatsApp: 48 conversas classificadas,
+        identificação da finalidade do grupo de fiscais e recuperação do teor literal da
+        demanda jurídica do caso Marfim.</p>
+      </div>
+      <div class="ia-card">
+        <b>Engenharia do sistema</b>
+        <p>Especificação funcional completa, importador em produção, painel operacional com
+        cinco telas e arquitetura de notificações em cinco camadas redundantes.</p>
+      </div>
+      <div class="ia-card">
+        <b>Produção documental</b>
+        <p>214,5 mil caracteres de documentação técnica — cerca de 120 páginas — incluindo
+        esta apresentação, gerada e revisada integralmente com IA.</p>
+      </div>
+      <div class="ia-card">
+        <b>Base de conhecimento</b>
+        <p>137 postos, 17 prestadoras e 513 vínculos estruturados em base consultável, com a
+        programação anual de 227 vínculos recuperada.</p>
+      </div>
+    </div>
+
+    <div class="highlight-box alert">
+      <strong>A situação atual é irregular e precisa ser resolvida.</strong> Todo esse trabalho
+      foi realizado em assinatura pessoal do analista, por não existir ferramenta corporativa
+      de IA disponível. Isso significa que <strong>dados operacionais, contratuais e jurídicos
+      do Grupo Tektron trafegam hoje em conta particular</strong>, sem controle administrativo
+      da empresa, sem retenção definida, sem registro de auditoria e sem continuidade
+      garantida: se o colaborador deixar a empresa, o histórico de trabalho sai com ele.
+      Além do risco de LGPD, a empresa não tem como auditar nem reivindicar o que foi produzido.
+    </div>
+  </section>
+
+  <!-- ================= PLANOS E PREÇOS ================= -->
+  <section class="card">
+    <h3 class="section-title">💳 Planos Claude: Comparativo e Recomendação</h3>
+
+    <p style="color: var(--text-muted); margin-bottom: 1.25rem;">
+      Valores de tabela em 17/10/2026, por usuário, sem impostos. Conversão de referência
+      adotada: <strong>US$ 1,00 = R$ 5,40</strong>.
+    </p>
+
+    <div style="overflow-x: auto;">
+      <table class="tbl-preco">
+        <thead>
+          <tr>
+            <th>Plano</th>
+            <th class="num">Anual (US$/mês)</th>
+            <th class="num">Mensal (US$)</th>
+            <th class="num">≈ R$/mês</th>
+            <th>Adequação à Tektron</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Pro</strong> — individual</td>
+            <td class="num">17</td><td class="num">20</td><td class="num">92</td>
+            <td>Uso individual. Sem controle administrativo, sem SSO, sem gestão de dados pela empresa.</td>
+          </tr>
+          <tr>
+            <td><strong>Max</strong> — individual</td>
+            <td class="num">—</td><td class="num">100 a 200</td><td class="num">540 a 1.080</td>
+            <td>5x a 20x o uso do Pro e créditos de API inclusos. Ainda assim, conta individual.</td>
+          </tr>
+          <tr class="destaque">
+            <td><strong>Team</strong> — assento padrão</td>
+            <td class="num">20</td><td class="num">25</td><td class="num">108</td>
+            <td><strong>Recomendado para iniciar.</strong> De 2 a 150 assentos, administração central, SSO, sem treinamento de modelo com dados da empresa, Claude Code e créditos de API agrupados.</td>
+          </tr>
+          <tr>
+            <td><strong>Team</strong> — assento premium</td>
+            <td class="num">100</td><td class="num">125</td><td class="num">540</td>
+            <td>5x o uso do assento padrão. Indicado para quem opera os agentes em volume.</td>
+          </tr>
+          <tr>
+            <td><strong>Enterprise</strong></td>
+            <td class="num">20 + uso</td><td class="num">—</td><td class="num">108 + uso</td>
+            <td>Mínimo de 20 assentos. Acrescenta SCIM, logs de auditoria, API de conformidade, retenção de dados customizada, controle de rede e lista de IPs permitidos.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="fonte">
+      Fonte: página oficial de planos da Anthropic, consultada em 17/10/2026. Preços e planos
+      sujeitos a alteração. Enterprise também disponível por cotação comercial.
+    </p>
+
+    <div class="highlight-box info" style="margin-top: 1.5rem;">
+      <strong>Por que o plano Team resolve o problema hoje.</strong> Os três pontos críticos da
+      situação atual — propriedade do dado, controle administrativo e continuidade — são
+      atendidos já no assento padrão: a conta pertence à empresa, o administrador concede e
+      revoga acessos, o conteúdo não é usado para treinamento de modelo por padrão, e o
+      histórico de trabalho permanece na organização independentemente de quem o produziu.
+      O Enterprise passa a fazer sentido quando a operação exigir trilha de auditoria formal
+      e integração com diretório corporativo — cenário natural após a implantação do sistema.
+    </div>
+  </section>
+
+  <!-- ================= CUSTO DE API ================= -->
+  <section class="card">
+    <h3 class="section-title">⚙️ Custo de Operação dos Agentes — API</h3>
+
+    <p style="color: var(--text-muted); margin-bottom: 1.25rem;">
+      Os agentes que operam dentro do sistema — leitura de ordens de serviço, conferência
+      documental, busca inteligente e briefing executivo — consomem API, cobrada por volume
+      de texto processado, não por assinatura.
+    </p>
+
+    <div style="overflow-x: auto;">
+      <table class="tbl-preco">
+        <thead>
+          <tr>
+            <th>Modelo</th>
+            <th class="num">Entrada US$/MTok</th>
+            <th class="num">Saída US$/MTok</th>
+            <th>Aplicação no sistema</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Haiku 5.5</strong></td>
+            <td class="num">0,10</td><td class="num">0,50</td>
+            <td>Alertas, classificação de demandas, rotinas de alta frequência</td>
+          </tr>
+          <tr class="destaque">
+            <td><strong>Sonnet 5.5</strong></td>
+            <td class="num">2,00</td><td class="num">10,00</td>
+            <td><strong>Operação diária.</strong> Leitura de OS, conferência documental, busca inteligente</td>
+          </tr>
+          <tr>
+            <td><strong>Opus 5</strong></td>
+            <td class="num">5,00</td><td class="num">25,00</td>
+            <td>Análise de contratos, pareceres e briefings executivos</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="fonte">
+      Fonte: tabela oficial de preços da plataforma Anthropic, consultada em 17/10/2026.
+      Processamento em lote reduz 50% sobre entrada e saída, e cache de contexto reduz as
+      leituras repetidas a uma fração do valor de entrada — ambos aplicáveis à rotina do sistema.
+    </p>
+
+    <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--primary); margin: 1.75rem 0 0.9rem;">
+      Estimativa de consumo mensal da operação
+    </h4>
+
+    <div style="overflow-x: auto;">
+      <table class="tbl-preco">
+        <thead>
+          <tr>
+            <th>Rotina</th>
+            <th class="num">Volume/mês</th>
+            <th>Modelo</th>
+            <th class="num">≈ R$/mês</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Leitura e validação de OS e folhas de ponto</td><td class="num">~500 docs</td><td>Sonnet 5.5</td><td class="num">60 a 110</td></tr>
+          <tr><td>Conferência documental do fechamento</td><td class="num">17 prestadoras</td><td>Sonnet 5.5</td><td class="num">20 a 40</td></tr>
+          <tr><td>Rotina diária de alertas e agenda</td><td class="num">30 execuções</td><td>Haiku 5.5</td><td class="num">5 a 15</td></tr>
+          <tr><td>Busca inteligente</td><td class="num">~300 consultas</td><td>Sonnet 5.5</td><td class="num">25 a 50</td></tr>
+          <tr><td>Briefing executivo e relatórios</td><td class="num">mensal</td><td>Opus 5</td><td class="num">30 a 60</td></tr>
+          <tr class="total"><td>Total estimado de API</td><td class="num">—</td><td>—</td><td class="num">140 a 275</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="fonte">
+      Estimativa com base no volume real da carteira — 137 postos, 513 serviços, 17 prestadoras —
+      já considerando desconto de lote e cache. O plano Team inclui créditos de API agrupados,
+      que devem absorver parte relevante desse consumo no início da operação.
+    </p>
+  </section>
+
+  <!-- ================= CUSTO TOTAL DA INFRAESTRUTURA ================= -->
+  <section class="card">
+    <h3 class="section-title">🧾 Custo Total da Infraestrutura do Sistema</h3>
+
+    <div style="overflow-x: auto;">
+      <table class="tbl-preco">
+        <thead>
+          <tr>
+            <th>Recurso</th>
+            <th>Função no sistema</th>
+            <th class="num">≈ R$/mês</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="destaque">
+            <td><strong>Claude Team</strong> — 2 assentos</td>
+            <td>Ferramenta corporativa de IA, conta da empresa, administração e continuidade</td>
+            <td class="num">216</td>
+          </tr>
+          <tr>
+            <td><strong>API Anthropic</strong></td>
+            <td>Operação dos agentes dentro do sistema</td>
+            <td class="num">140 a 275</td>
+          </tr>
+          <tr>
+            <td><strong>Firebase — plano Blaze</strong></td>
+            <td>Banco de dados, autenticação, funções e armazenamento</td>
+            <td class="num">0 a 60</td>
+          </tr>
+          <tr>
+            <td><strong>Google Workspace</strong> — Business Standard</td>
+            <td>Drive corporativo para guarda fiscal dos documentos, 2 TB por usuário</td>
+            <td class="num">76 por usuário</td>
+          </tr>
+          <tr>
+            <td><strong>ClickUp</strong> — plano Unlimited</td>
+            <td>Espelho de controle interno, já em uso</td>
+            <td class="num">38 por usuário</td>
+          </tr>
+          <tr>
+            <td><strong>Domínio do portal</strong></td>
+            <td>Endereço do portal de acesso</td>
+            <td class="num">~4</td>
+          </tr>
+          <tr class="total">
+            <td>Total estimado</td>
+            <td>Configuração mínima operacional</td>
+            <td class="num">474 a 669</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="fonte">
+      Firebase: o plano Blaze é cobrado por uso, com faixa gratuita mensal que cobre 50 mil
+      leituras e 20 mil escritas por dia no banco, 2 milhões de execuções de função e 50 mil
+      usuários autenticados — limites acima do volume projetado para esta operação. A cobrança
+      ocorre apenas no que exceder. Google Workspace: US$ 14 por usuário/mês, necessário apenas
+      se a guarda documental migrar para drive compartilhado corporativo. ClickUp: US$ 7 por
+      usuário/mês na cobrança anual. Fontes consultadas em 17/10/2026.
+    </p>
+
+    <div class="highlight-box action" style="margin-top: 1.5rem;">
+      <strong>Comparação com o valor em jogo.</strong> O custo total da infraestrutura situa-se
+      entre <strong>R$ 474 e R$ 669 por mês</strong>. A meta de economia estabelecida para o
+      setor é de <strong>R$ 35.341 por mês</strong>. A infraestrutura completa representa, no
+      limite superior, <strong>menos de 2% da economia pretendida</strong> — e a defasagem de
+      R$ 19.228 já identificada na auditoria, sozinha, cobriria mais de dois anos e meio de
+      operação do sistema.
+    </div>
+  </section>
+
+  <!-- ================= PEDIDO ================= -->
+  <section class="card" style="border-left: 5px solid var(--success);">
+    <h3 class="section-title">✅ Solicitação à Diretoria</h3>
+
+    <div class="proposta-content">
+      <div class="proposta-item">
+        <div class="proposta-num">1</div>
+        <div>
+          <h4>Contratação do plano Claude Team em nome do Grupo Tektron</h4>
+          <p>Mínimo de 2 assentos — Gestão de Contratos e um segundo assento para a área que a
+          Diretoria indicar. Custo aproximado de R$ 216 por mês. Encerra a irregularidade do uso
+          de conta pessoal, transfere a propriedade do trabalho para a empresa e habilita o
+          controle administrativo de acessos.</p>
+        </div>
+      </div>
+
+      <div class="proposta-item">
+        <div class="proposta-num">2</div>
+        <div>
+          <h4>Conta de API corporativa com limite de gasto definido</h4>
+          <p>Para operação dos agentes dentro do sistema, com teto mensal estabelecido pela
+          Diretoria. Sugestão de limite inicial: R$ 300 por mês, com relatório de consumo.</p>
+        </div>
+      </div>
+
+      <div class="proposta-item">
+        <div class="proposta-num">3</div>
+        <div>
+          <h4>Projeto Firebase e domínio em titularidade da empresa</h4>
+          <p>Banco de dados e portal registrados em conta corporativa desde a origem, evitando
+          nova migração futura e garantindo que o sistema pertença ao Grupo Tektron.</p>
+        </div>
+      </div>
+
+      <div class="proposta-item">
+        <div class="proposta-num">4</div>
+        <div>
+          <h4>Definição sobre a guarda documental</h4>
+          <p>Google Workspace com drive compartilhado é o formato adequado para documento fiscal
+          com guarda de cinco anos, por pertencer à organização e não a uma pessoa. Enquanto não
+          houver definição, a guarda segue em conta pessoal autorizada — com a mesma fragilidade
+          de continuidade descrita acima.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box info" style="margin-top: 1.5rem;">
+      <strong>Transição para Enterprise.</strong> Quando a operação do sistema estiver consolidada
+      e os portais de prestadores e condomínios estiverem ativos, o plano Enterprise passa a ser
+      indicado: acrescenta trilha de auditoria formal, provisionamento automático de usuários,
+      API de conformidade, retenção de dados customizada e controle de acesso por rede — recursos
+      diretamente aplicáveis ao tratamento de dados de terceiros e à adequação à LGPD. O mínimo
+      é de 20 assentos, o que o torna adequado a um estágio de adoção mais amplo pelo Grupo, não
+      ao início.
     </div>
   </section>
 
