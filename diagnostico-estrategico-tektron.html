@@ -6,27 +6,49 @@
   <title>Diagnóstico Estratégico & Governança de Quarteirizados | Grupo Tektron</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #0f2744;
-      --primary-light: #1e3a8a;
-      --accent: #2563eb;
-      --accent-hover: #1d4ed8;
-      --success: #059669;
-      --success-bg: #ecfdf5;
-      --warning: #d97706;
-      --warning-bg: #fffbeb;
-      --danger: #dc2626;
-      --danger-bg: #fef2f2;
-      --bg: #f8fafc;
+      /* marca Grupo Tektron */
+      --petroleo: #0F293C;
+      --petroleo-esc: #091825;
+      --petroleo-med: #1C4257;
+      --petroleo-cl: #3E6E8E;
+      --vermelho: #D10404;
+      --vermelho-esc: #A00303;
+      --verde: #16694A;
+
+      /* superfícies */
+      --papel: #FBF7F3;
+      --papel-fundo: #F2EBE3;
+      --branco: #ffffff;
+
+      /* tinta */
+      --tinta: #16212B;
+      --tinta-med: #4C5862;
+      --tinta-fraca: #78838D;
+      --linha: #E2DAD1;
+      --linha-forte: #C9BDB0;
+
+      /* compatibilidade com as regras herdadas */
+      --primary: #0F293C;
+      --primary-light: #1C4257;
+      --accent: #D10404;
+      --accent-hover: #A00303;
+      --success: #16694A;
+      --success-bg: #EDF6F1;
+      --warning: #B45309;
+      --warning-bg: #FDF6EC;
+      --danger: #D10404;
+      --danger-bg: #FDF0F0;
+      --bg: #FBF7F3;
       --card-bg: #ffffff;
-      --text-main: #0f172a;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
-      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --text-main: #16212B;
+      --text-muted: #5E6A75;
+      --border: #E2DAD1;
+      --shadow-sm: none;
+      --shadow-md: 0 2px 8px rgb(15 41 60 / 0.07);
+      --shadow-lg: 0 10px 34px rgb(15 41 60 / 0.13);
     }
 
     * {
@@ -680,6 +702,215 @@
       .brand-text { padding-left: 0.6rem; }
     }
 
+
+    /* ======================================================================
+       CAMADA EDITORIAL — Grupo Tektron
+       Registro de publicação especializada: papel quente, serifa no corpo,
+       grotesca nos títulos e tabelas, filetes no lugar de cartões.
+       ====================================================================== */
+
+    body { font-family: 'Source Serif 4', Georgia, serif; background: var(--papel);
+      color: var(--tinta); font-size: 1.02rem; line-height: 1.7; }
+
+    h1, h2, h3, h4, h5, .ix-titulo, .badge, .sec-pill, .mini-pill,
+    table, .kpi-value, .kpi-label, .metric-tile, .tl-date, .ebar-label,
+    .ebar-val, button, .nav-link, .step-title, .step-num, .fonte, .ix-lista {
+      font-family: 'Archivo', system-ui, sans-serif; }
+
+    /* ---------- cabeçalho institucional ---------- */
+    .navbar { background: var(--petroleo); backdrop-filter: none;
+      border-bottom: 3px solid var(--vermelho); padding: 0.85rem 2rem; gap: 1.25rem; }
+    .brand-mark { background: var(--branco); border-radius: 4px; padding: 0.32rem 0.6rem; }
+    .brand-mark img { height: 28px; }
+    .brand-text { border-left: 1px solid rgba(255,255,255,0.2); padding-left: 1rem; }
+    .brand-text span { font-family: 'Archivo', sans-serif; font-size: 0.76rem;
+      color: #AFC2CE; letter-spacing: 0.01em; }
+    .badge { border-radius: 3px; font-size: 0.7rem; letter-spacing: 0.02em;
+      padding: 0.3rem 0.65rem; }
+    .badge-gold { background: rgba(209,4,4,0.16); color: #FFC9C9;
+      border: 1px solid rgba(209,4,4,0.45); }
+    .badge-blue { background: rgba(255,255,255,0.1); color: #C7D6E0;
+      border: 1px solid rgba(255,255,255,0.2); }
+    .nav-link { border-radius: 3px; background: rgba(255,255,255,0.09);
+      border-color: rgba(255,255,255,0.22); color: #DCE6ED; font-size: 0.72rem; }
+    .nav-link:hover { background: var(--vermelho); border-color: var(--vermelho); color: #fff; }
+
+    /* ---------- folha: índice + corpo ---------- */
+    .folha { display: grid; grid-template-columns: 250px minmax(0, 1fr);
+      gap: 3.5rem; max-width: 1280px; margin: 0 auto; padding: 2.5rem 2rem 0; }
+    .corpo { min-width: 0; }
+    .container { max-width: none; margin: 0; padding: 0; }
+
+    .indice { position: sticky; top: 92px; align-self: start;
+      max-height: calc(100vh - 120px); overflow-y: auto; padding-right: 0.5rem;
+      border-right: 1px solid var(--linha); }
+    .ix-titulo { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--tinta-fraca); margin-bottom: 0.9rem; }
+    .ix-lista { list-style: none; counter-reset: ix; margin: 0 0 1.5rem; padding: 0; }
+    .ix-lista li { counter-increment: ix; }
+    .ix-lista a { display: flex; align-items: baseline; gap: 0.5rem;
+      padding: 0.42rem 0.6rem 0.42rem 0.5rem; font-size: 0.8rem; line-height: 1.35;
+      color: var(--tinta-med); text-decoration: none; border-left: 2px solid transparent;
+      transition: color .12s, border-color .12s, background .12s; }
+    .ix-lista a:hover { color: var(--petroleo); background: rgba(15,41,60,0.045); }
+    .ix-lista a.ativo { color: var(--petroleo); font-weight: 600;
+      border-left-color: var(--vermelho); background: rgba(209,4,4,0.05); }
+    .ix-ponto { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+      transform: translateY(-1px); }
+    .ix-atual    { background: var(--vermelho); }
+    .ix-entregue { background: var(--petroleo-cl); }
+    .ix-proposta { background: var(--verde); }
+    .ix-decisao  { background: var(--petroleo); }
+    .ix-guia     { background: var(--linha-forte); }
+    .ix-legenda { border-top: 1px solid var(--linha); padding-top: 0.9rem; }
+    .ix-legenda p { display: flex; align-items: center; gap: 0.5rem; font-size: 0.72rem;
+      color: var(--tinta-fraca); font-family: 'Archivo', sans-serif; margin-bottom: 0.4rem; }
+
+    /* ---------- abertura ---------- */
+    .hero { background: var(--petroleo); border-radius: 0; padding: 3.25rem 3rem;
+      box-shadow: none; border-top: 3px solid var(--vermelho); }
+    .hero::after { display: none; }
+    .hero-title { font-family: 'Archivo', sans-serif; font-size: 2.6rem; font-weight: 800;
+      letter-spacing: -1.2px; line-height: 1.08; }
+    .hero-subtitle { font-family: 'Source Serif 4', serif; font-size: 1.08rem;
+      color: #C3D2DC; max-width: 62ch; }
+    .hero-meta { border-top-color: rgba(255,255,255,0.16); font-family: 'Archivo', sans-serif;
+      font-size: 0.8rem; color: #AFC2CE; }
+    .hero-meta strong { color: #E88A8A; }
+
+    /* ---------- seções como matéria, não como cartão ---------- */
+    .card { background: transparent; border: 0; border-radius: 0; box-shadow: none;
+      border-bottom: 1px solid var(--linha); padding: 3.25rem 0 3rem; margin: 0; }
+    .card:last-of-type { border-bottom: 0; }
+    .card.sec-atual, .card.sec-entregue, .card.sec-proposta,
+    .card.sec-decisao, .guia { border-left: 0; }
+    .card[class*="sec-"]::before, .guia::before { content: ''; display: block;
+      width: 46px; height: 3px; margin-bottom: 1.4rem; background: var(--linha-forte); }
+    .sec-atual::before    { background: var(--vermelho) !important; }
+    .sec-entregue::before { background: var(--petroleo-cl) !important; }
+    .sec-proposta::before { background: var(--verde) !important; }
+    .sec-decisao::before  { background: var(--petroleo) !important; }
+
+    .section-title { font-family: 'Archivo', sans-serif; font-size: 1.85rem; font-weight: 700;
+      letter-spacing: -0.7px; line-height: 1.18; color: var(--petroleo);
+      margin-bottom: 1.35rem; }
+    .h-bloco { font-family: 'Archivo', sans-serif; font-size: 1.02rem; font-weight: 700;
+      color: var(--petroleo); letter-spacing: -0.1px; margin: 2.25rem 0 1rem; }
+    .card > p, .card > ul, .card > ol { max-width: 68ch; }
+    .card > p { margin-bottom: 1.15rem; }
+
+    .sec-pill { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.03em;
+      border-radius: 3px; padding: 0.3rem 0.6rem; }
+    .sec-pill-atual    { background: #FBE9E9; color: #9A0404; border-color: #EEC2C2; }
+    .sec-pill-entregue { background: #E8EFF4; color: #1C4257; border-color: #C3D4DF; }
+    .sec-pill-proposta { background: #E8F3EE; color: #0F4C36; border-color: #BCDCCD; }
+    .sec-pill-decisao  { background: #E9E5E0; color: #0F293C; border-color: #D2C8BD; }
+    .mini-pill { border-radius: 3px; background: #E8F3EE; color: #0F4C36;
+      border-color: #BCDCCD; font-family: 'Archivo', sans-serif; }
+
+    /* ---------- guia de leitura ---------- */
+    .guia-item { background: var(--branco); border-color: var(--linha); border-radius: 4px; }
+    .guia-item p { font-family: 'Source Serif 4', serif; font-size: 0.92rem; }
+    .guia-atual    { border-top-color: var(--vermelho); }
+    .guia-entregue { border-top-color: var(--petroleo-cl); }
+    .guia-proposta { border-top-color: var(--verde); }
+    .guia-decisao  { border-top-color: var(--petroleo); }
+    .guia-nota { background: #F3F7F5; border-color: #C9E0D5;
+      border-left-color: var(--verde); border-radius: 4px; }
+    .guia-nota p { font-family: 'Source Serif 4', serif; color: #14402F; }
+    .guia-nota strong { color: #0B2C20; }
+    .guia-intro { font-family: 'Source Serif 4', serif; color: var(--tinta-med); }
+
+    /* ---------- números ---------- */
+    .kpi-grid { gap: 0; border-top: 1px solid var(--linha);
+      border-bottom: 1px solid var(--linha); }
+    .kpi-card { background: transparent; border: 0; border-right: 1px solid var(--linha);
+      border-radius: 0; box-shadow: none; padding: 1.5rem 1.4rem; }
+    .kpi-card:last-child { border-right: 0; }
+    .kpi-value { font-family: 'JetBrains Mono', monospace; color: var(--petroleo);
+      font-variant-numeric: tabular-nums; letter-spacing: -0.03em; }
+    .kpi-label { font-size: 0.68rem; letter-spacing: 0.09em; text-transform: uppercase;
+      color: var(--tinta-fraca); font-weight: 600; }
+    .kpi-sub { font-family: 'Source Serif 4', serif; color: var(--tinta-med); }
+
+    .metric-tile { background: var(--branco); border-color: var(--linha); border-radius: 4px; }
+    .metric-tile b { font-family: 'JetBrains Mono', monospace; color: var(--petroleo);
+      font-variant-numeric: tabular-nums; }
+    .metric-tile span { font-family: 'Source Serif 4', serif; color: var(--tinta-med); }
+
+    /* ---------- tabelas ---------- */
+    table { font-family: 'Archivo', sans-serif !important; font-size: 0.86rem !important; }
+    table th { text-transform: none !important; letter-spacing: 0.01em !important;
+      font-size: 0.74rem !important; font-weight: 600 !important;
+      color: var(--tinta-fraca) !important; border-bottom-color: var(--linha-forte) !important; }
+    table td { border-bottom-color: var(--linha) !important; }
+    .tbl-preco tr.destaque td { background: #F0F6F3; }
+    .tbl-preco tr.total td { background: var(--papel-fundo); color: var(--petroleo); }
+
+    /* ---------- listas e blocos herdados ---------- */
+    .tl-items li, .tl-items li strong { font-family: 'Source Serif 4', serif; }
+    .tl-items li strong { color: var(--petroleo); font-weight: 600; }
+    .tl-items li::before { background: var(--linha-forte); }
+    .tl-date { font-size: 0.7rem; letter-spacing: 0.09em; text-transform: uppercase;
+      color: var(--vermelho); font-weight: 700; }
+    .ebar-fill { background: var(--petroleo) !important; }
+    .ebar-label span { font-family: 'Source Serif 4', serif; }
+    .fonte { font-size: 0.76rem; color: var(--tinta-fraca); }
+    .audit-alert-box { background: #FDF0F0; border-color: #EEC2C2;
+      border-left-color: var(--vermelho); border-radius: 4px; }
+    .audit-alert-title { color: #9A0404; }
+    code { background: var(--papel-fundo); color: var(--petroleo-med); border-radius: 3px; }
+
+    footer { background: var(--petroleo); color: #AFC2CE; border-top: 3px solid var(--vermelho);
+      margin-top: 3.5rem; font-family: 'Archivo', sans-serif; }
+
+    /* ---------- responsivo ---------- */
+    @media (max-width: 1040px) {
+      .folha { grid-template-columns: 1fr; gap: 1.75rem; padding: 1.5rem 1.25rem 0; }
+      .indice { position: static; max-height: none; border-right: 0;
+        border-bottom: 1px solid var(--linha); padding-bottom: 1.1rem; }
+      .ix-lista { columns: 2; column-gap: 1.25rem; margin-bottom: 1rem; }
+      .ix-legenda { display: flex; flex-wrap: wrap; gap: 0 1.1rem; }
+      .kpi-card { border-bottom: 1px solid var(--linha); }
+    }
+    @media (max-width: 680px) {
+      body { font-size: 0.98rem; }
+      .hero { padding: 2rem 1.35rem; }
+      .hero-title { font-size: 1.75rem; }
+      .section-title { font-size: 1.4rem; }
+      .card { padding: 2.25rem 0 2rem; }
+      .ix-lista { columns: 1; }
+      .navbar { padding: 0.7rem 1rem; }
+    }
+    @media print {
+      .indice { display: none; }
+      .folha { display: block; max-width: none; padding: 0; }
+      .navbar { position: static; }
+      .card { break-inside: avoid; }
+    }
+
+
+    /* ---------- ajustes finos ---------- */
+    code { font-size: 0.8em; padding: 0.1em 0.34em; }
+    .section-title { max-width: 72ch; }
+    .card > p[style*="text-muted"], .guia-intro { font-size: 1rem; color: var(--tinta-med); }
+    .ix-lista a:focus-visible, .nav-link:focus-visible { outline: 2px solid var(--vermelho);
+      outline-offset: 2px; }
+    html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+
+    /* ---------- contenção horizontal ---------- */
+    .scroll-x { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
+    .navbar { flex-wrap: wrap; }
+    .nav-tags { flex-wrap: wrap; min-width: 0; }
+    img, table { max-width: 100%; }
+    @media (max-width: 680px) {
+      .navbar { gap: 0.6rem; }
+      .nav-tags { width: 100%; }
+      .badge, .nav-link { font-size: 0.66rem; padding: 0.24rem 0.5rem; }
+    }
+
   </style>
 </head>
 <body>
@@ -696,12 +927,44 @@
     </div>
     <div class="nav-tags">
       <span class="badge badge-gold">Diagnóstico &bull; Versão 2.0 Auditada</span>
-      <span class="badge badge-blue">Meta Saving: 30%</span>
+      <span class="badge badge-blue">Meta de economia: 30%</span>
       <a class="nav-link" href="conferencia-defasagem-tektron.html">Conferência da defasagem &rarr;</a>
     </div>
   </header>
 
-  <main class="container">
+  <div class="folha">
+      <nav class="indice" aria-label="Índice do documento">
+        <p class="ix-titulo">Neste documento</p>
+        <ol class="ix-lista">
+        <li><a href="#como-ler-este-documento" data-alvo="como-ler-este-documento"><span class="ix-ponto ix-guia"></span>Como ler este documento</a></li>
+        <li><a href="#panorama" data-alvo="panorama"><span class="ix-ponto ix-guia"></span>Panorama da carteira</a></li>
+        <li><a href="#como-a-auditoria-foi-conduzida" data-alvo="como-a-auditoria-foi-conduzida"><span class="ix-ponto ix-atual"></span>Como a auditoria foi conduzida</a></li>
+        <li><a href="#o-diagnostico-real-os-dois-gargalos-que-consom" data-alvo="o-diagnostico-real-os-dois-gargalos-que-consom"><span class="ix-ponto ix-atual"></span>Os dois gargalos do dia a dia</a></li>
+        <li><a href="#quadro-oficial-de-prestadoras-homologadas" data-alvo="quadro-oficial-de-prestadoras-homologadas"><span class="ix-ponto ix-atual"></span>Prestadoras homologadas</a></li>
+        <li><a href="#os-seis-maiores-gargalos-operacionais-e-riscos" data-alvo="os-seis-maiores-gargalos-operacionais-e-riscos"><span class="ix-ponto ix-atual"></span>Seis gargalos e riscos de campo</a></li>
+        <li><a href="#o-pipeline-mensal-de-fechamento-em-sete-etapas" data-alvo="o-pipeline-mensal-de-fechamento-em-sete-etapas"><span class="ix-ponto ix-atual"></span>O pipeline mensal de fechamento</a></li>
+        <li><a href="#nova-arquitetura-de-governanca-digital" data-alvo="nova-arquitetura-de-governanca-digital"><span class="ix-ponto ix-proposta"></span>Nova arquitetura de governança digital</a></li>
+        <li><a href="#registro-de-atividades-nos-primeiros-cinco-dia" data-alvo="registro-de-atividades-nos-primeiros-cinco-dia"><span class="ix-ponto ix-entregue"></span>Registro de atividades</a></li>
+        <li><a href="#painel-de-esforco-o-que-foi-processado-e-produ" data-alvo="painel-de-esforco-o-que-foi-processado-e-produ"><span class="ix-ponto ix-entregue"></span>Painel de esforço</a></li>
+        <li><a href="#frente-de-relacionamento-e-base-de-contatos" data-alvo="frente-de-relacionamento-e-base-de-contatos"><span class="ix-ponto ix-entregue"></span>Frente de relacionamento</a></li>
+        <li><a href="#convergencia-de-demandas-e-vazio-de-registro" data-alvo="convergencia-de-demandas-e-vazio-de-registro"><span class="ix-ponto ix-atual"></span>Convergência de demandas e vazio de registro</a></li>
+        <li><a href="#decisoes-solicitadas-governanca-da-informacao" data-alvo="decisoes-solicitadas-governanca-da-informacao"><span class="ix-ponto ix-decisao"></span>Governança da informação</a></li>
+        <li><a href="#como-este-diagnostico-foi-produzido-com-inteli" data-alvo="como-este-diagnostico-foi-produzido-com-inteli"><span class="ix-ponto ix-entregue"></span>Produção com inteligência artificial</a></li>
+        <li><a href="#planos-claude-comparativo-e-recomendacao" data-alvo="planos-claude-comparativo-e-recomendacao"><span class="ix-ponto ix-proposta"></span>Planos Claude: comparativo e recomendação</a></li>
+        <li><a href="#custo-de-operacao-dos-agentes-na-api" data-alvo="custo-de-operacao-dos-agentes-na-api"><span class="ix-ponto ix-proposta"></span>Custo de operação dos agentes na API</a></li>
+        <li><a href="#custo-total-da-infraestrutura-do-sistema" data-alvo="custo-total-da-infraestrutura-do-sistema"><span class="ix-ponto ix-proposta"></span>Custo total da infraestrutura do sistema</a></li>
+        <li><a href="#solicitacao-a-diretoria" data-alvo="solicitacao-a-diretoria"><span class="ix-ponto ix-decisao"></span>Solicitação à diretoria</a></li>
+        <li><a href="#decisoes-e-encaminhamentos-com-a-diretoria-est" data-alvo="decisoes-e-encaminhamentos-com-a-diretoria-est"><span class="ix-ponto ix-decisao"></span>Decisões e encaminhamentos</a></li>
+        </ol>
+        <div class="ix-legenda">
+          <p><span class="ix-ponto ix-atual"></span>Situação atual</p>
+          <p><span class="ix-ponto ix-entregue"></span>Já entregue</p>
+          <p><span class="ix-ponto ix-proposta"></span>Proposta</p>
+          <p><span class="ix-ponto ix-decisao"></span>Decisão</p>
+        </div>
+      </nav>
+
+    <main class="corpo">
 
     <!-- Hero Header -->
     <section class="hero">
@@ -718,7 +981,7 @@
     </section>
 
     <!-- Como ler este documento -->
-    <section class="card guia">
+    <section class="card guia" id="como-ler-este-documento">
       <h3 class="section-title">Como ler este documento</h3>
       <p class="guia-intro">
         O documento reúne quatro tipos de conteúdo, e eles não têm o mesmo peso. Cada seção traz,
@@ -760,7 +1023,7 @@
     </section>
 
     <!-- KPI Grid -->
-    <section class="kpi-grid">
+    <section class="kpi-grid" id="panorama">
       <div class="kpi-card">
         <div class="kpi-label">Condomínios Ativos</div>
         <div class="kpi-value">137</div>
@@ -798,14 +1061,14 @@
       <div class="audit-alert-title">
         <span>⚠️</span> <strong>Achado Crítico de Auditoria: A Distorção do Consolidado Herdado da Gestão Anterior</strong>
       </div>
-      <p style="font-size: 0.9rem; color: #1e3a8a;">
+      <p style="font-size: 0.9rem; color: #0F293C;">
         O número que circulava como referência financeira do setor estava
         <strong>R$ 19.228,49 abaixo do valor real</strong> — uma defasagem de 11,4%. A seguir, como se
         chegou a essa conclusão.
       </p>
     </section>
 
-    <section class="card sec-atual">
+    <section class="card sec-atual" id="como-a-auditoria-foi-conduzida">
       <h3 class="section-title">Como a auditoria foi conduzida<span class="sec-pill sec-pill-atual">Situação atual</span></h3>
 
       <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
@@ -817,7 +1080,7 @@
       <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-bottom: 0.9rem;">
         Etapa 1 — Entendimento da estrutura do arquivo
       </h4>
-      <p style="font-size: 0.92rem; color: #334155; margin-bottom: 1.25rem;">
+      <p style="font-size: 0.92rem; color: #2C3842; margin-bottom: 1.25rem;">
         A planilha opera em duas camadas que deveriam espelhar uma à outra. A aba <code>2026</code> é a
         <strong>mestra</strong>: cada linha é um condomínio, com pares de colunas
         <em>EMPRESA + VALOR</em> para cada um dos 7 serviços. As demais abas
@@ -831,7 +1094,7 @@
       <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-bottom: 0.9rem;">
         Etapa 2 — Reconciliação cruzada, registro por registro
       </h4>
-      <p style="font-size: 0.92rem; color: #334155; margin-bottom: 0.75rem;">
+      <p style="font-size: 0.92rem; color: #2C3842; margin-bottom: 0.75rem;">
         Cada par <em>condomínio × serviço</em> da aba mestra foi confrontado com o mesmo par na aba de
         serviço correspondente. O processo foi automatizado para eliminar erro de conferência manual e
         aplicou cinco tratamentos antes da comparação:
@@ -860,14 +1123,14 @@
       <div class="metric-grid" style="margin-bottom: 1.5rem;">
         <div class="metric-tile"><b>R$ 168.135,36</b><span>Valor que a aba <code>valor total</code> informava</span></div>
         <div class="metric-tile"><b>R$ 187.363,85</b><span>Soma real das linhas da aba mestra <code>2026</code></span></div>
-        <div class="metric-tile" style="border-color: #fecaca; background: #fef2f2;"><b style="color: var(--danger);">R$ 19.228,49</b><span>Defasagem apurada — 11,4% a menos</span></div>
+        <div class="metric-tile" style="border-color: #F3C6C6; background: #FDF0F0;"><b style="color: var(--danger);">R$ 19.228,49</b><span>Defasagem apurada — 11,4% a menos</span></div>
       </div>
 
-      <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-left: 5px solid var(--accent); border-radius: 8px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem;">
+      <div style="background: #F1F5F8; border: 1px solid #CBD9E3; border-left: 5px solid var(--accent); border-radius: 8px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem;">
         <p style="font-size: 0.93rem; font-weight: 700; color: var(--primary); margin-bottom: 0.6rem;">
           A defasagem está aberta para conferência &mdash; em documento próprio
         </p>
-        <p style="font-size: 0.89rem; color: #1e3a8a; margin-bottom: 0.6rem;">
+        <p style="font-size: 0.89rem; color: #0F293C; margin-bottom: 0.6rem;">
           Nenhum número desta auditoria precisa ser aceito por confiança. A apuração completa está no
           anexo técnico <strong>Conferência da Defasagem</strong>: a comparação das três camadas
           serviço por serviço, os <strong>61 lançamentos divergentes com o número da linha de origem
@@ -875,16 +1138,16 @@
           <code>Conferencia_Defasagem_2026.xlsx</code>, construída com fórmulas vivas para que o
           cálculo possa ser refeito do zero.
         </p>
-        <p style="font-size: 0.89rem; color: #1e3a8a; margin-bottom: 0.9rem;">
+        <p style="font-size: 0.89rem; color: #0F293C; margin-bottom: 0.9rem;">
           O anexo também expõe o achado que o total geral esconde: <strong>em Prumadas a relação se
           inverte</strong> &mdash; a aba mestra registra R$ 13.439,27 <em>a menos</em> que a aba de
           serviço. As pontas se compensam, e a divergência bruta entre as camadas chega a
           <strong>R$ 46.107,25</strong> antes de se anular até os R$ 19.228 líquidos.
         </p>
-        <a class="nav-link" style="color: var(--accent); background: #dbeafe; border-color: #93c5fd; padding: 0.5rem 1.1rem; display: inline-block; font-size: 0.82rem;" href="conferencia-defasagem-tektron.html">Abrir a conferência da defasagem &rarr;</a>
+        <a class="nav-link" style="color: var(--accent); background: #DEE8EF; border-color: #9FB9CA; padding: 0.5rem 1.1rem; display: inline-block; font-size: 0.82rem;" href="conferencia-defasagem-tektron.html">Abrir a conferência da defasagem &rarr;</a>
       </div>
 
-      <p style="font-size: 0.92rem; color: #334155; margin-bottom: 0.75rem;">
+      <p style="font-size: 0.92rem; color: #2C3842; margin-bottom: 0.75rem;">
         A diferença não vem de um erro único de digitação: ela é o acúmulo de registros que existiam na
         operação mas não chegavam ao consolidado. Além da defasagem, a reconciliação expôs
         <strong>32 divergências entre as duas camadas da planilha</strong>:
@@ -907,7 +1170,7 @@
       <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-bottom: 0.9rem;">
         Etapa 4 — Correção do dimensionamento da carteira
       </h4>
-      <p style="font-size: 0.92rem; color: #334155; margin-bottom: 1rem;">
+      <p style="font-size: 0.92rem; color: #2C3842; margin-bottom: 1rem;">
         O saneamento também corrigiu a dimensão do que se acreditava gerir. Os números que circulavam
         internamente não resistiram à conferência:
       </p>
@@ -927,25 +1190,25 @@
               <td style="padding: 0.65rem 0.75rem;">Condomínios</td>
               <td style="padding: 0.65rem 0.75rem; text-align: right; font-family: 'JetBrains Mono', monospace;">135</td>
               <td style="padding: 0.65rem 0.75rem; text-align: right; font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--primary);">137</td>
-              <td style="padding: 0.65rem 0.75rem; color: #475569;">Dois postos existiam só nas abas de serviço</td>
+              <td style="padding: 0.65rem 0.75rem; color: #4C5862;">Dois postos existiam só nas abas de serviço</td>
             </tr>
             <tr style="border-bottom: 1px solid var(--border);">
               <td style="padding: 0.65rem 0.75rem;">Serviços contratados</td>
               <td style="padding: 0.65rem 0.75rem; text-align: right; font-family: 'JetBrains Mono', monospace;">521</td>
               <td style="padding: 0.65rem 0.75rem; text-align: right; font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--primary);">513</td>
-              <td style="padding: 0.65rem 0.75rem; color: #475569;">Linhas de total e linhas compostas contadas como serviço</td>
+              <td style="padding: 0.65rem 0.75rem; color: #4C5862;">Linhas de total e linhas compostas contadas como serviço</td>
             </tr>
             <tr style="border-bottom: 1px solid var(--border);">
               <td style="padding: 0.65rem 0.75rem;">Prestadores</td>
               <td style="padding: 0.65rem 0.75rem; text-align: right; font-family: 'JetBrains Mono', monospace;">30</td>
               <td style="padding: 0.65rem 0.75rem; text-align: right; font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--primary);">17</td>
-              <td style="padding: 0.65rem 0.75rem; color: #475569;">Grafias duplicadas, sufixos de escopo e colaboradores registrados no lugar da razão social</td>
+              <td style="padding: 0.65rem 0.75rem; color: #4C5862;">Grafias duplicadas, sufixos de escopo e colaboradores registrados no lugar da razão social</td>
             </tr>
             <tr>
               <td style="padding: 0.65rem 0.75rem;">Serviços em cortesia</td>
               <td style="padding: 0.65rem 0.75rem; text-align: right; font-family: 'JetBrains Mono', monospace;">—</td>
               <td style="padding: 0.65rem 0.75rem; text-align: right; font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--primary);">104</td>
-              <td style="padding: 0.65rem 0.75rem; color: #475569;">Nunca foram classificados: a planilha apenas deixava a célula de valor vazia</td>
+              <td style="padding: 0.65rem 0.75rem; color: #4C5862;">Nunca foram classificados: a planilha apenas deixava a célula de valor vazia</td>
             </tr>
           </tbody>
         </table>
@@ -962,15 +1225,15 @@
     </section>
 
     <!-- Os Dois Gargalos Reais do Gestor -->
-    <section class="card sec-atual">
+    <section class="card sec-atual" id="o-diagnostico-real-os-dois-gargalos-que-consom">
       <h3 class="section-title">O diagnóstico real: os dois gargalos que consomem o dia do analista<span class="sec-pill sec-pill-atual">Situação atual</span></h3>
-      <p style="color: #475569; font-size: 0.95rem;">
+      <p style="color: #4C5862; font-size: 0.95rem;">
         Historicamente, os serviços quarteirizados foram tratados na Tektron como "brinde" ou moeda de troca comercial. Isso gerou uma rotina sufocada por duas ineficiências graves:
       </p>
       <div class="two-bottlenecks-grid">
         <div class="bottleneck-box">
           <h4>Gargalo 1 — Cotação Manual (Consome ≈80% do Tempo)</h4>
-          <p style="font-size: 0.875rem; color: #475569; margin-bottom: 0.5rem;">
+          <p style="font-size: 0.875rem; color: #4C5862; margin-bottom: 0.5rem;">
             Cada condomínio novo demandava uma visita do prestador, que "escolhia" um preço arbitrário em vez de calculá-lo tecnicamente. Em seguida vinha uma barganha informal ("faço mais barato se me der outros postos"), criando dívida moral e amarrações com fornecedores.
           </p>
           <div class="highlight-box action">
@@ -979,7 +1242,7 @@
         </div>
         <div class="bottleneck-box">
           <h4>Gargalo 2 — Qualidade Reativa (Reclamação vs. Prevenção)</h4>
-          <p style="font-size: 0.875rem; color: #475569; margin-bottom: 0.5rem;">
+          <p style="font-size: 0.875rem; color: #4C5862; margin-bottom: 0.5rem;">
             O síndico ligava furioso cobrando serviço não realizado agendado há 6 meses. O gestor só descobria o atraso quando a reclamação já havia explodido na mesa da diretoria, gerando atrito comercial agudo.
           </p>
           <div class="highlight-box action">
@@ -992,7 +1255,7 @@
 
     <!-- Gargalos Sensíveis Mapeados -->
       <!-- ================= QUADRO OFICIAL DE PRESTADORAS ================= -->
-  <section class="card sec-atual">
+  <section class="card sec-atual" id="quadro-oficial-de-prestadoras-homologadas">
     <h3 class="section-title">Quadro oficial de prestadoras homologadas<span class="sec-pill sec-pill-atual">Situação atual</span></h3>
     <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
       A matriz oficial da supervisão fecha o quadro em <strong>17 prestadoras ativas</strong>,
@@ -1075,27 +1338,27 @@
           <tr style="border-bottom: 1px solid var(--border);">
             <td style="padding: 0.65rem 0.75rem;"><code>Royal Prime</code> e <code>Royal</code></td>
             <td style="padding: 0.65rem 0.75rem; font-weight: 600; color: var(--primary);">Royal</td>
-            <td style="padding: 0.65rem 0.75rem; color: #475569;">Mesma empresa em duas grafias — contava como duas</td>
+            <td style="padding: 0.65rem 0.75rem; color: #4C5862;">Mesma empresa em duas grafias — contava como duas</td>
           </tr>
           <tr style="border-bottom: 1px solid var(--border);">
             <td style="padding: 0.65rem 0.75rem;"><code>Prestativa</code> e <code>A Prestativa</code></td>
             <td style="padding: 0.65rem 0.75rem; font-weight: 600; color: var(--primary);">Prestativa</td>
-            <td style="padding: 0.65rem 0.75rem; color: #475569;">Mesma empresa em duas grafias — contava como duas</td>
+            <td style="padding: 0.65rem 0.75rem; color: #4C5862;">Mesma empresa em duas grafias — contava como duas</td>
           </tr>
           <tr style="border-bottom: 1px solid var(--border);">
             <td style="padding: 0.65rem 0.75rem;"><code>Elivaldo</code> e <code>Gilberto</code></td>
             <td style="padding: 0.65rem 0.75rem; font-weight: 600; color: var(--primary);">Talita</td>
-            <td style="padding: 0.65rem 0.75rem; color: #475569;">Nomes de pessoas lançados no lugar da razão social — ambos são da Talita Jardins</td>
+            <td style="padding: 0.65rem 0.75rem; color: #4C5862;">Nomes de pessoas lançados no lugar da razão social — ambos são da Talita Jardins</td>
           </tr>
           <tr style="border-bottom: 1px solid var(--border);">
             <td style="padding: 0.65rem 0.75rem;"><code>Gosta de Cristal</code></td>
             <td style="padding: 0.65rem 0.75rem; font-weight: 600; color: var(--primary);">Gota de Cristal</td>
-            <td style="padding: 0.65rem 0.75rem; color: #475569;">Erro de digitação no cadastro</td>
+            <td style="padding: 0.65rem 0.75rem; color: #4C5862;">Erro de digitação no cadastro</td>
           </tr>
           <tr>
             <td style="padding: 0.65rem 0.75rem;"><code>Grupo F</code></td>
             <td style="padding: 0.65rem 0.75rem; font-weight: 600; color: var(--primary);">Grupo Fibra</td>
-            <td style="padding: 0.65rem 0.75rem; color: #475569;">Sigla abreviada usada como razão social</td>
+            <td style="padding: 0.65rem 0.75rem; color: #4C5862;">Sigla abreviada usada como razão social</td>
           </tr>
         </tbody>
       </table>
@@ -1110,7 +1373,7 @@
     </div>
   </section>
 
-  <section class="card sec-atual">
+  <section class="card sec-atual" id="os-seis-maiores-gargalos-operacionais-e-riscos">
       <h3 class="section-title">Os seis maiores gargalos operacionais e riscos de campo<span class="sec-pill sec-pill-atual">Situação atual</span></h3>
       <div class="gargalos-grid">
 
@@ -1211,9 +1474,9 @@
     </section>
 
     <!-- Pipeline 7 Etapas -->
-    <section class="card sec-atual">
+    <section class="card sec-atual" id="o-pipeline-mensal-de-fechamento-em-sete-etapas">
       <h3 class="section-title">O pipeline mensal de fechamento em sete etapas auditáveis<span class="sec-pill sec-pill-atual">Situação atual</span></h3>
-      <p style="color: #475569; font-size: 0.95rem;">
+      <p style="color: #4C5862; font-size: 0.95rem;">
         Fluxo obrigatório que rege todas as medições para pagamento no dia 13 (NF do prestador até dia 05; lote à Dayane até dia 06):
       </p>
 
@@ -1257,9 +1520,9 @@
     </section>
 
     <!-- Nova Arquitetura em Camadas -->
-    <section class="card sec-proposta">
+    <section class="card sec-proposta" id="nova-arquitetura-de-governanca-digital">
       <h3 class="section-title">Nova arquitetura de governança digital<span class="sec-pill sec-pill-proposta">Proposta</span></h3>
-      <p style="color: #475569; font-size: 0.95rem;">
+      <p style="color: #4C5862; font-size: 0.95rem;">
         Transição de planilhas manuais para uma estrutura de governança digital em camadas, evitando duplicidade e retrabalho:
       </p>
 
@@ -1285,7 +1548,7 @@
 
     <!-- Decisões Solicitadas -->
       <!-- ================= REGISTRO DE ATIVIDADES ================= -->
-  <section class="card sec-entregue">
+  <section class="card sec-entregue" id="registro-de-atividades-nos-primeiros-cinco-dia">
     <h3 class="section-title">Registro de atividades nos primeiros cinco dias<span class="sec-pill sec-pill-entregue">Já entregue</span></h3>
     <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
       Cronologia do trabalho executado desde a assunção da função em 13/10/2026, da imersão
@@ -1399,7 +1662,7 @@
   </section>
 
   <!-- ================= PAINEL DE ESFORÇO ================= -->
-  <section class="card sec-entregue">
+  <section class="card sec-entregue" id="painel-de-esforco-o-que-foi-processado-e-produ">
     <h3 class="section-title">Painel de esforço: o que foi processado e produzido<span class="sec-pill sec-pill-entregue">Já entregue</span></h3>
     <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
       Dimensionamento objetivo do trabalho realizado no período de diagnóstico e transição.
@@ -1458,7 +1721,7 @@
   </section>
 
   <!-- ================= RELACIONAMENTO ================= -->
-  <section class="card sec-entregue">
+  <section class="card sec-entregue" id="frente-de-relacionamento-e-base-de-contatos">
     <h3 class="section-title">Frente de relacionamento e base de contatos<span class="sec-pill sec-pill-entregue">Já entregue</span></h3>
     <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
       A gestão anterior mantinha os contatos de prestadores e síndicos exclusivamente no WhatsApp
@@ -1508,7 +1771,7 @@
   </section>
 
     <!-- ================= CONVERGÊNCIA DE DEMANDAS ================= -->
-  <section class="card sec-atual">
+  <section class="card sec-atual" id="convergencia-de-demandas-e-vazio-de-registro">
     <h3 class="section-title">Convergência de demandas e vazio de registro<span class="sec-pill sec-pill-atual">Situação atual</span></h3>
     <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
       A função tornou-se o ponto único de convergência de demandas de cinco origens, sem canal
@@ -1526,7 +1789,7 @@
     <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-bottom: 0.9rem;">
       A infraestrutura real do departamento hoje
     </h4>
-    <p style="font-size: 0.92rem; color: #334155; margin-bottom: 1rem;">
+    <p style="font-size: 0.92rem; color: #2C3842; margin-bottom: 1rem;">
       O levantamento do canal corporativo de WhatsApp, realizado em 17/10, dimensionou o que
       sustenta a operação na prática:
     </p>
@@ -1538,7 +1801,7 @@
       <div class="metric-tile"><b>0</b><span>Protocolos, históricos ou prazos registrados</span></div>
     </div>
 
-    <p style="font-size: 0.92rem; color: #334155; margin-bottom: 1.25rem;">
+    <p style="font-size: 0.92rem; color: #2C3842; margin-bottom: 1.25rem;">
       Não existe canal único por prestadora: cada pessoa da empresa parceira abre uma conversa
       própria, e a tratativa de um mesmo assunto se fragmenta. Uma cobrança de documento feita ao
       financeiro de uma prestadora é invisível para quem fala com o operacional da mesma empresa.
@@ -1558,7 +1821,7 @@
       Caso Marfim — quatro falhas de processo em um único evento
     </h4>
 
-    <p style="font-size: 0.92rem; color: #334155; margin-bottom: 0.5rem;">
+    <p style="font-size: 0.92rem; color: #2C3842; margin-bottom: 0.5rem;">
       Demanda recebida da representação jurídica da Tektron, encaminhada por fiscal de campo em 16/10,
       classificada como urgente:
     </p>
@@ -1579,7 +1842,7 @@
           o prazo jurídico corre.</li>
     </ol>
 
-    <p style="font-size: 0.92rem; color: #334155; margin-bottom: 1rem;">
+    <p style="font-size: 0.92rem; color: #2C3842; margin-bottom: 1rem;">
       Nenhuma dessas quatro falhas é sobre o serviço prestado. Todas são sobre registro.
     </p>
 
@@ -1587,14 +1850,14 @@
       O que a base auditada já respondeu
     </h4>
 
-    <p style="font-size: 0.92rem; color: #334155; margin-bottom: 1rem;">
+    <p style="font-size: 0.92rem; color: #2C3842; margin-bottom: 1rem;">
       A consulta à base saneada devolveu, de imediato, a posição contratual do posto: o condomínio é
       atendido pela <strong>Royal</strong> em caixa de gordura, caixa d'água e dedetização, e a coluna
       de <strong>prumadas está vazia nos exercícios de 2024, 2025 e 2026</strong> — registro histórico
       contínuo de que o serviço objeto do litígio nunca integrou o escopo da Tektron naquele posto.
     </p>
 
-    <p style="font-size: 0.92rem; color: #334155; margin-bottom: 1rem;">
+    <p style="font-size: 0.92rem; color: #2C3842; margin-bottom: 1rem;">
       Para o período solicitado, o volume documental esperado é de <strong>32 ordens de serviço</strong>
       — 22 de caixa de gordura, 3 de caixa d'água e 7 de dedetização — e as notas fiscais correspondentes.
     </p>
@@ -1611,7 +1874,7 @@
   </section>
 
   <!-- ================= DECISÕES SOBRE GOVERNANÇA DA INFORMAÇÃO ================= -->
-  <section class="card sec-decisao">
+  <section class="card sec-decisao" id="decisoes-solicitadas-governanca-da-informacao">
     <h3 class="section-title">Decisões solicitadas: governança da informação<span class="sec-pill sec-pill-decisao">Decisão</span></h3>
 
     <div class="proposta-content">
@@ -1692,7 +1955,7 @@
   </section>
 
     <!-- ================= IA: MÉTODO, CUSTO E PROPOSTA ================= -->
-  <section class="card sec-entregue">
+  <section class="card sec-entregue" id="como-este-diagnostico-foi-produzido-com-inteli">
     <h3 class="section-title">Como este diagnóstico foi produzido com inteligência artificial<span class="sec-pill sec-pill-entregue">Já entregue</span></h3>
 
     <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
@@ -1760,7 +2023,7 @@
   </section>
 
   <!-- ================= PLANOS E PREÇOS ================= -->
-  <section class="card sec-proposta">
+  <section class="card sec-proposta" id="planos-claude-comparativo-e-recomendacao">
     <h3 class="section-title">Planos Claude: comparativo e recomendação<span class="sec-pill sec-pill-proposta">Proposta</span></h3>
 
     <p style="color: var(--text-muted); margin-bottom: 1.25rem;">
@@ -1826,7 +2089,7 @@
   </section>
 
   <!-- ================= CUSTO DE API ================= -->
-  <section class="card sec-proposta">
+  <section class="card sec-proposta" id="custo-de-operacao-dos-agentes-na-api">
     <h3 class="section-title">Custo de operação dos agentes na API<span class="sec-pill sec-pill-proposta">Proposta</span></h3>
 
     <p style="color: var(--text-muted); margin-bottom: 1.25rem;">
@@ -1904,7 +2167,7 @@
   </section>
 
   <!-- ================= CUSTO TOTAL DA INFRAESTRUTURA ================= -->
-  <section class="card sec-proposta">
+  <section class="card sec-proposta" id="custo-total-da-infraestrutura-do-sistema">
     <h3 class="section-title">Custo total da infraestrutura do sistema<span class="sec-pill sec-pill-proposta">Proposta</span></h3>
 
     <div style="overflow-x: auto;">
@@ -1976,7 +2239,7 @@
   </section>
 
   <!-- ================= PEDIDO ================= -->
-  <section class="card sec-decisao">
+  <section class="card sec-decisao" id="solicitacao-a-diretoria">
     <h3 class="section-title">Solicitação à diretoria<span class="sec-pill sec-pill-decisao">Decisão</span></h3>
 
     <div class="proposta-content">
@@ -2032,7 +2295,7 @@
     </div>
   </section>
 
-  <section class="card sec-decisao">
+  <section class="card sec-decisao" id="decisoes-e-encaminhamentos-com-a-diretoria-est">
       <h3 class="section-title">Decisões e encaminhamentos com a diretoria estratégica<span class="sec-pill sec-pill-decisao">Decisão</span></h3>
       <div class="propostas-list">
         
@@ -2079,13 +2342,50 @@
       </div>
     </section>
 
-  </main>
+    </main>
+  </div>
 
   <footer>
     <p>Grupo Tektron &bull; Diretoria Estratégica &bull; Análise de Contratos e Serviços Quarteirizados</p>
     <p style="margin-top: 0.25rem; font-size: 0.75rem;">Elaborado por Cléber Donato &bull; Outubro de 2026 &bull; Versão 2.0 Auditada</p>
   </footer>
 
+
+
+  <script>
+    (function () {
+      var links = Array.prototype.slice.call(document.querySelectorAll('.ix-lista a'));
+      if (!links.length) return;
+      var pares = links.map(function (a) {
+        return { link: a, sec: document.getElementById(a.getAttribute('data-alvo')) };
+      }).filter(function (p) { return p.sec; });
+      if (!pares.length) return;
+
+      var pendente = false;
+
+      function marcar() {
+        pendente = false;
+        var limite = window.scrollY + 150;
+        var atual = pares[0];
+        pares.forEach(function (p) {
+          if (p.sec.getBoundingClientRect().top + window.scrollY <= limite) atual = p;
+        });
+        pares.forEach(function (p) {
+          p.link.classList.toggle('ativo', p === atual);
+        });
+      }
+
+      function agendar() {
+        if (pendente) return;
+        pendente = true;
+        window.requestAnimationFrame(marcar);
+      }
+
+      window.addEventListener('scroll', agendar, { passive: true });
+      window.addEventListener('resize', agendar, { passive: true });
+      marcar();
+    })();
+  </script>
 
 </body>
 </html>
