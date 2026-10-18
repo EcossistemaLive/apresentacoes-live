@@ -1163,23 +1163,49 @@
 
       <p style="font-size: 0.92rem; color: #2C3842; margin-bottom: 0.75rem;">
         A diferença não vem de um erro único de digitação: ela é o acúmulo de registros que existiam na
-        operação mas não chegavam ao consolidado. Além da defasagem, a reconciliação expôs
-        <strong>32 divergências entre as duas camadas da planilha</strong>:
+        operação mas não chegavam ao consolidado. A reconciliação apontou, inicialmente,
+        <strong>32 divergências entre as duas camadas</strong>. Reexaminadas uma a uma contra as regras
+        reais de contratação, <strong>a maior parte tem causa estrutural conhecida e não é erro de
+        cadastro</strong>:
       </p>
       <ul class="tl-items" style="margin-bottom: 1.25rem;">
-        <li><strong>18 divergências de prestador</strong> — o mesmo serviço, no mesmo condomínio, com
-            empresas diferentes conforme a aba consultada. No <em>Alegria</em>, a mestra aponta
-            Universal Services e a aba de serviço aponta TN. No <em>West House</em>, a inversão ocorre
-            em quatro serviços ao mesmo tempo. No <em>America Tower</em>, em três.</li>
-        <li><strong>10 divergências de valor</strong> — no <em>Goyazes</em>, a caixa d'água aparece a
-            R$ 1.200,00 na mestra e a R$ 630,97 na aba de serviço; a caixa de gordura, a R$ 900,00
-            contra R$ 636,02.</li>
-        <li><strong>4 serviços invisíveis</strong> — existem apenas na aba de serviço e não entram em
-            nenhum consolidado. Entre eles, a caixa de gordura do <em>The One</em> com A Prestativa,
+        <li><strong>12 trocas de prestadora</strong> &mdash; o mesmo serviço aparece com empresas
+            diferentes conforme a aba, mas <strong>com o valor idêntico nas duas</strong>. É a
+            substituição de fornecedor registrada em uma camada e não propagada para a outra: o
+            contrato e o preço não mudaram, mudou quem executa. No <em>America Tower</em>, a mestra já
+            registra a TN e a aba de serviço ainda registra a Royal, ambas a R$ 252,39 na caixa d'água.
+            Quando a troca ocorre no meio do mês, o valor ainda é rateado por dia entre as duas
+            empresas &mdash; e nenhuma das duas camadas comporta esse rateio.</li>
+        <li><strong>9 lançamentos de prumadas</strong> &mdash; explicados pela estrutura do serviço, que
+            tem três componentes (gordura, esgoto e pluvial) e só cabe uma vez na aba mestra. Somam
+            R$ 13.439,27 e são a causa integral da inversão descrita no anexo de conferência.</li>
+        <li><strong>5 divergências de valor efetivas</strong> &mdash; somam R$ 1.195,62 e se concentram
+            em <strong>dois condomínios</strong>. No <em>Goyazes</em>, a caixa d'água aparece a
+            R$ 1.200,00 na mestra e a R$ 630,97 na aba; no <em>Alegria</em>, a caixa de gordura a
+            R$ 419,00 contra R$ 701,08. O padrão sugere duas bases de preço convivendo: valor comercial
+            arredondado na mestra, valor de tabela com o reajuste de 4,26% na aba. Um sexto caso, no
+            <em>Atmosphere</em>, é diferença de R$ 1,00 por arredondamento.</li>
+        <li><strong>4 serviços invisíveis</strong> &mdash; existem apenas na aba de serviço e não entram
+            em nenhum consolidado. Entre eles, a caixa de gordura do <em>The One</em> com A Prestativa,
             de R$ 477,01.</li>
-        <li><strong>1 posto sem lastro</strong> — <em>Praça Sudoeste</em> soma R$ 7.300,00 na aba mestra
-            e aparece zerado em todas as abas de serviço.</li>
+        <li><strong>1 posto sem lastro</strong> &mdash; <em>Praça Sudoeste</em> soma R$ 7.300,00 na aba
+            mestra e aparece zerado em todas as abas de serviço.</li>
       </ul>
+
+      <div class="highlight-box action" style="margin-bottom: 1.5rem;">
+        <strong>O que a reclassificação muda.</strong> As 32 divergências da contagem inicial
+        incluíam <strong>sobreposição</strong>: quatro lançamentos do <em>Alegria</em> e do
+        <em>Goyazes</em> divergiam em prestadora <em>e</em> em valor, e entraram duas vezes na soma.
+        Descontada a sobreposição, restam <strong>30 situações distintas</strong>, das quais
+        <strong>21 têm explicação estrutural</strong> &mdash; troca de prestadora e serviço
+        multicomponente &mdash; e apenas <strong>5 exigem verificação de valor</strong>, em dois
+        condomínios. Isso não torna o problema menor: significa que a planilha
+        <strong>não comporta o que a operação faz</strong>. Ela não tem onde registrar um serviço com
+        três componentes, nem uma troca de fornecedor no meio do mês com rateio por dia, nem duas
+        empresas dividindo o mesmo posto. O que aparecia como erro de cadastro é, na maior parte,
+        <strong>operação real que não cabe na estrutura</strong> &mdash; e é exatamente isso que a
+        fonte única de verdade precisa resolver.
+      </div>
 
       <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-bottom: 0.9rem;">
         Etapa 4 — Correção do dimensionamento da carteira
@@ -1747,7 +1773,8 @@
           <li><strong>Auditoria completa da planilha de origem</strong>: 13 abas, 1.093 linhas e
               9.946 células reconciliadas uma a uma, aba mestra contra abas de serviço.</li>
           <li>Identificação da <strong>defasagem de R$ 19.228,49</strong> no consolidado herdado e de
-              <strong>32 divergências</strong> — 18 de prestador, 10 de valor e 4 serviços fora de
+              <strong>32 divergências</strong> — depois reclassificadas em 30 situações distintas:
+              12 trocas de prestadora, 9 lançamentos de prumadas, 5 de valor efetivas e 4 serviços fora de
               qualquer consolidado.</li>
           <li>Deduplicação do cadastro: o que constava como 30 prestadores são, de fato,
               <strong>17 empresas homologadas</strong>, confirmadas contra a matriz oficial da supervisão.</li>
