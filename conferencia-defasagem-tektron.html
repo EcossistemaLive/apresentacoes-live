@@ -505,15 +505,82 @@
           R$ 13.439,27 <em>a menos</em>.
         </p>
         <p>
-          As duas pontas se compensam parcialmente, e é exatamente isso que mascara o tamanho real do
-          problema. Somando as diferenças pelo valor absoluto, a divergência entre as camadas é de
-          <strong>R$ 46.107,25</strong>; ela se anula até os R$ 19.228 líquidos que apareciam no
-          consolidado.
+          As duas pontas se compensam parcialmente, e é exatamente isso que mascara o tamanho real
+          do problema. <strong>Divergência bruta</strong> é a soma das diferenças de cada serviço
+          <em>ignorando o sinal</em>: R$ 4.801,90 + R$ 8.975,17 + R$ 3.319,00 + R$ 13.439,27 +
+          R$ 2.836,88 + R$ 11.785,03 + R$ 950,00 = <strong>R$ 46.107,25</strong>. É o total de
+          valor que está registrado de forma diferente nas duas camadas &mdash; quanto seria preciso
+          corrigir para que elas passassem a coincidir.
+        </p>
+        <p>
+          Quando as diferenças são somadas <em>com</em> o sinal, os R$ 13.439,27 de Prumadas entram
+          como negativos e abatem parte dos outros seis. Sobram os <strong>R$ 19.228 líquidos</strong>,
+          que é o que aparecia no consolidado. <strong>O líquido mede o erro do total; o bruto mede o
+          erro da carteira.</strong> São R$ 26.878 de divergência que o total simplesmente não mostra.
         </p>
         <p>
           <strong>A consequência prática:</strong> um consolidado pode fechar “perto do certo” no
           total e estar errado em todas as linhas. Enquanto a conferência é feita apenas pelo total
           geral, nenhum dos dois erros aparece &mdash; e nenhum dos dois é corrigido.
+        </p>
+      </div>
+
+      <h4 class="sub-title" style="margin-top: 2rem;">A causa da inversão: prumadas não é um serviço só</h4>
+      <p class="p">
+        A inversão tem explicação exata, e ela não é erro de digitação nem valor divergente.
+        <strong>Prumadas são três serviços distintos</strong> &mdash; gordura, esgoto e pluvial
+        &mdash; cada um com preço próprio. Na aba de serviço, cada componente ocupa uma linha, e o
+        escopo aparece junto ao nome do fornecedor. Mas o condomínio é escrito
+        <strong>apenas na primeira linha</strong>: as seguintes ficam com a célula vazia, como se
+        fossem células mescladas.
+      </p>
+
+      <div class="scroll-x" style="margin-bottom: 1.1rem;">
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th class="num">Linha</th><th>Condomínio</th><th>Fornecedor</th>
+              <th class="num">Valor reajustado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="num mono-dim">6</td><td>Park dos Alpes</td><td>Royal &mdash; Gordura</td><td class="num">817,93</td></tr>
+            <tr style="background: #FDF0F0;"><td class="num mono-dim">7</td><td><em>(célula vazia)</em></td><td>Royal &mdash; Esgoto</td><td class="num">817,93</td></tr>
+            <tr style="background: #FDF0F0;"><td class="num mono-dim">8</td><td><em>(célula vazia)</em></td><td>Royal &mdash; Pluvial</td><td class="num">817,93</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="p">
+        Para quem olha na tela, é evidente que as três linhas são do Park dos Alpes. Para quem lê o
+        arquivo por programa, as linhas 7 e 8 são <strong>registros sem condomínio</strong> &mdash; e
+        um importador comum as descarta. O tratamento aplicado foi propagar o último nome visto para
+        baixo, de modo que a célula vazia herde o condomínio da linha anterior.
+      </p>
+
+      <div class="metric-grid" style="margin-bottom: 1.1rem;">
+        <div class="metric-tile"><b>22</b><span>Linhas na aba <code>Prumadas 26</code></span></div>
+        <div class="metric-tile"><b>10</b><span>Com o condomínio escrito &mdash; R$ 8.181,27</span></div>
+        <div class="metric-tile alerta"><b>12</b><span>Com a célula vazia &mdash; R$ 13.439,26</span></div>
+      </div>
+
+      <div class="verde">
+        <p class="nota-t">A conta fecha ao centavo</p>
+        <p>
+          A aba mestra tem <strong>uma única célula de prumadas por condomínio</strong>, e nela coube
+          somente o primeiro dos três componentes. Esgoto e pluvial existem apenas na aba de
+          detalhe. Por isso:
+        </p>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.86rem; line-height: 1.9;">
+          linhas com condomínio escrito &nbsp;&nbsp;R$&nbsp;&nbsp;8.181,27 &nbsp;=&nbsp; o que a aba mestra registra<br>
+          linhas com a célula vazia &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;R$&nbsp;13.439,26 &nbsp;=&nbsp; a diferença apurada<br>
+          soma &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;R$&nbsp;21.620,53 &nbsp;=&nbsp; o total da aba de serviço
+        </p>
+        <p>
+          Prumadas é a <strong>única aba com esse padrão</strong>. Nas outras seis, todas as linhas
+          têm o condomínio escrito, e por isso a mestra registra a mais em todas elas. É também o que
+          explica por que a inversão aparece em um único serviço: ali, um serviço de três componentes
+          tentou caber numa estrutura de planilha que previa um.
         </p>
       </div>
     </section>
