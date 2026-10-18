@@ -911,6 +911,19 @@
       .badge, .nav-link { font-size: 0.66rem; padding: 0.24rem 0.5rem; }
     }
 
+
+    /* ---------- selos: o cabeçalho é escuro, o corpo é claro ---------- */
+    .navbar .badge-gold { background: rgba(209,4,4,0.16); color: #FFC9C9;
+      border: 1px solid rgba(209,4,4,0.45); }
+    .navbar .badge-blue { background: rgba(255,255,255,0.1); color: #C7D6E0;
+      border: 1px solid rgba(255,255,255,0.2); }
+
+    .badge { font-weight: 600; letter-spacing: 0.01em; }
+    .badge-gold { background: #FBE9E9; color: #8F0404; border: 1px solid #EEC2C2; }
+    .badge-blue { background: #E4EDF3; color: #16425B; border: 1px solid #BDD1DE; }
+    .badge-green { background: #E6F2EC; color: #0F4C36; border: 1px solid #B9DACB; }
+    .badge-danger { background: #FBE4E4; color: #8F0404; border: 1px solid #EEB8B8; }
+
   </style>
 </head>
 <body>
@@ -1032,7 +1045,7 @@
       <div class="kpi-card">
         <div class="kpi-label">Serviços Sob Gestão</div>
         <div class="kpi-value">513</div>
-        <div class="kpi-sub">382 faturados + 104 cortesia + 27 conf.</div>
+        <div class="kpi-sub">382 faturados &middot; 104 cortesia &middot; 27 a confirmar</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-label">Prestadores Homologados</div>
@@ -1272,7 +1285,7 @@
           <span class="chip"><b>Planeta</b><span>54 vínculos</span></span>
           <span class="chip corrigido"><b>Prestativa</b><span>7 vínculos</span></span>
           <span class="chip corrigido"><b>Royal</b><span>46 vínculos</span></span>
-          <span class="chip"><b>TN</b><span>199 vínculos</span></span>
+          <span class="chip"><b>TN</b><span>198 vínculos</span></span>
           <span class="chip"><b>Universal</b><span>12 vínculos</span></span>
           <span class="chip"><b>Universo</b><span>13 vínculos</span></span>
         </div>
@@ -1368,7 +1381,7 @@
       <strong>Por que isso importa além da contagem.</strong> Com nomes duplicados, o custo de uma
       mesma empresa aparecia repartido em dois registros — impedindo ver o volume real contratado de
       cada parceiro e, com isso, qualquer negociação por pacote. Consolidado o quadro, a concentração
-      fica visível: a <strong>TN responde por 199 dos 513 serviços</strong>, quase 39% da carteira.
+      fica visível: a <strong>TN responde por 198 vínculos</strong> &mdash; 39% dos 509 pares condomínio&nbsp;×&nbsp;serviço registrados na aba mestra, contados pela coluna de prestador de cada um dos sete serviços, com as grafias já normalizadas.
       Esse é o número que define a prioridade da renegociação e o risco de dependência.
     </div>
   </section>
@@ -1389,7 +1402,17 @@
               <strong>Caso Real Documentado (The One):</strong> A empresa <em>A Prestativa</em> executou limpeza de prumadas em setembro por exigência da síndica, embora o serviço já tivesse sido pago em <strong>junho</strong>. A nota fiscal de <strong>R$ 3.058,54</strong> foi aceita e paga, porém a solução adotada foi a compensação temporal: o período para a próxima execução contratual deverá ser adiado proporcionalmente, resguardando o equilíbrio do contrato.
             </div>
             <div class="highlight-box info">
-              <strong>Achado Tático da Auditoria:</strong> Descobriu-se que o condomínio <em>The One</em> possui também um contrato de <strong>caixa de gordura com A Prestativa de R$ 477,01</strong> que constava apenas na aba de serviço e fora dos consolidados. Essa relação comercial integrada subsidia o alinhamento de cronograma com a síndica.
+              <strong>O que a auditoria encontrou:</strong> o condomínio <em>The One</em> tem um
+              segundo serviço com A Prestativa &mdash; limpeza de caixa de gordura, <strong>R$ 477,01
+              por mês</strong> &mdash; que aparece somente na aba de serviço da planilha e não entra em
+              nenhum consolidado. É um serviço ativo e faturado que estava <strong>invisível para o
+              controle gerencial e para a conferência do financeiro</strong>.<br><br>
+              <strong>Por que isso importa neste caso:</strong> o The One é o mesmo condomínio da nota
+              de R$ 3.058,54 recusada no fechamento, e A Prestativa é a mesma prestadora. A pendência
+              da prumada, portanto, não se dá numa relação pontual: há um serviço mensal em curso no
+              mesmo posto, com o mesmo fornecedor, que precisa seguir sendo executado e pago
+              normalmente enquanto a divergência se resolve. Tratar os dois assuntos como um só é o
+              que cria o risco de interromper um serviço regular por causa de uma pendência em outro.
             </div>
           </div>
         </div>
@@ -1460,13 +1483,36 @@
             <span class="badge badge-danger">Risco de Execução / Passivo</span>
           </div>
           <div class="gargalo-body">
-            <p><strong>O Problema:</strong> A planilha de controle da execução dos serviços de periodicidade trimestral e semestral — caixa d'água, dedetização, desratização, prumadas e vidros em altura — foi deixada <strong>desatualizada pela gestão anterior</strong>. Não há, hoje, registro confiável de quando cada um desses serviços foi executado pela última vez em cada posto.</p>
+            <p><strong>O Problema:</strong> a informação existe, o mecanismo é que não existe. A aba
+            <code>PROGRAMAÇÃO</code> da planilha mestra registra, posto a posto, os meses previstos de
+            cada serviço de periodicidade trimestral e semestral &mdash; caixa d'água, dedetização,
+            prumadas e vidros em altura &mdash; e as planilhas de pagamento de cada prestadora
+            registram o que foi efetivamente executado. O que não há é
+            <strong>controle com notificação</strong>: tudo depende de verificação e marcação manual.
+            A própria aba traz uma coluna de <em>status</em> preenchida à mão, hoje com
+            <strong>109 postos marcados “Ok”, 6 como “Atrasado” e 5 em branco</strong>.</p>
 
-            <p><strong>Por que é grave:</strong> são justamente os serviços de maior intervalo e maior risco técnico. Um serviço semestral esquecido só se revela seis meses depois — pela reclamação do síndico, ou por uma ocorrência em campo. Sem o controle, não há como saber se a carteira está em dia nem como provar que esteve.</p>
+            <p><strong>Por que é grave:</strong> para manter esse controle em dia, o analista precisa
+            acompanhar e cobrar, mês a mês, a execução de cada serviço em cada posto, junto a cada
+            prestadora. São <strong>677 execuções programadas ao longo do ano, em 120 condomínios</strong>
+            &mdash; e outros 17 postos da carteira sequer têm programação registrada. Nessa escala, o
+            acompanhamento manual não se sustenta: o que falha não é o registro, é o lembrete. E são
+            justamente os serviços de maior intervalo e maior risco técnico: um semestral esquecido só
+            se revela seis meses depois, pela reclamação do síndico ou por uma ocorrência em campo.</p>
 
-            <p><strong>O que isso exige agora:</strong> uma varredura completa de verificação junto às <strong>17 prestadoras homologadas</strong>, levantando a última execução de cada serviço em cada posto e, em paralelo, a situação documental de <strong>cada colaborador</strong> que essas empresas colocam em campo — ASO, ficha de EPI, registro em carteira e certificados de NR-33 e NR-35 conforme o serviço.</p>
+            <p><strong>O que isso exige agora:</strong> confrontar o previsto na aba
+            <code>PROGRAMAÇÃO</code> com o efetivamente pago nas planilhas de cada prestadora, fechando
+            o histórico de última execução por posto. Em paralelo, levantar a situação documental de
+            <strong>cada colaborador</strong> que essas empresas colocam em campo &mdash; ASO, ficha de
+            EPI, registro em carteira e certificados de NR-33 e NR-35 conforme o serviço.</p>
 
-            <p><strong>Encaminhamento:</strong> a verificação está sendo estruturada sobre a base saneada, que já recuperou a programação anual de <strong>227 vínculos</strong> com meses de execução definidos. O que falta é confrontar o previsto com o efetivamente realizado e reconstruir o histórico. Concluída a varredura, o controle passa a ser automático: alerta de proximidade, alerta de atraso e bloqueio de escalação de equipe sem documentação válida.</p>
+            <p><strong>Encaminhamento:</strong> a verificação está sendo estruturada sobre a base
+            saneada, que já recuperou a programação anual de <strong>227 vínculos</strong> com meses de
+            execução definidos. Concluída a varredura, a marcação manual deixa de ser necessária: o
+            sistema passa a emitir alerta de proximidade em D-30, alerta de atraso assim que o mês
+            previsto se encerra sem execução comprovada, e bloqueio de escalação de equipe sem
+            documentação válida. <strong>A coluna de status deixa de ser preenchida por alguém e passa
+            a ser consequência do que foi registrado.</strong></p>
           </div>
         </div>
 
@@ -2319,7 +2365,10 @@
           <div class="proposta-num">3</div>
           <div class="proposta-content">
             <h4>Alinhamento Operacional para o Caso The One (Prestativa)</h4>
-            <p>Formalização do adiamento da próxima execução de prumadas do condomínio (compensando a NF de R$ 3.058,54 paga em setembro) e monitoramento integrado do vínculo de caixa de gordura (R$ 477,01) junto à síndica.</p>
+            <p>Formalizar por escrito o adiamento da próxima execução de prumadas, compensando a
+            nota de R$ 3.058,54 recusada no fechamento, e manter o serviço mensal de caixa de gordura
+            (R$ 477,01) em execução e pagamento regulares &mdash; registrando-o no controle, já que
+            hoje não consta de nenhum consolidado.</p>
           </div>
         </div>
 

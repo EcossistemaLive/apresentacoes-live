@@ -6,16 +6,23 @@
   <title>Conferência da Defasagem do Consolidado 2026 | Grupo Tektron</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #0f2744; --primary-light: #1e3a8a; --accent: #2563eb; --accent-hover: #1d4ed8;
-      --success: #059669; --success-bg: #ecfdf5; --warning: #d97706; --warning-bg: #fffbeb;
-      --danger: #dc2626; --danger-bg: #fef2f2; --bg: #f8fafc; --card-bg: #ffffff;
-      --text-main: #0f172a; --text-muted: #64748b; --border: #e2e8f0;
-      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --petroleo: #0F293C; --petroleo-esc: #091825; --petroleo-med: #1C4257;
+      --petroleo-cl: #3E6E8E; --vermelho: #D10404; --vermelho-esc: #A00303;
+      --verde: #16694A;
+      --papel: #FBF7F3; --papel-fundo: #F2EBE3; --branco: #ffffff;
+      --tinta: #16212B; --tinta-med: #4C5862; --tinta-fraca: #5E6A75;
+      --linha: #E2DAD1; --linha-forte: #C9BDB0;
+
+      --primary: #0F293C; --primary-light: #1C4257; --accent: #D10404;
+      --accent-hover: #A00303; --success: #16694A; --success-bg: #EDF6F1;
+      --warning: #B45309; --warning-bg: #FDF6EC; --danger: #D10404;
+      --danger-bg: #FDF0F0; --bg: #FBF7F3; --card-bg: #ffffff;
+      --text-main: #16212B; --text-muted: #5E6A75; --border: #E2DAD1;
+      --shadow-sm: none; --shadow-md: 0 2px 8px rgb(15 41 60 / 0.07);
+      --shadow-lg: 0 10px 34px rgb(15 41 60 / 0.13);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg);
@@ -165,16 +172,145 @@
       .card { break-inside: avoid; box-shadow: none; }
       tr[data-t] { display: table-row !important; }
     }
+
+    /* ====================== CAMADA EDITORIAL — Grupo Tektron ====================== */
+    body { font-family: 'Source Serif 4', Georgia, serif; background: var(--papel);
+      color: var(--tinta); font-size: 1.02rem; line-height: 1.7; }
+    h1, h2, h3, h4, .ix-titulo, .badge, .nav-link, .filtro, .tag, .metric-tile b,
+    table.tbl, .nota-t, .contador, .passos, .fonte, .ix-lista, .hero-eyebrow {
+      font-family: 'Archivo', system-ui, sans-serif; }
+
+    .navbar { background: var(--petroleo); backdrop-filter: none;
+      border-bottom: 3px solid var(--vermelho); padding: 0.85rem 2rem; flex-wrap: wrap; }
+    .brand-mark { background: var(--branco); border-radius: 4px; padding: 0.32rem 0.6rem;
+      line-height: 0; flex-shrink: 0; }
+    .brand-mark img { height: 28px; width: auto; display: block; }
+    .brand-text { border-left: 1px solid rgba(255,255,255,0.2); padding-left: 1rem; }
+    .brand-text span { font-family: 'Archivo', sans-serif; font-size: 0.76rem; color: #AFC2CE; }
+    .nav-tags { flex-wrap: wrap; min-width: 0; }
+    .badge-gold { background: rgba(209,4,4,0.16); color: #FFC9C9;
+      border: 1px solid rgba(209,4,4,0.45); border-radius: 3px; }
+    .nav-link { border-radius: 3px; background: rgba(255,255,255,0.09);
+      border-color: rgba(255,255,255,0.22); color: #DCE6ED; }
+    .nav-link:hover { background: var(--vermelho); border-color: var(--vermelho); color: #fff; }
+
+    .folha { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 3.25rem;
+      max-width: 1280px; margin: 0 auto; padding: 2.5rem 2rem 0; }
+    .corpo { min-width: 0; }
+    .container { max-width: none; margin: 0; padding: 0; }
+    .indice { position: sticky; top: 92px; align-self: start;
+      max-height: calc(100vh - 120px); overflow-y: auto; padding-right: 0.5rem;
+      border-right: 1px solid var(--linha); }
+    .ix-titulo { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--tinta-fraca); margin-bottom: 0.9rem; }
+    .ix-lista { list-style: none; margin: 0 0 1.4rem; padding: 0; }
+    .ix-lista a { display: block; padding: 0.42rem 0.6rem 0.42rem 0.55rem; font-size: 0.8rem;
+      line-height: 1.35; color: var(--tinta-med); text-decoration: none;
+      border-left: 2px solid transparent; transition: color .12s, border-color .12s, background .12s; }
+    .ix-lista a:hover { color: var(--petroleo); background: rgba(15,41,60,0.045); }
+    .ix-lista a.ativo { color: var(--petroleo); font-weight: 600;
+      border-left-color: var(--vermelho); background: rgba(209,4,4,0.05); }
+    .ix-legenda { border-top: 1px solid var(--linha); padding-top: 0.9rem; }
+    .ix-legenda p { font-family: 'Source Serif 4', serif; font-size: 0.78rem;
+      color: var(--tinta-fraca); line-height: 1.55; }
+
+    .hero { background: var(--petroleo); border-radius: 0; box-shadow: none;
+      border-top: 3px solid var(--vermelho); padding: 3rem 2.75rem; }
+    .hero::after { display: none; }
+    .hero-eyebrow { color: #E88A8A; }
+    .hero-title { font-family: 'Archivo', sans-serif; font-size: 2.4rem; font-weight: 800;
+      letter-spacing: -1.1px; }
+    .hero-subtitle { font-family: 'Source Serif 4', serif; color: #C3D2DC; }
+    .hero-meta { border-top-color: rgba(255,255,255,0.16); color: #AFC2CE; }
+    .hero-meta strong { color: #E88A8A; }
+
+    .card { background: transparent; border: 0; border-radius: 0; box-shadow: none;
+      border-bottom: 1px solid var(--linha); padding: 3rem 0 2.75rem; margin: 0; }
+    .card:last-of-type { border-bottom: 0; }
+    .card::before { content: ''; display: block; width: 46px; height: 3px;
+      margin-bottom: 1.3rem; background: var(--vermelho); }
+    .section-title { font-family: 'Archivo', sans-serif; font-size: 1.8rem; font-weight: 700;
+      letter-spacing: -0.7px; line-height: 1.18; color: var(--petroleo);
+      margin-bottom: 1.3rem; display: block; }
+    .sub-title { font-family: 'Archivo', sans-serif; font-size: 1.02rem; }
+    .p, .card p { max-width: 70ch; }
+
+    .audit-alert-box { background: #FDF0F0; border-color: #EEC2C2;
+      border-left-color: var(--vermelho); border-radius: 4px; }
+    .audit-alert-title { color: #8F0404; }
+    .audit-alert-box p { color: #6B1414 !important; font-family: 'Source Serif 4', serif; }
+
+    .metric-tile { background: var(--branco); border-color: var(--linha); border-radius: 4px; }
+    .metric-tile b { font-family: 'JetBrains Mono', monospace; color: var(--petroleo);
+      font-variant-numeric: tabular-nums; }
+    .metric-tile span { font-family: 'Source Serif 4', serif; color: var(--tinta-med); }
+    .metric-tile.alerta { background: #FDF0F0; border-color: #EEC2C2; }
+    .metric-tile.alerta b { color: var(--vermelho); }
+
+    table.tbl { font-size: 0.86rem; }
+    table.tbl th { text-transform: none; letter-spacing: 0.01em; font-size: 0.74rem;
+      font-weight: 600; color: var(--tinta-fraca); border-bottom-color: var(--linha-forte); }
+    table.tbl td { border-bottom-color: var(--linha); }
+    table.tbl tr.invertido td { background: #FDF0F0; }
+    table.tbl tr.total td { background: var(--papel-fundo); border-top-color: var(--petroleo); }
+    .transcrito { color: var(--petroleo-cl); }
+    .mono-dim { color: var(--tinta-fraca); }
+
+    .nota { background: #FDF6EC; border-color: #EBD7B8; border-left-color: #B45309;
+      border-radius: 4px; }
+    .nota p { font-family: 'Source Serif 4', serif; color: #6B3A12; }
+    .nota .nota-t { color: #7A3E0C; }
+    .verde { background: #EDF6F1; border-color: #BFDFCF; border-left-color: var(--verde);
+      border-radius: 4px; }
+    .verde p { font-family: 'Source Serif 4', serif; color: #114733; }
+    .verde .nota-t { color: #0B3326; }
+
+    .filtro { border-radius: 3px; border-color: var(--linha-forte); background: var(--branco);
+      color: var(--tinta-med); }
+    .filtro:hover { border-color: var(--vermelho); color: var(--vermelho); }
+    .filtro[aria-pressed="true"] { background: var(--petroleo); border-color: var(--petroleo); }
+    .tag { border-radius: 3px; }
+    .tag-mestra  { background: #FBE9E9; color: #8F0404; }
+    .tag-valor   { background: #E4EDF3; color: #16425B; }
+    .tag-servico { background: #F3E8DD; color: #6B3A12; }
+    .passos li::before { background: var(--petroleo); }
+    .passos li, .tl-items li { font-family: 'Source Serif 4', serif; }
+    code { background: var(--papel-fundo); color: var(--petroleo-med); border-radius: 3px;
+      font-size: 0.8em; }
+    .fonte { color: var(--tinta-fraca); font-size: 0.76rem; }
+    footer { background: var(--petroleo); color: #AFC2CE; border-top: 3px solid var(--vermelho);
+      margin-top: 3rem; padding: 2rem 1.5rem 2.5rem; font-family: 'Archivo', sans-serif; }
+    html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+    @media (max-width: 1040px) {
+      .folha { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem 1.25rem 0; }
+      .indice { position: static; max-height: none; border-right: 0;
+        border-bottom: 1px solid var(--linha); padding-bottom: 1rem; }
+      .ix-lista { columns: 2; column-gap: 1.25rem; }
+    }
+    @media (max-width: 680px) {
+      .navbar { padding: 0.7rem 1rem; gap: 0.6rem; }
+      .nav-tags { width: 100%; }
+      .hero { padding: 2rem 1.35rem; }
+      .hero-title { font-size: 1.7rem; }
+      .section-title { font-size: 1.35rem; }
+      .ix-lista { columns: 1; }
+    }
+    @media print { .indice, .filtros { display: none; }
+      .folha { display: block; padding: 0; } .navbar { position: static; } }
+
   </style>
 </head>
 <body>
 
   <header class="navbar">
     <div class="brand">
-      <div class="brand-logo">T</div>
+      <h1 class="brand-mark">
+        <img src="logo-tektron.png" alt="Grupo Tektron" width="282" height="91">
+      </h1>
       <div class="brand-text">
-        <h1>GRUPO TEKTRON</h1>
-        <span>Anexo Técnico &bull; Conferência da Defasagem do Consolidado 2026</span>
+        <span>Anexo técnico &bull; Conferência da defasagem do consolidado 2026</span>
       </div>
     </div>
     <div class="nav-tags">
@@ -183,7 +319,25 @@
     </div>
   </header>
 
-  <main class="container">
+  <div class="folha">
+      <nav class="indice" aria-label="Índice do anexo">
+        <p class="ix-titulo">Neste anexo</p>
+        <ol class="ix-lista">
+          <li><a href="#os-numeros-em-conferencia" data-alvo="os-numeros-em-conferencia">Os números em conferência</a></li>
+          <li><a href="#como-a-planilha-esta-estruturada" data-alvo="como-a-planilha-esta-estruturada">Como a planilha está estruturada</a></li>
+          <li><a href="#a-conferencia-servico-por-servico" data-alvo="a-conferencia-servico-por-servico">A conferência serviço por serviço</a></li>
+          <li><a href="#os-61-lancamentos-que-nao-fecham" data-alvo="os-61-lancamentos-que-nao-fecham">Os 61 lançamentos que não fecham</a></li>
+          <li><a href="#o-que-foi-tratado-antes-de-comparar" data-alvo="o-que-foi-tratado-antes-de-comparar">O que foi tratado antes de comparar</a></li>
+          <li><a href="#como-qualquer-pessoa-pode-conferir" data-alvo="como-qualquer-pessoa-pode-conferir">Como qualquer pessoa pode conferir</a></li>
+          <li><a href="#por-que-isso-importa-para-a-decisao" data-alvo="por-que-isso-importa-para-a-decisao">Por que isso importa para a decisão</a></li>
+        </ol>
+        <div class="ix-legenda">
+          <p>Documento de conferência aberta. Todos os números podem ser
+             refeitos a partir da planilha de origem.</p>
+        </div>
+      </nav>
+
+    <main class="corpo">
 
     <section class="hero">
       <div class="hero-eyebrow">Anexo técnico ao diagnóstico estratégico</div>
@@ -206,7 +360,7 @@
       <div class="audit-alert-title">
         <span>&#9211;</span> <strong>A conclusão em uma frase</strong>
       </div>
-      <p style="font-size: 0.92rem; color: #1e3a8a;">
+      <p style="font-size: 0.92rem; color: #0F293C;">
         A planilha herdada tem <strong>duas camadas que deveriam espelhar uma à outra e nunca foram
         reconciliadas entre si</strong>. O consolidado divulgado foi montado a partir de uma delas.
         A outra &mdash; a aba mestra, que é a que a operação usa no dia a dia &mdash; registra
@@ -215,8 +369,8 @@
       </p>
     </section>
 
-    <section class="card">
-      <h3 class="section-title">&#128202; Os números em conferência</h3>
+    <section class="card" id="os-numeros-em-conferencia">
+      <h3 class="section-title">Os números em conferência</h3>
       <div class="metric-grid">
         <div class="metric-tile"><b>187.363,85</b><span>(a) Soma real das linhas da aba mestra <code>2026</code></span></div>
         <div class="metric-tile"><b>168.135,14</b><span>(b) Soma das abas por serviço</span></div>
@@ -231,8 +385,8 @@
       </p>
     </section>
 
-    <section class="card">
-      <h3 class="section-title">&#129513; Como a planilha está estruturada</h3>
+    <section class="card" id="como-a-planilha-esta-estruturada">
+      <h3 class="section-title">Como a planilha está estruturada</h3>
       <p class="p">
         Entender a estrutura é o que torna a defasagem óbvia. A planilha opera em
         <strong>duas camadas</strong>, mais um consolidado:
@@ -257,8 +411,8 @@
       </p>
     </section>
 
-    <section class="card">
-      <h3 class="section-title">&#128269; A conferência serviço por serviço</h3>
+    <section class="card" id="a-conferencia-servico-por-servico">
+      <h3 class="section-title">A conferência serviço por serviço</h3>
       <p class="p">
         Esta é a tabela central do documento. A coluna (c), em azul, foi transcrita da planilha de
         origem. Comparando (b) com (c), fica visível que
@@ -282,21 +436,21 @@
             <td class="num">37.513,75</td>
             <td class="num">32.711,85</td>
             <td class="num transcrito">32.712,08</td>
-            <td class="num" style="font-weight:700;color:#0f766e;">+4.801,90</td>
+            <td class="num" style="font-weight:700;color:#0F4C36;">+4.801,90</td>
           </tr>
           <tr>
             <td><strong>Caixa d'água</strong></td>
             <td class="num">50.062,06</td>
             <td class="num">41.086,89</td>
             <td class="num transcrito">41.086,89</td>
-            <td class="num" style="font-weight:700;color:#0f766e;">+8.975,17</td>
+            <td class="num" style="font-weight:700;color:#0F4C36;">+8.975,17</td>
           </tr>
           <tr>
             <td><strong>Dedetização</strong></td>
             <td class="num">6.974,90</td>
             <td class="num">3.655,90</td>
             <td class="num transcrito">3.655,90</td>
-            <td class="num" style="font-weight:700;color:#0f766e;">+3.319,00</td>
+            <td class="num" style="font-weight:700;color:#0F4C36;">+3.319,00</td>
           </tr>
           <tr class="invertido">
             <td><strong>Prumadas</strong></td>
@@ -310,21 +464,21 @@
             <td class="num">27.154,03</td>
             <td class="num">24.317,15</td>
             <td class="num transcrito">24.317,13</td>
-            <td class="num" style="font-weight:700;color:#0f766e;">+2.836,88</td>
+            <td class="num" style="font-weight:700;color:#0F4C36;">+2.836,88</td>
           </tr>
           <tr>
             <td><strong>Piscinas</strong></td>
             <td class="num">50.655,27</td>
             <td class="num">38.870,24</td>
             <td class="num transcrito">38.870,25</td>
-            <td class="num" style="font-weight:700;color:#0f766e;">+11.785,03</td>
+            <td class="num" style="font-weight:700;color:#0F4C36;">+11.785,03</td>
           </tr>
           <tr>
             <td><strong>Vidros em altura</strong></td>
             <td class="num">6.822,58</td>
             <td class="num">5.872,58</td>
             <td class="num transcrito">5.872,58</td>
-            <td class="num" style="font-weight:700;color:#0f766e;">+950,00</td>
+            <td class="num" style="font-weight:700;color:#0F4C36;">+950,00</td>
           </tr>
           <tr class="total">
             <td>TOTAL</td>
@@ -364,8 +518,8 @@
       </div>
     </section>
 
-    <section class="card">
-      <h3 class="section-title">&#128203; Os 61 lançamentos que não fecham</h3>
+    <section class="card" id="os-61-lancamentos-que-nao-fecham">
+      <h3 class="section-title">Os 61 lançamentos que não fecham</h3>
       <p class="p">
         A diferença não vem de um erro único de digitação: é o acúmulo de 61 lançamentos
         divergentes, de três naturezas distintas. A tolerância aplicada foi de R$ 0,60, para que
@@ -445,7 +599,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">2.000,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">2.000,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">2.000,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -455,7 +609,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">1.900,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">1.900,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">1.900,00</td>
         </tr>
         <tr data-t="valor">
           <td><span class="tag tag-valor">Valor divergente</span></td>
@@ -475,7 +629,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">1.700,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">1.700,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">1.700,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -485,7 +639,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">1.700,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">1.700,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">1.700,00</td>
         </tr>
         <tr data-t="valor">
           <td><span class="tag tag-valor">Valor divergente</span></td>
@@ -505,7 +659,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">1.600,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">1.600,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">1.600,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -515,7 +669,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">1.400,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">1.400,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">1.400,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -525,7 +679,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">1.379,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">1.379,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">1.379,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -535,7 +689,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">1.360,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">1.360,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">1.360,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -545,7 +699,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">1.350,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">1.350,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">1.350,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -555,7 +709,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">1.200,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">1.200,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">1.200,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -565,7 +719,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">1.100,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">1.100,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">1.100,00</td>
         </tr>
         <tr data-t="valor">
           <td><span class="tag tag-valor">Valor divergente</span></td>
@@ -585,7 +739,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">1.000,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">1.000,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">1.000,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -595,7 +749,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">1.000,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">1.000,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">1.000,00</td>
         </tr>
         <tr data-t="valor">
           <td><span class="tag tag-valor">Valor divergente</span></td>
@@ -615,7 +769,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">950,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">950,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">950,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -625,7 +779,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">950,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">950,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">950,00</td>
         </tr>
         <tr data-t="servico">
           <td><span class="tag tag-servico">Só na aba de serviço</span></td>
@@ -645,7 +799,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">875,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">875,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">875,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -655,7 +809,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">800,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">800,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">800,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -665,7 +819,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">750,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">750,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">750,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -675,7 +829,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">700,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">700,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">700,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -685,7 +839,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">700,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">700,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">700,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -695,7 +849,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">600,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">600,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">600,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -705,7 +859,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">600,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">600,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">600,00</td>
         </tr>
         <tr data-t="valor">
           <td><span class="tag tag-valor">Valor divergente</span></td>
@@ -715,7 +869,7 @@
           <td class="num mono-dim">41</td>
           <td class="num">1.200,00</td>
           <td class="num">630,97</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">569,03</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">569,03</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -725,7 +879,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">550,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">550,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">550,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -735,7 +889,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">550,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">550,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">550,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -745,7 +899,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">550,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">550,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">550,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -755,7 +909,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">500,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">500,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">500,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -765,7 +919,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">500,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">500,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">500,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -775,7 +929,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">500,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">500,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">500,00</td>
         </tr>
         <tr data-t="valor">
           <td><span class="tag tag-valor">Valor divergente</span></td>
@@ -805,7 +959,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">477,01</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">477,01</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">477,01</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -815,7 +969,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">450,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">450,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">450,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -825,7 +979,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">450,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">450,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">450,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -835,7 +989,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">400,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">400,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">400,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -845,7 +999,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">400,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">400,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">400,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -855,7 +1009,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">382,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">382,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">382,00</td>
         </tr>
         <tr data-t="servico">
           <td><span class="tag tag-servico">Só na aba de serviço</span></td>
@@ -875,7 +1029,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">350,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">350,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">350,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -885,7 +1039,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">300,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">300,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">300,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -895,7 +1049,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">300,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">300,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">300,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -905,7 +1059,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">300,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">300,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">300,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -915,7 +1069,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">300,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">300,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">300,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -925,7 +1079,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">299,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">299,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">299,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -935,7 +1089,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">289,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">289,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">289,00</td>
         </tr>
         <tr data-t="valor">
           <td><span class="tag tag-valor">Valor divergente</span></td>
@@ -955,7 +1109,7 @@
           <td class="num mono-dim">40</td>
           <td class="num">900,00</td>
           <td class="num">636,02</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">263,98</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">263,98</td>
         </tr>
         <tr data-t="servico">
           <td><span class="tag tag-servico">Só na aba de serviço</span></td>
@@ -975,7 +1129,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">220,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">220,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">220,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -985,7 +1139,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">200,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">200,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">200,00</td>
         </tr>
         <tr data-t="mestra">
           <td><span class="tag tag-mestra">Só na aba mestra</span></td>
@@ -995,7 +1149,7 @@
           <td class="num mono-dim">—</td>
           <td class="num">200,00</td>
           <td class="num">—</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">200,00</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">200,00</td>
         </tr>
         <tr data-t="valor">
           <td><span class="tag tag-valor">Valor divergente</span></td>
@@ -1005,7 +1159,7 @@
           <td class="num mono-dim">2</td>
           <td class="num">2.499,00</td>
           <td class="num">2.419,47</td>
-          <td class="num" style="font-weight:700;color:#0f766e;">79,53</td>
+          <td class="num" style="font-weight:700;color:#0F4C36;">79,53</td>
         </tr>
         <tr data-t="valor">
           <td><span class="tag tag-valor">Valor divergente</span></td>
@@ -1028,8 +1182,8 @@
       </p>
     </section>
 
-    <section class="card">
-      <h3 class="section-title">&#9881; O que foi tratado antes de comparar</h3>
+    <section class="card" id="o-que-foi-tratado-antes-de-comparar">
+      <h3 class="section-title">O que foi tratado antes de comparar</h3>
       <p class="p">
         A comparação direta entre as duas camadas produziria divergências falsas, porque a planilha
         herdada não tem padronização de cadastro. Cinco tratamentos foram aplicados antes do
@@ -1054,8 +1208,8 @@
       </ul>
     </section>
 
-    <section class="card">
-      <h3 class="section-title">&#9989; Como qualquer pessoa pode conferir</h3>
+    <section class="card" id="como-qualquer-pessoa-pode-conferir">
+      <h3 class="section-title">Como qualquer pessoa pode conferir</h3>
 
       <div class="verde">
         <p class="nota-t">A conferência de 30 segundos, sem abrir nenhum arquivo de apoio</p>
@@ -1092,8 +1246,8 @@
       </p>
     </section>
 
-    <section class="card" style="border-left: 5px solid var(--accent);">
-      <h3 class="section-title">&#127919; Por que isso importa para a decisão</h3>
+    <section class="card" style="border-left: 5px solid var(--accent);" id="por-que-isso-importa-para-a-decisao">
+      <h3 class="section-title">Por que isso importa para a decisão</h3>
       <p class="p">
         A defasagem não é um erro de aritmética a ser corrigido e esquecido. Ela é a
         <strong>consequência previsível de um controle em que o mesmo dado existe em dois lugares
@@ -1112,7 +1266,8 @@
       </p>
     </section>
 
-  </main>
+    </main>
+  </div>
 
   <footer>
     Grupo Tektron &bull; Anexo técnico ao Diagnóstico Estratégico de Quarteirizados<br>
@@ -1139,6 +1294,35 @@
       botoes.forEach(function (b) {
         b.addEventListener('click', function () { aplicar(b.getAttribute('data-f')); });
       });
+    })();
+  </script>
+
+
+  <script>
+    (function () {
+      var links = Array.prototype.slice.call(document.querySelectorAll('.ix-lista a'));
+      if (!links.length) return;
+      var pares = links.map(function (a) {
+        return { link: a, sec: document.getElementById(a.getAttribute('data-alvo')) };
+      }).filter(function (p) { return p.sec; });
+      if (!pares.length) return;
+      var pendente = false;
+      function marcar() {
+        pendente = false;
+        var limite = window.scrollY + 150, atual = pares[0];
+        pares.forEach(function (p) {
+          if (p.sec.getBoundingClientRect().top + window.scrollY <= limite) atual = p;
+        });
+        pares.forEach(function (p) { p.link.classList.toggle('ativo', p === atual); });
+      }
+      function agendar() {
+        if (pendente) return;
+        pendente = true;
+        window.requestAnimationFrame(marcar);
+      }
+      window.addEventListener('scroll', agendar, { passive: true });
+      window.addEventListener('resize', agendar, { passive: true });
+      marcar();
     })();
   </script>
 
