@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auditoria Financeira da Carteira 2026 | Grupo Tektron</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --petroleo: #0F293C;
+      --petroleo-esc: #091825;
+      --petroleo-med: #1C4257;
+      --petroleo-cl: #3E6E8E;
+      --vermelho: #D10404;
+      --verde: #16694A;
+      --verde-bg: #EDF6F1;
+      --alerta-bg: #FDF0F0;
+      --papel: #FBF7F3;
+      --papel-fundo: #F2EBE3;
+      --branco: #ffffff;
+      --tinta: #16212B;
+      --tinta-med: #4C5862;
+      --linha: #E2DAD1;
+      --linha-forte: #C9BDB0;
+      --shadow-sm: 0 1px 3px rgba(15, 41, 60, 0.05);
+      --shadow-md: 0 4px 14px rgba(15, 41, 60, 0.08);
+      --shadow-lg: 0 12px 36px rgba(15, 41, 60, 0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Archivo', sans-serif;
+      background-color: var(--papel-fundo);
+      color: var(--tinta);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 5rem;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--petroleo-esc) 0%, var(--petroleo) 100%);
+      color: var(--branco);
+      padding: 3rem 1.5rem 2.5rem;
+      border-bottom: 4px solid var(--vermelho);
+    }
+    .header-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .tag-topo {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background-color: rgba(255, 255, 255, 0.12);
+      padding: 0.35rem 0.75rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      color: #cbd5e1;
+    }
+    h1 {
+      font-family: 'Source Serif 4', serif;
+      font-size: 2.25rem;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 0.75rem;
+    }
+    .subtitulo {
+      font-size: 1.1rem;
+      color: #94a3b8;
+      max-width: 800px;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+    }
+    .meta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .main-container {
+      max-width: 1000px;
+      margin: 2rem auto 0;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--branco);
+      border-radius: 8px;
+      padding: 2rem;
+      border: 1px solid var(--linha);
+      box-shadow: var(--shadow-sm);
+    }
+
+    h2 {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.5rem;
+      color: var(--petroleo);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    h3 {
+      font-size: 1.15rem;
+      color: var(--petroleo-med);
+      margin: 1.5rem 0 0.5rem;
+    }
+    p { margin-bottom: 1rem; color: var(--tinta-med); font-size: 0.98rem; }
+
+    /* Box de destaque para o link do drive */
+    .drive-banner {
+      background: linear-gradient(to right, #ffffff, var(--papel));
+      border: 2px solid var(--petroleo-cl);
+      border-radius: 8px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    @media (min-width: 768px) {
+      .drive-banner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+    .drive-text h4 {
+      font-size: 1.1rem;
+      color: var(--petroleo);
+      margin-bottom: 0.35rem;
+    }
+    .drive-text p {
+      font-size: 0.88rem;
+      color: var(--tinta-med);
+      margin-bottom: 0;
+    }
+    .btn-drive {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: var(--petroleo);
+      color: var(--branco);
+      padding: 0.75rem 1.25rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: background-color 0.2s, transform 0.1s;
+      white-space: nowrap;
+    }
+    .btn-drive:hover {
+      background-color: var(--vermelho);
+      transform: translateY(-1px);
+    }
+
+    /* Grid de números e KPI */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .kpi-card {
+      border: 1px solid var(--linha);
+      border-radius: 8px;
+      padding: 1.25rem;
+      background-color: var(--papel);
+    }
+    .kpi-card.alerta {
+      background-color: var(--alerta-bg);
+      border-color: #fca5a5;
+    }
+    .kpi-card.sucesso {
+      background-color: var(--verde-bg);
+      border-color: #86efac;
+    }
+    .kpi-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--tinta-med);
+      margin-bottom: 0.4rem;
+    }
+    .kpi-val {
+      font-size: 1.85rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--petroleo);
+      line-height: 1.1;
+    }
+    .kpi-card.alerta .kpi-val { color: var(--vermelho); }
+    .kpi-card.sucesso .kpi-val { color: var(--verde); }
+    .kpi-desc {
+      font-size: 0.82rem;
+      color: var(--tinta-med);
+      margin-top: 0.5rem;
+      line-height: 1.35;
+    }
+
+    /* Tabelas */
+    .table-container {
+      overflow-x: auto;
+      margin: 1.25rem 0;
+      border: 1px solid var(--linha);
+      border-radius: 6px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+    th {
+      background-color: var(--petroleo);
+      color: var(--branco);
+      padding: 0.75rem 1rem;
+      font-weight: 600;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--linha);
+      color: var(--tinta-med);
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background-color: rgba(15, 41, 60, 0.02); }
+    .num { font-family: 'JetBrains Mono', monospace; font-weight: 600; text-align: right; }
+    th.num { text-align: right; }
+
+    /* Metodologia 4 passos */
+    .step-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+    @media (min-width: 640px) {
+      .step-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .step-box {
+      border: 1px solid var(--linha);
+      border-left: 4px solid var(--petroleo);
+      padding: 1.25rem;
+      border-radius: 4px;
+      background: var(--papel);
+    }
+    .step-num {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--vermelho);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.35rem;
+    }
+    .step-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--petroleo);
+      margin-bottom: 0.5rem;
+    }
+    .step-box p {
+      font-size: 0.88rem;
+      margin-bottom: 0;
+      color: var(--tinta-med);
+    }
+
+    /* Box de destaque */
+    .highlight-box {
+      border-left: 4px solid var(--vermelho);
+      background: #FEF2F2;
+      padding: 1rem 1.25rem;
+      border-radius: 4px;
+      margin: 1.25rem 0;
+      font-size: 0.92rem;
+      color: #7f1d1d;
+    }
+    .highlight-box.info {
+      border-left-color: var(--petroleo-cl);
+      background: #F0F7FB;
+      color: #0c4a6e;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 0.85rem;
+      color: var(--tinta-med);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <div class="tag-topo">Relatório Executivo &bull; Setor Financeiro</div>
+      <h1>Auditoria da Planilha Mestra &amp; Esclarecimento da Defasagem</h1>
+      <p class="subtitulo">
+        Reconciliação forense da base de serviços quarteirizados 2026, identificação do gap oculto de 
+        <strong>R$ 19.228,49 (11,4%)</strong> e alinhamento do fluxo de fechamento mensal.
+      </p>
+      <div class="meta-bar">
+        <div><strong>Destinatário:</strong> Equipe Financeira (Dayane / Diretoria Financeira)</div>
+        <div><strong>Autor:</strong> Cléber Donato (Análise de Contratos e Serviços)</div>
+        <div><strong>Competência:</strong> Exercício 2026</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-container">
+
+    <!-- SEÇÃO 1: ACESSO À PLANILHA NO DRIVE -->
+    <section class="card">
+      <h2>📁 Acesso Direto à Planilha Mestra no Google Drive</h2>
+      <p>
+        Historicamente, o setor Financeiro recebia apenas um número consolidado mensal e não tinha conhecimento 
+        de como a planilha analítica era alimentada pela gestão anterior. Para assegurar total transparência, o arquivo 
+        original auditado está disponível no Google Drive corporativo:
+      </p>
+
+      <div class="drive-banner">
+        <div class="drive-text">
+          <h4>PROGRAMAÇÃO ANUAL 2026 - 4,26%.xlsx</h4>
+          <p>Planilha original legada contendo a aba mestra <code>2026</code> e as 7 abas por especialidade.</p>
+        </div>
+        <a href="https://docs.google.com/spreadsheets/d/1nYeWhNf-fk_efT0tGpDyu6YHXz4JbBl1RxgSnr2aL9o/edit?gid=1780472411#gid=1780472411" 
+           target="_blank" class="btn-drive">
+          Abrir Planilha no Google Sheets &rarr;
+        </a>
+      </div>
+
+      <div class="highlight-box info" style="margin-top: 1.25rem;">
+        <strong>Por que o Financeiro não conhecia esta planilha?</strong> O controle detalhado de prestadores, valores de visita e contratos ficava centralizado exclusivamente com o gestor anterior (Marcos César). O Financeiro recebia apenas o resumo sintético da aba <code>valor total</code> para fins de provisão contábil.
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2: A DEFASAGEM EM NÚMEROS -->
+    <section class="card">
+      <h2>⚖️ O Achado Central: A Defasagem de R$ 19.228,49</h2>
+      <p>
+        Ao realizar a leitura e soma real linha a linha da aba mestra <code>2026</code>, constatou-se que o valor total 
+        contratado é significativamente superior ao consolidado oficial que circulava na empresa:
+      </p>
+
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Consolidado Oficial (Aba Total)</div>
+          <div class="kpi-val">R$ 168.135,36</div>
+          <div class="kpi-desc">Valor de referência que o Financeiro utilizava como parâmetro do setor.</div>
+        </div>
+
+        <div class="kpi-card alerta">
+          <div class="kpi-label">Soma Real das Linhas (Aba 2026)</div>
+          <div class="kpi-val">R$ 187.363,85</div>
+          <div class="kpi-desc">Soma aritmética real dos serviços contratados por ciclo de execução.</div>
+        </div>
+
+        <div class="kpi-card sucesso">
+          <div class="kpi-label">Defasagem Não Computada</div>
+          <div class="kpi-val">+ R$ 19.228,49</div>
+          <div class="kpi-desc">Diferença oculta de <strong>+11,4%</strong> que não constava no resumo oficial.</div>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <strong>Impacto Prático para a Dayane:</strong> Ao receber as notas fiscais até o dia 05 para pagamento no dia 13, parecia haver um "estouro de orçamento" de quase R$ 20 mil. Na realidade, esse valor sempre correspondeu a serviços efetivamente contratados e prestados, mas que haviam sido omitidos do resumo por fórmulas quebradas.
+      </div>
+    </section>
+
+    <!-- SEÇÃO 3: METODOLOGIA DE ANÁLISE -->
+    <section class="card">
+      <h2>🔬 Como a Análise Foi Realizada (Metodologia em 4 Passos)</h2>
+      <p>
+        Como a equipe financeira não acompanhava a mecânica interna da planilha, estruturamos a auditoria em 4 etapas sistemáticas de checagem:
+      </p>
+
+      <div class="step-grid">
+        <div class="step-box">
+          <div class="step-num">Passo 01</div>
+          <div class="step-title">Varredura Linha a Linha da Aba Mestra</div>
+          <p>
+            Lemos individualmente cada um dos 135 condomínios listados na primeira aba e confrontamos as colunas pareadas de prestador e valor para as 7 especialidades (Gordura, Água, Dedetização, Prumadas, Jardim, Piscina e Vidros).
+          </p>
+        </div>
+
+        <div class="step-box">
+          <div class="step-num">Passo 02</div>
+          <div class="step-title">Auditoria Matemática das Fórmulas</div>
+          <p>
+            Inspecionamos as fórmulas da aba <code>valor total</code> e identificamos que os intervalos de soma estavam truncados: condomínios inseridos ao longo do tempo foram adicionados abaixo da linha final da fórmula <code>=SOMA()</code>.
+          </p>
+        </div>
+
+        <div class="step-box">
+          <div class="step-num">Passo 03</div>
+          <div class="step-title">Reconciliação com as 7 Abas Específicas</div>
+          <p>
+            Cruzamos os dados com as abas de cada serviço. Descobriu-se que <strong>2 condomínios existiam apenas nas abas de serviço</strong> (<em>Cleveland</em> e <em>Euroville Torre Ibiza</em>), elevando a carteira real para <strong>137 postos</strong>.
+          </p>
+        </div>
+
+        <div class="step-box">
+          <div class="step-num">Passo 04</div>
+          <div class="step-title">Saneamento e Deduplicação</div>
+          <p>
+            Expurgamos linhas de totalizadores intermediários somados em duplicidade e deduplicamos grafias da mesma empresa (ex: Royal Prime e Royal), consolidando o quadro oficial em <strong>17 prestadoras homologadas</strong>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 4: RAIO-X DOS CUSTOS POR SERVIÇO -->
+    <section class="card">
+      <h2>📊 Onde Está o Dinheiro: Distribuição da Carteira Real</h2>
+      <p>
+        A abertura dos R$ 187.363,85 auditados demonstra exatamente quais especialidades demandam maior liquidez financeira:
+      </p>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Especialidade</th>
+              <th class="num">Serviços Faturados</th>
+              <th class="num">Cortesias Vinculadas</th>
+              <th class="num">Soma Real (R$)</th>
+              <th class="num">% da Carteira</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Piscina</strong></td>
+              <td class="num">68</td>
+              <td class="num">0</td>
+              <td class="num">R$ 50.655,26</td>
+              <td class="num">27,0%</td>
+            </tr>
+            <tr>
+              <td><strong>Caixa d'Água</strong></td>
+              <td class="num">117</td>
+              <td class="num">0</td>
+              <td class="num">R$ 50.062,06</td>
+              <td class="num">26,7%</td>
+            </tr>
+            <tr>
+              <td><strong>Caixa de Gordura</strong></td>
+              <td class="num">116</td>
+              <td class="num">0</td>
+              <td class="num">R$ 37.513,75</td>
+              <td class="num">20,0%</td>
+            </tr>
+            <tr>
+              <td><strong>Jardim</strong></td>
+              <td class="num">68</td>
+              <td class="num">0</td>
+              <td class="num">R$ 27.154,03</td>
+              <td class="num">14,5%</td>
+            </tr>
+            <tr>
+              <td><strong>Prumadas</strong></td>
+              <td class="num">10</td>
+              <td class="num">0</td>
+              <td class="num">R$ 8.181,26</td>
+              <td class="num">4,4%</td>
+            </tr>
+            <tr>
+              <td><strong>Dedetização</strong></td>
+              <td class="num">18</td>
+              <td class="num">104</td>
+              <td class="num">R$ 6.974,90</td>
+              <td class="num">3,7%</td>
+            </tr>
+            <tr>
+              <td><strong>Vidros em Altura</strong></td>
+              <td class="num">8</td>
+              <td class="num">0</td>
+              <td class="num">R$ 6.822,58</td>
+              <td class="num">3,6%</td>
+            </tr>
+            <tr style="background-color: var(--papel); font-weight: 700;">
+              <td>TOTAL AUDITADO</td>
+              <td class="num">405</td>
+              <td class="num">104</td>
+              <td class="num" style="color: var(--petroleo); font-size: 1rem;">R$ 187.363,85</td>
+              <td class="num">100,0%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="font-size: 0.9rem; color: var(--tinta-med);">
+        * <em>Nota:</em> Os três primeiros serviços (Piscina, Caixa d'Água e Caixa de Gordura) concentram <strong>73,7%</strong> de todo o desembolso da empresa.
+      </p>
+    </section>
+
+    <!-- SEÇÃO 5: GANHOS PARA A ROTINA DO FINANCEIRO -->
+    <section class="card">
+      <h2>🛡️ Como o Novo Modelo Protege o Fechamento do Financeiro</h2>
+      <p>
+        Para que a Dayane e a Diretoria Financeira operem com 100% de segurança jurídica e previsibilidade de caixa:
+      </p>
+
+      <ul style="padding-left: 1.5rem; color: var(--tinta-med); display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.95rem;">
+        <li>
+          <strong>Fim das Notas com CNPJ Errado (Regra R1):</strong> O prestador só emite a NF após receber nossa autorização formal especificando exatamente qual das 4 empresas do grupo é a tomadora (<strong>TCL, TSL, GYN ou TAS</strong>). Se vier errado, corrigimos antes de entregar ao Financeiro.
+        </li>
+        <li>
+          <strong>Conferência Prévia das 7 Etapas do Pipeline:</strong> Nenhuma nota é repassada para pagamento sem a comprovação em campo (OS assinada pelo zelador com marcação "Sim - Aprovado" ou folha de ponto de piscina).
+        </li>
+        <li>
+          <strong>Super Planilha com Status Colorido em Tempo Real:</strong> Criamos uma versão gerada automaticamente onde o Financeiro pode acompanhar linha por linha o que já foi executado, o que está com NF conferida e o que já foi entregue à Dayane.
+        </li>
+        <li>
+          <strong>Pontualidade Impreterível:</strong> O malote físico com NFs, boletos e OSs conferidos será entregue até o <strong>dia 06</strong> para garantir a quitação tranquila no <strong>dia 13</strong>.
+        </li>
+      </ul>
+    </section>
+
+  </div>
+
+  <footer>
+    <p>Grupo Tektron &bull; Análise de Contratos e Serviços Quarteirizados &bull; Setor Financeiro</p>
+    <p style="font-size: 0.75rem; margin-top: 0.25rem;">Relatório Técnico emitido por Cléber Donato &bull; Outubro de 2026</p>
+  </footer>
+
+</body>
+</html>
