@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PLUR Movimento — Proposta de Renovação de Locação | Escola de Capoeira Mestre Guerreiro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #8ec63f;
+    --teal: #28a3c8;
+    --blue: #2e64b0;
+    --indigo: #3b3f9a;
+    --violet: #6d4aa7;
+    --plur: #5e35a8;
+    --ink: #0f172a;
+    --slate: #475569;
+    --mist: #94a3b8;
+    --paper: #ffffff;
+    --paper-2: #f8fafc;
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --line: rgba(148, 163, 184, 0.2);
+    --grad: linear-gradient(100deg, var(--green) 0%, var(--teal) 32%, var(--blue) 58%, var(--violet) 100%);
+    --grad-soft: linear-gradient(120deg, rgba(142,198,63,.12), rgba(40,163,200,.12), rgba(109,74,167,.14));
+    --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.05);
+    --shadow-lg: 0 20px 45px -12px rgba(94, 53, 168, 0.25);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.8;
+    font-size: 19px;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Sora', sans-serif;
+    letter-spacing: -0.025em;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 32px; }
+  
+  #progressBar {
+    position: fixed; top: 0; left: 0; height: 4px; background: var(--grad); width: 0%; z-index: 1000;
+  }
+  
+  header {
+    background: var(--paper-2);
+    border-bottom: 1px solid var(--line);
+    padding: 60px 0 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: ''; position: absolute; inset: 0; background: var(--grad-soft); opacity: 0.6; pointer-events: none;
+  }
+  .header-content { position: relative; z-index: 1; }
+  .badge {
+    display: inline-block; padding: 6px 14px; background: rgba(94, 53, 168, 0.1); color: var(--plur);
+    font-weight: 600; font-size: 14px; border-radius: 30px; margin-bottom: 18px; text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  h1 { font-size: clamp(32px, 4vw, 48px); font-weight: 800; color: var(--ink); margin-bottom: 16px; line-height: 1.2; }
+  .subtitle { font-size: 20px; color: var(--slate); max-width: 800px; font-weight: 400; }
+  
+  main { padding: 60px 0 100px; }
+  section { margin-bottom: 64px; }
+  h2 { font-size: 28px; font-weight: 700; color: var(--plur); margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+  h2::before { content: ''; display: inline-block; width: 8px; height: 28px; background: var(--grad); border-radius: 4px; }
+  
+  p { margin-bottom: 20px; color: var(--slate); font-size: 19px; }
+  
+  .card-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin: 32px 0;
+  }
+  .card {
+    background: var(--paper-2); border: 1px solid var(--line); border-radius: 16px; padding: 32px;
+    box-shadow: var(--shadow-sm); transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+  .card h3 { font-size: 20px; color: var(--ink); margin-bottom: 12px; font-weight: 700; }
+  .card ul { list-style: none; padding: 0; }
+  .card li { margin-bottom: 10px; color: var(--slate); font-size: 17px; display: flex; align-items: flex-start; gap: 10px; }
+  .card li::before { content: '•'; color: var(--plur); font-weight: bold; font-size: 20px; line-height: 1; }
+  
+  .highlight-box {
+    background: linear-gradient(135deg, rgba(94, 53, 168, 0.05) 0%, rgba(40, 163, 200, 0.05) 100%);
+    border-left: 5px solid var(--plur); padding: 28px; border-radius: 0 16px 16px 0; margin: 32px 0;
+  }
+  .highlight-box p { margin-bottom: 0; color: var(--ink); font-weight: 500; }
+  
+  table {
+    width: 100%; border-collapse: collapse; margin: 32px 0; background: var(--paper-2); border-radius: 12px; overflow: hidden; border: 1px solid var(--line);
+  }
+  th, td { padding: 18px 24px; text-align: left; border-bottom: 1px solid var(--line); font-size: 18px; }
+  th { background: rgba(94, 53, 168, 0.08); color: var(--plur); font-family: 'Sora', sans-serif; font-weight: 700; }
+  td { color: var(--slate); }
+  tr:last-child td { border-bottom: none; }
+  
+  footer {
+    background: var(--paper-2); border-top: 1px solid var(--line); padding: 40px 0; text-align: center; color: var(--slate); font-size: 16px;
+  }
+</style>
+</head>
+<body>
+
+<div id="progressBar"></div>
+
+<header>
+  <div class="wrap header-content">
+    <div class="badge">PLUR Movimento • Proposta Oficial</div>
+    <h1>Renovação de Locação Parcial</h1>
+    <p class="subtitle">Escola de Capoeira Mestre Guerreiro | Condições comerciais atualizadas para a nova estrutura do PLUR Training Center (Jardim América, Goiânia - GO).</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section>
+    <h2>1. Valor de Referência da Sala — Locação Integral</h2>
+    <p>A sala possui aproximadamente <strong>120 m²</strong> e está inserida dentro de toda a infraestrutura de alto padrão da PLUR Movimento.</p>
+    <p>Considerando a atualização do aluguel principal do imóvel para <strong>R$ 9.000,00 mensais</strong>, além dos demais custos compartilhados da operação, o novo valor de referência para utilização integral da sala é de:</p>
+    
+    <div class="highlight-box">
+      <p style="font-size: 26px; font-family: 'Sora', sans-serif; color: var(--plur); font-weight: 800;">R$ 7.378,57 / mês</p>
+      <p style="margin-top: 8px; font-size: 16px; color: var(--slate);">Inclui proporcionalmente aluguel, IPTU, energia, água, internet, limpeza, manutenção, recepção, vestiários e estrutura compartilhada.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>2. Nova Configuração da Locação Parcial</h2>
+    <p>Para a Escola de Capoeira Mestre Guerreiro, a parceria baseia-se na utilização dedicada em horários específicos, garantindo excelente previsibilidade e custo altamente competitivo em relação à locação integral:</p>
+    
+    <div class="card-grid">
+      <div class="card">
+        <h3>Segundas e Quartas-feiras</h3>
+        <ul>
+          <li>18h30 às 19h30</li>
+          <li>20h30 às 21h30</li>
+          <li><strong>Carga:</strong> 2h por dia (4h semanais)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Terças e Quintas-feiras</h3>
+        <ul>
+          <li>8h às 9h</li>
+          <li>18h30 às 19h30</li>
+          <li>19h30 às 21h (1h30)</li>
+          <li><strong>Carga:</strong> 3h30 por dia (7h semanais)</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="highlight-box">
+      <p><strong>Carga Horária Total:</strong> 11 horas semanais (aproximadamente 47,7 horas mensais na média anual).</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>3. Valor da Locação Parcial (Mensalidade Fixa)</h2>
+    <table>
+      <tr>
+        <th>Parâmetro</th>
+        <th>Valor / Condição</th>
+      </tr>
+      <tr>
+        <td>Valor por hora de referência</td>
+        <td>R$ 70,00</td>
+      </tr>
+      <tr>
+        <td>Mensalidade Fixa Acordada</td>
+        <td><strong>R$ 3.080,00 por mês</strong></td>
+      </tr>
+      <tr>
+        <td>Previsibilidade</td>
+        <td>Valor fixo mensal independentemente de meses com 4 ou 5 semanas. (~8% mais favorável que o rateio bruto por hora da média anual).</td>
+      </tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>4. Comparativo Econômico & Benefícios</h2>
+    <table>
+      <tr>
+        <th>Modalidade</th>
+        <th>Área / Carga</th>
+        <th>Investimento Mensal</th>
+      </tr>
+      <tr>
+        <td>Locação Integral da Sala</td>
+        <td>120 m² (Integral)</td>
+        <td>R$ 7.378,57</td>
+      </tr>
+      <tr>
+        <td><strong>Locação Parcial (Capoeira)</strong></td>
+        <td><strong>11 horas semanais</strong></td>
+        <td><strong>R$ 3.080,00</strong></td>
+      </tr>
+    </table>
+
+    <p>Além da utilização exclusiva da sala nos horários contratados, a parceria contempla o acesso completo à infraestrutura compartilhada da PLUR Movimento:</p>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Infraestrutura Completa</h3>
+        <ul>
+          <li>Recepção profissional e acolhedora</li>
+          <li>Banheiros e vestiários equipados</li>
+          <li>Copa exclusiva para instrutores</li>
+          <li>Água, energia e internet de alta velocidade</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Operação & Comunidade</h3>
+        <ul>
+          <li>Limpeza e manutenção constante das áreas comuns</li>
+          <li>Segurança e localização privilegiada no Jardim América</li>
+          <li>Ações comerciais cruzadas e integração com a comunidade PLUR</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>PLUR Movimento</strong> — Gestão Estratégica & Operacional<br>Rua C-155, Qd. 365, Lt. 06, nº 767 – Jardim América, Goiânia - GO</p>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const winScroll = document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    document.getElementById('progressBar').style.width = scrolled + '%';
+  });
+</script>
+
+</body>
+</html>
